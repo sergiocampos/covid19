@@ -1,0 +1,1691 @@
+{% load static %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+	<title>Registro - Casos COVID19</title>
+	<link rel="stylesheet" href="">
+
+</head>
+<body>
+
+	<div class="container">
+		<div class="jumbotron">
+			<h2>SOLICITAÇÃO DE VAGA PARA LEITO REFERÊNCIA COVID-19</h2>
+			<p>
+				<ul style="list-style-type: disc;">
+					<li>
+						Preenchimento digitalizado; caso não seja possível, encaminhar os dados do paciente no corpo do e-
+mail para cerh.pb@gmail.com;
+					</li>
+					<li>
+						Preenchimento da ficha com todos os dados disponíveis.
+					</li>
+					<li>
+						Descrever o quadro clínico com a cronologia de início dos sintomas (importante para definir qual melhor
+método de diagnóstico de COVID-19);
+					</li>
+					<li>
+						Informar se já foi realizado a coleta de swab SARS-CoV-2 e/ou teste rápido (IgM, IgG);
+					</li>
+					<li>
+						Informar quais medicações administradas no serviço solicitante;
+					</li>
+					<li>
+						Pacientes que estejam sob assistência ventilatória invasiva (intubação orotraqueal) – relatar os
+parâmetros de ventilação mecânica atual: PEEP, Ppico, Pplatô, FR, Raw, Cest, FiO2, FR. Também
+relatar o uso de sedoanalgesia e drogas vasoativas atuais (dose, em mL/h ou mcg/kg/min ou mcg/min);
+					</li>
+					<li>
+						Descrever os exames laboratoriais realizados na unidade de origem, caso sejam disponíveis:
+leucometria, PCR, d-dímero, troponina, TGO, TGP, Ur, Cr, DHL, Bilirrubina total e frações, eletrólitos,
+gasometria arterial, lactato sérico, procalcitonina.
+					</li>
+					<li>
+						Após análise dos dados apresentados, o CERH poderá emitir a senha de transferência, que tem duração
+máxima de 12h de validação para recepção na unidade solicitante.
+					</li>
+					
+				</ul>
+			</p>
+		</div>
+
+		<br>
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		  <h2 style="text-align: center; color: white">
+		  	CENTRO ESTADUAL DE REGULACAO HOSPITALAR COVID-19 (CERH)
+		  </h2>
+		</nav><br>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-4" style="background-color:;">
+					<div style="position: relative; left: 0; top: 20%; width: 100%; text-align: center;">
+						<img src="{% static "covid19/cerh_covid19.png" %}" alt="" style=" background-color: ;width: 70%">
+					</div>
+				</div>
+
+	      		<div class="col-sm-4" style="">
+	      			<div class="col" style="text-align: center;">
+	      				<p>GOVERNO DO ESTADO DA PARAÍBA</p>
+	      				<p>SECRETARIA DE ESTADO DA SAÚDE</p>
+	      				<p></p>
+	      				<p><h7><b>Registro de Casos - Perfil Enfermeiro/Médico - {{user}}</b></h7></p>
+	      			</div>
+	      		</div>
+	      		<div class="col-sm-4" style="background-color:;">
+	      			<div style="position: relative; left: 0; top: 30%; width: 100%; text-align: center;">
+	      				<img src="{% static "covid19/governo.png" %}" alt="" style="background-color: ;width: 70%">
+	      			</div>
+	      		</div>
+	      	</div>
+	    <br>
+		</div>
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		  <ul class="navbar-nav">
+		    <li class="nav-item">
+		      <a class="nav-link" href="/registro_covid/">Registro</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="/registro_enfermeiro_medico/">Registro/Edição</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link active" href="/regulacao/">Regulação</a>
+		    </li>
+		  </ul>
+		</nav><hr>
+
+		<form action="">
+
+		<div class="container">
+
+			<p></p>
+			<div class="row">
+			
+    			<div class="col-sm-6">
+					Nome do Solicitante
+					<div class="form-check-inline">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="nome-doador-anexo" size="40" value="">
+				    </div>
+				</div>
+
+				<div class="col-sm-6">
+					Paciente
+					<div class="form-check-inline">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="nome-doador-anexo" size="40" value="">
+				    </div>
+				</div>
+    			
+			</div>			
+		</div>
+		<hr>
+		<div class="container" style="">
+			<div class="row">
+				
+				<div class="col-sm-6">
+					Unidade de Origem
+					<div class="form-check-inline">
+						<select name="unidade_origem" id="" class="form-control form-control-sm" style="width: auto">
+				            <option value=""></option>
+				            <option value="upa cruz das armas">UPA CRUZ DAS ARMAS</option>
+				            <option value="upa bancarios">UPA BANCÁRIOS</option>
+				            <option value="upa tibiri">UPA TIBIRI</option>
+				            <option value="upa oceania">UPA OCEANIA</option>
+				            
+				        </select>
+				    </div>
+				</div>
+				
+    			<div class="col-sm-6">
+    				Idade:
+				    <div class="form-check-inline">
+				        <input type="number" class="form-control form-control-sm" id="" placeholder="" name="idade_paciente" value="" min="1" max="200">
+				    </div>
+    			</div>
+    			
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-12">
+					<b>DESCRIÇÃO CLÍNICA (SIC, UNIDADE SOLICITANTE)</b>					
+				</div>
+			</div><br><br>
+			<div class="row">
+				<div class="col-sm-12">
+					<b>Síndrome Gripal?</b> – Aspectos relacionados a síndrome gripal
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-1">
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="orgaos-anexo" value="Coracao" id="orgaos-doados">Tosse
+					</label>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width: 140%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="orgaos-anexo" value="Figado" id="orgaos-doados">Coriza Nasal
+					</label>
+					</div>
+				</div>
+				<div class="col-sm-1">
+					<div class="form-check-inline" style="width: 130%; margin-left: -20px">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="orgaos-anexo" value="Rim" id="orgaos-doados">Anosmia
+					</label>
+					</div>
+				</div>
+				<div class="col-sm-1">
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="orgaos-anexo" value="Corneas" id="orgaos-doados">Febre
+					</label>
+					</div>
+				</div>
+				<div class="col-sm-1">
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="orgaos-anexo" value="Pancreas" id="orgaos-doados">Mialgia
+					</label>
+					</div>
+				</div>
+				<div class="col-sm-1">
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="orgaos-anexo" value="Pulmao" id="orgaos-doados">Fadiga
+					</label>
+					</div>
+				</div>
+				<div class="col-sm-1">
+					<div class="form-check-inline" style="width: 140%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="orgaos-anexo" value="Intestino" id="orgaos-doados">Dispinéia
+					</label>
+					</div>
+				</div>
+				<div class="col-sm-1">
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="orgaos-anexo" value="Osso" id="orgaos-doados">Astenia
+					</label>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="orgaos-anexo" value="Musculo/Tendao" id="orgaos-doados">Cefaléia
+					</label>
+					</div>
+				</div>
+				
+				
+			</div><hr>
+
+			<div class="row">
+				<div class="col-sm-12">
+					Tempo de início de quadro sintomático:
+					<div class="form-check-inline">
+				        <input type="number" class="form-control form-control-sm" id="" placeholder="" name="idade_paciente" value="" min="1" max="200">
+				    </div>
+				    dias.
+				</div>
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-12">
+					Exposição epidemiológica a qualquer pessoa infectada pelo SARS CoV-2?
+					<div class="form-check-inline">
+			          <label class="form-check-label">
+			            <input type="radio" class="form-check-input" name="exposicao_epidemiologica_sim" value="Sim" required>Sim
+			          </label>
+			        </div>
+			        <div class="form-check-inline">
+			          <label class="form-check-label">
+			            <input type="radio" class="form-check-input" name="exposicao_epidemiologica_sim" value="Não" required>Não
+			          </label>
+			        </div>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					Grau de parentesco:
+					<div class="form-check-inline">
+						<select name="unidade_origem" id="" class="form-control form-control-sm" style="width: auto">
+				            <option value=""></option>
+				            <option value="Mãe">Mãe</option>
+				            <option value="Pai">Pai</option>
+				            <option value="Irmão">Irmão(a)</option>
+				            <option value="Tio">Tio(a)</option>
+				            <option value="Cunhado">Cunhado</option>
+				            <option value="Avó">Avó</option>
+				            <option value="Avô">Avô</option>
+				            <option value="Primo">Primo</option>
+				            
+				        </select>
+				    </div>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					<b>Comorbidades</b>
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="orgaos-anexo" value="Coracao" id="orgaos-doados">Obesidade;
+					</label>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="orgaos-anexo" value="Figado" id="orgaos-doados">HAS
+					</label>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="orgaos-anexo" value="Rim" id="orgaos-doados">DM-2;
+					</label>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-check-inline" style="">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="orgaos-anexo" value="Corneas" id="orgaos-doados">Cardiopatia Squêmica prévia - FE
+					</label>
+					</div>
+				</div>
+				
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="orgaos-anexo" value="Pancreas" id="orgaos-doados">AVEi prévio;
+					</label>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="orgaos-anexo" value="Pulmao" id="orgaos-doados">Doença pulmonar pré-existente
+					</label>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-check-inline" style="width: 140%">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="orgaos-anexo" value="Intestino" id="orgaos-doados">Lesão Renal Crônica – estágio:
+					</label>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-check-inline" style="width: 140%">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="orgaos-anexo" value="Intestino" id="orgaos-doados">Uso de imunobiológicos;
+					</label>
+					</div>
+				</div>
+				
+			</div><br>
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="" value="" id="">História de Transplantes;
+					</label>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-check-inline">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="" value="" id="">Imunossupressor prévio (corticosteróide,quimioterápicos);
+					</label>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-check-inline">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="diagnostico_hiv" value="Musculo/Tendao" id="orgaos-doados">Diagnóstico de HIV;
+					</label>
+					</div>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="vehicle1" value="something">Outras cardiopatias – Descrever:
+				      </label>
+				    </div>
+					
+					<div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="outras_cardiopatias" value="">
+				    </div>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-6">
+					
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="vehicle1" value="something">Gestação – Idade Gestacional:
+				      </label>
+				    </div>
+					
+					<div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="idade_gestacional" value="">
+				    </div>
+
+
+				</div>
+				<div class="col-sm-6">
+					Gesta/Para:
+					<div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="gesta_para" value="">
+				    </div>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="vehicle1" value="something">Comorbidades obstétricas:
+				      </label>
+				    </div>
+					
+					<div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="comorbidade_obstetrica" value="">
+				    </div>
+				</div>
+			</div><br><hr>
+			<div class="row">
+				<div class="col-sm-12">
+					<b>Medicamentos de uso habitual?</b>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-6">
+					
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="" value="something">BRA (Losartana, Valsartana, Olmesartana, etc)
+				      </label>
+				    </div>
+					
+				</div>
+				<div class="col-sm-6">
+					
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="vehicle1" value="something">IECA; Outros
+				      </label>
+				    </div>
+					
+					<div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="comorbidade_obstetrica" value="">
+				    </div>
+				</div>
+			</div><br>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<b>Oximetria periférica – Sistema Respiratório e Ventilação</b>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-3">
+					SPO2:
+				    <div class="form-check-inline">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="spo2" style="width: 60px" value="">
+				    </div><label for="" style="margin-left: -10px">%</label>
+				</div>
+				<div class="col-sm-3">
+					FR:
+				    <div class="form-check-inline">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="spo2" style="width: 100px" value="">
+				    </div><label for="" style="margin-left: -10px">IRPM</label>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-1"><b>Ventilação</b>:</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="" value="something">Espontânea
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="" value="something">IOT
+				      </label>
+				    </div>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-2">
+					<b>O2 suporte:</b>
+				</div>
+				<div class="col-sm-4">
+					<label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="something">CN:
+				      </label>
+
+				    <div class="form-check-inline">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="spo2" style="width: 60px" value="cn">
+				    </div><label for="" style="margin-left: -10px">lts/min</label>
+				</div>
+				<div class="col-sm-2">
+					<label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="venturi" value="something">Venturi
+				      </label>
+
+					<div class="form-check-inline">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="spo2" style="width: 60px" value="">
+				    </div><label for="" style="margin-left: -10px">%</label>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="something">Máscara com reservatório
+				      </label>
+				    </div>
+
+					
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-1">
+					<b>VMI:</b>
+				</div>
+				<div class="col-sm-1">
+					<div class="form-check-inline" style="width: 130px">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="something">PCV
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-1">
+					<div class="form-check-inline" style="width: 130px">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="something">PSV
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-1">
+					<div class="form-check-inline" style="width: 130px">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="something">VCV
+				      </label>
+				    </div>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-2">
+					Vt:
+				    <div class="form-check-inline">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="vt" style="width: 60px" value="">
+				    </div><label for="" style="margin-left: -10px">mL/Kg</label>
+				</div>
+				<div class="col-sm-3">
+					Delta pressure:
+				    <div class="form-check-inline" style="width:">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="delta_pressure" style="width: 80px" value="">
+				    </div><label for="" style="">cmH2O</label>
+				</div>
+				<div class="col-sm-3">
+					Pplatô:
+				    <div class="form-check-inline" style="width:">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pplato" style="width: 80px" value="">
+				    </div><label for="" style="">cmH2O</label>
+				</div>
+				<div class="col-sm-2">
+					Raw:
+				    <div class="form-check-inline">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="raw" style="width: 100px" value="">
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					Cest:
+				    <div class="form-check-inline">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="cest" style="width: 100px" value="">
+				    </div>
+				</div>
+				
+			</div><br>
+			<div class="row">
+				<div class="col-sm-2">
+					SaO2:
+				    <div class="form-check-inline">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="SaO2" style="width: 60px" value="">
+				    </div><label for="" style="margin-left: -10px">%</label>
+				</div>
+				<div class="col-sm-3">
+					PaO2:
+				    <div class="form-check-inline" style="width:">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="paO2" style="width: 80px" value="">
+				    </div><label for="" style="">mmHg</label>
+				</div>
+				<div class="col-sm-3">
+					FiO2:
+				    <div class="form-check-inline" style="width:">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="fio2" style="width: 80px" value="">
+				    </div><label for="" style="">%</label>
+				</div>
+				<div class="col-sm-3">
+					PaCO2:
+				    <div class="form-check-inline">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="paco2" style="width: 100px" value="">
+				    </div><label for="">mmHg</label>
+				</div>
+				
+				
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					<b>Verificação de PA/FC/FR – Cardiovascular e Infecção</b>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-2">
+					PA:
+				    <div class="form-check-inline">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa" style="width: 60px" value="">
+				    </div><label for="" style="">mmHg</label>
+				</div>
+				<div class="col-sm-3">
+					FC:
+				    <div class="form-check-inline" style="width:">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="fc" style="width: 80px" value="">
+				    </div><label for="" style="">bpm</label>
+				</div>
+				<div class="col-sm-4">
+					Temperatura axilar:
+				    <div class="form-check-inline" style="width:">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="temp_auxiliar" style="width: 80px" value="">
+				    </div><label for="" style="">°C</label>
+				</div>
+				
+			</div><br>
+			<div class="row">
+				<div class="col-sm-2" style="">
+					<b>Uso de DVA:</b>
+				</div>
+				<div class="col-sm-5" style="">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="something">Noradrenalina - Dose
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="nora" step="0.01" min="0" max="100" name="qtd_nora" style="width: 100px">
+	              		<div class="invalid-feedback"></div>
+	              		<label for="">mcg/kg/min</label>
+	              	</div>
+				</div>
+				<div class="col-sm-5" style="">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="something">Adrenalina - Dose
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="nora" step="0.01" min="0" max="100" name="qtd_adrenalina" style="width: 100px">
+	              		<div class="invalid-feedback"></div>
+	              		<label for="">mcg/kg/min</label>
+	              	</div>
+				</div>
+				<div class="col-sm-2"></div>
+				
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-5" style="">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="something">Vasopressina - Dose
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="nora" step="0.01" min="0" max="100" name="qtd_vasopressina" style="width: 100px">
+	              		<div class="invalid-feedback"></div>
+	              		<label for="">UI/min</label>
+	              	</div>
+				</div>
+				<div class="col-sm-5" style="">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="something">Dobutamina - Dose
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="nora" step="0.01" min="0" max="100" name="qtd_dobutamina" style="width: 100px">
+	              		<div class="invalid-feedback"></div>
+	              		<label for="">mcg/kg/min</label>
+	              	</div>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-2">
+					<b>Arritmia:</b>
+				</div>
+				<div class="col-sm-1" style="">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="arritmia" value="something">FA
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-1" style="">
+					<div class="form-check-inline" style="width:110%">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="arritmia" value="something">Flutter
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-1" style="">
+					<div class="form-check-inline" style="width:110%">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="arritmia" value="something">TSV
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-1" style="">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="arritmia" value="something">TV
+				      </label>
+				    </div>
+				</div>
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-4">
+					<b>Infecção bacteriana concomitante:</b>
+				</div>
+				<div class="col-sm-2" style="">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="arritmia" value="Sim">Sim
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2" style="">
+					<div class="form-check-inline" style="width:110%">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="arritmia" value="Não">Não
+				      </label>
+				    </div>
+				</div>
+				
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-1">
+					<b>Foco:</b>
+				</div>
+				<div class="col-sm-2" style="">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="arritmia" value="Pulmonar">Pulmonar
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2" style="">
+					<div class="form-check-inline" style="width:110%">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="arritmia" value="Urinário">Urinário
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-3" style="">
+					<div class="form-check-inline" style="width:110%">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="arritmia" value="Pele/tecidos moles">Pele/tecidos moles
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-3" style="">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="arritmia" value="Corrente sanguínea">Corrente sanguínea
+				      </label>
+				    </div>
+				</div>
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<b>Uso de antibioticoterapia:</b>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-check-inline" style="width: 300px">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="uso_antibioticoterapia" value="">
+				    </div>
+				</div>
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-4">
+					<b>Pesquisa de SARS CoV-2; teste rápido:</b>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo">Positivo
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Negativo">Negativo
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Não Realizado">Não Realizado
+				      </label>
+				    </div>
+				</div>
+			</div>
+			<hr>
+
+			<div class="row">
+				<div class="col-sm-3">
+					<b>RT PCR SARS CoV-2:</b>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width: 90%">
+				      <label class="form-check-label" for="check1">
+				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Detectável">Detectável
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Não Detectável">Não Detectável
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-5">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Aguardando">Aguarda resultado – data coleta:
+				      </label>
+				      <label for="">
+				      	<input type="date" class="form-control form-control-sm">				      	
+				      </label>
+				    </div>
+				</div>
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<b>Em uso de Corticosteróide?</b>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="check1">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_corticosteroide" value="Sim">Sim - Qual Dose:
+				      </label>
+				    </div>
+				    
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" id="" placeholder="" name="dose_corticosteroide" value="" min="0" max="10000">
+				    </div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="check1">Data de Início:
+				        
+				      </label>
+				      <input type="date" class="form-control form-control-sm" id="" name="data_inicio_corticosteroide" value="">
+				    </div>
+				</div>
+				<div class="col-sm-1">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="check1">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_corticosteroide" value="Não">Não
+				      </label>
+				    </div>
+				    
+				</div>
+				
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<b>Em uso de Hidroxicloroquina?</b>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="check1">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_hidrocloroquina" value="Sim">Sim - Data de Início:
+				      </label>
+				    </div>
+				    
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="">
+						<input type="date" class="form-control form-control-sm" id="" name="data_inicio_hidroxicloroquina" value="">
+				    </div>
+				</div>
+				
+				<div class="col-sm-1">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="check1">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_hidrocloroquina" value="Não">Não
+				      </label>
+				    </div>
+				    
+				</div>
+				
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<b>Em uso de Oseltamivir?</b>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="check1">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Sim">Sim - Data de Início:
+				      </label>
+				    </div>
+				    
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="">
+						<input type="date" class="form-control form-control-sm" id="" name="data_inicio_oseltamivir" value="">
+				    </div>
+				</div>
+				
+				<div class="col-sm-1">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="check1">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Não">Não
+				      </label>
+				    </div>
+				    
+				</div>
+				
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-2" style="">
+					<b style="font-size: 94%">Em uso de Heparina?</b>
+				</div>
+				<div class="col-sm-2" style="">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="check1" style="font-size: 94%; margin-left: -10px">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_heparina" value="Sim">Sim - Data de Início:
+				      </label>
+				    </div>
+				    
+				</div>
+				<div class="col-sm-1" style="">
+					<div class="form-check-inline" style="margin-left: -40px">
+						<input type="date" class="form-control form-control-sm" id="" name="data_inicio_heparina" value="">
+				    </div>
+				</div>
+
+				<div class="col-sm-4" style="">
+					<b>Tipo de Heparina</b>
+					<div class="form-check-inline" style="width: ">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="tipo_heparina" value="">
+				    </div>
+
+				</div>
+				<div class="col-sm-2" style="">
+					<b style="font-size: 90%">Dose:</b>
+					<div class="form-check-inline" style="width: 60%;">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="dose_heparina" value="">
+				    </div>
+				</div>
+				
+				<div class="col-sm-1" style="">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="check1">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_heparina" value="Não">Não
+				      </label>
+				    </div>
+				    
+				</div>
+				
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-1">
+					<b>Idade</b>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="idade_paciente" style="width: 100px">
+	              	</div>
+				</div>
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-12">
+					<b>Pacientes com idade ≥ 65 anos, aplicar Escala de Performance Paliativa</b>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<!-- div da 1° tabela -->
+				<img src="{% static "cetpb/tabela1.png" %}" alt="" style="width: 60%">
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-2">
+					<b>PPS</b>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="idade_paciente" style="width:60px"><label for="">%</label>
+	              	</div>
+				</div>
+				
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					<b>Desorientação? Padrão neurológico, nível de consciência</b>
+				</div>
+			</div><br>
+
+			<div class="row">
+				<div class="col-sm-5" style="">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="something">Escala de Coma de Glasgow
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="" style="width: 100px">
+	              		<div class="invalid-feedback"></div>
+	              		<label for="">pontos</label>
+	              	</div>
+				</div>
+				<div class="col-sm-3" style="">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="something">Sedação contínua
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="margin-left: -10px">
+						<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="sedacao_continua" style="width:70px">
+	              	</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="Midazolam">Midazolam - Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="midazolam_dose" style="width: 100px">
+	              		
+	              	</div>
+				</div>
+			</div><br>
+			<div class="row">
+				
+				<div class="col-sm-3" style="">
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="Fentanil">Fentanil - Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="margin-left: -10px">
+						<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="fentanil_dose" style="width:70px">
+	              	</div>
+				</div>
+				<div class="col-sm-4" style="">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="Propofol">Propofol - Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+						<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="propofol_dose" style="width: 100px">
+	              	</div>
+				</div>
+				<div class="col-sm-4" style="">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="Bloqueador Neuromuscular">Bloqueador Neuromuscular:
+				      </label>
+				    </div>
+				</div>
+			</div><br>
+			<div class="row">
+				
+				<div class="col-sm-3" style="">
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="Rocurônio">Rocurônio – Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="margin-left: -10px">
+						<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="rocuronio_dose" style="width:70px">
+	              	</div>
+				</div>
+				<div class="col-sm-4" style="">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="Pancurônio">Pancurônio – Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+						<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="pacuronio_dose" style="width: 100px">
+	              	</div>
+				</div>
+				<div class="col-sm-4" style="">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="Cisatracúrio">Cisatracúrio – Dose:
+				      </label>
+				    </div>
+				    <div class="form-check-inline" style="margin-left: -10px">
+						<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="cisacuronio_dose" style="width:70px">
+	              	</div>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					<b>RASS:</b>
+					<div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="rass" value="">
+				    </div>
+				</div>
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-12">
+					<b>Laboratório - Data</b>
+					<div class="form-check-inline" style="width: 200px">
+						<input type="date" class="form-control form-control-sm" id="" placeholder="" name="data_exames_laboratorio" value="">
+				    </div>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-3">
+					Leucócitos:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="leucocito" value="">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					Linfócitos:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="leucocito" value="">
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					HB:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="leucocito" value="">
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					HT:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="leucocito" value="">
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					PCR:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="leucocito" value="">
+				    </div>
+				</div>
+				
+			</div><br>
+			<div class="row">
+				<div class="col-sm-3">
+					Lactato:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="lactato" value="">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					DHL:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="dhl" value="">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					Ferritina:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ferritina" value="">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					Troponina:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="troponina" value="">
+				    </div>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-3">
+					CPK:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="cpk" value="">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					D-dímero:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="d_dimero" value="">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					Uréia:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ureia" value="">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					Creatinina:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="creatinina" value="">
+				    </div>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-2">
+					AP:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="cpk" value="">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					TAP:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="d_dimero" value="">
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					INR:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ureia" value="">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					TGO:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="creatinina" value="">
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					TGP:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="creatinina" value="">
+				    </div>
+				</div>
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-12"><b>Imagem:</b></div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="exame_imagem" value="TC Tórax">TC Tórax; Laudo:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="width: 80%">
+						<input type="text" size="" class="form-control form-control-sm" id="" step="" name="laudo_tc_torax" style="">
+	              	</div>					
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="check1">
+				        <input type="checkbox" class="form-check-input" id="check1" name="exame_imagem" value="RX Tórax">RX Tórax; Laudo:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="width: 80%">
+						<input type="text" size="" class="form-control form-control-sm" id="" step="" name="laudo_rx_torax" style="">
+	              	</div>	
+				</div>
+			</div><hr>
+
+			
+		<div class="container" style="border: 2px solid #cccccc; border-radius: 10px">
+			<div class="row" style="margin-top: 30px">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6" style="text-align: center;"><b style="font-size: 110%">Recomendações do CERH:</b></div>
+				<div class="col-sm-3"></div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-3">
+					
+				</div>
+				<div class="col-sm-6">
+					<b>Síndrome gripal</b>
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="sindrome_gripal" value="Sim">Sim
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="sindrome_gripal" value="Não">Não
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="sindrome_gripal" value="Criterios Inconclusivo">Critérios Inconclusivo
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2"></div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6">
+					<b>NEWS-FAST (SES/PB)</b>
+				</div>
+
+				<div class="col-sm-3"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_fast" value="eixo azul">1 ponto (eixo azul)
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					
+
+				</div>
+				<div class="col-sm-3">
+					
+
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_fast" value="eixo amarelo">2 ponto (eixo amarelo)
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					
+				</div>
+				<div class="col-sm-2">
+					
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_fast" value="eixo amarelo">2 ponto (eixo laranja)
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					
+				</div>
+				<div class="col-sm-2">
+					
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_fast" value="eixo vermelho"> >=3 ponto (eixo vermelho)
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					
+				</div>
+				<div class="col-sm-2">
+					
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+			<div class="row"></div><br>
+
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6">
+					<b>NEWS modificado</b>
+				</div>
+
+				<div class="col-sm-3"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="zero ponto">0 ponto
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					
+
+				</div>
+				<div class="col-sm-3">
+					
+
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="amarelo">1-4 pontos (amarelo)
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					
+				</div>
+				<div class="col-sm-2">
+					
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="laranja">5-6 pontos (laranja)
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					
+				</div>
+				<div class="col-sm-2">
+					
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="vermelho"> >=7 pontos (vermelho)
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					
+				</div>
+				<div class="col-sm-2">
+					
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="preto"> >=7 pontos (preto)
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					
+				</div>
+				<div class="col-sm-2">
+					
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+			<div class="row"></div><br>
+
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6">
+					<b>UTI</b>
+				</div>
+
+				<div class="col-sm-3"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="uti" value="zero ponto">Insuficiência respiratória aguda com necessidade de ventilação mecânica.
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="uti" value="amarelo">Sepse/Choque séptico e infecção pulmonar pelo XOVID-19.
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					
+				</div>
+				
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-8">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="uti" value="laranja">Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-1">
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="uti" value="news modificado"> NEWS modificado ≥ 7 pontos
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					
+				</div>
+				
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="uti" value="preto"> NEWS-FAST ≥ 3 pontos
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					
+				</div>
+				
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar"> Disfunção orgânica, além do pulmonar
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					
+				</div>
+				
+			</div><br>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="perfil" value="ENFERMARIA">ENFERMARIA
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="perfil" value="UTI ADULTO">UTI ADULTO
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="perfil" value="UTI PEDIÁTRICA">UTI PEDIÁTRICA
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="perfil" value="UTI MATERNA">UTI MATERNA
+				      </label>
+				    </div>
+				</div>
+			</div><br>
+				
+		</div>
+			<br>
+
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					<b>Prioridades UTI – Conselho Federal de Medicina (apenas preencher se UTI)</b>
+				</div>
+				<div class="col-sm-2"></div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<img src="{% static "cetpb/prioridades.png" %}" alt="" style="width: 60%">
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8">
+					Prioridade:
+					<div class="form-check-inline" style="">
+    					<input type="number" min="0" max="10" class="form-control form-control-sm" id="" placeholder="" name="prioridade" value="">
+				    </div>
+				</div>
+				<div class="col-sm-2"></div>
+			</div>
+			<br>
+			<div class="row" style="border: 2px solid #cccccc; border-radius: 10px">
+				
+				<div class="col-sm-12" style="margin-top: 30px">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="check1">
+				        <input type="radio" class="form-check-input" id="" name="" value="Paciente não preenche critérios para Regulação">PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+				      <label for="comment">Justificativa:</label>
+				      <textarea class="form-control" rows="5" id="comment" name="justificativa_nao_regulacao"></textarea>
+				    </div>
+				</div>
+				<div class="col-sm-6"></div>
+
+				<div class="col-sm-4">
+					Data:
+					<div class="form-check-inline">
+						<input type="date" class="form-control form-control-sm" id="" placeholder="" name="data_alteracao" size="10" value="">
+				    </div>
+
+				</div>
+				
+				<div class="col-sm-8">
+					Assinatura/CRM:
+				</div>
+				<div class="col-sm-12"><br></div>
+
+			</div>
+
+
+
+
+
+		</div>
+		
+		<hr>
+		<div class="container-fluid" style="text-align: center;">
+			<button type="submit" class="btn btn-primary" style="align-items: center;" id="btn_inserir_paciente">Inserir</button>  
+	    </div>
+
+	    <div style="height: 50px"></div>
+
+
+		</form>
+	</div>
+
+	<img src="{% static "covid19/rodape4.jpg" %}" alt="" style="background-color: ;width: 100%">
+	<div style="background-color: #e6e6e6;">
+		
+			<br /><br />
+		
+	</div>
+	
+</body>
+</html>

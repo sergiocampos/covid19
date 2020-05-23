@@ -20,8 +20,10 @@ from core import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
+    path('covid_list/', views.covid_list, name='covid_list'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('registro_covid/', views.registro_covid, name='registro_covid'),
+    path('registro_covid/submit', views.registro_covid_set),
     path('registro_enfermeiro_medico/', views.registro_enfermeiro_medico, name='registro_enfermeiro_medico'),
     path('regulacao/', views.regulacao, name='regulacao'),
 ]

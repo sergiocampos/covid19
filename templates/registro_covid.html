@@ -70,7 +70,7 @@
 	    <br>
 		</div>
 
-		<form action="">
+		<form action="" method="POST">{% csrf_token %}
 
 		<div class="container">
 
@@ -79,19 +79,19 @@
 				<div class="col-sm-3">
 					Data
 					<div class="form-check-inline">
-						<input type="date" class="form-control form-control-sm" id="" placeholder="" name="data_anexo_me" size="10" value="">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="data_notificacao" disabled="" size="10" value="{{formateDate}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					Hora
 					<div class="form-check-inline">
-						<input type="time" class="form-control form-control-sm" id="" placeholder="" name="" size="12">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="" size="12" value="{{hora}}" disabled>
 				    </div>
 				</div>
     			<div class="col-sm-6">
 					Nome do Solicitante
 					<div class="form-check-inline">
-						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="nome-doador-anexo" size="40" value="">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="nome_solicitante" size="40" value="">
 				    </div>
 				</div>
     			

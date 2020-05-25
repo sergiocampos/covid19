@@ -11,7 +11,9 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 	<title>Registro - Casos COVID19</title>
-	<link rel="stylesheet" href="">
+	<link rel="stylesheet" href="{% static "css/covid.css" %}">
+
+	<script type="text/javascript" src='/static/js/covid.js/'></script>
 
 </head>
 <body>
@@ -373,13 +375,13 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="form-check-inline">
-				      <label class="form-check-label" for="check1">
-				        <input type="checkbox" class="form-check-input" id="check1" name="vehicle1" value="something">Outras cardiopatias – Descrever:
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_outras_cardiopatias" name="" value="" onclick="activeOutrasCardiopatias()">Outras cardiopatias – Descrever:
 				      </label>
 				    </div>
 					
 					<div class="form-check-inline" style="width: 200px">
-						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="outras_cardiopatias" value="">
+						<input type="text" class="form-control form-control-sm" id="outras_cardiopatias" placeholder="" name="desc_outras_cardiopatias" value="" disabled>
 				    </div>
 				</div>
 			</div><br>
@@ -387,13 +389,13 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-6">
 					
 					<div class="form-check-inline">
-				      <label class="form-check-label" for="check1">
-				        <input type="checkbox" class="form-check-input" id="check1" name="vehicle1" value="something">Gestação – Idade Gestacional:
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_idade_gestacional" name="" value="" onclick="activeIdadeGestacional()">Gestação – Idade Gestacional:
 				      </label>
 				    </div>
 					
 					<div class="form-check-inline" style="width: 200px">
-						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="idade_gestacional" value="">
+						<input type="text" class="form-control form-control-sm" id="idade_gestacional" placeholder="" name="idade_gestacao" value="" disabled>
 				    </div>
 
 
@@ -401,7 +403,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-6">
 					Gesta/Para:
 					<div class="form-check-inline" style="width: 200px">
-						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="gesta_para" value="">
+						<input type="text" class="form-control form-control-sm" id="gesta_para" placeholder="" name="gestacao_para" value="" disabled>
 				    </div>
 				</div>
 			</div><br>
@@ -409,13 +411,13 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-12">
 					
 					<div class="form-check-inline">
-				      <label class="form-check-label" for="check1">
-				        <input type="checkbox" class="form-check-input" id="check1" name="vehicle1" value="something">Comorbidades obstétricas:
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_comorbidades_obstetrica" name="" value="" onclick="comorbidadesObstetrica()">Comorbidades obstétricas:
 				      </label>
 				    </div>
 					
 					<div class="form-check-inline" style="width: 200px">
-						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="comorbidade_obstetrica" value="">
+						<input type="text" class="form-control form-control-sm" id="comorbidades_obstetrica" placeholder="" name="comorbidade_obstetrica" value="" disabled>
 				    </div>
 				</div>
 			</div><br><hr>
@@ -425,25 +427,32 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 			</div><br>
 			<div class="row">
-				<div class="col-sm-6">
+				<div class="col-sm-5">
 					
 					<div class="form-check-inline">
-				      <label class="form-check-label" for="check1">
-				        <input type="checkbox" class="form-check-input" id="check1" name="" value="something">BRA (Losartana, Valsartana, Olmesartana, etc)
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="medicamento_bra" value="BRA (Losartana, Valsartana, Olmesartana, etc)">BRA (Losartana, Valsartana, Olmesartana, etc)
 				      </label>
 				    </div>
 					
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-2">
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="medicamento_ieca" value="IECA">IECA
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-5" style="">
 					
 					<div class="form-check-inline">
-				      <label class="form-check-label" for="check1">
-				        <input type="checkbox" class="form-check-input" id="check1" name="vehicle1" value="something">IECA; Outros
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="outros_medicamento" name="medicamento_outros" value="Outros" onclick="check_outro_medicamento()">Outros
 				      </label>
 				    </div>
 					
-					<div class="form-check-inline" style="width: 200px">
-						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="comorbidade_obstetrica" value="">
+					<div class="form-check-inline" style="">
+						<input type="text" class="form-control form-control-sm" id="descricao_outro_medicamento" placeholder="" name="descricao_outros_medicamento" disabled value="">
 				    </div>
 				</div>
 			</div><br>
@@ -914,7 +923,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 				<div class="col-sm-2">
 					<div class="form-check-inline" style="width: 110%">
-				      <label class="form-check-label" for="check1">
+				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Sim">Sim - Data de Início:
 				      </label>
 				    </div>
@@ -928,7 +937,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				
 				<div class="col-sm-1">
 					<div class="form-check-inline" style="width: 110%">
-				      <label class="form-check-label" for="check1">
+				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Não">Não
 				      </label>
 				    </div>
@@ -937,47 +946,49 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				
 			</div><hr>
 			<div class="row">
-				<div class="col-sm-2" style="">
-					<b style="font-size: 94%">Em uso de Heparina?</b>
+				<div class="col-sm-3" style="">
+					<b style="font-size:">Em uso de Heparina?</b>
 				</div>
 				<div class="col-sm-2" style="">
 					<div class="form-check-inline" style="width: 110%">
-				      <label class="form-check-label" for="check1" style="font-size: 94%; margin-left: -10px">
-				        <input type="radio" class="form-check-input" id="" name="em_uso_heparina" value="Sim">Sim - Data de Início:
+				      <label class="form-check-label" for="" style="font-size: ; margin-left:">
+				        <input type="radio" class="form-check-input" id="uso_heparina_sim" name="em_uso_heparina" onclick="activeDateHeparina()" value="Sim">Sim - Data de Início:
 				      </label>
 				    </div>
 				    
 				</div>
-				<div class="col-sm-1" style="">
-					<div class="form-check-inline" style="margin-left: -40px">
-						<input type="date" class="form-control form-control-sm" id="" name="data_inicio_heparina" value="">
+				<div class="col-sm-2" style="">
+					<div class="form-check-inline" style="margin-left:">
+						<input type="date" class="form-control form-control-sm" id="date_inicio_heparina" name="data_inicio_heparina" value="" disabled>
 				    </div>
 				</div>
 
-				<div class="col-sm-4" style="">
+				<div class="col-sm-3" style="">
 					<b>Tipo de Heparina</b>
-					<div class="form-check-inline" style="width: ">
-						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="tipo_heparina" value="">
+					<div class="form-check-inline" style="width: 100px">
+						<input type="text" class="form-control form-control-sm" id="heparina_tipo" placeholder="" name="tipo_heparina" value="" style="">
 				    </div>
 
 				</div>
 				<div class="col-sm-2" style="">
 					<b style="font-size: 90%">Dose:</b>
 					<div class="form-check-inline" style="width: 60%;">
-						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="dose_heparina" value="">
+						<input type="text" class="form-control form-control-sm" id="heparina_dose" placeholder="" name="dose_heparina" value="">
 				    </div>
 				</div>
 				
-				<div class="col-sm-1" style="">
-					<div class="form-check-inline" style="width: 110%">
-				      <label class="form-check-label" for="check1">
-				        <input type="radio" class="form-check-input" id="" name="em_uso_heparina" value="Não">Não
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-9">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_heparina" value="Não" onclick="desactiveDateHeparina()">Não
 				      </label>
 				    </div>
-				    
 				</div>
-				
-			</div><hr>
+			</div>
+			<hr>
 			<div class="row">
 				<div class="col-sm-1">
 					<b>Idade</b>
@@ -1016,8 +1027,8 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-5" style="">
 					<div class="form-check-inline" style="width:">
-				      <label class="form-check-label" for="check1">
-				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="something">Escala de Coma de Glasgow
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="mascara_reservatorio" value="something">Escala de Coma de Glasgow
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -1028,8 +1039,8 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 				<div class="col-sm-3" style="">
 					<div class="form-check-inline" style="width:">
-				      <label class="form-check-label" for="check1">
-				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="something">Sedação contínua
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="mascara_reservatorio" value="something">Sedação contínua
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="margin-left: -10px">
@@ -1038,8 +1049,8 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 				<div class="col-sm-4">
 					<div class="form-check-inline" style="width:">
-				      <label class="form-check-label" for="check1">
-				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="Midazolam">Midazolam - Dose:
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="mascara_reservatorio" value="Midazolam">Midazolam - Dose:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -1052,8 +1063,8 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				
 				<div class="col-sm-3" style="">
 					<div class="form-check-inline">
-				      <label class="form-check-label" for="check1">
-				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="Fentanil">Fentanil - Dose:
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="mascara_reservatorio" value="Fentanil">Fentanil - Dose:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="margin-left: -10px">
@@ -1062,8 +1073,8 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 				<div class="col-sm-4" style="">
 					<div class="form-check-inline" style="width:">
-				      <label class="form-check-label" for="check1">
-				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="Propofol">Propofol - Dose:
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="mascara_reservatorio" value="Propofol">Propofol - Dose:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -1072,8 +1083,8 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 				<div class="col-sm-4" style="">
 					<div class="form-check-inline" style="width:">
-				      <label class="form-check-label" for="check1">
-				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="Bloqueador Neuromuscular">Bloqueador Neuromuscular:
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="mascara_reservatorio" value="Bloqueador Neuromuscular">Bloqueador Neuromuscular:
 				      </label>
 				    </div>
 				</div>
@@ -1082,8 +1093,8 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				
 				<div class="col-sm-3" style="">
 					<div class="form-check-inline">
-				      <label class="form-check-label" for="check1">
-				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="Rocurônio">Rocurônio – Dose:
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="mascara_reservatorio" value="Rocurônio">Rocurônio – Dose:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="margin-left: -10px">
@@ -1092,8 +1103,8 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 				<div class="col-sm-4" style="">
 					<div class="form-check-inline" style="width:">
-				      <label class="form-check-label" for="check1">
-				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="Pancurônio">Pancurônio – Dose:
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="mascara_reservatorio" value="Pancurônio">Pancurônio – Dose:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -1102,8 +1113,8 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 				<div class="col-sm-4" style="">
 					<div class="form-check-inline" style="width:">
-				      <label class="form-check-label" for="check1">
-				        <input type="checkbox" class="form-check-input" id="check1" name="mascara_reservatorio" value="Cisatracúrio">Cisatracúrio – Dose:
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="mascara_reservatorio" value="Cisatracúrio">Cisatracúrio – Dose:
 				      </label>
 				    </div>
 				    <div class="form-check-inline" style="margin-left: -10px">

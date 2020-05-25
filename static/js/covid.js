@@ -1,3 +1,13 @@
+function activeOutrasComorbidades(){
+	if (document.getElementById('outras_comorbidades').checked == true) {
+		$("#desc_outras_comorbidades").prop("disabled", false);
+	}
+	else{
+		$("#desc_outras_comorbidades").prop("disabled", true);
+		$("#desc_outras_comorbidades").val("");
+	}
+}
+
 function activeOutrasCardiopatias(){
 	if (document.getElementById('check_outras_cardiopatias').checked == true) {
 		$("#outras_cardiopatias").prop("disabled", false);

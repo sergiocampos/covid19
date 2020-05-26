@@ -66,3 +66,34 @@ function desactiveDateHeparina(){
 	$("#heparina_dose").prop("disabled", true);
 
 }
+
+function desactiveFoco(){
+	$("#foco_pulmonar").prop("disabled", false);
+	$("#foco_urinario").prop("disabled", false);
+	$("#foco_pele").prop("disabled", false);
+	$("#foco_abdominal").prop("disabled", false);
+	$("#foco_corrente_sanguinea").prop("disabled", false);
+}
+
+function activeFoco(){
+	$("#foco_pulmonar").prop("checked", false);
+	$("#foco_urinario").prop("checked", false);
+	$("#foco_pele").prop("checked", false);
+	$("#foco_abdominal").prop("checked", false);
+	$("#foco_corrente_sanguinea").prop("checked", false);
+
+	$("#foco_pulmonar").prop("disabled", true);
+	$("#foco_urinario").prop("disabled", true);
+	$("#foco_pele").prop("disabled", true);
+	$("#foco_abdominal").prop("disabled", true);
+	$("#foco_corrente_sanguinea").prop("disabled", true);
+}
+
+function activeDataColeta(){
+	$("#data_coleta").prop("disabled", false);
+}
+
+function desactiveDataColeta(){
+	$("#data_coleta").val("");
+	$("#data_coleta").prop("disabled", true);
+}

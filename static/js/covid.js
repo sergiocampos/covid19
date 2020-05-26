@@ -97,3 +97,237 @@ function desactiveDataColeta(){
 	$("#data_coleta").val("");
 	$("#data_coleta").prop("disabled", true);
 }
+
+function activeDoseCorticosteroide(){
+	$("#corticosteroide_id").prop("disabled", false);
+	$("#data_inicio_corticosteroide_id").prop("disabled", false);
+}
+
+function desactiveDoseCorticosteroide(){
+	$("#corticosteroide_id").val("");
+	$("#data_inicio_corticosteroide_id").val("");
+	$("#corticosteroide_id").prop("disabled", true);
+	$("#data_inicio_corticosteroide_id").prop("disabled", true);
+}
+
+function activeDataInicioHC(){
+	$("#data_inicio_hidroxicloroquina_id").prop("disabled", false);
+}
+
+function desactiveDataInicioHC(){
+	$("#data_inicio_hidroxicloroquina_id").val("");
+	$("#data_inicio_hidroxicloroquina_id").prop("disabled", true);
+}
+
+function dataInicioOseltamivir(){
+	$("#data_inicio_oseltamivir_id").prop("disabled", false);
+}
+
+function desactiveDataInicioOseltamivir(){
+	$("#data_inicio_oseltamivir_id").val("");
+	$("#data_inicio_oseltamivir_id").prop("disabled", true);
+}
+
+function activeValorGlasgow(){
+	if (document.getElementById("check_escala_glasgow").checked == true){
+		$("#escala_glasgow_id").prop("disabled", false);
+	}
+	else {
+		$("#escala_glasgow_id").val("");
+		$("#escala_glasgow_id").prop("disabled", true);
+	}
+	
+}
+
+function activeBloqueadores(){
+	if (document.getElementById("check_bloqueador_neuromuscular_id").checked == true){
+		$("#check_midazolam").prop("disabled", false);
+		$("#check_fentanil_id").prop("disabled", false);
+		$("#check_propofol_id").prop("disabled", false);
+		
+	}
+	else {
+		$("#dose_midazolam_id").val("");
+		$("#dose_fentanil_id").val("");
+		$("#check_midazolam").prop("disabled", true);
+		$("#dose_fentanil_id").prop("disabled", true);
+		$("#check_midazolam").prop("checked", false);
+		$("#dose_midazolam_id").prop("disabled", true);
+
+		$("#check_fentanil_id").prop("checked", false);
+		$("#check_fentanil_id").prop("disabled", true);
+
+		$("#dose_propofol_id").val("");
+		$("#dose_propofol_id").prop("disabled", true);
+		$("#check_propofol_id").prop("checked", false);
+		$("#check_propofol_id").prop("disabled", true);
+	}
+
+}
+
+function activeDoseMidazolam(){
+	if (document.getElementById("check_midazolam").checked == true){
+		$("#dose_midazolam_id").prop("disabled", false);
+	}
+	else {
+		$("#dose_midazolam_id").val("");
+		$("#dose_midazolam_id").prop("disabled", true);
+	}
+}
+
+function activeDoseFentanil(){
+	if (document.getElementById("check_fentanil_id").checked == true){
+		$("#dose_fentanil_id").prop("disabled", false);
+	}
+	else {
+		$("#dose_fentanil_id").val("");
+		$("#dose_fentanil_id").prop("disabled", true);
+	}
+}
+
+function activeDosePropofol(){
+	if (document.getElementById("check_propofol_id").checked == true){
+		$("#dose_propofol_id").prop("disabled", false);
+	}
+	else {
+		$("#dose_propofol_id").val("");
+		$("#dose_propofol_id").prop("disabled", true);
+	}
+}
+
+//funções para sedação continua
+
+function activeSedacaoContinua(){
+	if (document.getElementById("check_sedacao_continua_id").checked == true){
+		$("#check_rocuronio_id").prop("disabled", false);
+		$("#check_pancuronio_id").prop("disabled", false);
+		$("#check_cisatracurio_id").prop("disabled", false);
+		
+	}
+	else {
+		$("#check_rocuronio_id").prop("disabled", true);
+		$("#check_pancuronio_id").prop("disabled", true);
+		$("#check_cisatracurio_id").prop("disabled", true);
+		$("#check_rocuronio_id").prop("checked", false);
+		$("#check_pancuronio_id").prop("checked", false);
+		$("#check_cisatracurio_id").prop("checked", false);
+
+		$("#rocuronio_dose_id").val("");
+		$("#rocuronio_dose_id").prop("disabled", true);
+		$("#pacuronio_dose_id").val("");
+		$("#pacuronio_dose_id").prop("disabled", true);
+		$("#cisatracurio_dose_id").val("");
+		$("#cisatracurio_dose_id").prop("disabled", true);
+	}
+
+}
+
+function activeDoseRocuronio(){
+	if (document.getElementById("check_rocuronio_id").checked == true){
+		$("#rocuronio_dose_id").prop("disabled", false);
+	}
+	else {
+		$("#rocuronio_dose_id").val("");
+		$("#rocuronio_dose_id").prop("disabled", true);
+	}
+}
+
+function activeDosePacuronio(){
+	if (document.getElementById("check_pancuronio_id").checked == true){
+		$("#pacuronio_dose_id").prop("disabled", false);
+	}
+	else {
+		$("#pacuronio_dose_id").val("");
+		$("#pacuronio_dose_id").prop("disabled", true);
+	}
+}
+
+function activeDoseCisatracurio(){
+	if (document.getElementById("check_cisatracurio_id").checked == true){
+		$("#cisatracurio_dose_id").prop("disabled", false);
+	}
+	else {
+		$("#cisatracurio_dose_id").val("");
+		$("#cisatracurio_dose_id").prop("disabled", true);
+	}
+}
+
+function activeValorCn(){
+	if (document.getElementById("check_cn_id").checked == true){
+		$("#dose_cn_id").prop("disabled", false);
+	}
+	else {
+		$("#dose_cn_id").val("");
+		$("#dose_cn_id").prop("disabled", true);
+	}
+}
+
+function activeValorVenturi(){
+	if (document.getElementById("check_venturi_id").checked == true){
+		$("#venturi_id").prop("disabled", false);
+	}
+	else {
+		$("#venturi_id").val("");
+		$("#venturi_id").prop("disabled", true);
+	}
+}
+
+function activeDoseNora(){
+	if (document.getElementById("check_nora_id").checked == true){
+		$("#dose_nora_id").prop("disabled", false);
+	}
+	else {
+		$("#dose_nora_id").val("");
+		$("#dose_nora_id").prop("disabled", true);
+	}
+}
+
+function activeDoseAdrenalina(){
+	if (document.getElementById("check_adrenalina_id").checked == true){
+		$("#dose_adrenalina_id").prop("disabled", false);
+	}
+	else {
+		$("#dose_adrenalina_id").val("");
+		$("#dose_adrenalina_id").prop("disabled", true);
+	}
+}
+
+function activeDoseVaso(){
+	if (document.getElementById("check_vasopressina_id").checked == true){
+		$("#dose_vasopressina_id").prop("disabled", false);
+	}
+	else {
+		$("#dose_vasopressina_id").val("");
+		$("#dose_vasopressina_id").prop("disabled", true);
+	}
+}
+
+function activeDoseDobutamina(){
+	if (document.getElementById("check_dobutamina_id").checked == true){
+		$("#dose_dobutamina_id").prop("disabled", false);
+	}
+	else {
+		$("#dose_dobutamina_id").val("");
+		$("#dose_dobutamina_id").prop("disabled", true);
+	}
+}
+
+function activeLaudoTc(){
+	if (document.getElementById("check_tc_torax_id").checked == true){
+		$("#laudo_tc_torax_id").prop("disabled", false);
+	}
+	else {
+		$("#laudo_tc_torax_id").val("");
+		$("#laudo_tc_torax_id").prop("disabled", true);
+	}
+}
+
+function activeLaudoRx(){
+	if (document.getElementById("check_rx_torax_id").checked == true){
+		$("#laudo_rx_torax_id").prop("disabled", false);
+	}
+	else {
+		$("#laudo_rx_torax_id").val("");
+		$("#laudo_rx_torax_id").prop("disabled", true);
+	}
+}

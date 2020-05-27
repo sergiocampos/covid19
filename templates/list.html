@@ -31,7 +31,7 @@
 		      <a class="nav-link" href="/registro_covid/">Registrar Caso</a>
 		    </li>
 		    <li class="nav-item">
-		      <a class="nav-link" href="/registro_enfermeiro_medico/">Registro/Edição</a>
+		      <a class="nav-link" href="">Registro/Edição</a>
 		    </li>
 		    <li class="nav-item">
 		      <a class="nav-link" href="/regulacao/">Regulação</a>
@@ -66,11 +66,45 @@
 	      	</div>
 	    <br>
 		</div>
+		<hr />
+
+		<div class="row">
+			<div class="col-sm-5"></div>
+			<div class="col-sm-3">Notificações</div>
+			<div class="col-sm-4"></div>
+		</div>            
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Data da notificação</th>
+        <th>Data do Óbito</th>
+        <th>Nome</th>
+        <th>Idade</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+    	{% for o in obitos %}
+      <tr>
+        <td>{{o.data_notificacao|date:'d/m/Y'}} - {{o.data_notificacao|time:'H:i'}}</td>
+        <td><a href="/detail_obito/?id={{o.id}}">{{o.data_obito}}</a></td>
+        <td>{{o.nome_obito}}</td>
+        <td>{{o.idade_obito}}</td>
+        <td><a href="/editar_obito/?id={{o.id}}">Editar</a> /
+          <a href="/delete_obito/{{o.id}}/">Excluir</a>
+        </td>
+        <td><a href="">.pdf</a></td>
+        <td><a href="">.xls</a></td>
+      </tr>
+      	{% endfor %}
+      
+    </tbody>
+  </table>
 
 		
 	</div><br />
 
-	<img src="{% static "covid19/rodape4.jpg" %}" alt="" style="background-color: ;width: 100%">
+	<img src="{% static "" %}" alt="" style="background-color: ;width: 100%">
 	<div style="background-color: #e6e6e6;">
 		
 			<br /><br />

@@ -331,3 +331,12 @@ function activeLaudoRx(){
 		$("#laudo_rx_torax_id").prop("disabled", true);
 	}
 }
+
+
+//função cnes
+function nomeCnes(){
+	if (document.getElementById("field_cnes_id").checked == true){
+		$("#nome_paciente_id").prop("disabled", true);
+	}
+	
+}

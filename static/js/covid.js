@@ -332,6 +332,15 @@ function activeLaudoRx(){
 	}
 }
 
+function activeOutroEstabelecimento(){
+	if (document.getElementById("check_outros_estabelecimentos").checked == true){
+		$("#outro_estabelecimento_id").prop("disabled", false);
+	}
+	else {
+		$("#outro_estabelecimento_id").val("");
+		$("#outro_estabelecimento_id").prop("disabled", true);
+	}
+}
 
 //função cnes
 function nomeCnes(){
@@ -340,3 +349,4 @@ function nomeCnes(){
 	}
 	
 }
+//Fim Cnes

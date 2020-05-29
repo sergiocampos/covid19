@@ -14,9 +14,17 @@ def registro_covid(request):
 	data = datetime.now()
 	formateDate = data.strftime("%d-%m-%Y")
 	hora = data.strftime("%H:%M")
+
+	num_part_1 = '1209'
+	num_part_2 = '1209'
+
+	num_registro = num_part_1 + num_part_2
+
+
+
 	print("data:", formateDate)
 	print("data:", hora)
-	return render(request, 'registro_covid.html', {'formateDate': formateDate, 'hora': hora})
+	return render(request, 'registro_covid.html', {'formateDate': formateDate, 'hora': hora, 'num_registro':num_registro})
 
 
 @login_required
@@ -95,7 +103,7 @@ def registro_enfermeiro_medico(request):
 def regulacao(request):
     return render(request, 'regulacao.html')
 
-#@login_required
-#def registro_covid_set(request):
-#        
-#    return redirect('registro_covid_all')
+@login_required
+def regulacao_edit(request):
+
+	return render(request, 'regulacao_edit.html')

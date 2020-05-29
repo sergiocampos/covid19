@@ -350,3 +350,39 @@ function nomeCnes(){
 	
 }
 //Fim Cnes
+
+
+$(function(){
+
+	var situacoes = [
+	"AGUARDANDO CONFIRMAÇÃO DE VAGA",
+	"ATUALIZADO SINAIS VITAIS",
+	"NEGADO",
+	"ÓBITO",
+	"OUTROS",
+	"PARECER MÉDICO", 
+	"SEM CONDIÇÕES DE REMOÇÃO",
+	"SEM VAGA",
+	"SITUAÇÃO",
+	"TRANSPORTE SANITÁRIO",
+	];
+	$("#situacao_lista_espera_id").autocomplete({
+		source:situacoes
+		});
+});
+
+function activeSituacao(){
+	if (document.getElementById("incluir_em_lista_id").checked == true){
+		$("#situacao_lista_espera_id").prop("disabled", false);
+
+	}
+	else {
+		$("#situacao_lista_espera_id").val("");
+		$("#situacao_lista_espera_id").prop("disabled", true);
+	}
+}
+
+function desactiveSituacao(){
+	$("#situacao_lista_espera_id").val("");
+	$("#situacao_lista_espera_id").prop("disabled", true);
+}

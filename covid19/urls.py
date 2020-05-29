@@ -26,4 +26,5 @@ urlpatterns = [
     path('registro_covid/submit', views.registro_covid_set),
     path('registro_enfermeiro_medico/', views.registro_enfermeiro_medico, name='registro_enfermeiro_medico'),
     path('regulacao/', views.regulacao, name='regulacao'),
+    path('regulacao_edit/', views.regulacao_edit, name='regulacao_edit'),
 ]

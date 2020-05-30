@@ -41,7 +41,72 @@ class RegistroCovid(models.Model):
 	idade_gestacional = models.CharField(max_length=100, blank=True, null=True)
 	comorbidades_obstetricas = models.CharField(max_length=100, blank=True, null=True)
 	gesta_para = models.CharField(max_length=100, blank=True, null=True)
+
+	medicamentos_uso_habitual = ArrayField(models.CharField(max_length=100), blank=True, null=True)
+
+	spo2 = models.IntegerField(blank=True, null=True)
+	fr_irpm = models.IntegerField(blank=True, null=True)
+
+	ventilacao_tipo = models.CharField(max_length=100, blank=True, default='', null=True)
 	
+	o2_suporte = ArrayField(models.CharField(max_length=100), blank=True, null=True)
+	dose_cn = models.FloatField(blank=True, null=True)
+	dose_venturi = models.FloatField(blank=True, null=True)
+
+	vmi = models.CharField(max_length=10, blank=True, null=True)
+
+	vt = models.FloatField(blank=True, null=True)
+	delta_pressure = models.FloatField(blank=True, null=True)
+	pplato = models.FloatField(blank=True, null=True)
+	raw = models.FloatField(blank=True, null=True)
+	cest = models.FloatField(blank=True, null=True)
+	sao2 = models.FloatField(blank=True, null=True)
+	pao2 = models.FloatField(blank=True, null=True)
+	fio2 = models.FloatField(blank=True, null=True)
+	paco2 = models.FloatField(blank=True, null=True)
+
+	pa = models.CharField(max_length=11, default='', null=True)
+	fc = models.IntegerField(blank=True, null=True)
+	temperatura_axilar = models.FloatField(blank=True, null=True)
+
+	droga_vasoativa = ArrayField(models.CharField(max_length=100), blank=True, null=True)
+	qtd_nora = models.FloatField(blank=True, null=True)
+	qtd_adrenalina = models.FloatField(blank=True, null=True)
+	qtd_vasopressina = models.FloatField(blank=True, null=True)
+	qtd_dobutamina = models.FloatField(blank=True, null=True)
+
+	arritmia = ArrayField(models.CharField(max_length=10), blank=True, null=True)
+
+	infeccao_bacteriana = models.CharField(max_length=3, default='', null=True)
+	foco = ArrayField(models.CharField(max_length=100), blank=True, null=True)
+
+	uso_antibioticoterapia = models.CharField(max_length=3, blank=True, default='', null=True)
+
+	pesquisa_teste_sars_cov_2 = models.CharField(max_length=3, blank=True, default='', null=True)
+
+	rt_pcr_sars_cov_2 = models.CharField(max_length=3, blank=True, default='', null=True)
+	data_coleta = models.DateField()
+
+	em_uso_corticosteroide = models.CharField(max_length=3, blank=True, default='', null=True)
+	dose_corticosteroide = models.CharField(max_length=100, blank=True, default='', null=True)
+
+	em_uso_hidroxicloroquina = models.CharField(max_length=3, blank=True, default='', null=True)
+	data_inicio_hidroxicloroquina = models.DateField()
+
+	em_uso_oseltamivir = models.CharField(max_length=3, blank=True, default='', null=True)
+	data_inicio_oseltamivir = models.DateField()
+
+	em_uso_heparina = models.CharField(max_length=3, blank=True, default='', null=True)
+	data_inicio_heparina = models.DateField()
+	tipo_heparina = models.CharField(max_length=100, blank=True, default='', null=True)
+	dose_heparina = models.CharField(max_length=100, blank=True, default='', null=True)
+
+	pps = models.FloatField(blank=True, null=True)
+
+	
+
+
+
 
 
 

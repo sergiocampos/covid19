@@ -14,6 +14,7 @@ class RegistroCovid(models.Model):
 	nome_solicitante = models.CharField(max_length=100, blank=True, default='', null=True)
 	municipio_estabelecimento = models.CharField(max_length=100, blank=True, default='', null=True)
 	estabelecimento_solicitante = models.CharField(max_length=200, blank=True, default='', null=True)
+	estabelecimento_outro = models.CharField(max_length=200, blank=True, default='', null=True)
 	unidade_origem = models.CharField(max_length=100, blank=True, default='', null=True)
 	nome_paciente = models.CharField(max_length=100, blank=True, default='', null=True)
 	idade_paciente = models.IntegerField(blank=True, null=True)
@@ -103,11 +104,61 @@ class RegistroCovid(models.Model):
 
 	pps = models.FloatField(blank=True, null=True)
 
+	escala_pontos_glasgow = models.IntegerField(blank=True, null=True)
 	
+	bloqueador_neuromuscular = ArrayField(models.CharField(max_length=100), blank=True, null=True)
+	midazolam_dose = models.CharField(max_length=100, blank=True, default='', null=True)
+	fentanil_dose = models.CharField(max_length=100, blank=True, default='', null=True)
+	propofol_dose = models.CharField(max_length=100, blank=True, default='', null=True)
 
+	sedacao_continua = ArrayField(models.CharField(max_length=100), blank=True, null=True)
+	rocuronio_dose = models.CharField(max_length=100, blank=True, default='', null=True)
+	pacuronio_dose = models.CharField(max_length=100, blank=True, default='', null=True)
+	cisatracurio_dose = models.CharField(max_length=100, blank=True, default='', null=True)
 
+	rass = models.CharField(max_length=100, blank=True, default='', null=True)
 
+	data_exames_laboratorio = models.DateField()
+	leucocito = models.FloatField(blank=True, null=True)
+	linfocito = models.FloatField(blank=True, null=True)
+	hb = models.FloatField(blank=True, null=True)
+	ht = models.FloatField(blank=True, null=True)
+	pcr = models.FloatField(blank=True, null=True)
+	lactato = models.FloatField(blank=True, null=True)
+	dhl = models.FloatField(blank=True, null=True)
+	ferritina = models.FloatField(blank=True, null=True)
+	troponina = models.FloatField(blank=True, null=True)
+	cpk = models.FloatField(blank=True, null=True)
+	d_dimero = models.FloatField(blank=True, null=True)
+	ureia = models.FloatField(blank=True, null=True)
+	creatinina = models.FloatField(blank=True, null=True)
+	ap = models.FloatField(blank=True, null=True)
+	tap = models.FloatField(blank=True, null=True)
+	inr = models.FloatField(blank=True, null=True)
+	tgo = models.FloatField(blank=True, null=True)
+	tgp = models.FloatField(blank=True, null=True)
 
+	exame_imagem = ArrayField(models.CharField(max_length=100), blank=True, null=True)
+	laudo_tc_torax = models.TextField(blank=True, default='', null=True)
+	laudo_rx_torax = models.TextField(blank=True, default='', null=True)
+
+	is_sindrome_gripal = models.CharField(max_length=100, blank=True, default='', null=True)
+	news_fast_pb = models.CharField(max_length=100, blank=True, default='', null=True)
+	news_modificado = models.CharField(max_length=100, blank=True, default='', null=True)
+	uti = models.CharField(max_length=200, blank=True, default='', null=True)
+	leito = models.CharField(max_length=100, blank=True, default='', null=True)
+	prioridade = models.IntegerField(blank=True, null=True)
+
+	regulacao_paciente = models.CharField(max_length=100, blank=True, default='', null=True)
+	status_regulacao = models.CharField(max_length=100, blank=True, default='', null=True)
+	codigo_sescovid = models.CharField(max_length=100, blank=True, default='', null=True)
+
+	justificativa = models.TextField(blank=True, default='', null=True)
+
+	observacao = models.TextField(blank=True, default='', null=True)
+
+	pareceristas  = ArrayField(models.CharField(max_length=100), blank=True, null=True)
+	data_regulacao = models.DateField()
 
 
 

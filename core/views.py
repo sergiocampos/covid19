@@ -29,7 +29,7 @@ def registro_covid(request):
 
 @login_required
 def registro_covid_set(request):
-	user = request.user
+	responsavel_pelo_preenchimento = request.user
 
 	data = datetime.now()
 	data_notificacao = data.strftime("%d-%m-%Y")
@@ -84,7 +84,20 @@ def registro_covid_set(request):
 
 	observacoes = request.POST.get('observacao_paciente')
 
+	print("passou no set covid!")
+
 	#implementar o algoritmo: codigo_registro = None
+
+	registro = RegistroCovid.objects.create(
+		nome_solicitante = nome_solicitante,
+		municipio_estabelecimento = municipio_estabelecimento,
+		estabelecimento_solicitante = estabelecimento_solicitante,
+		estabelecimento_outro = estabelecimento_outro,
+		unidade_origem = unidade_origem,
+		nome_paciente = nome_paciente,
+		idade_paciente = idade_paciente,
+
+		responsavel_pelo_preenchimento = responsavel_pelo_preenchimento)
 
 
 

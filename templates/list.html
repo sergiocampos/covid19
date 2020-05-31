@@ -77,24 +77,21 @@
     <thead>
       <tr>
         <th>Data da notificação</th>
-        <th>Data do Óbito</th>
-        <th>Nome</th>
+        <th>Estabelecimento Solicitante</th>
+        <th>Paciente</th>
         <th>Idade</th>
         <th>Ações</th>
       </tr>
     </thead>
     <tbody>
-    	{% for o in obitos %}
+    	{% for o in registros %}
       <tr>
-        <td>{{o.data_notificacao|date:'d/m/Y'}} - {{o.data_notificacao|time:'H:i'}}</td>
-        <td><a href="/detail_obito/?id={{o.id}}">{{o.data_obito}}</a></td>
-        <td>{{o.nome_obito}}</td>
-        <td>{{o.idade_obito}}</td>
-        <td><a href="/editar_obito/?id={{o.id}}">Editar</a> /
-          <a href="/delete_obito/{{o.id}}/">Excluir</a>
+        <td>{{o.data_notificacao|date:'d/m/Y'}} - {{o.hora_notificacao|time:'H:i'}}</td>
+        <td><a href="/detail_estab/?id={{o.id}}">{{o.estabelecimento_solicitante}}</a></td>
+        <td>{{o.nome_paciente}}</td>
+        <td>{{o.idade_paciente}}</td>
+        <td><a href="/regulacao_edit/?id={{o.id}}">Editar</a>
         </td>
-        <td><a href="">.pdf</a></td>
-        <td><a href="">.xls</a></td>
       </tr>
       	{% endfor %}
       

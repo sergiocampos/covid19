@@ -11,6 +11,7 @@ class RegistroCovid(models.Model):
 	responsavel_pelo_preenchimento = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 	data_notificacao = models.DateField(auto_now_add=True)
 	hora_notificacao = models.TimeField(auto_now_add=True)
+	codigo_registro = models.CharField(max_length=100, default='', null=True)
 	nome_solicitante = models.CharField(max_length=100, blank=True, default='', null=True)
 	municipio_estabelecimento = models.CharField(max_length=100, blank=True, default='', null=True)
 	estabelecimento_solicitante = models.CharField(max_length=200, blank=True, default='', null=True)
@@ -18,10 +19,9 @@ class RegistroCovid(models.Model):
 	unidade_origem = models.CharField(max_length=100, blank=True, default='', null=True)
 	nome_paciente = models.CharField(max_length=100, blank=True, default='', null=True)
 	idade_paciente = models.IntegerField(blank=True, null=True)
-	unidade_origem = models.CharField(max_length=100, blank=True, default='', null=True)
 	recurso_que_precisa = models.TextField()
-	estado_origem = models.CharField(max_length=50, blank=True, default='')
-	cidade_origem = models.CharField(max_length=50, blank=True, default='')
+	estado_origem = models.CharField(max_length=50, blank=True, default='', null=True)
+	cidade_origem = models.CharField(max_length=50, blank=True, default='', null=True)
 	telefone_retorno = models.CharField(max_length=30, blank=True, default='', null=True)
 	frequencia_respiratoria = models.IntegerField(blank=True, null=True)
 	saturacao_paciente = models.IntegerField(blank=True, null=True)
@@ -30,7 +30,7 @@ class RegistroCovid(models.Model):
 	pa = models.CharField(max_length=11, default='', null=True)
 	conciencia = models.CharField(max_length=100, blank=True, default='', null=True)
 	temperatura = models.FloatField(blank=True, null=True)
-	codigo_registro = models.CharField(max_length=100, default='', null=True)
+	
 	observacoes = models.TextField(blank=True, default='', null=True)
 
 	sindrome_gripal = ArrayField(models.CharField(max_length=20), blank=True, null=True)
@@ -86,19 +86,19 @@ class RegistroCovid(models.Model):
 	pesquisa_teste_sars_cov_2 = models.CharField(max_length=3, blank=True, default='', null=True)
 
 	rt_pcr_sars_cov_2 = models.CharField(max_length=3, blank=True, default='', null=True)
-	data_coleta = models.DateField()
+	data_coleta = models.DateField(blank=True, null=True)
 
 	em_uso_corticosteroide = models.CharField(max_length=3, blank=True, default='', null=True)
 	dose_corticosteroide = models.CharField(max_length=100, blank=True, default='', null=True)
 
 	em_uso_hidroxicloroquina = models.CharField(max_length=3, blank=True, default='', null=True)
-	data_inicio_hidroxicloroquina = models.DateField()
+	data_inicio_hidroxicloroquina = models.DateField(blank=True, null=True)
 
 	em_uso_oseltamivir = models.CharField(max_length=3, blank=True, default='', null=True)
-	data_inicio_oseltamivir = models.DateField()
+	data_inicio_oseltamivir = models.DateField(blank=True, null=True)
 
 	em_uso_heparina = models.CharField(max_length=3, blank=True, default='', null=True)
-	data_inicio_heparina = models.DateField()
+	data_inicio_heparina = models.DateField(blank=True, null=True)
 	tipo_heparina = models.CharField(max_length=100, blank=True, default='', null=True)
 	dose_heparina = models.CharField(max_length=100, blank=True, default='', null=True)
 
@@ -118,7 +118,7 @@ class RegistroCovid(models.Model):
 
 	rass = models.CharField(max_length=100, blank=True, default='', null=True)
 
-	data_exames_laboratorio = models.DateField()
+	data_exames_laboratorio = models.DateField(blank=True, null=True)
 	leucocito = models.FloatField(blank=True, null=True)
 	linfocito = models.FloatField(blank=True, null=True)
 	hb = models.FloatField(blank=True, null=True)
@@ -158,7 +158,7 @@ class RegistroCovid(models.Model):
 	observacao = models.TextField(blank=True, default='', null=True)
 
 	pareceristas  = ArrayField(models.CharField(max_length=100), blank=True, null=True)
-	data_regulacao = models.DateField()
+	data_regulacao = models.DateField(blank=True, null=True)
 
 
 

@@ -152,7 +152,8 @@ def regulacao_set(request, id):
 	registro = RegistroCovid.objects.get(id=id)
 
 	responsavel_pelo_preenchimento = request.user
-	#codigo_registro
+	
+	codigo_registro = "20201"
 	#implementar
 	nome_solicitante = request.POST.get('nome_solicitante')
 	municipio_estabelecimento = request.POST.get('')
@@ -374,6 +375,131 @@ def regulacao_set(request, id):
 	pareceristas = request.POST.getlist('pareceristas')
 	data_regulacao = request.POST.get('data_regulacao')
 
+	
+	registro.responsavel_pelo_preenchimento = responsavel_pelo_preenchimento
+	registro.codigo_registro = codigo_registro
+	registro.nome_solicitante = nome_solicitante
+	registro.municipio_estabelecimento = municipio_estabelecimento
+	registro.estabelecimento_solicitante = estabelecimento_solicitante
+	registro.estabelecimento_outro = estabelecimento_outro
+	registro.unidade_origem = unidade_origem
+	registro.nome_paciente = nome_paciente
+	registro.idade_paciente = idade_paciente
+	registro.recurso_que_precisa = recurso_que_precisa
+	registro.estado_origem = estado_origem
+	registro.cidade_origem = cidade_origem
+	registro.telefone_retorno = telefone_retorno
+	registro.frequencia_respiratoria = frequencia_respiratoria
+	registro.saturacao_paciente = saturacao_paciente
+	registro.ar_o2 = ar_o2
+	registro.frequencia_cardiaca = frequencia_cardiaca
+	registro.pa = pa
+	registro.conciencia = conciencia
+	registro.temperatura = temperatura
+	registro.observacoes = observacoes
+	registro.sindrome_gripal = sindrome_gripal
+	registro.tempo_quadro_sintomatico = tempo_quadro_sintomatico
+	registro.exposicao_pessoa_infectada = exposicao_pessoa_infectada
+	registro.parentesco = parentesco
+	registro.comorbidades = comorbidades
+	registro.outras_comorbidades = outras_comorbidades
+	registro.outras_cardiopatias = outras_cardiopatias
+	registro.idade_gestacional = idade_gestacional
+	registro.comorbidades_obstetricas = comorbidades_obstetricas
+	registro.gesta_para = gesta_para
+	registro.medicamentos_uso_habitual = medicamentos_uso_habitual
+	registro.medicamento_outros = medicamento_outros
+	registro.spo2 = spo2
+	registro.fr_irpm = fr_irpm
+	registro.ventilacao_tipo = ventilacao_tipo
+	registro.o2_suporte = o2_suporte
+	registro.dose_cn = dose_cn
+	registro.dose_venturi = dose_venturi
+	registro.vmi = vmi
+	registro.vt = vt
+	registro.delta_pressure = delta_pressure
+	registro.pplato = pplato
+	registro.raw = raw
+	registro.cest = cest
+	registro.sao2 = sao2
+	registro.pao2 = pao2
+	registro.fio2 = fio2
+	registro.paco2 = paco2
+	registro.pa = pa
+	registro.fc = fc
+	registro.temperatura_axilar = temperatura_axilar
+	registro.droga_vasoativa = droga_vasoativa
+	registro.qtd_nora = qtd_nora
+	registro.qtd_adrenalina = qtd_adrenalina
+	registro.qtd_vasopressina = qtd_vasopressina
+	registro.qtd_dobutamina = qtd_dobutamina
+	registro.arritmia = arritmia
+	registro.infeccao_bacteriana = infeccao_bacteriana
+	registro.foco = foco
+	registro.uso_antibioticoterapia = uso_antibioticoterapia
+	registro.pesquisa_teste_sars_cov_2 = pesquisa_teste_sars_cov_2
+	registro.rt_pcr_sars_cov_2 = rt_pcr_sars_cov_2
+	registro.data_coleta = data_coleta
+	registro.em_uso_corticosteroide = em_uso_corticosteroide
+	registro.dose_corticosteroide = dose_corticosteroide
+	registro.data_inicio_corticosteroide = data_inicio_corticosteroide
+	registro.em_uso_hidroxicloroquina = em_uso_hidroxicloroquina
+	registro.data_inicio_hidroxicloroquina = data_inicio_hidroxicloroquina
+	registro.em_uso_oseltamivir = em_uso_oseltamivir
+	registro.data_inicio_oseltamivir = data_inicio_oseltamivir
+	registro.em_uso_heparina = em_uso_heparina
+	registro.data_inicio_heparina = data_inicio_heparina
+	registro.tipo_heparina = tipo_heparina
+	registro.dose_heparina = dose_heparina
+	registro.pps = pps
+	registro.escala_pontos_glasgow = escala_pontos_glasgow
+	registro.bloqueador_neuromuscular = bloqueador_neuromuscular
+	registro.midazolam_dose = midazolam_dose
+	registro.fentanil_dose = fentanil_dose
+	registro.propofol_dose = propofol_dose
+	registro.sedacao_continua = sedacao_continua
+	registro.rocuronio_dose = rocuronio_dose
+	registro.pacuronio_dose = pacuronio_dose
+	registro.cisatracurio_dose = cisatracurio_dose
+	registro.rass = rass
+	registro.data_exames_laboratorio = data_exames_laboratorio
+	registro.leucocito = leucocito
+	registro.linfocito = linfocito
+	registro.hb = hb
+	registro.ht = ht
+	registro.pcr = pcr
+	registro.lactato = lactato
+	registro.dhl = dhl
+	registro.ferritina = ferritina
+	registro.troponina = troponina
+	registro.cpk = cpk
+	registro.d_dimero = d_dimero
+	registro.ureia = ureia
+	registro.creatinina = creatinina
+	registro.ap = ap
+	registro.tap = tap
+	registro.inr = inr
+	registro.tgo = tgo
+	registro.tgp = tgp
+	registro.exame_imagem = exame_imagem
+	registro.laudo_tc_torax = laudo_tc_torax
+	registro.laudo_rx_torax = laudo_rx_torax
+	registro.is_sindrome_gripal = is_sindrome_gripal
+	registro.news_fast_pb = news_fast_pb
+	registro.news_modificado = news_modificado
+	registro.uti = uti
+	registro.leito = leito
+	registro.prioridade = prioridade
+	registro.regulacao_paciente = regulacao_paciente
+	registro.status_regulacao = status_regulacao
+	registro.codigo_sescovid = codigo_sescovid
+	registro.justificativa = justificativa
+	registro.observacao = observacao
+	registro.pareceristas = pareceristas
+	registro.data_regulacao = data_regulacao
+
+	registro.save()
+
 	return redirect('regulacao', id=id)
 
 @login_required
@@ -381,6 +507,16 @@ def regulacao_edit(request):
 
 	registro_id = request.GET.get('id')
 	registro = RegistroCovid.objects.get(id=registro_id)
+	pa = registro.pa
 
+	if len(pa)>4:
+		pa_1 = pa[0] + pa[1]
+		pa_2 = pa[3] + pa[4]
+	elif len(pa) == 4:
+		pa_1 = pa[0] + pa[1]
+		pa_2 = pa[3]
+	else:
+		pa_1 = ''
+		pa_2 = ''
 
-	return render(request, 'regulacao_edit.html', {'registro':registro})
+	return render(request, 'regulacao_edit.html', {'registro':registro, 'pa_1': pa_1, 'pa_2': pa_2})

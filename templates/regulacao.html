@@ -112,7 +112,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 		  </ul>
 		</nav><hr>
 
-		<form action="">
+		<form enctype="multipart/form-data" action="submit" method="POST">{% csrf_token %}
 
 		<div class="container">
 
@@ -255,12 +255,12 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					Exposição epidemiológica a qualquer pessoa infectada pelo SARS CoV-2?
 					<div class="form-check-inline">
 			          <label class="form-check-label">
-			            <input type="radio" class="form-check-input" name="exposicao_epidemiologica_sim" value="Sim" required>Sim
+			            <input type="radio" class="form-check-input" name="exposicao_epidemiologica_sim" value="Sim">Sim
 			          </label>
 			        </div>
 			        <div class="form-check-inline">
 			          <label class="form-check-label">
-			            <input type="radio" class="form-check-input" name="exposicao_epidemiologica_sim" value="Não" required>Não
+			            <input type="radio" class="form-check-input" name="exposicao_epidemiologica_sim" value="Não">Não
 			          </label>
 			        </div>
 				</div>
@@ -606,13 +606,13 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-2">
 					SaO2:
 				    <div class="form-check-inline">
-				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="sao2" style="width: 60px" value="">
+				        <input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="sao2" style="width: 60px" value="">
 				    </div><label for="" style="margin-left: -10px">%</label>
 				</div>
 				<div class="col-sm-3">
 					PaO2:
 				    <div class="form-check-inline" style="width:">
-				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pao2" style="width: 80px" value="">
+				        <input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="pao2" style="width: 80px" value="">
 				    </div><label for="" style="">mmHg</label>
 				</div>
 				<div class="col-sm-3">
@@ -806,7 +806,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-2" style="margin-left: ; background-color: ">
 					<div class="form-check-inline" style="">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="foco_abdominal" name="foco" value="Corrente sanguínea" disabled>Abdominal
+				        <input type="checkbox" class="form-check-input" id="foco_abdominal" name="foco" value="Abdominal" disabled>Abdominal
 				      </label>
 				    </div>
 				</div>

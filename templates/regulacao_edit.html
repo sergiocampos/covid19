@@ -1622,6 +1622,53 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-3">
 					<b>Em uso de Oseltamivir?</b>
 				</div>
+				{% if registro.em_uso_oseltamivir == 'Sim' %}
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Sim" onclick="dataInicioOseltamivir()" checked>Sim - Data de Início:
+				      </label>
+				    </div>
+				    
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="">
+						<input type="" class="form-control form-control-sm" id="data_inicio_oseltamivir_id" name="data_inicio_oseltamivir" value="{{registro.data_inicio_oseltamivir}}">
+				    </div>
+				</div>
+				
+				<div class="col-sm-1">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Não" onclick="desactiveDataInicioOseltamivir()">Não
+				      </label>
+				    </div>
+				    
+				</div>
+				{% elif registro.em_uso_oseltamivir == 'Não' %}
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Sim" onclick="dataInicioOseltamivir()">Sim - Data de Início:
+				      </label>
+				    </div>
+				    
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="">
+						<input type="date" class="form-control form-control-sm" id="data_inicio_oseltamivir_id" name="data_inicio_oseltamivir" value="" disabled>
+				    </div>
+				</div>
+				
+				<div class="col-sm-1">
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Não" onclick="desactiveDataInicioOseltamivir()" checked>Não
+				      </label>
+				    </div>
+				    
+				</div>
+				{%else%}
 				<div class="col-sm-2">
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
@@ -1644,6 +1691,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				    </div>
 				    
 				</div>
+				{%endif%}
 				
 			</div><hr>
 			<div class="row">

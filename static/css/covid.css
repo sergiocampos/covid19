@@ -1,5 +1,3 @@
-#lb_vaga_conf_internacao,
-#lb_aguard_confirm,
-#lb_aguard_em_lista {
-	display: ;
+#status_regulacao {
+	display: none;
 }

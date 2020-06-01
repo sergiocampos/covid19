@@ -121,15 +121,16 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			
     			<div class="col-sm-6">
 					Nome do Solicitante
+					<input type="number" name="registro_id" value="{{registro.id}}" id="" hidden>
 					<div class="form-check-inline">
-						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="nome-doador-anexo" size="40" value="">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="nome_solicitante" size="40" value="{{registro.nome_solicitante}}">
 				    </div>
 				</div>
 
 				<div class="col-sm-6">
 					Paciente
 					<div class="form-check-inline">
-						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="nome-doador-anexo" size="40" value="">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="nome_paciente" size="40" value="{{registro.nome_paciente}}">
 				    </div>
 				</div>
     			
@@ -143,7 +144,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					Unidade de Origem
 					<div class="form-check-inline">
 						<select name="unidade_origem" id="" class="form-control form-control-sm" style="width: auto">
-				            <option value=""></option>
+				            <option value="{{registro.unidade_origem}}" selected="">{{registro.unidade_origem}}</option>
 				            <option value="upa cruz das armas">UPA CRUZ DAS ARMAS</option>
 				            <option value="upa bancarios">UPA BANCÁRIOS</option>
 				            <option value="upa tibiri">UPA TIBIRI</option>
@@ -156,7 +157,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
     			<div class="col-sm-6">
     				Idade:
 				    <div class="form-check-inline">
-				        <input type="number" class="form-control form-control-sm" id="" placeholder="" name="idade_paciente" value="" min="1" max="200">
+				        <input type="number" class="form-control form-control-sm" id="" placeholder="" name="idade_paciente" value="{{registro.idade_paciente}}" min="1" max="200">
 				    </div>
     			</div>
     			
@@ -176,63 +177,63 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-1">
 					<div class="form-check-inline" style="width: 120%">
 						<label class="form-check-label">
-						<input type="checkbox" class="" name="orgaos-anexo" value="Coracao" id="orgaos-doados">Tosse
+						<input type="checkbox" class="" name="s_gripal" value="Tosse" id="orgaos-doados">Tosse
 					</label>
 					</div>
 				</div>
 				<div class="col-sm-2">
 					<div class="form-check-inline" style="width: 140%">
 						<label class="form-check-label">
-						<input type="checkbox" class="" name="orgaos-anexo" value="Figado" id="orgaos-doados">Coriza Nasal
+						<input type="checkbox" class="" name="s_gripal" value="Coriza Nasal" id="orgaos-doados">Coriza Nasal
 					</label>
 					</div>
 				</div>
 				<div class="col-sm-1">
 					<div class="form-check-inline" style="width: 130%; margin-left: -20px">
 						<label class="form-check-label">
-						<input type="checkbox" class="" name="orgaos-anexo" value="Rim" id="orgaos-doados">Anosmia
+						<input type="checkbox" class="" name="s_gripal" value="Anosmia" id="orgaos-doados">Anosmia
 					</label>
 					</div>
 				</div>
 				<div class="col-sm-1">
 					<div class="form-check-inline" style="width: 120%">
 						<label class="form-check-label">
-						<input type="checkbox" class="" name="orgaos-anexo" value="Corneas" id="orgaos-doados">Febre
+						<input type="checkbox" class="" name="s_gripal" value="Febre" id="orgaos-doados">Febre
 					</label>
 					</div>
 				</div>
 				<div class="col-sm-1">
 					<div class="form-check-inline" style="width: 120%">
 						<label class="form-check-label">
-						<input type="checkbox" class="" name="orgaos-anexo" value="Pancreas" id="orgaos-doados">Mialgia
+						<input type="checkbox" class="" name="s_gripal" value="Mialgia" id="orgaos-doados">Mialgia
 					</label>
 					</div>
 				</div>
 				<div class="col-sm-1">
 					<div class="form-check-inline" style="width: 120%">
 						<label class="form-check-label">
-						<input type="checkbox" class="" name="orgaos-anexo" value="Pulmao" id="orgaos-doados">Fadiga
+						<input type="checkbox" class="" name="s_gripal" value="Fadiga" id="orgaos-doados">Fadiga
 					</label>
 					</div>
 				</div>
 				<div class="col-sm-1">
 					<div class="form-check-inline" style="width: 140%">
 						<label class="form-check-label">
-						<input type="checkbox" class="" name="orgaos-anexo" value="Intestino" id="orgaos-doados">Dispnéia
+						<input type="checkbox" class="" name="s_gripal" value="Dispnéia" id="orgaos-doados">Dispnéia
 					</label>
 					</div>
 				</div>
 				<div class="col-sm-1">
 					<div class="form-check-inline" style="width: 120%">
 						<label class="form-check-label">
-						<input type="checkbox" class="" name="orgaos-anexo" value="Osso" id="orgaos-doados">Astenia
+						<input type="checkbox" class="" name="s_gripal" value="Astenia" id="orgaos-doados">Astenia
 					</label>
 					</div>
 				</div>
 				<div class="col-sm-2">
 					<div class="form-check-inline">
 						<label class="form-check-label">
-						<input type="checkbox" class="" name="orgaos-anexo" value="Musculo/Tendao" id="orgaos-doados">Cefaléia
+						<input type="checkbox" class="" name="s_gripal" value="Cefaléia" id="orgaos-doados">Cefaléia
 					</label>
 					</div>
 				</div>
@@ -244,7 +245,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-12">
 					Tempo de início de quadro sintomático:
 					<div class="form-check-inline">
-				        <input type="number" class="form-control form-control-sm" id="" placeholder="" name="idade_paciente" value="" min="1" max="200">
+				        <input type="number" class="form-control form-control-sm" id="" placeholder="" name="tempo_inicio_sintomas" value="" min="1" max="200">
 				    </div>
 				    dias.
 				</div>
@@ -268,7 +269,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-12">
 					Grau de parentesco:
 					<div class="form-check-inline">
-						<select name="unidade_origem" id="" class="form-control form-control-sm" style="width: auto">
+						<select name="grau_parentesco" id="" class="form-control form-control-sm" style="width: auto">
 				            <option value=""></option>
 				            <option value="Mãe">Mãe</option>
 				            <option value="Pai">Pai</option>
@@ -293,28 +294,28 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-2">
 					<div class="form-check-inline" style="">
 						<label class="form-check-label">
-						<input type="checkbox" class="form-check-input" name="orgaos-anexo" value="Coracao" id="orgaos-doados">Obesidade;
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Obesidade" id="">Obesidade;
 					</label>
 					</div>
 				</div>
 				<div class="col-sm-2">
 					<div class="form-check-inline" style="">
 						<label class="form-check-label">
-						<input type="checkbox" class="form-check-input" name="orgaos-anexo" value="Figado" id="orgaos-doados">HAS
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="HAS" id="">HAS
 					</label>
 					</div>
 				</div>
 				<div class="col-sm-2">
 					<div class="form-check-inline" style="">
 						<label class="form-check-label">
-						<input type="checkbox" class="form-check-input" name="orgaos-anexo" value="Rim" id="orgaos-doados">DM-2;
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="DM-2" id="">DM-2;
 					</label>
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="form-check-inline" style="">
 						<label class="form-check-label">
-						<input type="checkbox" class="form-check-input" name="orgaos-anexo" value="Corneas" id="orgaos-doados">Cardiopatia isquêmica prévia - FE
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Cardiopatia isquêmica prévia - FE" id="">Cardiopatia isquêmica prévia - FE
 					</label>
 					</div>
 				</div>
@@ -322,11 +323,11 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-6">
 					<div class="form-check-inline" style="">
 						<label class="form-check-label">
-						<input type="checkbox" class="form-check-input" name="orgaos-anexo" value="Figado" id="outras_comorbidades" onclick="activeOutrasComorbidades()">Outros
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Outros" id="outras_comorbidades" onclick="activeOutrasComorbidades()">Outros
 					</label>
 					</div>
 					<div class="form-check-inline" style="width: 200px">
-						<input type="text" class="form-control form-control-sm" id="desc_outras_comorbidades" placeholder="" name="desc_outras_cardiopatias" value="" disabled>
+						<input type="text" class="form-control form-control-sm" id="desc_outras_comorbidades" placeholder="" name="descricao_outras_comorbidades" value="" disabled>
 				    </div>
 				</div>
 				
@@ -336,28 +337,28 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-2">
 					<div class="form-check-inline" style="width: 120%">
 						<label class="form-check-label">
-						<input type="checkbox" class="form-check-input" name="orgaos-anexo" value="Pancreas" id="orgaos-doados">AVEi prévio;
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="AVEi prévio" id="">AVEi prévio;
 					</label>
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-check-inline" style="width: 120%">
 						<label class="form-check-label">
-						<input type="checkbox" class="form-check-input" name="orgaos-anexo" value="Pulmao" id="orgaos-doados">Doença pulmonar pré-existente
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Doença pulmonar pré-existente" id="">Doença pulmonar pré-existente
 					</label>
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-check-inline" style="width: 140%">
 						<label class="form-check-label">
-						<input type="checkbox" class="form-check-input" name="orgaos-anexo" value="Intestino" id="orgaos-doados">Lesão Renal Crônica – estágio:
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Lesão Renal Crônica – estágio" id="">Lesão Renal Crônica – estágio:
 					</label>
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-check-inline" style="width: 140%">
 						<label class="form-check-label">
-						<input type="checkbox" class="form-check-input" name="orgaos-anexo" value="Intestino" id="orgaos-doados">Uso de imunobiológicos;
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Uso de imunobiológicos" id="">Uso de imunobiológicos;
 					</label>
 					</div>
 				</div>
@@ -367,21 +368,21 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-3">
 					<div class="form-check-inline" style="width: 120%">
 						<label class="form-check-label">
-						<input type="checkbox" class="form-check-input" name="" value="" id="">História de Transplantes;
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="História de Transplantes" id="">História de Transplantes;
 					</label>
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="form-check-inline">
 						<label class="form-check-label">
-						<input type="checkbox" class="form-check-input" name="" value="" id="">Imunossupressor prévio (corticosteróide,quimioterápicos);
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Imunossupressor prévio (corticosteróide,quimioterápicos)" id="">Imunossupressor prévio (corticosteróide,quimioterápicos);
 					</label>
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-check-inline">
 						<label class="form-check-label">
-						<input type="checkbox" class="form-check-input" name="diagnostico_hiv" value="Musculo/Tendao" id="orgaos-doados">Diagnóstico de HIV;
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Diagnóstico de HIV" id="">Diagnóstico de HIV;
 					</label>
 					</div>
 				</div>
@@ -390,7 +391,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-12">
 					<div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_outras_cardiopatias" name="" value="" onclick="activeOutrasCardiopatias()">Outras cardiopatias – Descrever:
+				        <input type="checkbox" class="form-check-input" id="check_outras_cardiopatias" name="comorbidades" value="Outras cardiopatias" onclick="activeOutrasCardiopatias()">Outras cardiopatias – Descrever:
 				      </label>
 				    </div>
 					
@@ -404,7 +405,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					
 					<div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_idade_gestacional" name="" value="" onclick="activeIdadeGestacional()">Gestação – Idade Gestacional:
+				        <input type="checkbox" class="form-check-input" id="check_idade_gestacional" name="comorbidades" value="Gestação" onclick="activeIdadeGestacional()">Gestação – Idade Gestacional:
 				      </label>
 				    </div>
 					
@@ -426,7 +427,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					
 					<div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_comorbidades_obstetrica" name="" value="" onclick="comorbidadesObstetrica()">Comorbidades obstétricas:
+				        <input type="checkbox" class="form-check-input" id="check_comorbidades_obstetrica" name="comorbidades" value="Comorbidades obstétricas" onclick="comorbidadesObstetrica()">Comorbidades obstétricas:
 				      </label>
 				    </div>
 					
@@ -445,7 +446,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					
 					<div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="" name="medicamento_bra" value="BRA (Losartana, Valsartana, Olmesartana, etc)">BRA (Losartana, Valsartana, Olmesartana, etc)
+				        <input type="checkbox" class="form-check-input" id="" name="medicamento_uso_habitual" value="BRA (Losartana, Valsartana, Olmesartana, etc)">BRA (Losartana, Valsartana, Olmesartana, etc)
 				      </label>
 				    </div>
 					
@@ -453,7 +454,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-2">
 					<div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="" name="medicamento_ieca" value="IECA">IECA
+				        <input type="checkbox" class="form-check-input" id="" name="medicamento_uso_habitual" value="IECA">IECA
 				      </label>
 				    </div>
 				</div>
@@ -461,7 +462,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					
 					<div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="outros_medicamento" name="medicamento_outros" value="Outros" onclick="check_outro_medicamento()">Outros
+				        <input type="checkbox" class="form-check-input" id="outros_medicamento" name="medicamento_uso_habitual" value="Outros" onclick="check_outro_medicamento()">Outros
 				      </label>
 				    </div>
 					
@@ -497,14 +498,14 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-2">
 					<div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="" name="ventilacao" value="Espontânea">Espontânea
+				        <input type="radio" class="form-check-input" id="" name="ventilacao" value="Espontânea">Espontânea
 				      </label>
 				    </div>
 				</div>
 				<div class="col-sm-2">
 					<div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="" name="ventilacao" value="IOT">IOT
+				        <input type="radio" class="form-check-input" id="" name="ventilacao" value="IOT">IOT
 				      </label>
 				    </div>
 				</div>
@@ -605,13 +606,13 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-2">
 					SaO2:
 				    <div class="form-check-inline">
-				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="SaO2" style="width: 60px" value="">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="sao2" style="width: 60px" value="">
 				    </div><label for="" style="margin-left: -10px">%</label>
 				</div>
 				<div class="col-sm-3">
 					PaO2:
 				    <div class="form-check-inline" style="width:">
-				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="paO2" style="width: 80px" value="">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pao2" style="width: 80px" value="">
 				    </div><label for="" style="">mmHg</label>
 				</div>
 				<div class="col-sm-3">
@@ -635,10 +636,12 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 			</div><br>
 			<div class="row">
-				<div class="col-sm-2">
+				<div class="col-sm-3">
 					PA:
 				    <div class="form-check-inline">
-				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa" style="width: 60px" value="">
+				        <input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" style="width: 60px" value="{{pa_1}}">
+				        <label for="">x</label>
+				        <input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" style="width: 60px" value="{{pa_2}}">
 				    </div><label for="" style="">mmHg</label>
 				</div>
 				<div class="col-sm-3">
@@ -867,7 +870,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-5">
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Aguardando" onclick="activeDataColeta()">Aguarda resultado – data coleta:
+				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Aguardando Resultado" onclick="activeDataColeta()">Aguarda resultado – data coleta:
 				      </label>
 				      <label for="">
 				      	<input type="date" class="form-control form-control-sm" id="data_coleta" name="data_da_coleta" disabled>				      	
@@ -1013,7 +1016,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 				<div class="col-sm-2">
 					<div class="form-check-inline" style="">
-	              		<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="idade_paciente" style="width: 100px">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="" style="width: 100px" value="{{registro.idade_paciente}}">
 	              	</div>
 				</div>
 			</div><hr>
@@ -1031,7 +1034,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-2">
 					<b>PPS</b>
 					<div class="form-check-inline" style="">
-	              		<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="idade_paciente" style="width:60px"><label for="">%</label>
+	              		<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="pps_paciente" style="width:60px"><label for="">%</label>
 	              	</div>
 				</div>
 				
@@ -1205,13 +1208,13 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-2">
 					HB:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="hb" value="">
+						<input type="number" step="0.1" min="0" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="hb" value="">
 				    </div>
 				</div>
 				<div class="col-sm-2">
 					HT:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ht" value="">
+						<input type="number" step="0.1" min="0" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ht" value="">
 				    </div>
 				</div>
 				<div class="col-sm-2">
@@ -1270,7 +1273,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-3">
 					Creatinina:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="creatinina" value="">
+						<input type="number" step="0.1" min="0.00" class="form-control form-control-sm" id="" placeholder="" name="creatinina" value="">
 				    </div>
 				</div>
 			</div><br>
@@ -1711,7 +1714,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-4" style="margin-top: 30px; background-color: ">
 					<div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="paciente_preenche_criterios" value="Paciente preenche critérios para Regulação" onclick="desactiveSituacao()">PACIENTE REGULADO - Protocolo:
+				        <input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="paciente_preenche_criterios" value="Paciente preenche critérios para Regulação" onclick="activeAguardVaga()">PACIENTE REGULADO - Protocolo:
 				      </label>
 				    </div>
 				</div>
@@ -1725,7 +1728,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-6">
 					
 				</div>
-				<div class="col-sm-3" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+				<div class="col-sm-3" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px" id="status_regulacao">
 					<b>status:<i>Aguardando Confirmação de Vaga!</i></b>
 
 				</div>
@@ -1755,7 +1758,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				
 				<div class="col-sm-6">
 					Pareceristas - CRM:
-					<select multiple class="form-control" id="" name="">
+					<select multiple class="form-control" id="" name="pareceristas">
 						<option value="Alexandre Yukio Nishimi crm 10730">Alexandre Yukio Nishimi CRM 10730</option>
 						<option value="Ana Luísa Castelo Branco Gomes 12852">Ana Luísa Castelo Branco Gomes CRM 12852</option>
 						<option value="Andre Cristiano da costa lima 9714">Andre Cristiano da costa lima CRM 9714</option>

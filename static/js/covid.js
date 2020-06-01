@@ -386,3 +386,12 @@ function desactiveSituacao(){
 	$("#situacao_lista_espera_id").val("");
 	$("#situacao_lista_espera_id").prop("disabled", true);
 }
+
+function activeAguardVaga(){
+	if (document.getElementById("check_paciente_regulado_id").checked == true){
+		document.getElementById("status_regulacao").style.display == 'block';
+	}
+	else {
+		document.getElementById("status_regulacao").style.display == 'none';
+	}
+}

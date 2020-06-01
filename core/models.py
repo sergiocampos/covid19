@@ -38,12 +38,14 @@ class RegistroCovid(models.Model):
 	exposicao_pessoa_infectada = models.CharField(max_length=5, blank=True, null=True)
 	parentesco = models.CharField(max_length=30, blank=True, null=True)
 	comorbidades = ArrayField(models.CharField(max_length=100), blank=True, null=True)
+	outras_comorbidades = models.CharField(max_length=100, blank=True, null=True)
 	outras_cardiopatias = models.CharField(max_length=100, blank=True, null=True)
 	idade_gestacional = models.CharField(max_length=100, blank=True, null=True)
 	comorbidades_obstetricas = models.CharField(max_length=100, blank=True, null=True)
 	gesta_para = models.CharField(max_length=100, blank=True, null=True)
 
 	medicamentos_uso_habitual = ArrayField(models.CharField(max_length=100), blank=True, null=True)
+	medicamento_outros = models.CharField(max_length=100, blank=True, default='', null=True)
 
 	spo2 = models.IntegerField(blank=True, null=True)
 	fr_irpm = models.IntegerField(blank=True, null=True)
@@ -54,7 +56,7 @@ class RegistroCovid(models.Model):
 	dose_cn = models.FloatField(blank=True, null=True)
 	dose_venturi = models.FloatField(blank=True, null=True)
 
-	vmi = models.CharField(max_length=10, blank=True, null=True)
+	vmi = ArrayField(models.CharField(max_length=10), blank=True, null=True)
 
 	vt = models.FloatField(blank=True, null=True)
 	delta_pressure = models.FloatField(blank=True, null=True)
@@ -90,6 +92,7 @@ class RegistroCovid(models.Model):
 
 	em_uso_corticosteroide = models.CharField(max_length=3, blank=True, default='', null=True)
 	dose_corticosteroide = models.CharField(max_length=100, blank=True, default='', null=True)
+	data_inicio_corticosteroide = models.DateField(blank=True, null=True)
 
 	em_uso_hidroxicloroquina = models.CharField(max_length=3, blank=True, default='', null=True)
 	data_inicio_hidroxicloroquina = models.DateField(blank=True, null=True)
@@ -119,24 +122,24 @@ class RegistroCovid(models.Model):
 	rass = models.CharField(max_length=100, blank=True, default='', null=True)
 
 	data_exames_laboratorio = models.DateField(blank=True, null=True)
-	leucocito = models.FloatField(blank=True, null=True)
-	linfocito = models.FloatField(blank=True, null=True)
-	hb = models.FloatField(blank=True, null=True)
-	ht = models.FloatField(blank=True, null=True)
-	pcr = models.FloatField(blank=True, null=True)
-	lactato = models.FloatField(blank=True, null=True)
-	dhl = models.FloatField(blank=True, null=True)
-	ferritina = models.FloatField(blank=True, null=True)
-	troponina = models.FloatField(blank=True, null=True)
-	cpk = models.FloatField(blank=True, null=True)
-	d_dimero = models.FloatField(blank=True, null=True)
-	ureia = models.FloatField(blank=True, null=True)
-	creatinina = models.FloatField(blank=True, null=True)
-	ap = models.FloatField(blank=True, null=True)
-	tap = models.FloatField(blank=True, null=True)
-	inr = models.FloatField(blank=True, null=True)
-	tgo = models.FloatField(blank=True, null=True)
-	tgp = models.FloatField(blank=True, null=True)
+	leucocito = models.CharField(max_length=100, blank=True, default='', null=True)
+	linfocito = models.CharField(max_length=100, blank=True, default='', null=True)
+	hb = models.CharField(max_length=100, blank=True, default='', null=True)
+	ht = models.CharField(max_length=100, blank=True, default='', null=True)
+	pcr = models.CharField(max_length=100, blank=True, default='', null=True)
+	lactato = models.CharField(max_length=100, blank=True, default='', null=True)
+	dhl = models.CharField(max_length=100, blank=True, default='', null=True)
+	ferritina = models.CharField(max_length=100, blank=True, default='', null=True)
+	troponina = models.CharField(max_length=100, blank=True, default='', null=True)
+	cpk = models.CharField(max_length=100, blank=True, default='', null=True)
+	d_dimero = models.CharField(max_length=100, blank=True, default='', null=True)
+	ureia = models.CharField(max_length=100, blank=True, default='', null=True)
+	creatinina = models.CharField(max_length=100, blank=True, default='', null=True)
+	ap = models.CharField(max_length=100, blank=True, default='', null=True)
+	tap = models.CharField(max_length=100, blank=True, default='', null=True)
+	inr = models.CharField(max_length=100, blank=True, default='', null=True)
+	tgo = models.CharField(max_length=100, blank=True, default='', null=True)
+	tgp = models.CharField(max_length=100, blank=True, default='', null=True)
 
 	exame_imagem = ArrayField(models.CharField(max_length=100), blank=True, null=True)
 	laudo_tc_torax = models.TextField(blank=True, default='', null=True)
@@ -163,4 +166,4 @@ class RegistroCovid(models.Model):
 
 
 	def __str__(self):
-		return str(self.descricao)
+		return str(self.nome_paciente)

@@ -28,5 +28,6 @@ urlpatterns = [
     path('regulacao/<id>/', views.regulacao, name='regulacao'),
     path('regulacao/<id>/submit', views.regulacao_set),
     path('regulacao_edit/<id>/', views.regulacao_edit, name='regulacao_edit'),
+    path('regulacao_edit/<id>/submit', views.regulacao_edit_set),
     path('regulacao_detail/<id>/', views.regulacao_detail, name='regulacao_detail' )
 ]

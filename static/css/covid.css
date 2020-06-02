@@ -1,3 +1,7 @@
-#status_regulacao {
+#status_regulacao,
+#paciente_regulado_id,
+#paciente_lista_id,
+#paciente_internado_id,
+#paciente_obito_id {
 	display: none;
 }

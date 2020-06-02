@@ -112,11 +112,26 @@ máxima de 12h de validação para recepção na unidade solicitante.
 		  </ul>
 		</nav><hr>
 
-		<form action="">
+		<form enctype="multipart/form-data" action="submit" method="POST">{% csrf_token %}
 
 		<div class="container">
 
 			<p></p>
+			<div class="row">
+				<div class="col-sm-4">
+					Número do Registro
+					<div class="form-check-inline">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="nome-doador-anexo" size="40" value="{{registro.codigo_registro}}" disabled style="width: 150px">
+				    </div>
+				</div>
+				<div class="col-sm-6">
+					Estabelecimento Solicitante:
+					<div class="form-check-inline" style="width: 50%">
+						<input type="text" class="form-control form-control-sm" id="field_cnes_id" placeholder="Digite o nome ou parte do nome do estabelecimento" name="estabelecimento_solicitante" size="12" value="{{registro.estabelecimento_solicitante}}" onclick="" style="width:">
+				    </div>
+				</div>
+				<div class="col-sm-2"></div>
+			</div><hr>
 			<div class="row">
 			
     			<div class="col-sm-6">
@@ -130,7 +145,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-6">
 					Paciente
 					<div class="form-check-inline">
-						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="nome-doador-anexo" size="40" value="{{registro.nome_paciente}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="nome_paciente" size="40" value="{{registro.nome_paciente}}">
 				    </div>
 				</div>
     			
@@ -317,7 +332,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-12">
 					Tempo de início de quadro sintomático:
 					<div class="form-check-inline">
-				        <input type="number" class="form-control form-control-sm" id="" placeholder="" name="tempo_inicio_sintomas" value="{{registro.tempo_quadro_sintomatico}}" min="1" max="200">
+				        <input type="number" class="form-control form-control-sm" id="" placeholder="" name="tempo_inicio_sintomas" value="{{registro.tempo_quadro_sintomatico}}" min="1">
 				    </div>
 				    dias.
 				</div>
@@ -365,7 +380,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-12">
 					Grau de parentesco:
 					<div class="form-check-inline">
-						<select name="unidade_origem" id="" class="form-control form-control-sm" style="width: auto">
+						<select name="grau_parentesco" id="" class="form-control form-control-sm" style="width: auto">
 				            <option value="" selected>{{registro.parentesco}}</option>
 				            <option value="Mãe">Mãe</option>
 				            <option value="Pai">Pai</option>
@@ -456,7 +471,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					</label>
 					</div>
 					<div class="form-check-inline" style="width: 200px">
-						<input type="text" class="form-control form-control-sm" id="desc_outras_comorbidades" placeholder="" name="desc_outras_cardiopatias" value="{{registro.outras_comorbidades}}">
+						<input type="text" class="form-control form-control-sm" id="desc_outras_comorbidades" placeholder="" name="descricao_outras_comorbidades" value="{{registro.outras_comorbidades}}">
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="">
@@ -465,7 +480,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					</label>
 					</div>
 					<div class="form-check-inline" style="width: 200px">
-						<input type="text" class="form-control form-control-sm" id="desc_outras_comorbidades" placeholder="" name="desc_outras_cardiopatias" value="" disabled>
+						<input type="text" class="form-control form-control-sm" id="desc_outras_comorbidades" placeholder="" name="descricao_outras_comorbidades" value="" disabled>
 				    </div>
 				    {%endif%}
 				</div>
@@ -676,13 +691,13 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					{% if 'BRA (Losartana, Valsartana, Olmesartana, etc)' in registro.medicamentos_uso_habitual %}
 					<div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="" name="medicamento_bra" value="BRA (Losartana, Valsartana, Olmesartana, etc)" checked>BRA (Losartana, Valsartana, Olmesartana, etc)
+				        <input type="checkbox" class="form-check-input" id="" name="medicamento_uso_habitual" value="BRA (Losartana, Valsartana, Olmesartana, etc)" checked>BRA (Losartana, Valsartana, Olmesartana, etc)
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="" name="medicamento_bra" value="BRA (Losartana, Valsartana, Olmesartana, etc)">BRA (Losartana, Valsartana, Olmesartana, etc)
+				        <input type="checkbox" class="form-check-input" id="" name="medicamento_uso_habitual" value="BRA (Losartana, Valsartana, Olmesartana, etc)">BRA (Losartana, Valsartana, Olmesartana, etc)
 				      </label>
 				    </div>
 				    {%endif%}
@@ -692,13 +707,13 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					{% if 'IECA' in registro.medicamentos_uso_habitual %}
 					<div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="" name="medicamento_ieca" value="IECA" checked>IECA
+				        <input type="checkbox" class="form-check-input" id="" name="medicamento_uso_habitual" value="IECA" checked>IECA
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="" name="medicamento_ieca" value="IECA">IECA
+				        <input type="checkbox" class="form-check-input" id="" name="medicamento_uso_habitual" value="IECA">IECA
 				      </label>
 				    </div>
 				    {%endif%}
@@ -707,7 +722,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					{% if 'Outros' in registro.medicamentos_uso_habitual %}
 					<div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="outros_medicamento" name="medicamento_outros" value="Outros" onclick="check_outro_medicamento()" checked>Outros
+				        <input type="checkbox" class="form-check-input" id="outros_medicamento" name="medicamento_uso_habitual" value="Outros" onclick="check_outro_medicamento()" checked>Outros
 				      </label>
 				    </div>
 					
@@ -717,7 +732,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				    {%else%}
 				    <div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="outros_medicamento" name="medicamento_outros" value="Outros" onclick="check_outro_medicamento()">Outros
+				        <input type="checkbox" class="form-check-input" id="outros_medicamento" name="medicamento_uso_habitual" value="Outros" onclick="check_outro_medicamento()">Outros
 				      </label>
 				    </div>
 					
@@ -2794,13 +2809,13 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					{% if registro.regulacao_paciente == 'Paciente não preenche critérios para Regulação' %}
 					<div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="paciente_preenche_criterios" value="Paciente não preenche critérios para Regulação" onclick="desactiveSituacao()" checked>PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
+				        <input type="radio" class="form-check-input" id="" name="paciente_preenche_criterios" value="Paciente não preenche critérios para Regulação" onclick="ocultaStatusAguardConfVaga()" checked>PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="paciente_preenche_criterios" value="Paciente não preenche critérios para Regulação" onclick="desactiveSituacao()">PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
+				        <input type="radio" class="form-check-input" id="" name="paciente_preenche_criterios" value="Paciente não preenche critérios para Regulação" onclick="ocultaStatusAguardConfVaga()">PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
 				      </label>
 				    </div>
 				    {%endif%}
@@ -2809,19 +2824,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					{% if registro.regulacao_paciente == 'Paciente preenche critérios para Regulação' %}
 					<div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="paciente_preenche_criterios" value="Paciente preenche critérios para Regulação" onclick="desactiveSituacao()" checked>PACIENTE REGULADO - Protocolo:
+				        <input type="radio" class="form-check-input" id="" name="paciente_preenche_criterios" value="Paciente preenche critérios para Regulação" onclick="exibeStatusAguardConfVaga()" checked>PACIENTE REGULADO - Protocolo:
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="paciente_preenche_criterios" value="Paciente preenche critérios para Regulação" onclick="desactiveSituacao()">PACIENTE REGULADO - Protocolo:
+				        <input type="radio" class="form-check-input" id="" name="paciente_preenche_criterios" value="Paciente preenche critérios para Regulação" onclick="exibeStatusAguardConfVaga()">PACIENTE REGULADO - Protocolo:
 				      </label>
 				    </div>
 				    {%endif%}
 				</div>
 				<div class="col-sm-3" style="margin-top: 30px; background-color: ">
-					<div class="form-check-inline" style="font-size: 83%; width: 100px">
+					<div class="form-check-inline" style="font-size: 83%; width: 140px">
     					SESCOVID
     					<input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="{{registro.codigo_sescovid}}">
 				    </div>
@@ -2830,10 +2845,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-6">
 					
 				</div>
-				<div class="col-sm-3" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b>status:<i>Aguardando Confirmação de Vaga!</i></b>
-
-				</div>
+				
 				<div class="col-sm-3">
 					
 				</div>
@@ -2843,19 +2855,22 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-4">
 					<div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="" id="lb_vaga_conf_internacao">
-				        <input type="radio" class="form-check-input" id="incluir_em_lista_id" name="paciente_preenche_criterios" value="Paciente em Lista de Espera" onclick="">Vaga confirmada com Internação Imediata
+				        <input type="radio" class="form-check-input" id="check_internacao_id" name="status_paciente" value="Vaga confirmada com Internação Imediata" onclick="activeInternacao()">Vaga confirmada com Internação Imediata
 				      </label>
 				    </div>
 
 				</div>
-				<div class="col-sm-3"></div>
-				<div class="col-sm-5"></div>
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" for="" id="lb_aguard_confirm">
-				        <input type="radio" class="form-check-input" id="incluir_em_lista_id" name="paciente_preenche_criterios" value="Paciente em Lista de Espera" onclick="">Aguardando Confirmação de Vaga
+				      <label class="form-check-label" for="" id="lb_vaga_conf_internacao">
+				        <input type="radio" class="form-check-input" id="check_obito_id" name="status_paciente" value="Vaga confirmada com Internação Imediata" onclick="activeObito()">Óbito
+				        <input type="date" required disabled id="data_obito_id">
 				      </label>
 				    </div>
+				</div>
+				<div class="col-sm-5"></div>
+				<div class="col-sm-4">
+					
 
 				    
 				</div>
@@ -2864,12 +2879,63 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-4">
 					<div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="" id="lb_aguard_em_lista">
-				        <input type="radio" class="form-check-input" id="incluir_em_lista_id" name="paciente_preenche_criterios" value="Paciente em Lista de Espera" onclick="">AGUARDANDO EM LISTA DE ESPERA
+				        <input type="radio" class="form-check-input" id="check_em_lista_espera_id" name="status_paciente" value="Aguardando em Lista de Espera" onclick="activeEmListaEspera()">AGUARDANDO EM LISTA DE ESPERA
 				      </label>
 				    </div>
 
 				</div>
+
+				<div class="col-sm-4">
+					
+				</div>
+				<div class="col-sm-4">
+					
+				</div>
+				<div class="col-sm-4">
+					
+				</div>
+				<div class="col-sm-4">
+					
+				</div>
+
+
+				<div id="paciente_regulado_id" class="col-sm-4" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Aguardando Confirmação de Vaga!</i></b>
+
+				</div>
+
+				<div id="paciente_obito_id" class="col-sm-4" style="background-color: #c6c6c6; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Paciente veio a óbito!</i></b>
+
+				</div>
+
+				<div id="paciente_lista_id" class="col-sm-4" style="background-color: #ffcc99; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Paciente em Lista de espera!</i></b>
+
+				</div>
+
+				<div id="paciente_internado_id" class="col-sm-4" style="background-color: #b3e6b3; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Paciente encaminhado para Internação!</i></b>
+
+				</div>
+
+
+
+				{% if registro.regulacao_paciente == 'Paciente preenche critérios para Regulação' %}
+				<div id="ag_conf_vaga" class="col-sm-4" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Aguardando Confirmação de Vaga!</i></b>
+
+				</div>
+				{%else%}
+				<div class="col-sm-4">
+					
+				</div>
+				{%endif%}
 				
+				<div class="col-sm-4">
+					
+				</div>
+
 				<div class="col-sm-12">
 					<div class="form-group">
 				      <label for="">Justificativa:</label>

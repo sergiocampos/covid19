@@ -382,10 +382,6 @@ function activeSituacao(){
 	}
 }
 
-function desactiveSituacao(){
-	$("#situacao_lista_espera_id").val("");
-	$("#situacao_lista_espera_id").prop("disabled", true);
-}
 
 function activeAguardVaga(){
 	if (document.getElementById("check_paciente_regulado_id").checked == true){
@@ -399,3 +395,68 @@ function activeAguardVaga(){
 $(document).ready(function(){
 	$("#detail :input").prop("disabled", true);
 });
+
+function exibeStatusAguardConfVaga(){
+	$("#paciente_regulado_id").show();
+
+	$("#paciente_lista_id").hide();
+	$("#ag_conf_vaga").hide();
+	$("#paciente_obito_id").hide();
+
+	$("#paciente_internado_id").hide();
+
+	$("#data_obito_id").prop("disabled", true);
+	$("#data_obito_id").val("");
+
+	$("#check_obito_id").prop("checked", false);
+	$("#check_em_lista_espera_id").prop("checked", false);
+	$("#check_internacao_id").prop("checked", false);
+
+}
+
+function ocultaStatusAguardConfVaga(){
+	$("#paciente_regulado_id").hide();
+
+}
+
+function activeObito(){
+	if (document.getElementById("check_obito_id").checked == true){
+		$("#data_obito_id").prop("disabled", false);
+		$("#paciente_obito_id").show();
+		$("#paciente_regulado_id").hide();
+		$("#paciente_lista_id").hide();
+		$("#paciente_internado_id").hide();
+	}
+	else {
+		$("#paciente_obito_id").hide();
+	}
+		
+}
+
+function activeEmListaEspera(){
+	if (document.getElementById("check_em_lista_espera_id").checked == true){
+		$("#paciente_lista_id").show();
+		$("#ag_conf_vaga").hide();
+		$("#paciente_obito_id").hide();
+		$("#paciente_regulado_id").hide();
+
+		$("#paciente_internado_id").hide();
+
+		$("#data_obito_id").prop("disabled", true);
+		$("#data_obito_id").val("");
+	}
+}
+
+function activeInternacao(){
+	if (document.getElementById("check_internacao_id").checked == true){
+		$("#paciente_internado_id").show();
+
+		$("#paciente_lista_id").hide();
+		$("#ag_conf_vaga").hide();
+		$("#paciente_obito_id").hide();
+		$("#paciente_regulado_id").hide();
+
+		$("#data_obito_id").prop("disabled", true);
+		$("#data_obito_id").val("");
+	}
+}

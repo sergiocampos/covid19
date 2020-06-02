@@ -395,3 +395,7 @@ function activeAguardVaga(){
 		document.getElementById("status_regulacao").style.display == 'none';
 	}
 }
+
+$(document).ready(function(){
+	$("#detail :input").prop("disabled", true);
+});

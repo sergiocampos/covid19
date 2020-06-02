@@ -270,28 +270,28 @@ def regulacao_set(request, id):
 	droga_vasoativa = request.POST.getlist('droga_vasoativa')
 	
 	qtd_nora_cap = request.POST.get('qtd_nora')
-	if qtd_nora_cap != '':
-		qtd_nora = float(qtd_nora_cap)
-	else:
+	if qtd_nora_cap == '' or qtd_nora_cap == None:
 		qtd_nora = None
+	else:
+		qtd_nora = float(qtd_nora_cap)
 
 	qtd_adrenalina_cap = request.POST.get('qtd_adrenalina')
-	if qtd_adrenalina_cap != '':
-		qtd_adrenalina = float(qtd_adrenalina_cap)
-	else:
+	if qtd_adrenalina_cap == '' or qtd_adrenalina_cap == None:
 		qtd_adrenalina = None
+	else:
+		qtd_adrenalina = float(qtd_adrenalina_cap)
 
 	qtd_vasopressina_cap = request.POST.get('qtd_vasopressina')
-	if qtd_vasopressina_cap != '':
-		qtd_vasopressina = float(qtd_vasopressina_cap)
-	else:
+	if qtd_vasopressina_cap == '' or qtd_vasopressina_cap == None:
 		qtd_vasopressina = None
+	else:
+		qtd_vasopressina = float(qtd_vasopressina_cap)
 
 	qtd_dobutamina_cap = request.POST.get('qtd_dobutamina')
-	if qtd_dobutamina_cap != '':
-		qtd_dobutamina = float(qtd_dobutamina_cap)
-	else:
+	if qtd_dobutamina_cap == '' or qtd_dobutamina_cap == None:
 		qtd_dobutamina = None
+	else:
+		qtd_dobutamina = float(qtd_dobutamina_cap)
 
 	arritmia = request.POST.getlist('arritmia')
 	infeccao_bacteriana = request.POST.get('infeccao_bacteriana')
@@ -500,13 +500,21 @@ def regulacao_set(request, id):
 
 	registro.save()
 
-	return redirect('regulacao', id=id)
+	return redirect('regulacao_detail', id=id)
+
 
 @login_required
-def regulacao_edit(request):
+def regulacao_detail(request, id):
+	registro = RegistroCovid.objects.get(id=id)
 
-	registro_id = request.GET.get('id')
-	registro = RegistroCovid.objects.get(id=registro_id)
+	return render(request, 'regulacao_detail.html', {'registro':registro})
+
+@login_required
+def regulacao_edit(request, id):
+
+	#registro_id = request.GET.get('id')
+	#registro = RegistroCovid.objects.get(id=registro_id)
+	registro = RegistroCovid.objects.get(id=id)
 	pa = registro.pa
 
 	if len(pa)>4:

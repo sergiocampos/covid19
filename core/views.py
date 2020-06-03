@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from datetime import datetime, timezone
 from .models import RegistroCovid
+import calendar
+from time import gmtime, strftime
 
 # Create your views here.
 
@@ -17,16 +19,29 @@ def registro_covid(request):
 	formateDate = data.strftime("%d-%m-%Y")
 	hora = data.strftime("%H:%M")
 
-	num_part_1 = '1209'
-	num_part_2 = '1209'
+	last_registro = RegistroCovid.objects.all().last()
+	last_codigo_registro_total = last_registro.codigo_registro_total
+	last_codigo_registro_mensal = last_registro.codigo_registro_mensal
+	
 
-	num_registro = num_part_1 + num_part_2
+	#Dia de hoje:
+	dia = data.day
+	#último dia do mês:
+	ultimo_dia = calendar.monthrange(int(strftime("%Y", gmtime())), int(strftime("%m", gmtime())))[1]
+	if dia <= ultimo_dia:
+		last_codigo_registro_total += 1
+		last_codigo_registro_mensal += 1
+	else:
+		last_codigo_registro_total += 1
+		last_codigo_registro_mensal += 0
+
+	last_codigo_registro_total_str = str(last_codigo_registro_total)
+	last_codigo_registro_mensal_str = str(last_codigo_registro_mensal)
 
 
+	num_registro = last_codigo_registro_total_str + last_codigo_registro_mensal_str
 
-	print("data:", formateDate)
-	print("data:", hora)
-	return render(request, 'registro_covid.html', {'formateDate': formateDate, 'hora': hora, 'num_registro':num_registro})
+	return render(request, 'registro_covid.html', {'formateDate': formateDate, 'hora': hora, 'num_registro':num_registro, 'last_codigo_registro_total_str': last_codigo_registro_total_str, 'last_codigo_registro_mensal_str':last_codigo_registro_mensal_str})
 
 
 @login_required
@@ -95,9 +110,18 @@ def registro_covid_set(request):
 
 
 	#implementar o algoritmo: codigo_registro = None
+	codigo_registro_total = request.POST.get('last_codigo_total')
+	codigo_registro_mensal = request.POST.get('last_codigo_mensal')
+
+
+	codigo_registro_completo = request.POST.get('num_total_registros')
+	print("codigo completo:",codigo_registro_completo)
 
 	registro = RegistroCovid.objects.create(
 		responsavel_pelo_preenchimento = responsavel_pelo_preenchimento,
+		codigo_registro_total = codigo_registro_total,
+		codigo_registro_mensal = codigo_registro_mensal,
+		codigo_registro_completo = codigo_registro_completo,
 		nome_solicitante = nome_solicitante,
 		municipio_estabelecimento = municipio_estabelecimento,
 		estabelecimento_solicitante = estabelecimento_solicitante,

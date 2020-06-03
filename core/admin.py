@@ -5,4 +5,4 @@ from .models import RegistroCovid
 
 @admin.register(RegistroCovid)
 class RegistroCovidAdmin(admin.ModelAdmin):
-	list_display = ['codigo_registro', 'nome_solicitante', 'estabelecimento_solicitante']
+	list_display = ['nome_solicitante', 'estabelecimento_solicitante']

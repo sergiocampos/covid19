@@ -176,8 +176,7 @@ def regulacao_set(request, id):
 
 	responsavel_pelo_preenchimento = request.user
 	
-	codigo_registro = "20201"
-	#implementar
+	
 	nome_solicitante = request.POST.get('nome_solicitante')
 	municipio_estabelecimento = request.POST.get('')
 	estabelecimento_solicitante = request.POST.get('')
@@ -391,7 +390,12 @@ def regulacao_set(request, id):
 		prioridade = None
 
 	regulacao_paciente = request.POST.get('paciente_preenche_criterios')
-	status_regulacao = request.POST.get('')
+	if regulacao_paciente == 'Paciente não preenche critérios para Regulação':
+		status_regulacao = 'Paciente não Regulado'
+	else:
+		status_regulacao = request.POST.get('')
+
+	#status_regulacao = request.POST.get('')
 	codigo_sescovid = request.POST.get('num_protocolo')
 	justificativa = request.POST.get('justificativa_nao_regulacao')
 	observacao = request.POST.get('observacoes_medicas')
@@ -400,7 +404,7 @@ def regulacao_set(request, id):
 
 	
 	registro.responsavel_pelo_preenchimento = responsavel_pelo_preenchimento
-	registro.codigo_registro = codigo_registro
+	#registro.codigo_registro = codigo_registro
 	registro.nome_solicitante = nome_solicitante
 	registro.municipio_estabelecimento = municipio_estabelecimento
 	registro.estabelecimento_solicitante = estabelecimento_solicitante
@@ -559,8 +563,6 @@ def regulacao_edit_set(request, id):
 
 	responsavel_pelo_preenchimento = request.user
 	
-	codigo_registro = "20201"
-	#implementar
 	nome_solicitante = registro.nome_solicitante
 	municipio_estabelecimento = registro.municipio_estabelecimento
 	estabelecimento_solicitante = registro.estabelecimento_solicitante

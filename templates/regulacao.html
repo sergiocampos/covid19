@@ -1712,19 +1712,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-2"></div>
 			</div>
 			<br>
-			<div class="row" style="border: 2px solid #cccccc; border-radius: 10px">
-				
+			<div class="container" style="border: 2px solid #cccccc; border-radius: 10px">
+				<div class="row">
 				<div class="col-sm-5" style="margin-top: 30px">
 					<div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="paciente_preenche_criterios" value="Paciente não preenche critérios para Regulação" onclick="desactiveSituacao()">PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
+				        <input type="radio" class="form-check-input" id="" name="paciente_preenche_criterios" value="Paciente não preenche critérios para Regulação" onclick="activeStatusNaoRegulado()">PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
 				      </label>
 				    </div>
 				</div>
 				<div class="col-sm-4" style="margin-top: 30px; background-color: ">
 					<div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="paciente_preenche_criterios" value="Paciente preenche critérios para Regulação" onclick="activeAguardVaga()">PACIENTE REGULADO - Protocolo:
+				        <input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="paciente_preenche_criterios" value="Paciente preenche critérios para Regulação" onclick="activeStatusAguardVaga()">PACIENTE REGULADO - Protocolo:
 				      </label>
 				    </div>
 				</div>
@@ -1734,37 +1734,116 @@ máxima de 12h de validação para recepção na unidade solicitante.
     					<input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="">
 				    </div>
 				</div>
+			</div>
+			
 
-				<div class="col-sm-6">
-					
+			<div class="row">
+				<div class="col-sm-5"></div>
+					<div class="col-sm-4">
+						<div class="form-check-inline" style="font-size: 83%">
+					      <label class="form-check-label" for="" id="lb_vaga_conf_internacao">
+					        <input type="checkbox" class="form-check-input" id="check_internacao_id" name="status_paciente" value="Vaga confirmada com Internação Imediata" onclick="activeInternacaoImediata()">Vaga confirmada com Internação Imediata
+					      </label>
+					    </div>
+
+					</div>
+				
+				<div class="col-sm-3"></div>					
+			</div>
+			<div class="row">
+				<div class="col-sm-5"></div>
+				<div class="col-sm-3">
+					<div class="form-check-inline" style="font-size: 83%">
+				      <label class="form-check-label" for="" id="">
+				        <input type="checkbox" class="form-check-input" id="check_obito_id" name="status_paciente" value="Vaga confirmada com Internação Imediata" onclick="activeStatusObito()">Óbito
+				        <input type="date" required disabled id="data_obito_id">
+				      </label>
+				    </div>
 				</div>
-				<div class="col-sm-3" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px" id="status_regulacao">
+				<div class="col-sm-4"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-5"></div>
+				<div class="col-sm-4">
+					<div class="form-check-inline" style="font-size: 83%">
+				      <label class="form-check-label" id="">
+				        <input type="checkbox" class="form-check-input" id="check_em_lista_espera_id" name="status_paciente" value="Aguardando em Lista de Espera" onclick="activeListaEspera()">AGUARDANDO EM LISTA DE ESPERA
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-3"></div>
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-12" style="background-color: #cccccc"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4"></div>
+				<div id="paciente_regulado_id" class="col-sm-4" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
 					<b>status:<i>Aguardando Confirmação de Vaga!</i></b>
-
 				</div>
+				<div class="col-sm-4"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4"></div>
+				<div id="paciente_obito_regulacao_id" class="col-sm-4" style="background-color: #c6c6c6; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Paciente veio a óbito!</i></b>
+				</div>
+				<div class="col-sm-4"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4"></div>
+				<div id="paciente_lista_regulacao_id" class="col-sm-4" style="background-color: #ffcc99; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Paciente em Lista de espera!</i></b>
+				</div>
+				<div class="col-sm-4"></div>
 				
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4"></div>
+				<div id="paciente_internado_regulacao_id" class="col-sm-4" style="background-color: #b3e6b3; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Paciente encaminhado para Internação!</i></b>
+				</div>
+				<div class="col-sm-4"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4"></div>
+				<div id="paciente_nao_regulado_id" class="col-sm-4" style="background-color: #ffbb99; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Paciente Não Regulado!</i></b>
+				</div>
+				<div class="col-sm-4"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12" style="background-color: #cccccc"></div>
+			</div>
 				
+			<hr>
+			<div class="row">
 				<div class="col-sm-12">
 					<div class="form-group">
 				      <label for="">Justificativa:</label>
 				      <textarea class="form-control" rows="5" id="" name="justificativa_nao_regulacao"></textarea>
 				    </div>
 				</div>
+			</div>	
+				
+			<div class="row">
 				<div class="col-sm-12">
 					<div class="form-group">
 				      <label for="">Observações:</label>
 				      <textarea class="form-control" rows="5" id="" name="observacoes_medicas" placeholder="Caso necessário, faça observação(es) neste campo"></textarea>
 				    </div>
 				</div>
-				<div class="col-sm-6"></div>
-
-				<div class="col-sm-4">
-					Data:
-					<div class="form-check-inline">
-						<input type="date" class="form-control form-control-sm" id="" placeholder="" name="data_regulacao" size="10" value="">
-				    </div>
-
-				</div>
+			</div>	
+				
+				
+			<div class="row">
 				
 				<div class="col-sm-6">
 					Pareceristas - CRM:
@@ -1810,9 +1889,14 @@ máxima de 12h de validação para recepção na unidade solicitante.
 						
       				</select>
 				</div>
-				<div class="col-sm-12"><br></div>
+				<div class="col-sm-6">
+					Data:
+						<div class="form-check-inline">
+							<input type="date" class="form-control form-control-sm" id="" placeholder="" name="data_regulacao" size="10" value="">
+					    </div>
+				</div>
 
-			</div>
+			</div><br>
 
 
 
@@ -1824,6 +1908,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 		<div class="container-fluid" style="text-align: center;">
 			<button type="submit" class="btn btn-primary" style="align-items: center;" id="btn_inserir_paciente">Inserir</button>  
 	    </div>
+	   </div>
 
 	    <div style="height: 50px"></div>
 

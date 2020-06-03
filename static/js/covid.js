@@ -460,3 +460,44 @@ function activeInternacao(){
 		$("#data_obito_id").val("");
 	}
 }
+
+function activeStatusNaoRegulado(){
+	$("#paciente_nao_regulado_id").show();
+}
+
+function activeStatusAguardVaga(){
+	$("#paciente_regulado_id").show();
+}
+
+function activeInternacaoImediata(){
+	if (document.getElementById("check_internacao_id").checked == true){
+		$("#paciente_internado_regulacao_id").show();
+	}
+	else {
+		$("#paciente_internado_regulacao_id").hide();
+	}
+	
+}
+
+function activeStatusObito(){
+	if (document.getElementById("check_obito_id").checked == true){
+		$("#paciente_obito_regulacao_id").show();
+		$("#data_obito_id").prop("disabled", false);
+	}
+	else {
+		$("#paciente_obito_regulacao_id").hide();
+		$("#data_obito_id").prop("disabled", true);
+		$("#data_obito_id").val("");
+	}
+	
+}
+
+function activeListaEspera(){
+	if (document.getElementById("check_em_lista_espera_id").checked == true){
+		$("#paciente_lista_regulacao_id").show();
+	}
+	else {
+		$("#paciente_lista_regulacao_id").hide();
+	}
+	
+}

@@ -1,7 +1,13 @@
-#status_regulacao,
-#paciente_regulado_id,
-#paciente_lista_id,
-#paciente_internado_id,
-#paciente_obito_id {
-	display: none;
-}
+	#status_regulacao_id,
+	#paciente_regulado_id,
+	#paciente_lista_id,
+	#paciente_internado_id,
+	#paciente_obito_id,
+	#paciente_nao_regulado_id,
+	#paciente_regulado_id,
+	#paciente_obito_regulacao_id,
+	#paciente_lista_regulacao_id,
+	#paciente_internado_regulacao_id,
+	#ag_conf_vaga_regulacao_id {
+		display: none;
+	}

@@ -115,7 +115,6 @@ def registro_covid_set(request):
 
 
 	codigo_registro_completo = request.POST.get('num_total_registros')
-	print("codigo completo:",codigo_registro_completo)
 
 	registro = RegistroCovid.objects.create(
 		responsavel_pelo_preenchimento = responsavel_pelo_preenchimento,

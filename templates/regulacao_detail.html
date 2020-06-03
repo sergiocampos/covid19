@@ -120,6 +120,16 @@ máxima de 12h de validação para recepção na unidade solicitante.
 
 			<p></p>
 			<div class="row">
+				<div class="col-sm-12">
+					Registro:
+					<div class="form-check-inline">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="num_total_registros" value="{{registro.codigo_registro_completo}}">
+				    </div>
+				    <input type="number" name="last_codigo_mensal" value="{{registro.codigo_registro_mensal}}" hidden>
+				    <input type="number" name="last_codigo_total" value="{{registro.codigo_registro_total}}" hidden>
+				</div>
+			</div><br>
+			<div class="row">
 			
     			<div class="col-sm-6">
 					Nome do Solicitante
@@ -1746,7 +1756,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 				<div class="col-sm-2">
 					<div class="form-check-inline" style="">
-	              		<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="idade_paciente" style="width: 100px">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="idade_paciente" style="width: 100px" value="{{registro.idade_paciente}}">
 	              	</div>
 				</div>
 			</div><hr>
@@ -1777,7 +1787,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 
 			<div class="row">
 				<div class="col-sm-5" style="">
+					{%if registro.escala_pontos_glasgow != '' %}
 					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_escala_glasgow" name="mascara_reservatorio" value="" onclick="activeValorGlasgow()" checked>Escala de Coma de Glasgow
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="escala_glasgow_id" step="" min="0" max="100" name="escala_glasgow" style="width: 100px" value="{{registro.escala_pontos_glasgow}}">
+	              		<div class="invalid-feedback"></div>
+	              		<label for="">pontos</label>
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
 				        <input type="checkbox" class="form-check-input" id="check_escala_glasgow" name="mascara_reservatorio" value="" onclick="activeValorGlasgow()">Escala de Coma de Glasgow
 				      </label>
@@ -1787,6 +1809,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 	              		<div class="invalid-feedback"></div>
 	              		<label for="">pontos</label>
 	              	</div>
+	              	{%endif%}
 				</div>
 				<div class="col-sm-3" style="">
 					
@@ -1799,22 +1822,38 @@ máxima de 12h de validação para recepção na unidade solicitante.
 
 			<div class="row">
 				<div class="col-sm-3">
+					{% if registro.bloqueador_neuromuscular != None %}
 					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_bloqueador_neuromuscular_id" name="mascara_reservatorio" value="Bloqueador Neuromuscular" onclick="activeBloqueadores()" checked>Bloqueador Neuromuscular:
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
 				        <input type="checkbox" class="form-check-input" id="check_bloqueador_neuromuscular_id" name="mascara_reservatorio" value="Bloqueador Neuromuscular" onclick="activeBloqueadores()">Bloqueador Neuromuscular:
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-3">
 					
 				</div>
 				
 				<div class="col-sm-3">
+					{% if registro.sedacao_continua != None %}
 					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_sedacao_continua_id" name="sedacao_continua" value="Sedação Continua" onclick="activeSedacaoContinua()" checked>Sedação contínua
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
 				        <input type="checkbox" class="form-check-input" id="check_sedacao_continua_id" name="sedacao_continua" value="Sedação Continua" onclick="activeSedacaoContinua()">Sedação contínua
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-3">
 					
@@ -1824,7 +1863,18 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-2" style="background-color: ">
 				</div>
 				<div class="col-sm-4" style="margin-left: ">
+					{%if 'Midazolam' in registro.bloqueador_neuromuscular %}
 					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_midazolam" name="mascara_reservatorio" value="Midazolam" disabled onclick="activeDoseMidazolam()" checked>Midazolam - Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="text" size="2" class="form-control form-control-sm" id="dose_midazolam_id" name="midazolam_dose" style="width: 100px" value="{{registro.midazolam_dose}}">
+	              		
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
 				        <input type="checkbox" class="form-check-input" id="check_midazolam" name="mascara_reservatorio" value="Midazolam" disabled onclick="activeDoseMidazolam()">Midazolam - Dose:
 				      </label>
@@ -1833,12 +1883,23 @@ máxima de 12h de validação para recepção na unidade solicitante.
 	              		<input type="text" size="2" class="form-control form-control-sm" id="dose_midazolam_id" name="midazolam_dose" style="width: 100px" disabled>
 	              		
 	              	</div>
+	              	{%endif%}
 				</div>
 				<div class="col-sm-2" style="background-color: ">
 					
 				</div>
 				<div class="col-sm-4" style="background-color: ">
+					{% if 'Rocurônio' in registro.sedacao_continua %}
 					<div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_rocuronio_id" name="Rocurônio" value="Rocurônio" disabled onclick="activeDoseRocuronio()" checked>Rocurônio – Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="margin-left:">
+						<input type="text" size="2" class="form-control form-control-sm" id="rocuronio_dose_id" name="rocuronio_dose" style="width: 100px" value="{{registro.rocuronio_dose}}">
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline">
 				      <label class="form-check-label" for="">
 				        <input type="checkbox" class="form-check-input" id="check_rocuronio_id" name="Rocurônio" value="Rocurônio" disabled onclick="activeDoseRocuronio()">Rocurônio – Dose:
 				      </label>
@@ -1846,6 +1907,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					<div class="form-check-inline" style="margin-left:">
 						<input type="text" size="2" class="form-control form-control-sm" id="rocuronio_dose_id" name="rocuronio_dose" style="width: 100px" disabled>
 	              	</div>
+	              	{%endif%}
 
 					
 				</div>
@@ -1854,7 +1916,17 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row" style="margin-top: 10px">
 				<div class="col-sm-2"></div>
 				<div class="col-sm-4">
+					{% if 'Fentanil' in registro.bloqueador_neuromuscular %}
 					<div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_fentanil_id" name="fentanil" value="Fentanil" disabled onclick="activeDoseFentanil()" checked>Fentanil - Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="margin-left:">
+						<input type="text" size="2" class="form-control form-control-sm" id="dose_fentanil_id" name="fentanil_dose" style="width: 100px" value="{{registro.fentanil_dose}}">
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline">
 				      <label class="form-check-label" for="">
 				        <input type="checkbox" class="form-check-input" id="check_fentanil_id" name="fentanil" value="Fentanil" disabled onclick="activeDoseFentanil()">Fentanil - Dose:
 				      </label>
@@ -1862,10 +1934,21 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					<div class="form-check-inline" style="margin-left:">
 						<input type="text" size="2" class="form-control form-control-sm" id="dose_fentanil_id" name="fentanil_dose" style="width: 100px" disabled>
 	              	</div>
+	              	{%endif%}
 				</div>
 				<div class="col-sm-2"></div>
 				<div class="col-sm-4">
+					{% if 'Pancurônio' in registro.sedacao_continua %}
 					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_pancuronio_id" name="pacuronio" value="Pancurônio" disabled onclick="activeDosePacuronio()" checked>Pancurônio – Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+						<input type="text" size="2" class="form-control form-control-sm" id="pacuronio_dose_id" name="pacuronio_dose" style="width: 100px" value="{{registro.pacuronio_dose}}">
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
 				        <input type="checkbox" class="form-check-input" id="check_pancuronio_id" name="pacuronio" value="Pancurônio" disabled onclick="activeDosePacuronio()">Pancurônio – Dose:
 				      </label>
@@ -1873,6 +1956,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					<div class="form-check-inline" style="">
 						<input type="text" size="2" class="form-control form-control-sm" id="pacuronio_dose_id" name="pacuronio_dose" style="width: 100px" disabled>
 	              	</div>
+	              	{%endif%}
 				</div>
 			</div>
 			
@@ -1882,7 +1966,17 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					
 				</div>
 				<div class="col-sm-4" style="">
+					{% if 'Propofol' in registro.bloqueador_neuromuscular %}
 					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_propofol_id" name="mascara_reservatorio" value="Propofol" disabled onclick="activeDosePropofol()" checked>Propofol - Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+						<input type="text" size="2" class="form-control form-control-sm" id="dose_propofol_id" name="propofol_dose" style="width: 100px" value="{{registro.propofol_dose}}">
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
 				        <input type="checkbox" class="form-check-input" id="check_propofol_id" name="mascara_reservatorio" value="Propofol" disabled onclick="activeDosePropofol()">Propofol - Dose:
 				      </label>
@@ -1890,12 +1984,23 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					<div class="form-check-inline" style="">
 						<input type="text" size="2" class="form-control form-control-sm" id="dose_propofol_id" name="propofol_dose" style="width: 100px" disabled>
 	              	</div>
+	              	{%endif%}
 				</div>
 				<div class="col-sm-2" style="">
 					
 				</div>
 				<div class="col-sm-4" style="">
+					{% if 'Cisatracúrio' in registro.sedacao_continua %}
 					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_cisatracurio_id" name="cisatracurio" value="Cisatracúrio" disabled onclick="activeDoseCisatracurio()" checked>Cisatracúrio – Dose:
+				      </label>
+				    </div>
+				    <div class="form-check-inline" style="margin-left:">
+						<input type="text" size="2" class="form-control form-control-sm" id="cisatracurio_dose_id" name="cisatracurio_dose" style="width: 100px" value="{{registro.cisatracurio_dose}}">
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
 				        <input type="checkbox" class="form-check-input" id="check_cisatracurio_id" name="cisatracurio" value="Cisatracúrio" disabled onclick="activeDoseCisatracurio()">Cisatracúrio – Dose:
 				      </label>
@@ -1903,6 +2008,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				    <div class="form-check-inline" style="margin-left:">
 						<input type="text" size="2" class="form-control form-control-sm" id="cisatracurio_dose_id" name="cisatracurio_dose" style="width: 100px" disabled>
 	              	</div>
+	              	{%endif%}
 				</div>
 
 			</div><br>
@@ -1910,7 +2016,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-12">
 					<b>RASS:</b>
 					<div class="form-check-inline" style="width: 200px">
-						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="rass" value="">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="rass" value="{{registro.rass}}">
 				    </div>
 				</div>
 			</div><hr>
@@ -1918,7 +2024,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-12">
 					<b>Laboratório - Data</b>
 					<div class="form-check-inline" style="width: 200px">
-						<input type="date" class="form-control form-control-sm" id="" placeholder="" name="data_exames_laboratorio" value="">
+						<input type="" class="form-control form-control-sm" id="" placeholder="" name="data_exames_laboratorio" value="{{registro.data_exames_laboratorio}}">
 				    </div>
 				</div>
 			</div><br>
@@ -1926,31 +2032,31 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-3">
 					Leucócitos:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="leucocito" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="leucocito" value="{{registro.leucocito}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					Linfócitos:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="leucocito" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="leucocito" value="{{registro.linfocito}}">
 				    </div>
 				</div>
 				<div class="col-sm-2">
 					HB:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="leucocito" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="leucocito" value="{{registro.hb}}">
 				    </div>
 				</div>
 				<div class="col-sm-2">
 					HT:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="leucocito" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="leucocito" value="{{registro.ht}}">
 				    </div>
 				</div>
 				<div class="col-sm-2">
 					PCR:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="leucocito" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="leucocito" value="{{registro.pcr}}">
 				    </div>
 				</div>
 				
@@ -1959,25 +2065,25 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-3">
 					Lactato:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="lactato" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="lactato" value="{{registro.lactato}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					DHL:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="dhl" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="dhl" value="{{registro.dhl}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					Ferritina:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ferritina" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ferritina" value="{{registro.ferritina}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					Troponina:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="troponina" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="troponina" value="{{registro.troponina}}">
 				    </div>
 				</div>
 			</div><br>
@@ -1985,25 +2091,25 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-3">
 					CPK:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="cpk" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="cpk" value="{{registro.cpk}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					D-dímero:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="d_dimero" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="d_dimero" value="{{registro.d_dimero}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					Uréia:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ureia" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ureia" value="{{registro.ureia}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					Creatinina:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="creatinina" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="creatinina" value="{{registro.creatinina}}">
 				    </div>
 				</div>
 			</div><br>
@@ -2011,31 +2117,31 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-2">
 					AP:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="cpk" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="cpk" value="{{registro.ap}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					TAP:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="d_dimero" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="d_dimero" value="{{registro.tap}}">
 				    </div>
 				</div>
 				<div class="col-sm-2">
 					INR:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ureia" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ureia" value="{{registro.inr}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					TGO:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="creatinina" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="creatinina" value="{{registro.tgo}}">
 				    </div>
 				</div>
 				<div class="col-sm-2">
 					TGP:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="creatinina" value="">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="creatinina" value="{{registro.tgp}}">
 				    </div>
 				</div>
 			</div><hr>
@@ -2045,26 +2151,48 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<br>
 			<div class="row">
 				<div class="col-sm-12">
+					{% if 'TC Tórax' in registro.exame_imagem %}
 					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_tc_torax_id" name="exame_imagem" value="TC Tórax" onclick="activeLaudoTc()" checked>TC Tórax; Laudo:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="width: 80%">
+						<input type="text" size="" class="form-control form-control-sm" id="laudo_tc_torax_id" step="" name="laudo_tc_torax" value="{{registro.laudo_tc_torax}}">
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
 				        <input type="checkbox" class="form-check-input" id="check_tc_torax_id" name="exame_imagem" value="TC Tórax" onclick="activeLaudoTc()">TC Tórax; Laudo:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="width: 80%">
 						<input type="text" size="" class="form-control form-control-sm" id="laudo_tc_torax_id" step="" name="laudo_tc_torax" style="" disabled>
-	              	</div>					
+	              	</div>
+	              	{%endif%}					
 				</div>
 			</div><br>
 			<div class="row">
 				<div class="col-sm-12">
+					{% if 'RX Tórax' in registro.exame_imagem %}
 					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_rx_torax_id" name="rx_torax" value="RX Tórax" onclick="activeLaudoRx()" checked>RX Tórax; Laudo:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="width: 80%">
+						<input type="text" size="" class="form-control form-control-sm" id="laudo_rx_torax_id" step="" name="laudo_rx_torax" style="" value="{{registro.laudo_rx_torax}}">
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
 				        <input type="checkbox" class="form-check-input" id="check_rx_torax_id" name="rx_torax" value="RX Tórax" onclick="activeLaudoRx()">RX Tórax; Laudo:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="width: 80%">
 						<input type="text" size="" class="form-control form-control-sm" id="laudo_rx_torax_id" step="" name="laudo_rx_torax" style="" disabled>
-	              	</div>	
+	              	</div>
+	              	{%endif%}	
 				</div>
 			</div><hr>
 
@@ -2087,25 +2215,49 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-2">
+					{% if registro.is_sindrome_gripal == 'Sim' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="sindrome_gripal" value="Sim" checked>Sim
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="sindrome_gripal" value="Sim">Sim
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-2">
+					{% if registro.is_sindrome_gripal == 'Não' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="sindrome_gripal" value="Não" checked="">Não
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="sindrome_gripal" value="Não">Não
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-3">
+					{% if registro.is_sindrome_gripal == 'Criterios Inconclusivo' %}
 					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="sindrome_gripal" value="Criterios Inconclusivo" checked>Critérios Inconclusivos
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="sindrome_gripal" value="Criterios Inconclusivo">Critérios Inconclusivos
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-2"></div>
 			</div><br>
@@ -2120,11 +2272,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-2">
+					{% if registro.news_fast_pb == 'eixo azul' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_fast" value="eixo azul" checked>1 ponto (eixo azul)
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_fast" value="eixo azul">1 ponto (eixo azul)
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-2">
 					
@@ -2139,11 +2299,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
+					{% if registro.news_fast_pb == 'eixo amarelo' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_fast" value="eixo amarelo" checked>2 ponto (eixo amarelo)
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_fast" value="eixo amarelo">2 ponto (eixo amarelo)
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-2">
 					
@@ -2156,11 +2324,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
+					{% if registro.news_fast_pb == 'eixo laranja' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="new_fast" value="eixo amarelo">2 ponto (eixo laranja)
+				        <input type="radio" class="form-check-input" id="" name="new_fast" value="eixo laranja" checked>2 ponto (eixo laranja)
 				      </label>
 				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_fast" value="eixo laranja">2 ponto (eixo laranja)
+				      </label>
+				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-2">
 					
@@ -2173,11 +2349,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
+					{% if registro.news_fast_pb == 'eixo vermelho' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_fast" value="eixo vermelho" checked> >=3 ponto (eixo vermelho)
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_fast" value="eixo vermelho"> >=3 ponto (eixo vermelho)
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-2">
 					
@@ -2200,11 +2384,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-2">
+					{% if registro.news_modificado == 'zero ponto' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="zero ponto" checked>0 ponto
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="zero ponto">0 ponto
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-2">
 					
@@ -2219,11 +2411,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
+					{% if registro.news_modificado == 'amarelo' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="amarelo" checked>1-4 pontos (amarelo)
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="amarelo">1-4 pontos (amarelo)
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-2">
 					
@@ -2236,11 +2436,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
+					{% if registro.news_modificado == 'laranja' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="laranja" checked>5-6 pontos (laranja)
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="laranja">5-6 pontos (laranja)
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-2">
 					
@@ -2253,11 +2461,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
+					{% if registro.news_modificado == 'vermelho' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="vermelho" checked> >=7 pontos (vermelho)
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="vermelho"> >=7 pontos (vermelho)
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-2">
 					
@@ -2270,11 +2486,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
+					{% if registro.news_modificado == 'preto' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="preto" checked> >=7 pontos (preto)
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="preto"> >=7 pontos (preto)
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-2">
 					
@@ -2297,22 +2521,38 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-6">
+					{% if registro.uti == 'zero ponto' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="uti" value="zero ponto" checked>Insuficiência respiratória aguda com necessidade de ventilação mecânica.
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="uti" value="zero ponto">Insuficiência respiratória aguda com necessidade de ventilação mecânica.
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-3"></div>
 			</div>
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-6">
+					{% if registro.uti == 'amarelo' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="uti" value="amarelo" checked>Sepse/Choque séptico e infecção pulmonar pelo XOVID-19.
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="uti" value="amarelo">Sepse/Choque séptico e infecção pulmonar pelo XOVID-19.
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-3">
 					
@@ -2322,11 +2562,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-8">
+					{% if registro.uti == 'laranja' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="uti" value="laranja" checked>Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="uti" value="laranja">Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-1">
 					
@@ -2335,11 +2583,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-6">
+					{% if registro.uti == 'news modificado' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="uti" value="news modificado" checked> NEWS modificado ≥ 7 pontos
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="uti" value="news modificado"> NEWS modificado ≥ 7 pontos
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-3">
 					
@@ -2349,11 +2605,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-6">
+					{% if registro.uti == 'preto' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="uti" value="preto" checked> NEWS-FAST ≥ 3 pontos
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="uti" value="preto"> NEWS-FAST ≥ 3 pontos
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-3">
 					
@@ -2363,11 +2627,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-6">
+					{% if registro.uti == 'disfunção organica, alem do pulmonar' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar" checked> Disfunção orgânica, além do pulmonar
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar"> Disfunção orgânica, além do pulmonar
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-3">
 					
@@ -2377,32 +2649,64 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-2">
+					{% if registro.leito == 'ENFERMARIA' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="perfil" value="ENFERMARIA" checked>ENFERMARIA
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="perfil" value="ENFERMARIA">ENFERMARIA
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-2">
+					{% if registro.leito == 'UTI ADULTO' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="perfil" value="UTI ADULTO" checked>UTI ADULTO
+				      </label>
+				    </div>
+				    {% else %}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="perfil" value="UTI ADULTO">UTI ADULTO
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-3">
+					{% if registro.leito == 'UTI PEDIÁTRICA' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="perfil" value="UTI PEDIÁTRICA" checked>UTI PEDIÁTRICA
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="perfil" value="UTI PEDIÁTRICA">UTI PEDIÁTRICA
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-2">
+					{% if registro.leito == 'UTI MATERNA' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="perfil" value="UTI MATERNA" checked>UTI MATERNA
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="perfil" value="UTI MATERNA">UTI MATERNA
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 			</div><br>
 				
@@ -2426,7 +2730,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-8">
 					Prioridade:
 					<div class="form-check-inline" style="">
-    					<input type="number" min="0" max="10" class="form-control form-control-sm" id="" placeholder="" name="prioridade" value="">
+    					<input type="number" min="0" max="10" class="form-control form-control-sm" id="" placeholder="" name="prioridade" value="{{registro.prioridade}}">
 				    </div>
 				</div>
 				<div class="col-sm-2"></div>
@@ -2435,31 +2739,47 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row" style="border: 2px solid #cccccc; border-radius: 10px">
 				
 				<div class="col-sm-5" style="margin-top: 30px">
+					{% if registro.regulacao_paciente == 'Paciente não preenche critérios para Regulação' %}
 					<div class="form-check-inline" style="font-size: 83%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="paciente_preenche_criterios" value="Paciente não preenche critérios para Regulação" onclick="desactiveSituacao()" checked>PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="paciente_preenche_criterios" value="Paciente não preenche critérios para Regulação" onclick="desactiveSituacao()">PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-4" style="margin-top: 30px; background-color: ">
+					{% if registro.regulacao_paciente == 'Paciente preenche critérios para Regulação' %}
 					<div class="form-check-inline" style="font-size: 83%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="paciente_preenche_criterios" value="Paciente preenche critérios para Regulação" onclick="desactiveSituacao()" checked>PACIENTE REGULADO - Protocolo:
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="paciente_preenche_criterios" value="Paciente preenche critérios para Regulação" onclick="desactiveSituacao()">PACIENTE REGULADO - Protocolo:
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-3" style="margin-top: 30px; background-color: ">
 					<div class="form-check-inline" style="font-size: 83%; width: 100px">
     					SESCOVID
-    					<input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="">
+    					<input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="{{registro.codigo_sescovid}}">
 				    </div>
 				</div>
 
 				<div class="col-sm-6">
 					
 				</div>
-				<div class="col-sm-3" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b>status:<i>Aguardando Confirmação de Vaga!</i></b>
+				<div class="col-sm-3">
+					
 
 				</div>
 				<div class="col-sm-3">
@@ -2479,11 +2799,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-3"></div>
 				<div class="col-sm-5"></div>
 				<div class="col-sm-4">
-					<div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" for="" id="lb_aguard_confirm">
-				        <input type="radio" class="form-check-input" id="incluir_em_lista_id" name="paciente_preenche_criterios" value="Paciente em Lista de Espera" onclick="">Aguardando Confirmação de Vaga
-				      </label>
-				    </div>
+					
 
 				    
 				</div>
@@ -2497,17 +2813,24 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				    </div>
 
 				</div>
+				<div class="col-sm-5"></div>
+
+				<div class="col-sm-3" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Aguardando Confirmação de Vaga!</i></b>
+
+				</div>
+				<div class="col-sm-4"></div>
 				
 				<div class="col-sm-12">
 					<div class="form-group">
 				      <label for="">Justificativa:</label>
-				      <textarea class="form-control" rows="5" id="" name="justificativa_nao_regulacao"></textarea>
+				      <textarea class="form-control" rows="5" id="" name="justificativa_nao_regulacao">{{registro.justificativa}}</textarea>
 				    </div>
 				</div>
 				<div class="col-sm-12">
 					<div class="form-group">
 				      <label for="">Observações:</label>
-				      <textarea class="form-control" rows="5" id="" name="observacoes_medicas" placeholder="Caso necessário, faça observação(es) neste campo"></textarea>
+				      <textarea class="form-control" rows="5" id="" name="observacoes_medicas" placeholder="Caso necessário, faça observação(es) neste campo">{{registro.observacao}}</textarea>
 				    </div>
 				</div>
 				<div class="col-sm-6"></div>
@@ -2515,54 +2838,20 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-4">
 					Data:
 					<div class="form-check-inline">
-						<input type="date" class="form-control form-control-sm" id="" placeholder="" name="data_alteracao" size="10" value="">
+						<input type="" class="form-control form-control-sm" id="" placeholder="" name="data_alteracao" size="10" value="{{registro.data_regulacao}}">
 				    </div>
 
 				</div>
 				
-				<div class="col-sm-6">
-					Pareceristas - CRM:
-					<select multiple class="form-control" id="" name="">
-						<option value="Alexandre Yukio Nishimi crm 10730">Alexandre Yukio Nishimi CRM 10730</option>
-						<option value="Ana Luísa Castelo Branco Gomes 12852">Ana Luísa Castelo Branco Gomes CRM 12852</option>
-						<option value="Andre Cristiano da costa lima 9714">Andre Cristiano da costa lima CRM 9714</option>
-						<option value="Andressa Cesar Vinagre CRM 8555">Andressa Cesar Vinagre CRM 8555</option>
-						<option value="Caroline Viana Coêlho da Franca Leppänen CRM 10476">Caroline Viana Coêlho da Franca Leppänen CRM 10476</option>				
+				<div class="col-sm-6">Pareceristas - CRM:
+					<ul>
+					{% for r in registro.pareceristas %}
+						<li>
+							{{r}}
+						</li>
 						
-						<option value="Filipe Almeida Botter 10583">Filipe Almeida Botter CRM 10583</option>
-						
-						<option value="Gabriel Fernandes de Sousa 12696">Gabriel Fernandes de Sousa CRM 12696</option>
-						<option value="Homero Max de Assis e Sá CRM-PB 11756">Homero Max de Assis e Sá CRM-PB 11756</option>
-						<option value="Indalécio Pacelli Fernandes CRM 6827">Indalécio Pacelli Fernandes CRM 6827</option>
-						<option value="Larissa de Oliveira Fernandes Borba CRM PB 12735">Larissa de Oliveira Fernandes Borba CRM PB 12735</option>
-						<option value="Livia Laeny Henrique Pontes - CRM 8583">Livia Laeny Henrique Pontes - CRM 8583</option>
-						
-						
-						<option value="IGOR CARVALHO VASCONCELOS CRM 12286">IGOR CARVALHO VASCONCELOS CRM 12286</option>
-						
-						
-						<option value="Marcela Vasconcelos Fernandes CRM 12800">Marcela Vasconcelos Fernandes CRM 12800</option>
-						<option value="Mariana Wanderley G Ribeiro CRM 10524 PB">Mariana Wanderley G Ribeiro CRM 10524 PB</option>
-						<option value="Mariza Freire de Souza Soares  CRM-PB 12.749">Mariza Freire de Souza Soares  CRM-PB 12.749</option>
-						<option value="Moacyr Zucarelle Junior CRM-PB 12.279">Moacyr Zucarelle Junior CRM-PB 12.279</option>
-						<option value="Patrícia Kelle Medeiros de Lacerda 12493">Patrícia Kelle Medeiros de Lacerda CRM 12493</option>
-						<option value="Raíssa Barros Soares de Oliveira CRM 11368">Raíssa Barros Soares de Oliveira CRM 11368</option>
-						<option value="Raphael de Azevedo Leitão CRM 12920 PB">Raphael de Azevedo Leitão CRM 12920 PB</option>
-						<option value="Ramon bezerra alves sousa 9432">Ramon bezerra alves sousa CRM 9432</option>
-						<option value="Romero Ruan Cartaxo de Queiroga CRM-PB 7420">Romero Ruan Cartaxo de Queiroga CRM 7420</option>
-
-						<option value="Ruan César Teixeira de Carvalho CRM-PB 13267">Ruan César Teixeira de Carvalho CRM 13267</option>
-						<option value="Samara Alves Miranda de Sá  11293">Samara Alves Miranda de Sá CRM  11293</option>
-						<option value="Samia Laiz Alves da Fonseca 12776">Samia Laiz Alves da Fonseca CRM 12776</option>
-						<option value="Sibelli Fabricia Oliveira dos Santos CRM 12093">Sibelli Fabricia Oliveira dos Santos CRM 12093</option>
-						<option value="Thales Carneiro Farias 8799">Thales Carneiro Farias CRM 8799</option>
-						<option value="Tammer Gomes de Morais 8104">Tammer Gomes de Morais CRM 8104</option>
-						<option value="Teófilo Vanomark Chaves Bezerra CRM 9690">Teófilo Vanomark Chaves Bezerra CRM 9690</option>
-						<option value="Tiago de Assis Clemente de Araújo / CRM-PB 12996">Tiago de Assis Clemente de Araújo / CRM-PB 12996</option>
-						<option value="vanessa Serrano bezerra CRM12762">vanessa Serrano bezerra CRM 12762</option>
-						
-						
-      				</select>
+					{%endfor%}
+					</ul>
 				</div>
 				<div class="col-sm-12"><br></div>
 

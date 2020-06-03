@@ -118,6 +118,16 @@ máxima de 12h de validação para recepção na unidade solicitante.
 
 			<p></p>
 			<div class="row">
+				<div class="col-sm-12">
+					Registro:
+					<div class="form-check-inline">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="num_total_registros" value="{{registro.codigo_registro_completo}}">
+				    </div>
+				    <input type="number" name="last_codigo_mensal" value="{{registro.codigo_registro_mensal}}" hidden>
+				    <input type="number" name="last_codigo_total" value="{{registro.codigo_registro_total}}" hidden>
+				</div>
+			</div><br>
+			<div class="row">
 			
     			<div class="col-sm-6">
 					Nome do Solicitante

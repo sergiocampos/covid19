@@ -1755,7 +1755,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-3">
 					<div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="" id="">
-				        <input type="checkbox" class="form-check-input" id="check_obito_id" name="status_paciente" value="Vaga confirmada com Internação Imediata" onclick="activeStatusObito()">Óbito
+				        <input type="checkbox" class="form-check-input" id="check_obito_id" name="status_paciente" value="Obito" onclick="activeStatusObito()">Óbito
 				        <input type="date" required disabled id="data_obito_id">
 				      </label>
 				    </div>
@@ -1773,7 +1773,20 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				    </div>
 				</div>
 				<div class="col-sm-3"></div>
-			</div><hr>
+			</div>
+			<div class="row">
+				<div class="col-sm-5"></div>
+				<div class="col-sm-4">
+					<div class="form-check-inline" style="font-size: 83%">
+				      <label class="form-check-label" id="">
+				        <input type="checkbox" class="form-check-input" id="" name="status_paciente" value="Aguardando confirmação de Vaga" onclick="activeListaEspera()">Aguardando confirmação de Vaga
+				      </label>
+				    </div>
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
+
+			<hr>
 			<div class="row">
 				<div class="col-sm-12" style="background-color: #cccccc"></div>
 			</div>

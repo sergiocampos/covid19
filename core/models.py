@@ -155,7 +155,10 @@ class RegistroCovid(models.Model):
 	prioridade = models.IntegerField(blank=True, null=True)
 
 	regulacao_paciente = models.CharField(max_length=100, blank=True, default='', null=True)
-	status_regulacao = models.CharField(max_length=100, blank=True, default='', null=True)
+	status_regulacao = ArrayField(models.CharField(max_length=100), blank=True, null=True)
+	
+	data_obito = models.DateField(blank=True, null=True)
+
 	codigo_sescovid = models.CharField(max_length=100, blank=True, default='', null=True)
 
 	justificativa = models.TextField(blank=True, default='', null=True)

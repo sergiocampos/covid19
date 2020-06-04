@@ -20,8 +20,12 @@ def registro_covid(request):
 	hora = data.strftime("%H:%M")
 
 	last_registro = RegistroCovid.objects.all().last()
-	last_codigo_registro_total = last_registro.codigo_registro_total
-	last_codigo_registro_mensal = last_registro.codigo_registro_mensal
+	if not last_registro:
+		last_codigo_registro_total = 0
+		last_codigo_registro_mensal = 0
+	else:
+		last_codigo_registro_total = last_registro.codigo_registro_total
+		last_codigo_registro_mensal = last_registro.codigo_registro_mensal
 	
 
 	#Dia de hoje:
@@ -178,9 +182,9 @@ def regulacao_set(request, id):
 	
 	
 	nome_solicitante = request.POST.get('nome_solicitante')
-	municipio_estabelecimento = request.POST.get('')
-	estabelecimento_solicitante = request.POST.get('')
-	estabelecimento_outro = request.POST.get('')
+	municipio_estabelecimento = registro.municipio_estabelecimento
+	estabelecimento_solicitante = registro.estabelecimento_solicitante
+	estabelecimento_outro = registro.estabelecimento_outro
 	unidade_origem = request.POST.get('unidade_origem')
 	nome_paciente = request.POST.get('nome_paciente')
 	idade_paciente = request.POST.get('idade_paciente')
@@ -229,53 +233,78 @@ def regulacao_set(request, id):
 	o2_suporte = request.POST.getlist('o2_suporte')
 	
 	dose_cn_cap = request.POST.get('dose_cn')
-	if dose_cn_cap != '':
-		dose_cn = float(dose_cn_cap)
-	else:
+	if dose_cn_cap == '' or dose_cn_cap == None:
 		dose_cn = None
+	else:
+		dose_cn = float(dose_cn_cap)
 
 	dose_venturi_cap = request.POST.get('dose_venturi')
-	if dose_venturi_cap != '':
-		dose_venturi = float(dose_venturi_cap)
-	else:
+	if dose_venturi_cap == '' or dose_venturi_cap == None:
 		dose_venturi = None
+	else:
+		dose_venturi = float(dose_venturi_cap)
+	
 
 	vmi = request.POST.getlist('vmi')
 	
 	vt_cap = request.POST.get('vt')
-	if vt_cap != '':
-		vt = float(vt_cap)
-	else:
+	if vt_cap == '' or vt_cap == None:
 		vt = None
+	else:
+		vt = float(vt_cap)
+		
 
 	delta_pressure_cap = request.POST.get('delta_pressure')
-	if delta_pressure_cap != '':
-		delta_pressure = float(delta_pressure_cap)
-	else:
+	if delta_pressure_cap == '' or delta_pressure_cap == None:
 		delta_pressure = None
+	else:
+		delta_pressure = float(delta_pressure_cap)
+		
 
 	pplato_cap = request.POST.get('pplato')
-	if pplato_cap != '':
-		pplato = float(pplato_cap)
-	else:
+	if pplato_cap == '' or pplato_cap == None:
 		pplato = None
+	else:
+		pplato = float(pplato_cap)
+		
 
 	raw_cap = request.POST.get('raw')
-	if raw_cap != '':
-		raw = float(raw_cap)
-	else:
+	if raw_cap == '' or raw_cap == None:
 		raw = None
+	else:
+		raw = float(raw_cap)
+		
 
 	cest_cap = request.POST.get('cest')
-	if cest_cap != '':
-		cest = float(cest_cap)
-	else:
+	if cest_cap == '' or cest_cap == None :
 		cest = None
+	else:
+		cest = float(cest_cap)
+		
 
-	sao2 = request.POST.get('sao2')
-	pao2 = request.POST.get('pao2')
-	fio2 = request.POST.get('fio2')
-	paco2 = request.POST.get('paco2')
+	sao2_cap = request.POST.get('sao2')
+	if sao2_cap == '' or sao2_cap == None:
+		sao2 = None
+	else:
+		sao2 = float(sao2_cap)
+
+	pao2_cap = request.POST.get('pao2')
+	if pao2_cap == '' or pao2_cap == None:
+		pao2 = None
+	else:
+		pao2 = float(pao2_cap)
+
+	fio2_cap = request.POST.get('fio2')
+	if fio2_cap == '' or fio2_cap == None:
+		fio2 = None
+	else:
+		fio2 = float(fio2_cap)
+
+	paco2_cap = request.POST.get('paco2')
+	if paco2_cap == '' or paco2_cap == None:
+		paco2 = None
+	else:
+		paco2 = float(paco2_cap)
 	
 	fc_cap = request.POST.get('fc')
 	if fc_cap != '':
@@ -284,10 +313,11 @@ def regulacao_set(request, id):
 		fc = None
 
 	temperatura_axilar_cap = request.POST.get('temp_auxiliar')
-	if temperatura_axilar_cap != '':
-		temperatura_axilar = float(temperatura_axilar_cap)
-	else:
+	if temperatura_axilar_cap == '' or temperatura_axilar_cap == None :
 		temperatura_axilar = None
+	else:
+		temperatura_axilar = float(temperatura_axilar_cap)
+		
 
 	droga_vasoativa = request.POST.getlist('droga_vasoativa')
 	
@@ -335,16 +365,18 @@ def regulacao_set(request, id):
 	dose_heparina = request.POST.get('dose_heparina')
 	
 	pps_cap = request.POST.get('pps_paciente')
-	if pps_cap != '':
-		pps = float(pps_cap)
-	else:
+	if pps_cap == '' or pps_cap == None:
 		pps = None
+	else:
+		pps = float(pps_cap)
+		
 
 	escala_pontos_glasgow_cap = request.POST.get('escala_glasgow')
-	if escala_pontos_glasgow_cap != '':
-		escala_pontos_glasgow = int(escala_pontos_glasgow_cap)
-	else:
+	if escala_pontos_glasgow_cap == '' or escala_pontos_glasgow_cap == None:
 		escala_pontos_glasgow = None
+	else:
+		escala_pontos_glasgow = int(escala_pontos_glasgow_cap)
+		
 
 	bloqueador_neuromuscular = request.POST.getlist('desc_bloqueador_neuromuscular')
 	midazolam_dose = request.POST.get('midazolam_dose')
@@ -393,7 +425,7 @@ def regulacao_set(request, id):
 	if regulacao_paciente == 'Paciente não preenche critérios para Regulação':
 		status_regulacao = 'Paciente não Regulado'
 	else:
-		status_regulacao = request.POST.get('')
+		status_regulacao = request.POST.getlist('status_paciente')
 
 	#status_regulacao = request.POST.get('')
 	codigo_sescovid = request.POST.get('num_protocolo')

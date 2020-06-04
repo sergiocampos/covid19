@@ -32,8 +32,6 @@ class RegistroCovid(models.Model):
 	pa = models.CharField(max_length=100, default='', null=True)
 	conciencia = models.CharField(max_length=100, blank=True, default='', null=True)
 	temperatura = models.FloatField(blank=True, null=True)
-	
-	observacoes = models.TextField(blank=True, default='', null=True)
 
 	sindrome_gripal = ArrayField(models.CharField(max_length=100), blank=True, null=True)
 	tempo_quadro_sintomatico = models.IntegerField(blank=True, null=True)

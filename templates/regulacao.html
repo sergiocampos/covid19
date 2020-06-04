@@ -185,67 +185,139 @@ máxima de 12h de validação para recepção na unidade solicitante.
 
 			<div class="row">
 				<div class="col-sm-1">
+					{% if 'Tosse' in registro.sindrome_gripal %}
 					<div class="form-check-inline" style="width: 120%">
 						<label class="form-check-label">
-						<input type="checkbox" class="" name="s_gripal" value="Tosse" id="orgaos-doados">Tosse
+						<input type="checkbox" class="" name="s_gripal" value="Tosse" id="" checked>Tosse
 					</label>
 					</div>
+					{% else %}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Tosse" id="">Tosse
+					</label>
+					</div>
+					{% endif %}
 				</div>
 				<div class="col-sm-2">
+					{% if 'Coriza Nasal' in registro.sindrome_gripal %}
 					<div class="form-check-inline" style="width: 140%">
 						<label class="form-check-label">
-						<input type="checkbox" class="" name="s_gripal" value="Coriza Nasal" id="orgaos-doados">Coriza Nasal
+						<input type="checkbox" class="" name="s_gripal" value="Coriza Nasal" id="" checked>Coriza Nasal
 					</label>
 					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 140%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Coriza Nasal" id="">Coriza Nasal
+					</label>
+					</div>
+					{%endif%}
 				</div>
 				<div class="col-sm-1">
+					{% if 'Anosmia' in registro.sindrome_gripal %}
 					<div class="form-check-inline" style="width: 130%; margin-left: -20px">
 						<label class="form-check-label">
-						<input type="checkbox" class="" name="s_gripal" value="Anosmia" id="orgaos-doados">Anosmia
+						<input type="checkbox" class="" name="s_gripal" value="Anosmia" id="" checked>Anosmia
 					</label>
 					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 130%; margin-left: -20px">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Anosmia" id="">Anosmia
+					</label>
+					</div>
+					{%endif%}
 				</div>
 				<div class="col-sm-1">
+					{% if 'Febre' in registro.sindrome_gripal %}
 					<div class="form-check-inline" style="width: 120%">
 						<label class="form-check-label">
-						<input type="checkbox" class="" name="s_gripal" value="Febre" id="orgaos-doados">Febre
+						<input type="checkbox" class="" name="s_gripal" value="Febre" id="" checked>Febre
 					</label>
 					</div>
-				</div>
-				<div class="col-sm-1">
+					{%else%}
 					<div class="form-check-inline" style="width: 120%">
 						<label class="form-check-label">
-						<input type="checkbox" class="" name="s_gripal" value="Mialgia" id="orgaos-doados">Mialgia
+						<input type="checkbox" class="" name="s_gripal" value="Febre" id="">Febre
 					</label>
 					</div>
+					{%endif%}
 				</div>
 				<div class="col-sm-1">
+					{% if 'Mialgia' in registro.sindrome_gripal %}
 					<div class="form-check-inline" style="width: 120%">
 						<label class="form-check-label">
-						<input type="checkbox" class="" name="s_gripal" value="Fadiga" id="orgaos-doados">Fadiga
+						<input type="checkbox" class="" name="s_gripal" value="Mialgia" id="" checked>Mialgia
 					</label>
 					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Mialgia" id="">Mialgia
+					</label>
+					</div>
+					{%endif%}
 				</div>
 				<div class="col-sm-1">
+					{% if 'Fadiga' in registro.sindrome_gripal %}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Fadiga" id="" checked>Fadiga
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Fadiga" id="">Fadiga
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				<div class="col-sm-1">
+					{% if 'Dispnéia' in registro.sindrome_gripal %}
 					<div class="form-check-inline" style="width: 140%">
 						<label class="form-check-label">
-						<input type="checkbox" class="" name="s_gripal" value="Dispnéia" id="orgaos-doados">Dispnéia
+						<input type="checkbox" class="" name="s_gripal" value="Dispnéia" id="" checked>Dispnéia
 					</label>
 					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 140%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Dispnéia" id="">Dispnéia
+					</label>
+					</div>
+					{%endif%}
 				</div>
 				<div class="col-sm-1">
+					{% if 'Astenia' in registro.sindrome_gripal %}
 					<div class="form-check-inline" style="width: 120%">
 						<label class="form-check-label">
-						<input type="checkbox" class="" name="s_gripal" value="Astenia" id="orgaos-doados">Astenia
+						<input type="checkbox" class="" name="s_gripal" value="Astenia" id="" checked>Astenia
 					</label>
 					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Astenia" id="">Astenia
+					</label>
+					</div>
+					{%endif%}
 				</div>
 				<div class="col-sm-2">
+					{% if 'Cefaléia' in registro.sindrome_gripal %}
+					<div class="form-check-inline">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Cefaléia" id="orgaos-doados" checked>Cefaléia
+					</label>
+					</div>
+					{%else%}
 					<div class="form-check-inline">
 						<label class="form-check-label">
 						<input type="checkbox" class="" name="s_gripal" value="Cefaléia" id="orgaos-doados">Cefaléia
 					</label>
 					</div>
+					{%endif%}
 				</div>
 				
 				
@@ -492,13 +564,13 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-3">
 					SPO2:
 				    <div class="form-check-inline">
-				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="spo2" style="width: 60px" value="">
+				        <input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="spo2" style="width: 60px" value="{{registro.saturacao_paciente}}">
 				    </div><label for="" style="margin-left: -10px">%</label>
 				</div>
 				<div class="col-sm-3">
 					FR:
 				    <div class="form-check-inline">
-				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="fr_irpm" style="width: 100px" value="">
+				        <input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="fr_irpm" style="width: 100px" value="{{registro.frequencia_respiratoria}}">
 				    </div><label for="" style="margin-left: -10px">IRPM</label>
 				</div>
 			</div>
@@ -657,7 +729,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-3">
 					FC:
 				    <div class="form-check-inline" style="width:">
-				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="fc" style="width: 80px" value="">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="fc" style="width: 80px" value="{{registro.frequencia_cardiaca}}">
 				    </div><label for="" style="">bpm</label>
 				</div>
 				<div class="col-sm-4">
@@ -1756,7 +1828,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					<div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="" id="">
 				        <input type="checkbox" class="form-check-input" id="check_obito_id" name="status_paciente" value="Obito" onclick="activeStatusObito()">Óbito
-				        <input type="date" required disabled id="data_obito_id">
+				        <input type="date" required disabled id="data_obito_id" name="data_obito">
 				      </label>
 				    </div>
 				</div>
@@ -1850,7 +1922,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-12">
 					<div class="form-group">
 				      <label for="">Observações:</label>
-				      <textarea class="form-control" rows="5" id="" name="observacoes_medicas" placeholder="Caso necessário, faça observação(es) neste campo"></textarea>
+				      <textarea class="form-control" rows="5" id="" name="observacoes_medicas" placeholder="Caso necessário, faça observação(es) neste campo">{{registro.observacao}}</textarea>
 				    </div>
 				</div>
 			</div>	

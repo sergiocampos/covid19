@@ -110,7 +110,7 @@ def registro_covid_set(request):
 	else:
 		temperatura = None
 
-	observacoes = request.POST.get('observacao_paciente')
+	observacao = request.POST.get('observacao_paciente')
 
 
 	#implementar o algoritmo: codigo_registro = None
@@ -143,7 +143,7 @@ def registro_covid_set(request):
 		pa = pa,
 		conciencia = conciencia,
 		temperatura = temperatura,
-		observacoes = observacoes
+		observacao = observacao
 
 		)
 
@@ -161,15 +161,9 @@ def regulacao(request, id):
 	registro = RegistroCovid.objects.get(id=id)
 	pa = registro.pa
 
-	if len(pa)>4:
-		pa_1 = pa[0] + pa[1]
-		pa_2 = pa[3] + pa[4]
-	elif len(pa) == 4:
-		pa_1 = pa[0] + pa[1]
-		pa_2 = pa[3]
-	else:
-		pa_1 = ''
-		pa_2 = ''
+	p = pa.split("x")
+	pa_1 = p[0]
+	pa_2 = p[1]
 
 	return render(request, 'regulacao.html', {'registro' : registro, 'pa_1':pa_1, 'pa_2':pa_2})
 
@@ -188,22 +182,22 @@ def regulacao_set(request, id):
 	unidade_origem = request.POST.get('unidade_origem')
 	nome_paciente = request.POST.get('nome_paciente')
 	idade_paciente = request.POST.get('idade_paciente')
-	recurso_que_precisa = request.POST.get('')
-	estado_origem = request.POST.get('')
-	cidade_origem = request.POST.get('')
-	telefone_retorno = request.POST.get('')
-	frequencia_respiratoria = request.POST.get('')
-	saturacao_paciente = request.POST.get('')
-	ar_o2 = request.POST.get('')
-	frequencia_cardiaca = request.POST.get('')
+	recurso_que_precisa = registro.recurso_que_precisa
+	estado_origem = registro.estado_origem
+	cidade_origem = registro.cidade_origem
+	telefone_retorno = registro.telefone_retorno
+	frequencia_respiratoria = registro.frequencia_respiratoria
+	saturacao_paciente = registro.saturacao_paciente
+	ar_o2 = registro.ar_o2
+	frequencia_cardiaca = registro.frequencia_cardiaca
 	
 	pa_part1 = request.POST.get('pa_part1')
 	pa_part2 = request.POST.get('pa_part2')
 	pa = pa_part1 + "x" + pa_part2
 	
-	conciencia = request.POST.get('')
-	temperatura = request.POST.get('')
-	observacoes = request.POST.get('')
+	conciencia = registro.conciencia
+	temperatura = registro.temperatura
+	
 	sindrome_gripal = request.POST.getlist('s_gripal')
 	tempo_quadro_sintomatico = request.POST.get('tempo_inicio_sintomas')
 	exposicao_pessoa_infectada = request.POST.get('exposicao_epidemiologica_sim')
@@ -218,16 +212,18 @@ def regulacao_set(request, id):
 	medicamento_outros = request.POST.get('descricao_outros_medicamento')
 	
 	spo2_cap = request.POST.get('spo2')
-	if spo2_cap != '':
-		spo2 = int(spo2_cap)
-	else:
+	if spo2_cap == '' or spo2_cap == None:
 		spo2 = None
+	else:
+		spo2 = int(spo2_cap)
+		
 
 	fr_irpm_cap = request.POST.get('fr_irpm')
-	if fr_irpm_cap != '':
-		fr_irpm = int(fr_irpm_cap)
-	else:
+	if fr_irpm_cap == '' or fr_irpm_cap == None:
 		fr_irpm = None
+	else:
+		fr_irpm = int(fr_irpm_cap)
+		
 
 	ventilacao_tipo = request.POST.get('ventilacao')
 	o2_suporte = request.POST.getlist('o2_suporte')
@@ -307,10 +303,11 @@ def regulacao_set(request, id):
 		paco2 = float(paco2_cap)
 	
 	fc_cap = request.POST.get('fc')
-	if fc_cap != '':
-		fc = int(fc_cap)
-	else:
+	if fc_cap == '' or fc_cap == None:
 		fc = None
+	else:
+		fc = int(fc_cap)
+		
 
 	temperatura_axilar_cap = request.POST.get('temp_auxiliar')
 	if temperatura_axilar_cap == '' or temperatura_axilar_cap == None :
@@ -416,10 +413,11 @@ def regulacao_set(request, id):
 	leito = request.POST.get('perfil')
 	
 	prioridade_cap = request.POST.get('prioridade')
-	if prioridade_cap != '':
-		prioridade = int(prioridade_cap)
-	else:
+	if prioridade_cap == '' or prioridade_cap == None:
 		prioridade = None
+	else:
+		prioridade = int(prioridade_cap)
+		
 
 	regulacao_paciente = request.POST.get('paciente_preenche_criterios')
 	if regulacao_paciente == 'Paciente não preenche critérios para Regulação':
@@ -433,6 +431,7 @@ def regulacao_set(request, id):
 	observacao = request.POST.get('observacoes_medicas')
 	pareceristas = request.POST.getlist('pareceristas')
 	data_regulacao = request.POST.get('data_regulacao')
+	data_obito = request.POST.get('data_obito')
 
 	
 	registro.responsavel_pelo_preenchimento = responsavel_pelo_preenchimento
@@ -455,7 +454,6 @@ def regulacao_set(request, id):
 	registro.pa = pa
 	registro.conciencia = conciencia
 	registro.temperatura = temperatura
-	registro.observacoes = observacoes
 	registro.sindrome_gripal = sindrome_gripal
 	registro.tempo_quadro_sintomatico = tempo_quadro_sintomatico
 	registro.exposicao_pessoa_infectada = exposicao_pessoa_infectada
@@ -556,6 +554,7 @@ def regulacao_set(request, id):
 	registro.observacao = observacao
 	registro.pareceristas = pareceristas
 	registro.data_regulacao = data_regulacao
+	registro.data_obito = data_obito
 
 	registro.save()
 
@@ -566,7 +565,14 @@ def regulacao_set(request, id):
 def regulacao_detail(request, id):
 	registro = RegistroCovid.objects.get(id=id)
 
-	return render(request, 'regulacao_detail.html', {'registro':registro})
+	pa = registro.pa
+	p = pa.split("x")
+	p1 = p[0]
+	p2 = p[1]
+
+	
+
+	return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 'p2':p2})
 
 @login_required
 def regulacao_edit(request, id):

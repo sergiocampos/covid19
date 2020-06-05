@@ -630,7 +630,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				    {%endif%}
 					
 					<div class="form-check-inline" style="width: 200px">
-						<input type="text" class="form-control form-control-sm" id="idade_gestacional" placeholder="" name="idade_gestacao" value="" disabled>
+						<input type="text" class="form-control form-control-sm" id="idade_gestacional" placeholder="" name="idade_gestacao" value="{{registro.idade_gestacional}}" disabled>
 				    </div>
 
 
@@ -1796,7 +1796,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-6">
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="uti" value="zero ponto">Insuficiência respiratória aguda com necessidade de ventilação mecânica.
+				        <input type="radio" class="form-check-input" id="" name="uti" value="Insuficiência respiratória aguda com necessidade de ventilação mecânica">Insuficiência respiratória aguda com necessidade de ventilação mecânica.
 				      </label>
 				    </div>
 				</div>
@@ -1807,7 +1807,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-6">
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="uti" value="amarelo">Sepse/Choque séptico e infecção pulmonar pelo XOVID-19.
+				        <input type="radio" class="form-check-input" id="" name="uti" value="Sepse/Choque séptico e infecção pulmonar pelo COVID-19">Sepse/Choque séptico e infecção pulmonar pelo COVID-19.
 				      </label>
 				    </div>
 				</div>
@@ -1821,7 +1821,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-8">
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="uti" value="laranja">Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
+				        <input type="radio" class="form-check-input" id="" name="uti" value="Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica">Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
 				      </label>
 				    </div>
 				</div>
@@ -1834,7 +1834,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-6">
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="uti" value="news modificado"> NEWS modificado ≥ 7 pontos
+				        <input type="radio" class="form-check-input" id="" name="uti" value="NEWS modificado ≥ 7 pontos"> NEWS modificado ≥ 7 pontos
 				      </label>
 				    </div>
 				</div>
@@ -1848,7 +1848,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-6">
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="uti" value="preto"> NEWS-FAST ≥ 3 pontos
+				        <input type="radio" class="form-check-input" id="" name="uti" value="NEWS-FAST ≥ 3 pontos"> NEWS-FAST ≥ 3 pontos
 				      </label>
 				    </div>
 				</div>
@@ -1862,7 +1862,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-6">
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar"> Disfunção orgânica, além do pulmonar
+				        <input type="radio" class="form-check-input" id="" name="uti" value="Disfunção orgânica, além do pulmonar"> Disfunção orgânica, além do pulmonar
 				      </label>
 				    </div>
 				</div>
@@ -1945,10 +1945,10 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				      </label>
 				    </div>
 				</div>
-				<div class="col-sm-3" style="margin-top: 30px; background-color: ">
-					<div class="form-check-inline" style="font-size: 83%; width: 100px">
+				<div class="col-sm-3" style="margin-top: 30px; background-color: pink">
+					<div class="form-check-inline" style="font-size: 83%; width: 100px; background-color: red">
     					SESCOVID
-    					<input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="">
+    					<input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="{{registro.codigo_sescovid}}">
 				    </div>
 				</div>
 			</div>
@@ -2058,7 +2058,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-12">
 					<div class="form-group">
 				      <label for="">Justificativa:</label>
-				      <textarea class="form-control" rows="5" id="" name="justificativa_nao_regulacao"></textarea>
+				      <textarea class="form-control" rows="5" id="" name="justificativa_nao_regulacao">{{registro.justificativa}}</textarea>
 				    </div>
 				</div>
 			</div>	
@@ -2078,15 +2078,15 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-6">
 					Pareceristas - CRM:
 					<select multiple class="form-control" id="" name="pareceristas">
-						<option value="Alexandre Yukio Nishimi crm 10730">Alexandre Yukio Nishimi CRM 10730</option>
-						<option value="Ana Luísa Castelo Branco Gomes 12852">Ana Luísa Castelo Branco Gomes CRM 12852</option>
-						<option value="Andre Cristiano da costa lima 9714">Andre Cristiano da costa lima CRM 9714</option>
+						<option value="Alexandre Yukio Nishimi CRM 10730">Alexandre Yukio Nishimi CRM 10730</option>
+						<option value="Ana Luísa Castelo Branco Gomes CRM 12852">Ana Luísa Castelo Branco Gomes CRM 12852</option>
+						<option value="Andre Cristiano da costa lima CRM 9714">Andre Cristiano da costa lima CRM 9714</option>
 						<option value="Andressa Cesar Vinagre CRM 8555">Andressa Cesar Vinagre CRM 8555</option>
 						<option value="Caroline Viana Coêlho da Franca Leppänen CRM 10476">Caroline Viana Coêlho da Franca Leppänen CRM 10476</option>				
 						
-						<option value="Filipe Almeida Botter 10583">Filipe Almeida Botter CRM 10583</option>
+						<option value="Filipe Almeida Botter CRM 10583">Filipe Almeida Botter CRM 10583</option>
 						
-						<option value="Gabriel Fernandes de Sousa 12696">Gabriel Fernandes de Sousa CRM 12696</option>
+						<option value="Gabriel Fernandes de Sousa CRM 12696">Gabriel Fernandes de Sousa CRM 12696</option>
 						<option value="Homero Max de Assis e Sá CRM-PB 11756">Homero Max de Assis e Sá CRM-PB 11756</option>
 						<option value="Indalécio Pacelli Fernandes CRM 6827">Indalécio Pacelli Fernandes CRM 6827</option>
 						<option value="Larissa de Oliveira Fernandes Borba CRM PB 12735">Larissa de Oliveira Fernandes Borba CRM PB 12735</option>
@@ -2100,21 +2100,21 @@ máxima de 12h de validação para recepção na unidade solicitante.
 						<option value="Mariana Wanderley G Ribeiro CRM 10524 PB">Mariana Wanderley G Ribeiro CRM 10524 PB</option>
 						<option value="Mariza Freire de Souza Soares  CRM-PB 12.749">Mariza Freire de Souza Soares  CRM-PB 12.749</option>
 						<option value="Moacyr Zucarelle Junior CRM-PB 12.279">Moacyr Zucarelle Junior CRM-PB 12.279</option>
-						<option value="Patrícia Kelle Medeiros de Lacerda 12493">Patrícia Kelle Medeiros de Lacerda CRM 12493</option>
+						<option value="Patrícia Kelle Medeiros de Lacerda CRM 12493">Patrícia Kelle Medeiros de Lacerda CRM 12493</option>
 						<option value="Raíssa Barros Soares de Oliveira CRM 11368">Raíssa Barros Soares de Oliveira CRM 11368</option>
 						<option value="Raphael de Azevedo Leitão CRM 12920 PB">Raphael de Azevedo Leitão CRM 12920 PB</option>
 						<option value="Ramon bezerra alves sousa 9432">Ramon bezerra alves sousa CRM 9432</option>
 						<option value="Romero Ruan Cartaxo de Queiroga CRM-PB 7420">Romero Ruan Cartaxo de Queiroga CRM 7420</option>
 
 						<option value="Ruan César Teixeira de Carvalho CRM-PB 13267">Ruan César Teixeira de Carvalho CRM 13267</option>
-						<option value="Samara Alves Miranda de Sá  11293">Samara Alves Miranda de Sá CRM  11293</option>
-						<option value="Samia Laiz Alves da Fonseca 12776">Samia Laiz Alves da Fonseca CRM 12776</option>
+						<option value="Samara Alves Miranda de Sá CRM 11293">Samara Alves Miranda de Sá CRM  11293</option>
+						<option value="Samia Laiz Alves da Fonseca CRM 12776">Samia Laiz Alves da Fonseca CRM 12776</option>
 						<option value="Sibelli Fabricia Oliveira dos Santos CRM 12093">Sibelli Fabricia Oliveira dos Santos CRM 12093</option>
-						<option value="Thales Carneiro Farias 8799">Thales Carneiro Farias CRM 8799</option>
-						<option value="Tammer Gomes de Morais 8104">Tammer Gomes de Morais CRM 8104</option>
+						<option value="Thales Carneiro Farias CRM 8799">Thales Carneiro Farias CRM 8799</option>
+						<option value="Tammer Gomes de Morais CRM 8104">Tammer Gomes de Morais CRM 8104</option>
 						<option value="Teófilo Vanomark Chaves Bezerra CRM 9690">Teófilo Vanomark Chaves Bezerra CRM 9690</option>
 						<option value="Tiago de Assis Clemente de Araújo / CRM-PB 12996">Tiago de Assis Clemente de Araújo / CRM-PB 12996</option>
-						<option value="vanessa Serrano bezerra CRM12762">vanessa Serrano bezerra CRM 12762</option>
+						<option value="vanessa Serrano bezerra CRM 12762">vanessa Serrano bezerra CRM 12762</option>
 						
 						
       				</select>
@@ -2124,6 +2124,20 @@ máxima de 12h de validação para recepção na unidade solicitante.
 						<div class="form-check-inline">
 							<input type="date" class="form-control form-control-sm" id="" placeholder="" name="data_regulacao" size="10" value="" required>
 					    </div>
+					    
+					    {% if registro.pareceristas %}
+					    <div class="form-check-inline" style="border: 2px solid #b3cccc; padding: 10px; border-radius: 10px; margin-top: 20px">
+					    	
+							<ul>
+							{% for r in registro.pareceristas %}
+								<li>
+									{{r}}
+								</li>
+								
+							{%endfor%}
+							</ul>
+					    </div>
+					    {%endif%}
 				</div>
 
 			</div><br>

@@ -100,7 +100,10 @@ máxima de 12h de validação para recepção na unidade solicitante.
 		      <a class="nav-link" href="/">Principal</a>
 		    </li>
 		    <li class="nav-item">
-		      <a class="nav-link" href="/registro_covid/">Registro</a>
+		      <a class="nav-link" href="/registro_covid/">Registrar Caso</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="/regulacao/{{registro.id}}/">Regular Caso</a>
 		    </li>
 		    <li class="nav-item">
 		      <a class="nav-link active" href="/regulacao_detail/{{registro.id}}/">Detalhes da Regulação</a>
@@ -1711,42 +1714,76 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					<b style="font-size:">Em uso de Heparina?</b>
 				</div>
 				<div class="col-sm-2" style="">
+					{% if registro.em_uso_heparina == 'Sim' %}
 					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="" style="font-size: ; margin-left:">
+				        <input type="radio" class="form-check-input" id="uso_heparina_sim" name="em_uso_heparina" onclick="activeDateHeparina()" value="Sim" checked>Sim - Data de Início:
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="" style="font-size: ; margin-left:">
 				        <input type="radio" class="form-check-input" id="uso_heparina_sim" name="em_uso_heparina" onclick="activeDateHeparina()" value="Sim">Sim - Data de Início:
 				      </label>
 				    </div>
+				    {%endif%}
 				    
 				</div>
 				<div class="col-sm-2" style="">
+					{% if registro.data_inicio_heparina != None %}
 					<div class="form-check-inline" style="margin-left:">
+						<input type="text" class="form-control form-control-sm" id="date_inicio_heparina" name="data_inicio_heparina" value="{{registro.data_inicio_heparina}}" disabled>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="margin-left:">
 						<input type="date" class="form-control form-control-sm" id="date_inicio_heparina" name="data_inicio_heparina" value="" disabled>
 				    </div>
+				    {%endif%}
 				</div>
 
 				<div class="col-sm-3" style="">
 					<b>Tipo de Heparina</b>
+					{% if registro.tipo_heparina != '' %}
 					<div class="form-check-inline" style="width: 100px">
+						<input type="text" class="form-control form-control-sm" id="heparina_tipo" placeholder="" name="tipo_heparina" value="{{registro.tipo_heparina}}" style="" disabled>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 100px">
 						<input type="text" class="form-control form-control-sm" id="heparina_tipo" placeholder="" name="tipo_heparina" value="" style="" disabled>
 				    </div>
+				    {%endif%}
 
 				</div>
 				<div class="col-sm-2" style="">
 					<b style="font-size: 90%">Dose:</b>
+					{% if registro.dose_heparina != '' %}
 					<div class="form-check-inline" style="width: 60%;">
+						<input type="text" class="form-control form-control-sm" id="heparina_dose" placeholder="" name="dose_heparina" value="{{registro.dose_heparina}}" disabled>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 60%;">
 						<input type="text" class="form-control form-control-sm" id="heparina_dose" placeholder="" name="dose_heparina" value="" disabled>
 				    </div>
+				    {%endif%}
 				</div>
 				
 			</div>
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-9">
+					{% if registro.em_uso_heparina == 'Não' %}
 					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_heparina" value="Não" onclick="desactiveDateHeparina()" checked>Não
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="em_uso_heparina" value="Não" onclick="desactiveDateHeparina()">Não
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 			</div>
 			<hr>
@@ -2768,8 +2805,8 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				    </div>
 				    {%endif%}
 				</div>
-				<div class="col-sm-3" style="margin-top: 30px; background-color: ">
-					<div class="form-check-inline" style="font-size: 83%; width: 100px">
+				<div class="col-sm-3" style="margin-top: 30px">
+					<div class="form-check-inline" style="font-size: 83%; width: 150px">
     					SESCOVID
     					<input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="{{registro.codigo_sescovid}}">
 				    </div>
@@ -2789,28 +2826,56 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-5"></div>
 
 				<div class="col-sm-4">
+					{% if 'Paciente em Lista de Espera' in registro.status_regulacao %}
 					<div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="" id="lb_vaga_conf_internacao">
-				        <input type="radio" class="form-check-input" id="incluir_em_lista_id" name="paciente_preenche_criterios" value="Paciente em Lista de Espera" onclick="">Vaga confirmada com Internação Imediata
+				        <input type="checkbox" class="form-check-input" id="incluir_em_lista_id" name="paciente_preenche_criterios" value="Vaga confirmada com Internação Imediata" onclick="" checked>Vaga confirmada com Internação Imediata
 				      </label>
 				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="font-size: 83%">
+				      <label class="form-check-label" for="" id="lb_vaga_conf_internacao">
+				        <input type="checkbox" class="form-check-input" id="incluir_em_lista_id" name="paciente_preenche_criterios" value="Vaga confirmada com Internação Imediata" onclick="">Vaga confirmada com Internação Imediata
+				      </label>
+				    </div>
+				    {%endif%}
 
 				</div>
 				<div class="col-sm-3"></div>
 				<div class="col-sm-5"></div>
 				<div class="col-sm-4">
-					
-
-				    
+					{% if 'Obito' in registro.status_regulacao %}
+					<div class="form-check-inline" style="font-size: 83%">
+				      <label class="form-check-label" for="" id="">
+				        <input type="checkbox" class="form-check-input" id="check_obito_id" name="status_paciente" value="Obito" onclick="" checked>Óbito
+				        <input type="date" required disabled id="data_obito_id" name="data_obito" value="{{registro.data_obito}}">
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="font-size: 83%">
+				      <label class="form-check-label" for="" id="">
+				        <input type="checkbox" class="form-check-input" id="check_obito_id" name="status_paciente" value="Obito" onclick="activeStatusObito()">Óbito
+				        <input type="date" required disabled id="data_obito_id" name="data_obito">
+				      </label>
+				    </div>
+				    {%endif%}				    
 				</div>
 				<div class="col-sm-3"></div>
 				<div class="col-sm-5"></div>
 				<div class="col-sm-4">
+					{% if 'Aguardando em Lista de Espera' in registro.status_regulacao %}
 					<div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="" id="lb_aguard_em_lista">
-				        <input type="radio" class="form-check-input" id="incluir_em_lista_id" name="paciente_preenche_criterios" value="Paciente em Lista de Espera" onclick="">AGUARDANDO EM LISTA DE ESPERA
+				        <input type="checkbox" class="form-check-input" id="incluir_em_lista_id" name="paciente_preenche_criterios" value="" onclick="" checked>AGUARDANDO EM LISTA DE ESPERA
 				      </label>
 				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="font-size: 83%">
+				      <label class="form-check-label" for="" id="lb_aguard_em_lista">
+				        <input type="checkbox" class="form-check-input" id="incluir_em_lista_id" name="paciente_preenche_criterios" value="Aguardando em Lista de Espera" onclick="">AGUARDANDO EM LISTA DE ESPERA
+				      </label>
+				    </div>
+				    {%endif%}
 
 				</div>
 				<div class="col-sm-5"></div>

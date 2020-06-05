@@ -88,20 +88,20 @@ class RegistroCovid(models.Model):
 	pesquisa_teste_sars_cov_2 = models.CharField(max_length=100, blank=True, default='', null=True)
 
 	rt_pcr_sars_cov_2 = models.CharField(max_length=100, blank=True, default='', null=True)
-	data_coleta = models.DateField(blank=True, null=True)
+	data_coleta = models.DateField(blank=True, null=True, default=None)
 
 	em_uso_corticosteroide = models.CharField(max_length=100, blank=True, default='', null=True)
 	dose_corticosteroide = models.CharField(max_length=100, blank=True, default='', null=True)
-	data_inicio_corticosteroide = models.DateField(blank=True, null=True)
+	data_inicio_corticosteroide = models.DateField(blank=True, null=True, default=None)
 
 	em_uso_hidroxicloroquina = models.CharField(max_length=100, blank=True, default='', null=True)
-	data_inicio_hidroxicloroquina = models.DateField(blank=True, null=True)
+	data_inicio_hidroxicloroquina = models.DateField(blank=True, null=True, default=None)
 
 	em_uso_oseltamivir = models.CharField(max_length=100, blank=True, default='', null=True)
-	data_inicio_oseltamivir = models.DateField(blank=True, null=True)
+	data_inicio_oseltamivir = models.DateField(blank=True, null=True, default=None)
 
 	em_uso_heparina = models.CharField(max_length=100, blank=True, default='', null=True)
-	data_inicio_heparina = models.DateField(blank=True, null=True)
+	data_inicio_heparina = models.DateField(blank=True, null=True, default=None)
 	tipo_heparina = models.CharField(max_length=100, blank=True, default='', null=True)
 	dose_heparina = models.CharField(max_length=100, blank=True, default='', null=True)
 
@@ -121,7 +121,7 @@ class RegistroCovid(models.Model):
 
 	rass = models.CharField(max_length=100, blank=True, default='', null=True)
 
-	data_exames_laboratorio = models.DateField(blank=True, null=True)
+	data_exames_laboratorio = models.DateField(blank=True, null=True, default=None)
 	leucocito = models.CharField(max_length=100, blank=True, default='', null=True)
 	linfocito = models.CharField(max_length=100, blank=True, default='', null=True)
 	hb = models.CharField(max_length=100, blank=True, default='', null=True)
@@ -155,7 +155,7 @@ class RegistroCovid(models.Model):
 	regulacao_paciente = models.CharField(max_length=100, blank=True, default='', null=True)
 	status_regulacao = ArrayField(models.CharField(max_length=100), blank=True, null=True)
 	
-	data_obito = models.DateField(blank=True, null=True)
+	data_obito = models.DateField(blank=True, null=True, default=None)
 
 	codigo_sescovid = models.CharField(max_length=100, blank=True, default='', null=True)
 
@@ -164,7 +164,7 @@ class RegistroCovid(models.Model):
 	observacao = models.TextField(blank=True, default='', null=True)
 
 	pareceristas  = ArrayField(models.CharField(max_length=100), blank=True, null=True)
-	data_regulacao = models.DateField(blank=True, null=True)
+	data_regulacao = models.DateField(blank=True, null=True, default=None)
 
 
 

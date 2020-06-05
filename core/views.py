@@ -181,7 +181,13 @@ def regulacao_set(request, id):
 	estabelecimento_outro = registro.estabelecimento_outro
 	unidade_origem = request.POST.get('unidade_origem')
 	nome_paciente = request.POST.get('nome_paciente')
-	idade_paciente = request.POST.get('idade_paciente')
+	
+	idade_paciente_cap = request.POST.get('idade_paciente')
+	if idade_paciente_cap == '' or idade_paciente_cap == None:
+		idade_paciente = None
+	else:
+		idade_paciente = int(float(idade_paciente_cap))
+
 	recurso_que_precisa = registro.recurso_que_precisa
 	estado_origem = registro.estado_origem
 	cidade_origem = registro.cidade_origem
@@ -199,7 +205,13 @@ def regulacao_set(request, id):
 	temperatura = registro.temperatura
 	
 	sindrome_gripal = request.POST.getlist('s_gripal')
-	tempo_quadro_sintomatico = request.POST.get('tempo_inicio_sintomas')
+	
+	tempo_quadro_sintomatico_cap = request.POST.get('tempo_inicio_sintomas')
+	if tempo_quadro_sintomatico_cap == '' or tempo_quadro_sintomatico_cap == None:
+		tempo_quadro_sintomatico = None
+	else:
+		tempo_quadro_sintomatico = int(float(tempo_quadro_sintomatico_cap))
+
 	exposicao_pessoa_infectada = request.POST.get('exposicao_epidemiologica_sim')
 	parentesco = request.POST.get('grau_parentesco')
 	comorbidades = request.POST.getlist('comorbidades')
@@ -215,14 +227,14 @@ def regulacao_set(request, id):
 	if spo2_cap == '' or spo2_cap == None:
 		spo2 = None
 	else:
-		spo2 = int(spo2_cap)
+		spo2 = int(float(spo2_cap))
 		
 
 	fr_irpm_cap = request.POST.get('fr_irpm')
 	if fr_irpm_cap == '' or fr_irpm_cap == None:
 		fr_irpm = None
 	else:
-		fr_irpm = int(fr_irpm_cap)
+		fr_irpm = int(float(fr_irpm_cap))
 		
 
 	ventilacao_tipo = request.POST.get('ventilacao')
@@ -306,7 +318,7 @@ def regulacao_set(request, id):
 	if fc_cap == '' or fc_cap == None:
 		fc = None
 	else:
-		fc = int(fc_cap)
+		fc = int(float(fc_cap))
 		
 
 	temperatura_axilar_cap = request.POST.get('temp_auxiliar')
@@ -372,7 +384,7 @@ def regulacao_set(request, id):
 	if escala_pontos_glasgow_cap == '' or escala_pontos_glasgow_cap == None:
 		escala_pontos_glasgow = None
 	else:
-		escala_pontos_glasgow = int(escala_pontos_glasgow_cap)
+		escala_pontos_glasgow = int(float(escala_pontos_glasgow_cap))
 		
 
 	bloqueador_neuromuscular = request.POST.getlist('desc_bloqueador_neuromuscular')
@@ -416,7 +428,7 @@ def regulacao_set(request, id):
 	if prioridade_cap == '' or prioridade_cap == None:
 		prioridade = None
 	else:
-		prioridade = int(prioridade_cap)
+		prioridade = int(float(prioridade_cap))
 		
 
 	regulacao_paciente = request.POST.get('paciente_preenche_criterios')

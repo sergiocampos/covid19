@@ -365,11 +365,29 @@ def regulacao_set(request, id):
 	dose_corticosteroide = request.POST.get('dose_corticosteroide')
 	data_inicio_corticosteroide = request.POST.get('data_inicio_corticosteroide')
 	em_uso_hidroxicloroquina = request.POST.get('em_uso_hidrocloroquina')
-	data_inicio_hidroxicloroquina = request.POST.get('data_inicio_hidroxicloroquina')
+	
+	data_inicio_hidroxicloroquina_cap = request.POST.get('data_inicio_hidroxicloroquina')
+	if data_inicio_hidroxicloroquina_cap == '' or data_inicio_hidroxicloroquina_cap == None:
+		data_inicio_hidroxicloroquina = None
+	else:
+		data_inicio_hidroxicloroquina = datetime.strptime(data_inicio_hidroxicloroquina_cap, '%d/%m/%Y').date()
+		 
 	em_uso_oseltamivir = request.POST.get('em_uso_oseltamivir')
-	data_inicio_oseltamivir = request.POST.get('data_inicio_oseltamivir')
+	
+	data_inicio_oseltamivir_cap = request.POST.get('data_inicio_oseltamivir')
+	if data_inicio_oseltamivir_cap == '' or data_inicio_oseltamivir_cap == None:
+		data_inicio_oseltamivir = None
+	else:
+		data_inicio_oseltamivir = datetime.strptime(data_inicio_oseltamivir_cap, '%d/%m/%Y').date()
+
 	em_uso_heparina = request.POST.get('em_uso_heparina')
-	data_inicio_heparina = request.POST.get('data_inicio_heparina')
+
+	data_inicio_heparina_cap = request.POST.get('data_inicio_heparina')
+	if data_inicio_heparina_cap == '' or data_inicio_heparina_cap == None:
+		data_inicio_heparina = None
+	else:
+		data_inicio_heparina = datetime.strptime(data_inicio_heparina_cap, '%d/%m/%Y').date()
+
 	tipo_heparina = request.POST.get('tipo_heparina')
 	dose_heparina = request.POST.get('dose_heparina')
 	

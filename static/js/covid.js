@@ -108,6 +108,8 @@ function desactiveDoseCorticosteroide(){
 	$("#data_inicio_corticosteroide_id").val("");
 	$("#corticosteroide_id").prop("disabled", true);
 	$("#data_inicio_corticosteroide_id").prop("disabled", true);
+
+	$("#lb_data_inicio_corticosteroide_id").hide();
 }
 
 function activeDataInicioHC(){

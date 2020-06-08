@@ -35,14 +35,14 @@ class RegistroCovid(models.Model):
 
 	sindrome_gripal = ArrayField(models.CharField(max_length=100), blank=True, null=True)
 	tempo_quadro_sintomatico = models.IntegerField(blank=True, null=True)
-	exposicao_pessoa_infectada = models.CharField(max_length=100, blank=True, null=True)
-	parentesco = models.CharField(max_length=100, blank=True, null=True)
+	exposicao_pessoa_infectada = models.CharField(max_length=100, default='', blank=True, null=True)
+	parentesco = models.CharField(max_length=100, blank=True, default='', null=True)
 	comorbidades = ArrayField(models.CharField(max_length=100), blank=True, null=True)
-	outras_comorbidades = models.CharField(max_length=100, blank=True, null=True)
-	outras_cardiopatias = models.CharField(max_length=100, blank=True, null=True)
-	idade_gestacional = models.CharField(max_length=100, blank=True, null=True)
-	comorbidades_obstetricas = models.CharField(max_length=100, blank=True, null=True)
-	gesta_para = models.CharField(max_length=100, blank=True, null=True)
+	outras_comorbidades = models.CharField(max_length=100, blank=True, default='', null=True)
+	outras_cardiopatias = models.CharField(max_length=100, blank=True, default='', null=True)
+	idade_gestacional = models.CharField(max_length=100, blank=True, default='', null=True)
+	comorbidades_obstetricas = models.CharField(max_length=100, blank=True, default='', null=True)
+	gesta_para = models.CharField(max_length=100, blank=True, default='', null=True)
 
 	medicamentos_uso_habitual = ArrayField(models.CharField(max_length=100), blank=True, null=True)
 	medicamento_outros = models.CharField(max_length=100, blank=True, default='', null=True)
@@ -68,7 +68,7 @@ class RegistroCovid(models.Model):
 	fio2 = models.FloatField(blank=True, null=True)
 	paco2 = models.FloatField(blank=True, null=True)
 
-	pa = models.CharField(max_length=100, default='', null=True)
+	pa = models.CharField(max_length=100, blank=True, default='', null=True)
 	fc = models.IntegerField(blank=True, null=True)
 	temperatura_axilar = models.FloatField(blank=True, null=True)
 
@@ -80,7 +80,7 @@ class RegistroCovid(models.Model):
 
 	arritmia = ArrayField(models.CharField(max_length=100), blank=True, null=True)
 
-	infeccao_bacteriana = models.CharField(max_length=100, default='', null=True)
+	infeccao_bacteriana = models.CharField(max_length=100, blank=True, default='', null=True)
 	foco = ArrayField(models.CharField(max_length=100), blank=True, null=True)
 
 	uso_antibioticoterapia = models.CharField(max_length=200, blank=True, default='', null=True)

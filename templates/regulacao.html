@@ -650,17 +650,20 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				        <input type="checkbox" class="form-check-input" id="check_comorbidades_obstetrica" name="comorbidades" value="Comorbidades obstétricas" onclick="comorbidadesObstetrica()" checked>Comorbidades obstétricas:
 				      </label>
 				    </div>
+				    <div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="comorbidades_obstetrica" placeholder="" name="comorbidade_obstetrica" value="{{registro.comorbidades_obstetricas}}" disabled>
+				    </div>
 				    {%else%}
 				    <div class="form-check-inline">
 				      <label class="form-check-label" for="">
 				        <input type="checkbox" class="form-check-input" id="check_comorbidades_obstetrica" name="comorbidades" value="Comorbidades obstétricas" onclick="comorbidadesObstetrica()">Comorbidades obstétricas:
 				      </label>
 				    </div>
-				    {%endif%}
-					
-					<div class="form-check-inline" style="width: 200px">
+				    <div class="form-check-inline" style="width: 200px">
 						<input type="text" class="form-control form-control-sm" id="comorbidades_obstetrica" placeholder="" name="comorbidade_obstetrica" value="" disabled>
 				    </div>
+				    {%endif%}
+					
 				</div>
 			</div><br><hr>
 			<div class="row">
@@ -775,25 +778,49 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					<b>VMI:</b>
 				</div>
 				<div class="col-sm-1">
+					{% if 'PCV' in registro.vmi %}
 					<div class="form-check-inline" style="width: 130px">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="vmi" value="PCV" checked>PCV
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 130px">
 				      <label class="form-check-label" for="">
 				        <input type="checkbox" class="form-check-input" id="" name="vmi" value="PCV">PCV
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-1">
+					{% if 'PSV' in registro.vmi %}
 					<div class="form-check-inline" style="width: 130px">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="vmi" value="PSV" checked>PSV
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 130px">
 				      <label class="form-check-label" for="">
 				        <input type="checkbox" class="form-check-input" id="" name="vmi" value="PSV">PSV
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 				<div class="col-sm-1">
+					{% if 'VCV' in registro.vmi %}
 					<div class="form-check-inline" style="width: 130px">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="vmi" value="VCV" checked>VCV
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 130px">
 				      <label class="form-check-label" for="">
 				        <input type="checkbox" class="form-check-input" id="" name="vmi" value="VCV">VCV
 				      </label>
 				    </div>
+				    {%endif%}
 				</div>
 			</div><br>
 			<div class="row">
@@ -1214,7 +1241,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-3" style="">
 					<b>Tipo de Heparina</b>
 					<div class="form-check-inline" style="width: 100px">
-						<input type="text" class="form-control form-control-sm" id="heparina_tipo" placeholder="" name="tipo_heparina" value="" style="" disabled>
+						<input type="text" class="form-control form-control-sm" id="heparina_tipo" placeholder="" name="tipo_heparina" value="{{registro.tipo_heparina}}" style="" disabled>
 				    </div>
 
 				</div>
@@ -1413,9 +1440,37 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			</div><hr>
 			<div class="row">
 				<div class="col-sm-12">
+					<button type="button" class="btn btn-info btn-sm" onclick="informarDataExamesLab()" id="btn_lancarDataExamesLab_id">Informar Exames</button>
+					<button type="button" class="btn btn-warning btn-sm" onclick="calcelDataExamesLab()" id="btn_cancel_lancarDataExamesLab_id">Cancelar!</button>
+				</div>
+
+				<style type="text/css">
+					#btn_cancel_lancarDataExamesLab_id {
+						display: none;
+					}
+				</style>
+				<script type="text/javascript">
+					function informarDataExamesLab(){
+						$("#data_exames_lab_id").prop("disabled", false);
+						$("#btn_lancarDataExamesLab_id").hide();
+						$("#btn_cancel_lancarDataExamesLab_id").show();
+
+					}
+
+					function calcelDataExamesLab(){
+						$("#data_exames_lab_id").prop("disabled", true);
+						$("#data_exames_lab_id").val("");
+						$("#btn_lancarDataExamesLab_id").show();
+						$("#btn_cancel_lancarDataExamesLab_id").hide();
+					}
+				</script>
+
+			</div><p></p>
+			<div class="row">
+				<div class="col-sm-12">
 					<b>Laboratório - Data</b>
 					<div class="form-check-inline" style="width: 200px">
-						<input type="date" class="form-control form-control-sm" id="" placeholder="" name="data_exames_laboratorio" value="" required>
+						<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_exames_laboratorio" value="" disabled>
 				    </div>
 				</div>
 			</div><br>
@@ -2160,7 +2215,6 @@ máxima de 12h de validação para recepção na unidade solicitante.
 		</form>
 	</div>
 
-	<img src="{% static "" %}" alt="" style="background-color: ;width: 100%">
 	<div style="background-color: #e6e6e6;">
 		
 			<br /><br />

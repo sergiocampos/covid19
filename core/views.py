@@ -360,10 +360,31 @@ def regulacao_set(request, id):
 	uso_antibioticoterapia = request.POST.get('uso_antibioticoterapia')
 	pesquisa_teste_sars_cov_2 = request.POST.get('pesquisa_sars_cov2')
 	rt_pcr_sars_cov_2 = request.POST.get('pcr_sars_cov2')
-	data_coleta = request.POST.get('data_da_coleta')
+	
+	data_da_coleta_bd_cap = request.POST.get('data_da_coleta_bd')
+	data_coleta_cap = request.POST.get('data_da_coleta')
+	if data_coleta_cap == '' or data_coleta_cap == None:
+		if data_da_coleta_bd_cap == '' or data_da_coleta_bd_cap == None:
+			data_coleta = None
+		else:
+			data_coleta = datetime.strptime(data_da_coleta_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_coleta = data_coleta_cap
+	
 	em_uso_corticosteroide = request.POST.get('em_uso_corticosteroide')
 	dose_corticosteroide = request.POST.get('dose_corticosteroide')
-	data_inicio_corticosteroide = request.POST.get('data_inicio_corticosteroide')
+	
+	data_inicio_corticosteroide_bd_cap = request.POST.get('data_inicio_corticosteroide_bd')
+	data_inicio_corticosteroide_cap = request.POST.get('data_inicio_corticosteroide')
+	if data_inicio_corticosteroide_cap == '' or data_inicio_corticosteroide_cap == None:
+		if data_inicio_corticosteroide_bd_cap == '' or data_inicio_corticosteroide_bd_cap == None:
+			data_inicio_corticosteroide = None
+		else:
+			data_inicio_corticosteroide = datetime.strptime(data_inicio_corticosteroide_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_inicio_corticosteroide = data_inicio_corticosteroide_cap
+	
+
 	em_uso_hidroxicloroquina = request.POST.get('em_uso_hidrocloroquina')
 	
 	data_inicio_hidroxicloroquina_cap = request.POST.get('data_inicio_hidroxicloroquina')
@@ -485,7 +506,7 @@ def regulacao_set(request, id):
 
 	regulacao_paciente = request.POST.get('paciente_preenche_criterios')
 	if regulacao_paciente == 'Paciente não preenche critérios para Regulação':
-		status_regulacao = 'Paciente não Regulado'
+		status_regulacao = '{Paciente não Regulado}'
 	else:
 		status_regulacao = request.POST.getlist('status_paciente')
 
@@ -493,9 +514,41 @@ def regulacao_set(request, id):
 	codigo_sescovid = request.POST.get('num_protocolo')
 	justificativa = request.POST.get('justificativa_nao_regulacao')
 	observacao = request.POST.get('observacoes_medicas')
+	
+	#pareceristas_bd = registro.pareceristas
 	pareceristas = request.POST.getlist('pareceristas')
-	data_regulacao = request.POST.get('data_regulacao')
-	data_obito = request.POST.get('data_obito')
+	
+	#pareceristas_1 = array(pareceristas_bd, dtype=str)
+
+	#pareceristas_2 = array(pareceristas_cap, dtype=str)
+
+	#pareceristas = add(pareceristas_bd, pareceristas_cap)
+
+	#print("lista1:",pareceristas_1)
+	#print("lista 2:",pareceristas_2)
+	#print(pareceristas)
+
+	data_regulacao_bd_cap = request.POST.get('data_regulacao_bd')
+	data_regulacao_cap = request.POST.get('data_regulacao')
+	if data_regulacao_cap == '' or data_regulacao_cap == None:
+		if data_regulacao_bd_cap == '' or data_regulacao_bd_cap == None:
+			data_regulacao = None
+		else:
+			data_regulacao = datetime.strptime(data_regulacao_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_regulacao = data_regulacao_cap
+
+
+	data_obito_bd_cap = request.POST.get('data_obito_bd')
+	data_obito_cap = request.POST.get('data_obito')
+
+	if data_obito_cap == '' or data_obito_cap == None:
+		if data_obito_bd_cap == '' or data_obito_bd_cap == None:
+			data_obito = None
+		else:
+			data_obito = datetime.strptime(data_obito_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_obito = data_obito_cap
 
 	
 	registro.responsavel_pelo_preenchimento = responsavel_pelo_preenchimento
@@ -628,6 +681,8 @@ def regulacao_set(request, id):
 @login_required
 def regulacao_detail(request, id):
 	registro = RegistroCovid.objects.get(id=id)
+
+	responsavel_pelo_preenchimento = request.user
 
 	pa = registro.pa
 	p = pa.split("x")

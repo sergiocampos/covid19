@@ -1411,10 +1411,13 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 				<div class="col-sm-5">
 					{% if registro.rt_pcr_sars_cov_2 == 'Aguardando Resultado' %}
-					<div class="form-check-inline" style="width:">
+					<div class="form-check-inline" style="font-size: 95%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Aguardando Resultado" onclick="activeDataColeta()" checked>Aguarda resultado – data coleta:
-				      </label><b>{{registro.data_coleta}}</b>
+				      </label>
+				      <label for="" style="width: 130px">
+				      	<input type="text" class="form-control form-control-sm" id="data_coleta" name="data_da_coleta_bd" value="{{registro.data_coleta}}">				      	
+				      </label>
 				      
 				    </div>
 				    {%else%}
@@ -1456,18 +1459,18 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width: 100px">
-						<input type="text" class="form-control form-control-sm" id="corticosteroide_id" placeholder="" name="dose_corticosteroide" value="{{registro.dose_corticosteroide}}" disabled>
+						<input type="text" class="form-control form-control-sm" id="corticosteroide_id" placeholder="" name="dose_corticosteroide" value="{{registro.dose_corticosteroide}}">
 				    </div>
 				    {%endif%}
 				</div>
 				<div class="col-sm-3" style="">
 					<div class="form-check-inline" style="">
 				      Data de Início:
-				      {% if registro.data_inicio_corticosteroide != '' or registro.data_inicio_corticosteroide != None %}
-				      <label class="form-check-label" for="" id="lb_data_inicio_corticosteroide_id"><b>{{registro.data_inicio_corticosteroide}}</b></label>
-				      
+				      {% if registro.data_inicio_corticosteroide == '' or registro.data_inicio_corticosteroide == None %}
+				      <input type="date" class="form-control form-control-sm" id="data_inicio_corticosteroide_id" name="data_inicio_corticosteroide" value="" disabled style="width: 110px">
+
 				      {%else%}
-				      <input type="date" class="" id="data_inicio_corticosteroide_id" name="data_inicio_corticosteroide" value="" disabled>
+				      <input type="text" class="" id="data_inicio_corticosteroide_id" name="data_inicio_corticosteroide_bd" value="{{registro.data_inicio_corticosteroide}}" style="width: 110px">
 				      {%endif%}
 				    </div>
 				</div>
@@ -2667,7 +2670,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			</div>
 			<br>
 			<div class="container" style="border: 2px solid #cccccc; border-radius: 10px">
-				<div class="row" style="border: 2px solid #cccccc; border-radius: 10px">
+				<div class="row" style="">
 				<div class="col-sm-5" style="margin-top: 30px">
 					{% if registro.regulacao_paciente == 'Paciente não preenche critérios para Regulação' %}
 					<div class="form-check-inline" style="font-size: 83%">
@@ -2703,45 +2706,39 @@ máxima de 12h de validação para recepção na unidade solicitante.
     					SESCOVID
     					<input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="{{registro.codigo_sescovid}}">
 				    </div>
-				</div>
-
-				<div class="col-sm-6">
-					
-				</div>
-				<div class="col-sm-3">
-					
+				</div>			
 
 				</div>
-				<div class="col-sm-3">
-					
-				</div>
+
+				<div class="row">
+				<div class="col-sm-5"></div>
+					<div class="col-sm-4">
+						{% if 'Vaga confirmada com Internação Imediata' in registro.status_regulacao %}
+						<div class="form-check-inline" style="font-size: 83%">
+					      <label class="form-check-label" for="" id="lb_vaga_conf_internacao">
+					        <input type="checkbox" class="form-check-input" id="check_internacao_id" name="status_paciente" value="Vaga confirmada com Internação Imediata" onclick="activeInternacaoImediata()" checked>Vaga confirmada com Internação Imediata
+					      </label>
+					    </div>
+					    {%else%}
+					    <div class="form-check-inline" style="font-size: 83%">
+					      <label class="form-check-label" for="" id="lb_vaga_conf_internacao">
+					        <input type="checkbox" class="form-check-input" id="check_internacao_id" name="status_paciente" value="Vaga confirmada com Internação Imediata" onclick="activeInternacaoImediata()">Vaga confirmada com Internação Imediata
+					      </label>
+					    </div>
+					    {%endif%}
+
+					</div>
 				
+				<div class="col-sm-3"></div>					
+			</div>
+			<div class="row">
 				<div class="col-sm-5"></div>
-
-				<div class="col-sm-4">
-					{% if 'Paciente em Lista de Espera' in registro.status_regulacao %}
-					<div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" for="" id="lb_vaga_conf_internacao">
-				        <input type="checkbox" class="form-check-input" id="incluir_em_lista_id" name="paciente_preenche_criterios" value="Vaga confirmada com Internação Imediata" onclick="" checked>Vaga confirmada com Internação Imediata
-				      </label>
-				    </div>
-				    {%else%}
-				    <div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" for="" id="lb_vaga_conf_internacao">
-				        <input type="checkbox" class="form-check-input" id="incluir_em_lista_id" name="paciente_preenche_criterios" value="Vaga confirmada com Internação Imediata" onclick="">Vaga confirmada com Internação Imediata
-				      </label>
-				    </div>
-				    {%endif%}
-
-				</div>
-				<div class="col-sm-3"></div>
-				<div class="col-sm-5"></div>
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					{% if 'Obito' in registro.status_regulacao %}
 					<div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="" id="">
-				        <input type="checkbox" class="form-check-input" id="check_obito_id" name="status_paciente" value="Obito" onclick="" checked>Óbito
-				        <input type="date" required disabled id="data_obito_id" name="data_obito" value="{{registro.data_obito}}">
+				        <input type="checkbox" class="form-check-input" id="check_obito_id" name="status_paciente" value="Obito" onclick="activeStatusObito()" checked>Óbito
+				        <input type="text" id="data_obito_id" name="data_obito_bd" value="{{registro.data_obito}}">
 				      </label>
 				    </div>
 				    {%else%}
@@ -2751,64 +2748,132 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				        <input type="date" required disabled id="data_obito_id" name="data_obito">
 				      </label>
 				    </div>
-				    {%endif%}				    
+				    {%endif%}
 				</div>
-				<div class="col-sm-3"></div>
+				<div class="col-sm-4"></div>
+			</div>
+
+			<div class="row">
 				<div class="col-sm-5"></div>
 				<div class="col-sm-4">
 					{% if 'Aguardando em Lista de Espera' in registro.status_regulacao %}
 					<div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" for="" id="lb_aguard_em_lista">
-				        <input type="checkbox" class="form-check-input" id="incluir_em_lista_id" name="paciente_preenche_criterios" value="" onclick="" checked>AGUARDANDO EM LISTA DE ESPERA
+				      <label class="form-check-label" id="">
+				        <input type="checkbox" class="form-check-input" id="check_em_lista_espera_id" name="status_paciente" value="Aguardando em Lista de Espera" onclick="activeListaEspera()" checked>AGUARDANDO EM LISTA DE ESPERA
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" for="" id="lb_aguard_em_lista">
-				        <input type="checkbox" class="form-check-input" id="incluir_em_lista_id" name="paciente_preenche_criterios" value="Aguardando em Lista de Espera" onclick="">AGUARDANDO EM LISTA DE ESPERA
+				      <label class="form-check-label" id="">
+				        <input type="checkbox" class="form-check-input" id="check_em_lista_espera_id" name="status_paciente" value="Aguardando em Lista de Espera" onclick="activeListaEspera()">AGUARDANDO EM LISTA DE ESPERA
 				      </label>
 				    </div>
 				    {%endif%}
-
 				</div>
-				<div class="col-sm-5"></div>
-
-				<div class="col-sm-3" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b>status:<i>Aguardando Confirmação de Vaga!</i></b>
-
-				</div>
-				<div class="col-sm-4"></div>
-				
-				<div class="col-sm-12">
-					<div class="form-group">
-				      <label for="">Justificativa:</label>
-				      <textarea class="form-control" rows="5" id="" name="justificativa_nao_regulacao">{{registro.justificativa}}</textarea>
-				    </div>
-				</div>
-				<div class="col-sm-12">
-					<div class="form-group">
-				      <label for="">Observações:</label>
-				      <textarea class="form-control" rows="5" id="" name="observacoes_medicas" placeholder="Caso necessário, faça observação(es) neste campo">{{registro.observacao}}</textarea>
-				    </div>
-				</div>
-				<div class="col-sm-6"></div>
-
-				<div class="col-sm-4">
-					
-
-				</div>
-				
-
-
+				<div class="col-sm-3"></div>
 			</div>
 			
+			<div class="row">
+				<div class="col-sm-5"></div>
+				<div class="col-sm-4">
+					{% if 'Aguardando confirmação de Vaga' in registro.status_regulacao %}
+					<div class="form-check-inline" style="font-size: 83%">
+				      <label class="form-check-label" id="">
+				        <input type="checkbox" class="form-check-input" id="" name="status_paciente" value="Aguardando confirmação de Vaga" onclick="activeListaEspera()" checked>Aguardando confirmação de Vaga
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="font-size: 83%">
+				      <label class="form-check-label" id="">
+				        <input type="checkbox" class="form-check-input" id="" name="status_paciente" value="Aguardando confirmação de Vaga" onclick="activeListaEspera()">Aguardando confirmação de Vaga
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
+		
 
+			<hr>
+			<div class="row">
+				<div class="col-sm-12" style="background-color: #cccccc"></div>
+			</div>
 
+			<div class="row">
+				<div class="col-sm-4"></div>
+				{% if 'Aguardando confirmação de Vaga' in registro.status_regulacao %}
+				<div id="" class="col-sm-4" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Aguardando Confirmação de Vaga!</i></b>
+				</div>
+				{%else%}
+				<div id="paciente_regulado_id" class="col-sm-4" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Aguardando Confirmação de Vaga!</i></b>
+				</div>
+				{%endif%}
+				<div class="col-sm-4"></div>
+			</div>
 
+			<div class="row">
+				<div class="col-sm-4"></div>
+				{% if 'Obito' in registro.status_regulacao %}
+				<div id="" class="col-sm-4" style="background-color: #c6c6c6; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Paciente veio a óbito!</i></b>
+				</div>
+				{%else%}
+				<div id="paciente_obito_regulacao_id" class="col-sm-4" style="background-color: #c6c6c6; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Paciente veio a óbito!</i></b>
+				</div>
+				{%endif%}
+				<div class="col-sm-4"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4"></div>
+				{% if 'Aguardando em Lista de Espera' in registro.status_regulacao %}
+				<div id="" class="col-sm-4" style="background-color: #ffcc99; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Paciente em Lista de espera!</i></b>
+				</div>
+				{%else%}
+				<div id="paciente_lista_regulacao_id" class="col-sm-4" style="background-color: #ffcc99; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Paciente em Lista de espera!</i></b>
+				</div>
+				{%endif%}
+				<div class="col-sm-4"></div>
+				
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4"></div>
+				{% if 'Vaga confirmada com Internação Imediata' in registro.status_regulacao %}
+				<div id="" class="col-sm-4" style="background-color: #b3e6b3; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Paciente encaminhado para Internação!</i></b>
+				</div>
+				{%else%}
+				<div id="paciente_internado_regulacao_id" class="col-sm-4" style="background-color: #b3e6b3; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Paciente encaminhado para Internação!</i></b>
+				</div>
+				{%endif%}
+				<div class="col-sm-4"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4"></div>
+				{% if 'Paciente não preenche critérios para Regulação' in registro.regulacao_paciente %}
+				<div id="" class="col-sm-4" style="background-color: #ffbb99; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Paciente Não Regulado!</i></b>
+				</div>
+				{%else%}
+				<div id="paciente_nao_regulado_id" class="col-sm-4" style="background-color: #ffbb99; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b>status:<i>Paciente Não Regulado!</i></b>
+				</div>
+				{%endif%}
+				<div class="col-sm-4"></div>
+			</div>
 
 			<div class="row">
 				<div class="col-sm-12" style="background-color: #cccccc"></div>
 			</div>
+			
 				
 			<hr>
 				
@@ -2817,7 +2882,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				
 				<div class="col-sm-6">
 					Pareceristas - CRM:
-					<select multiple class="form-control" id="" name="pareceristas">
+					<select multiple class="form-control" id="" name="pareceristas" required>
 						<option value="Alexandre Yukio Nishimi CRM 10730">Alexandre Yukio Nishimi CRM 10730</option>
 						<option value="Ana Luísa Castelo Branco Gomes CRM 12852">Ana Luísa Castelo Branco Gomes CRM 12852</option>
 						<option value="Andre Cristiano da costa lima CRM 9714">Andre Cristiano da costa lima CRM 9714</option>
@@ -2861,23 +2926,17 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 				<div class="col-sm-6">
 					Data:
+						{% if registro.data_regulacao == '' or registro.data_regulacao == None %}
 						<div class="form-check-inline">
 							<input type="date" class="form-control form-control-sm" id="" placeholder="" name="data_regulacao" size="10" value="" required>
 					    </div>
-					    
-					    {% if registro.pareceristas %}
-					    <div class="form-check-inline" style="border: 2px solid #b3cccc; padding: 10px; border-radius: 10px; margin-top: 20px">
-					    	
-							<ul>
-							{% for r in registro.pareceristas %}
-								<li>
-									{{r}}
-								</li>
-								
-							{%endfor%}
-							</ul>
+					    {%else%}
+					    <div class="form-check-inline">
+							<input type="text" class="form-control form-control-sm" id="" placeholder="" name="data_regulacao_bd" size="10" value="{{registro.data_regulacao}}">
 					    </div>
 					    {%endif%}
+					    
+					   
 				</div>
 
 			</div><br>

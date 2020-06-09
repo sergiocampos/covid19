@@ -367,26 +367,49 @@ def regulacao_set(request, id):
 	em_uso_hidroxicloroquina = request.POST.get('em_uso_hidrocloroquina')
 	
 	data_inicio_hidroxicloroquina_cap = request.POST.get('data_inicio_hidroxicloroquina')
+	data_inicio_hidroxicloroquina_bd_cap = request.POST.get('data_inicio_hidroxicloroquina_bd')
+
+
 	if data_inicio_hidroxicloroquina_cap == '' or data_inicio_hidroxicloroquina_cap == None:
-		data_inicio_hidroxicloroquina = None
+		if data_inicio_hidroxicloroquina_bd_cap == '' or data_inicio_hidroxicloroquina_bd_cap == None:
+			data_inicio_hidroxicloroquina = None	
+		else:
+			data_inicio_hidroxicloroquina = datetime.strptime(data_inicio_hidroxicloroquina_bd_cap, '%d/%m/%Y').date()
 	else:
-		data_inicio_hidroxicloroquina = datetime.strptime(data_inicio_hidroxicloroquina_cap, '%d/%m/%Y').date()
-		 
+		data_inicio_hidroxicloroquina = data_inicio_hidroxicloroquina_cap
+
+
+	
+
 	em_uso_oseltamivir = request.POST.get('em_uso_oseltamivir')
 	
 	data_inicio_oseltamivir_cap = request.POST.get('data_inicio_oseltamivir')
+	data_inicio_oseltamivir_bd_cap = request.POST.get('data_inicio_oseltamivir_bd')
+
+
 	if data_inicio_oseltamivir_cap == '' or data_inicio_oseltamivir_cap == None:
-		data_inicio_oseltamivir = None
+		if data_inicio_oseltamivir_bd_cap == '' or data_inicio_oseltamivir_bd_cap == None:
+			data_inicio_oseltamivir = None
+		else:
+			data_inicio_oseltamivir = datetime.strptime(data_inicio_oseltamivir_bd_cap, '%d/%m/%Y').date()
 	else:
-		data_inicio_oseltamivir = datetime.strptime(data_inicio_oseltamivir_cap, '%d/%m/%Y').date()
+		data_inicio_oseltamivir = data_inicio_oseltamivir_cap
+
+
 
 	em_uso_heparina = request.POST.get('em_uso_heparina')
 
+	data_inicio_heparina_bd_cap = request.POST.get('data_inicio_heparina_bd')
 	data_inicio_heparina_cap = request.POST.get('data_inicio_heparina')
+
 	if data_inicio_heparina_cap == '' or data_inicio_heparina_cap == None:
-		data_inicio_heparina = None
+		if data_inicio_heparina_bd_cap == '' or data_inicio_heparina_bd_cap == None:
+			data_inicio_heparina = None
+		else:
+			data_inicio_heparina = datetime.strptime(data_inicio_heparina_bd_cap, '%d/%m/%Y').date()
 	else:
-		data_inicio_heparina = datetime.strptime(data_inicio_heparina_cap, '%d/%m/%Y').date()
+		data_inicio_heparina = data_inicio_heparina_cap
+		
 
 	tipo_heparina = request.POST.get('tipo_heparina')
 	dose_heparina = request.POST.get('dose_heparina')
@@ -414,7 +437,18 @@ def regulacao_set(request, id):
 	pacuronio_dose = request.POST.get('pacuronio_dose')
 	cisatracurio_dose = request.POST.get('cisatracurio_dose')
 	rass = request.POST.get('rass')
-	data_exames_laboratorio = request.POST.get('data_exames_laboratorio')
+	
+	data_exames_laboratorio_cap = request.POST.get('data_exames_laboratorio')
+	data_exames_laboratorio_bd_cap = request.POST.get('data_exames_laboratorio_bd')
+
+	if data_exames_laboratorio_cap == '' or data_exames_laboratorio_cap == None:
+		if data_exames_laboratorio_bd_cap == '' or data_exames_laboratorio_bd_cap == None:
+			data_exames_laboratorio = None
+		else:
+			data_exames_laboratorio = datetime.strptime(data_exames_laboratorio_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_exames_laboratorio = data_exames_laboratorio_cap
+
 	leucocito = request.POST.get('leucocito')
 	linfocito = request.POST.get('linfocito')
 	hb = request.POST.get('hb')

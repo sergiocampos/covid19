@@ -1006,9 +1006,9 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-3">
 					PA:
 				    <div class="form-check-inline">
-				        <input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" style="width: 60px" value="{{pa_1}}">
+				        <input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" style="width: 60px" value="{{p1}}">
 				        <label for="">x</label>
-				        <input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" style="width: 60px" value="{{pa_2}}">
+				        <input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" style="width: 60px" value="{{p2}}">
 				    </div><label for="" style="">mmHg</label>
 				</div>
 				<div class="col-sm-3">
@@ -2875,10 +2875,23 @@ máxima de 12h de validação para recepção na unidade solicitante.
 
 			<div class="row">
 				<div class="col-sm-12" style="background-color: #cccccc"></div>
-			</div>
-			
-				
+			</div>			
 			<hr>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<label for="comment"style="float: left;">Justificativa:</label>
+					<textarea class="form-control" rows="2" id="comment" name="justificativa" value="" style="width: 100%">{{registro.justificativa}}</textarea>
+					<div class="invalid-feedback"></div>
+		      </div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					<label for="comment"style="float: left;">Observação:</label>
+					<textarea class="form-control" rows="2" id="comment" name="observacoes_medicas" value="" style="width: 100%">{{registro.observacao}}</textarea>
+					<div class="invalid-feedback"></div>
+		      </div>
+			</div><hr>
 				
 				
 			<div class="row">

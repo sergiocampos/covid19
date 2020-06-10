@@ -101,7 +101,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 		      <a class="nav-link" href="/registro_covid/">Registrar Caso</a>
 		    </li>
 		    <li class="nav-item">
-		      <a class="nav-link" href="#">Registro/Edição</a>
+		      <a class="nav-link" href="/regulacao_edit/{{registro.id}}/">Registro/Edição</a>
 		    </li>
 		    <li class="nav-item">
 		      <a class="nav-link active" href="#">Regulação</a>
@@ -159,6 +159,10 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				            <option value="upa bancarios">UPA BANCÁRIOS</option>
 				            <option value="upa tibiri">UPA TIBIRI</option>
 				            <option value="upa oceania">UPA OCEANIA</option>
+				            <option value="Unidade de pronto Atendimento de Bayeux">Unidade de pronto Atendimento de Bayeux</option>
+				            <option value="Hospital Flávio Ribeito Coutinho">Hospital Flávio Ribeito Coutinho</option>				            
+				            <option value="UPA Guarabira">UPA Guarabira</option>
+				            <option value="UPA Princesa Isabel">UPA Princesa Isabel</option>
 				            
 				        </select>
 				    </div>
@@ -2876,13 +2880,27 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			
 				
 			<hr>
+			<div class="row">
+				<div class="col-sm-12">
+					<label for="comment"style="float: left;">Justificativa:</label>
+					<textarea class="form-control" rows="2" id="comment" name="justificativa" value="" style="width: 100%">{{registro.justificativa}}</textarea>
+					<div class="invalid-feedback"></div>
+		      </div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					<label for="comment"style="float: left;">Observação:</label>
+					<textarea class="form-control" rows="2" id="comment" name="observacoes_medicas" value="" style="width: 100%">{{registro.observacao}}</textarea>
+					<div class="invalid-feedback"></div>
+		      </div>
+			</div><hr>
 				
 				
 			<div class="row">
 				
 				<div class="col-sm-6">
 					Pareceristas - CRM:
-					<select multiple class="form-control" id="" name="pareceristas" required>
+					<select multiple class="form-control" id="" name="pareceristas">
 						<option value="Alexandre Yukio Nishimi CRM 10730">Alexandre Yukio Nishimi CRM 10730</option>
 						<option value="Ana Luísa Castelo Branco Gomes CRM 12852">Ana Luísa Castelo Branco Gomes CRM 12852</option>
 						<option value="Andre Cristiano da costa lima CRM 9714">Andre Cristiano da costa lima CRM 9714</option>
@@ -2933,6 +2951,20 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					    {%else%}
 					    <div class="form-check-inline">
 							<input type="text" class="form-control form-control-sm" id="" placeholder="" name="data_regulacao_bd" size="10" value="{{registro.data_regulacao}}">
+					    </div>
+					    {%endif%}
+
+					{% if registro.pareceristas %}
+					    <div class="form-check-inline" style="border: 2px solid #b3cccc; padding: 10px; border-radius: 10px; margin-top: 20px">
+					    	
+							<ul>
+							{% for r in registro.pareceristas %}
+								<li>
+									{{r}}
+								</li>
+								
+							{%endfor%}
+							</ul>
 					    </div>
 					    {%endif%}
 					    

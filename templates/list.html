@@ -98,8 +98,19 @@
         	{%endif%}
         </td>
         <td>{{o.nome_paciente}}</td>
-        <td>{{o.idade_paciente}}</td>
-        <td><a href="/regulacao_edit/{{o.id}}">Editar</a>/<a href="/regulacao/{{o.id}}/">Regular</a>/<a href="/regulacao_detail/{{o.id}}/">Ver</a>
+        <td>
+        	{% if o.idade_paciente == '' or o.idade_paciente == None %}
+        	{%else%}
+        	{{o.idade_paciente}}
+        	{%endif%}
+        </td>
+        <td style="font-size: 87%">
+        	<a href="/regulacao_edit/{{o.id}}">Editar</a>
+        	{% if user.first_name == 'videofonista' %}
+        	{%else%}
+        	<a href="/regulacao/{{o.id}}/">Regular</a>
+        	<a href="/regulacao_detail/{{o.id}}/">Ver</a>
+        	{%endif%}
         </td>
       </tr>
       	{% endfor %}

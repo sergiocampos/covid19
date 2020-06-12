@@ -4,13 +4,19 @@ from datetime import datetime, timezone
 from .models import RegistroCovid
 import calendar
 from time import gmtime, strftime
+from django.core.paginator import Paginator
 
 # Create your views here.
 
 @login_required
 def covid_list(request):
 	registros = RegistroCovid.objects.all()
-	return render(request, 'list.html', {'registros':registros})
+
+	paginator = Paginator(registros, 3)
+	page = request.GET.get('page')
+	regs = paginator.get_page(page)
+
+	return render(request, 'list.html', {'regs':regs})
 
 
 @login_required

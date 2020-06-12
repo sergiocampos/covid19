@@ -87,10 +87,16 @@
       </tr>
     </thead>
     <tbody>
-    	{% for o in registros %}
+    	{% for o in regs %}
       <tr>
         <td>{{o.data_notificacao|date:'d/m/Y'}} - {{o.hora_notificacao|time:'H:i'}}</td>
-        <td><a href="#">{{o.estabelecimento_solicitante}}</a></td>
+        <td>
+        	{% if o.estabelecimento_solicitante == '' or o.estabelecimento_solicitante == None %}
+        	<a href="#">{{o.estabelecimento_outro}}</a>
+        	{%else%}
+        	<a href="#">{{o.estabelecimento_solicitante}}</a>
+        	{%endif%}
+        </td>
         <td>{{o.nome_paciente}}</td>
         <td>{{o.idade_paciente}}</td>
         <td><a href="/regulacao_edit/{{o.id}}">Editar</a>/<a href="/regulacao/{{o.id}}/">Regular</a>/<a href="/regulacao_detail/{{o.id}}/">Ver</a>
@@ -101,8 +107,28 @@
     </tbody>
   </table>
 
+  <div style="height: 50px"></div>
+	<div class="pagination">
+	  <span class="step-links" style="margin: auto">
+	    {% if regs.has_previous %}
+	      <a href="?page={{regs.previous_page_number}}">Anterior</a>
+	    {% endif %}
+	    
+	    <span class="current">
+	        {{regs.number}} de {{regs.paginator.num_pages}}
+	    </span>
+	    {% if regs.has_next %}
+	      <a href="?page={{regs.next_page_number}}">Próximo</a>
+	    {% endif %}
+	    
+	  </span>  
+	    
+	</div>
+
 		
 	</div><br />
+
+	
 
 	<img src="{% static "" %}" alt="" style="background-color: ;width: 100%">
 	<div style="background-color: #e6e6e6;">

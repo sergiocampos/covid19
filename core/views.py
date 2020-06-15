@@ -12,7 +12,7 @@ from django.core.paginator import Paginator
 def covid_list(request):
 	registros = RegistroCovid.objects.all()
 
-	paginator = Paginator(registros, 3)
+	paginator = Paginator(registros, 10)
 	page = request.GET.get('page')
 	regs = paginator.get_page(page)
 
@@ -209,6 +209,8 @@ def regulacao_set(request, id):
 	
 	conciencia = registro.conciencia
 	temperatura = registro.temperatura
+
+	descricao_clinica = request.POST.get('descricao_clinica')
 	
 	sindrome_gripal = request.POST.getlist('s_gripal')
 	
@@ -502,6 +504,8 @@ def regulacao_set(request, id):
 	news_modificado = request.POST.get('new_modificado')
 	uti = request.POST.get('uti')
 	leito = request.POST.get('perfil')
+
+	parecer_medico = request.POST.get('parecer')
 	
 	prioridade_cap = request.POST.get('prioridade')
 	if prioridade_cap == '' or prioridade_cap == None:
@@ -510,11 +514,20 @@ def regulacao_set(request, id):
 		prioridade = int(float(prioridade_cap))
 		
 
+	status_regulacao = registro.status_regulacao
+	
 	regulacao_paciente = request.POST.get('paciente_preenche_criterios')
+
+	status_regulacao_cap = request.POST.getlist('status_paciente')
+
 	if regulacao_paciente == 'Paciente não preenche critérios para Regulação':
-		status_regulacao = '{Paciente não Regulado}'
+		if status_regulacao == '' or status_regulacao == None:
+			status_regulacao = status_regulacao_cap
+		else:
+			status_regulacao = status_regulacao + status_regulacao_cap
 	else:
-		status_regulacao = request.POST.getlist('status_paciente')
+		status_regulacao = 'Paciente Regulado'.join(status_regulacao)
+		
 
 	#status_regulacao = request.POST.get('')
 	codigo_sescovid = request.POST.get('num_protocolo')
@@ -522,17 +535,13 @@ def regulacao_set(request, id):
 	observacao = request.POST.get('observacoes_medicas')
 	
 	pareceristas = registro.pareceristas
-	print("Pareceristas do banco:",pareceristas, "tipo:", type(pareceristas))
+	
 	pareceristas_cap = request.POST.getlist('pareceristas')
 	
 	if pareceristas == '' or pareceristas == None:
 		pareceristas = pareceristas_cap
 	else:
 		pareceristas = pareceristas + pareceristas_cap
-
-	print("novos pareceristas:",pareceristas)
-	#print("lista 2:",pareceristas_2)
-	print("Pareceristas escolhido:",pareceristas_cap, "tipo:", type(pareceristas_cap))
 
 	data_regulacao_bd_cap = request.POST.get('data_regulacao_bd')
 	data_regulacao_cap = request.POST.get('data_regulacao')
@@ -577,6 +586,7 @@ def regulacao_set(request, id):
 	registro.pa = pa
 	registro.conciencia = conciencia
 	registro.temperatura = temperatura
+	registro.descricao_clinica = descricao_clinica
 	registro.sindrome_gripal = sindrome_gripal
 	registro.tempo_quadro_sintomatico = tempo_quadro_sintomatico
 	registro.exposicao_pessoa_infectada = exposicao_pessoa_infectada
@@ -669,6 +679,7 @@ def regulacao_set(request, id):
 	registro.news_modificado = news_modificado
 	registro.uti = uti
 	registro.leito = leito
+	registro.parecer_medico = parecer_medico
 	registro.prioridade = prioridade
 	registro.regulacao_paciente = regulacao_paciente
 	registro.status_regulacao = status_regulacao

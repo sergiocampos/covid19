@@ -178,7 +178,12 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			</div><hr>
 			<div class="row">
 				<div class="col-sm-12">
-					<b>DESCRIÇÃO CLÍNICA (SIC, UNIDADE SOLICITANTE)</b>					
+					<b>DESCRIÇÃO CLÍNICA (SIC, UNIDADE SOLICITANTE)</b>
+					{% if registro.descricao_clinica == '' or registro.descricao_clinica == None %}
+					<textarea class="form-control" rows="15" id="" name="descricao_clinica" value="" style="width: 100%"></textarea>
+					{%else%}
+					<textarea class="form-control" rows="15" id="" name="descricao_clinica" value="{{registro.descricao_clinica}}" style="width: 100%"></textarea>
+					{%endif%}
 				</div>
 			</div><br><br>
 			<div class="row">
@@ -1419,9 +1424,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Aguardando Resultado" onclick="activeDataColeta()" checked>Aguarda resultado – data coleta:
 				      </label>
-				      <label for="" style="width: 130px">
-				      	<input type="text" class="form-control form-control-sm" id="data_coleta" name="data_da_coleta_bd" value="{{registro.data_coleta}}">				      	
-				      </label>
+				      
 				      
 				    </div>
 				    {%else%}
@@ -1429,9 +1432,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Aguardando Resultado" onclick="activeDataColeta()">Aguarda resultado – data coleta:
 				      </label>
-				      <label for="">
-				      	<input type="date" class="form-control form-control-sm" id="data_coleta" name="data_da_coleta" disabled>				      	
-				      </label>
+				    </div>
+				    {%endif%}
+				    {% if registro.data_coleta == '' or registro.data_coleta == None %}
+				    <div class="form-check-inline" style="width:">
+				    	<label for="">
+				    		<input type="date" class="form-control form-control-sm" id="data_coleta" name="data_da_coleta" disabled>				      	
+					    </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:">
+				    <label for="" style="width: 130px">
+				    	<input type="text" class="form-control form-control-sm" id="data_coleta" name="data_da_coleta_bd" value="{{registro.data_coleta}}">				      	
+				    </label>
 				    </div>
 				    {%endif%}
 				</div>
@@ -2133,7 +2146,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			</div><hr>
 
 			
-		<div class="container" style="border: 2px solid #cccccc; border-radius: 10px">
+		<div class="container" style="border: 2px solid #cccccc; border-radius: 10px; background-color: #f0f5f5">
 			<div class="row" style="margin-top: 30px">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-6" style="text-align: center;"><b style="font-size: 110%">Recomendações do CERH:</b></div>
@@ -2643,6 +2656,18 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				      </label>
 				    </div>
 				    {%endif%}
+				</div>
+			</div><br>
+
+			<div class="row">
+				<div class="col-sm-12" style="text-align: center;">
+					<b>Parecer Médico</b>
+					{% if registro.parecer_medico == '' or registro.parecer_medico == None %}
+					<textarea class="form-control" rows="15" id="" name="parecer" value="" style="width: 100%"></textarea>
+					{%else%}
+					<textarea class="form-control" rows="15" id="" name="parecer" value="{{registro.parecer_medico}}" style="width: 100%"></textarea>
+					{%endif%}
+
 				</div>
 			</div><br>
 			

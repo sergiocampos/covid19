@@ -33,6 +33,8 @@ class RegistroCovid(models.Model):
 	conciencia = models.CharField(max_length=100, blank=True, default='', null=True)
 	temperatura = models.FloatField(blank=True, null=True)
 
+	descricao_clinica = models.TextField(blank=True, default='', null=True)
+
 	sindrome_gripal = ArrayField(models.CharField(max_length=100), blank=True, null=True)
 	tempo_quadro_sintomatico = models.IntegerField(blank=True, null=True)
 	exposicao_pessoa_infectada = models.CharField(max_length=100, default='', blank=True, null=True)
@@ -150,6 +152,9 @@ class RegistroCovid(models.Model):
 	news_modificado = models.CharField(max_length=100, blank=True, default='', null=True)
 	uti = models.CharField(max_length=200, blank=True, default='', null=True)
 	leito = models.CharField(max_length=100, blank=True, default='', null=True)
+
+	parecer_medico = models.TextField(blank=True, default='', null=True)
+
 	prioridade = models.IntegerField(blank=True, null=True)
 
 	regulacao_paciente = models.CharField(max_length=100, blank=True, default='', null=True)

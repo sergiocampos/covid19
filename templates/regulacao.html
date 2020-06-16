@@ -182,7 +182,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					{% if registro.descricao_clinica == '' or registro.descricao_clinica == None %}
 					<textarea class="form-control" rows="15" id="" name="descricao_clinica" value="" style="width: 100%"></textarea>
 					{%else%}
-					<textarea class="form-control" rows="15" id="" name="descricao_clinica" value="{{registro.descricao_clinica}}" style="width: 100%"></textarea>
+					<textarea class="form-control" rows="15" id="" name="descricao_clinica" value="" style="width: 100%">{{registro.descricao_clinica}}</textarea>
 					{%endif%}
 				</div>
 			</div><br><br>
@@ -2145,7 +2145,8 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 			</div><hr>
 
-			
+		{% if user.first_name == 'videofonista' %}
+        {%else%}	
 		<div class="container" style="border: 2px solid #cccccc; border-radius: 10px; background-color: #f0f5f5">
 			<div class="row" style="margin-top: 30px">
 				<div class="col-sm-3"></div>
@@ -2665,7 +2666,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					{% if registro.parecer_medico == '' or registro.parecer_medico == None %}
 					<textarea class="form-control" rows="15" id="" name="parecer" value="" style="width: 100%"></textarea>
 					{%else%}
-					<textarea class="form-control" rows="15" id="" name="parecer" value="{{registro.parecer_medico}}" style="width: 100%"></textarea>
+					<textarea class="form-control" rows="15" id="" name="parecer" value="" style="width: 100%">{{registro.parecer_medico}}</textarea>
 					{%endif%}
 
 				</div>
@@ -2673,8 +2674,11 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			
 				
 		</div>
+		{%endif%}
 			<br>
-
+		{% if user.first_name == 'videofonista' %}
+        {%else%}
+		
 			<div class="row">
 				<div class="col-sm-2"></div>
 				<div class="col-sm-8">
@@ -2698,7 +2702,10 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-2"></div>
 			</div>
 			<br>
+		{%endif%}
 			<div class="container" style="border: 2px solid #cccccc; border-radius: 10px">
+				{% if user.first_name == 'videofonista' %}
+        		{%else%}
 				<div class="row" style="">
 				<div class="col-sm-5" style="margin-top: 30px">
 					{% if registro.regulacao_paciente == 'Paciente não preenche critérios para Regulação' %}
@@ -2801,7 +2808,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 				<div class="col-sm-3"></div>
 			</div>
-			
+			<!--
 			<div class="row">
 				<div class="col-sm-5"></div>
 				<div class="col-sm-4">
@@ -2821,6 +2828,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 				<div class="col-sm-3"></div>
 			</div>
+		-->
 		
 
 			<hr>
@@ -2908,21 +2916,30 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-12">
 					<label for="comment"style="float: left;">Justificativa:</label>
+					{% if registro.justificativa == '' or registro.justificativa == None %}
+					<textarea class="form-control" rows="8" id="comment" name="justificativa" value="" style="width: 100%"></textarea>
+					{%else%}
 					<textarea class="form-control" rows="8" id="comment" name="justificativa" value="" style="width: 100%">{{registro.justificativa}}</textarea>
+					{%endif%}
 					<div class="invalid-feedback"></div>
 		      </div>
 			</div><br>
 			<div class="row">
 				<div class="col-sm-12">
 					<label for="comment"style="float: left;">Observação:</label>
+					{% if registro.observacao == '' or registro.observacao == None %}
+					<textarea class="form-control" rows="8" id="comment" name="observacoes_medicas" value="" style="width: 100%"></textarea>
+					{%else%}
 					<textarea class="form-control" rows="8" id="comment" name="observacoes_medicas" value="" style="width: 100%">{{registro.observacao}}</textarea>
+					{%endif%}
 					<div class="invalid-feedback"></div>
 		      </div>
 			</div><hr>
-				
+			{%endif%}	
 				
 			<div class="row">
-				
+				{% if user.first_name == 'videofonista' %}
+        		{%else%}
 				<div class="col-sm-6">
 					Pareceristas - CRM:
 					<select multiple class="form-control" id="" name="pareceristas">
@@ -2967,6 +2984,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 						
       				</select>
 				</div>
+				{%endif%}
 				<div class="col-sm-6">
 					Data:
 						{% if registro.data_regulacao == '' or registro.data_regulacao == None %}

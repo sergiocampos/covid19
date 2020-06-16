@@ -522,12 +522,21 @@ def regulacao_set(request, id):
 
 	if regulacao_paciente == 'Paciente não preenche critérios para Regulação':
 		if status_regulacao == '' or status_regulacao == None:
-			status_regulacao = status_regulacao_cap
+			status_regulacao = '{Paciente Não Regulado}'
 		else:
-			status_regulacao = status_regulacao + status_regulacao_cap
+			#n = 'Paciente Não Regulado'
+			status_regulacao.append(status_regulacao_cap)
+		#else:
+		#	status_regulacao = status_regulacao + status_regulacao_cap
+	elif regulacao_paciente == 'Paciente preenche critérios para Regulação':
+		if status_regulacao == '' or status_regulacao == None:
+			status_regulacao = '{Paciente Regulado, Aguardando confirmação de Vaga}'
+		else:
+			status_regulacao.append(status_regulacao_cap)
 	else:
-		status_regulacao = 'Paciente Regulado'.join(status_regulacao)
-		
+		status_regulacao = '{}'
+	
+	print("Status da regulação:", status_regulacao)	
 
 	#status_regulacao = request.POST.get('')
 	codigo_sescovid = request.POST.get('num_protocolo')

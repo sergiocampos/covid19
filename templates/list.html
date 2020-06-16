@@ -106,11 +106,10 @@
         </td>
         <td style="font-size: 87%">
         	<a href="/regulacao_edit/{{o.id}}">Editar</a>
-        	{% if user.first_name == 'videofonista' %}
-        	{%else%}
+        	
         	<a href="/regulacao/{{o.id}}/">Regular</a>
         	<a href="/regulacao_detail/{{o.id}}/">Ver</a>
-        	{%endif%}
+        	
         </td>
       </tr>
       	{% endfor %}

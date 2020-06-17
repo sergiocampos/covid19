@@ -825,3 +825,9 @@ def regulacao_edit_set(request, id):
 	registro.save()
 
 	return redirect('covid_list')
+
+@login_required
+def search_register(request):
+	regs = RegistroCovid.objects.all()
+
+	return render(request, 'search_register.html', {'regs':regs})

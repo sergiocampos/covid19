@@ -828,6 +828,30 @@ def regulacao_edit_set(request, id):
 
 @login_required
 def search_register(request):
-	regs = RegistroCovid.objects.all()
+	registros = RegistroCovid.objects.all()
+
+	paginator = Paginator(registros, 5)
+	page = request.GET.get('page')
+	regs = paginator.get_page(page)
 
 	return render(request, 'search_register.html', {'regs':regs})
+
+@login_required
+def search_between_date(request):
+
+	return render(request, 'search_between_date.html')
+
+@login_required
+def search_between_date_set(request):
+	data_inicio = request.POST.get('data_inicio')
+	data_fim = request.POST.get('data_fim')
+
+	values = RegistroCovid.objects.filter(data_notificacao__range=[data_inicio, data_fim])
+		
+	return render(request, 'result_search_between_date.html', {'values':values})
+
+@login_required
+def result_search_between_date(request):
+
+
+	return render(request, 'result_search_between_date.html')

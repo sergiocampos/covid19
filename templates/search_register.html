@@ -28,7 +28,7 @@
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		  <ul class="navbar-nav">
 		    <li class="nav-item">
-		      <a class="nav-link" href="/"></a>
+		      <a class="nav-link" href="/">Principal</a>
 		    </li>
 		    <li class="nav-item">
 		      <a class="nav-link" href="/registro_covid/">Registrar Caso</a>
@@ -125,6 +125,31 @@
 	      {% endfor %}
 	    </tbody>
 	  	</table>
+
+	  	<div class="pagination">
+		  <span class="step-links" style="margin: auto">
+		    {% if regs.has_previous %}
+		      <a href="?page={{regs.previous_page_number}}">Anterior</a>
+		    {% endif %}
+		    
+		    <span class="current">
+		        {{regs.number}} de {{regs.paginator.num_pages}}
+		    </span>
+		    {% if regs.has_next %}
+		      <a href="?page={{regs.next_page_number}}">Próximo</a>
+		    {% endif %}
+		    
+		  </span>  
+		    
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4">
+				<a href="/search_between_date/" class="btn btn-info btn-sm">Localizar entre datas</a>
+			</div>
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4"></div>
+		</div>
   
 	</div>
 
@@ -135,6 +160,7 @@
 
 		
 	</div><br />
+	
 
 	<div style="background-color: #e6e6e6;">
 		

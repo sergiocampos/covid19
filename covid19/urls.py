@@ -30,5 +30,8 @@ urlpatterns = [
     path('regulacao_edit/<id>/', views.regulacao_edit, name='regulacao_edit'),
     path('regulacao_edit/<id>/submit', views.regulacao_edit_set),
     path('regulacao_detail/<id>/', views.regulacao_detail, name='regulacao_detail' ),
-    path('search_register/', views.search_register, name='search_register')
+    path('search_register/', views.search_register, name='search_register'),
+    path('search_between_date/', views.search_between_date, name='search_between_date'),
+    path('search_between_date/submit', views.search_between_date_set),
+    path('result_search_between_date/', views.result_search_between_date, name='result_search_between_date')
 ]

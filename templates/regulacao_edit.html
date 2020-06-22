@@ -39,6 +39,18 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+	<script>
+  	function activeOutroEstabelecimento(){
+  		if (document.getElementById("check_outros_estabelecimentos").checked == true){
+  			$("#outro_estabelecimento_id").prop("disabled", false);
+  			}
+  		else {
+  			$("#outro_estabelecimento_id").val("");
+  			$("#outro_estabelecimento_id").prop("disabled", true);
+  			}
+  		}
+  </script>
+
   <script>
   $( function() {
     $.widget( "custom.combobox", {

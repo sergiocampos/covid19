@@ -37,12 +37,12 @@ def registro_covid(request):
 	#Dia de hoje:
 	dia = data.day
 	#mês:
-	mes_ultimo_registro=last_registro.data_notificacao.month
+	if last_registro:
+		mes_ultimo_registro=last_registro.data_notificacao.month
+	else:
+		mes_ultimo_registro=data.month
 	mes_corrente=data.month
-	dia_h=last_registro.data_notificacao.day
-	print("Mês do último registro:", mes_ultimo_registro, type(mes_ultimo_registro))
-	print("Mês corrente:", mes_corrente, type(mes_corrente))
-	print("dia do último registro:", dia_h)
+	
 	#Verifica se o mês mudou:
 	if mes_corrente > mes_ultimo_registro:
 		last_codigo_registro_mensal = 1

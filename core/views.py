@@ -539,18 +539,43 @@ def regulacao_set(request, id):
 	status_regulacao_cap = request.POST.getlist('status_paciente')
 
 	if regulacao_paciente == 'Paciente não preenche critérios para Regulação':
-		if status_regulacao == '' or status_regulacao == None:
+		if status_regulacao == '' or status_regulacao == None or status_regulacao == []:
 			status_regulacao = '{Paciente Não Regulado}'
-		else:
-			#n = 'Paciente Não Regulado'
-			status_regulacao = status_regulacao + status_regulacao_cap
-		#else:
-		#	status_regulacao = status_regulacao + status_regulacao_cap
+
 	elif regulacao_paciente == 'Paciente preenche critérios para Regulação':
-		if status_regulacao == '' or status_regulacao == None:
+		if status_regulacao == '' or status_regulacao == None or status_regulacao == []:
 			status_regulacao = '{Paciente Regulado, Aguardando confirmação de Vaga}'
 		else:
-			status_regulacao = status_regulacao + status_regulacao_cap
+			if 'Obito' not in status_regulacao:
+				print("entrou no obito")
+				print("status escolhido:", status_regulacao_cap)
+				if 'Obito' in status_regulacao_cap:
+					print("escolheu:", status_regulacao_cap)
+					status_regulacao = status_regulacao + status_regulacao_cap
+			elif 'Paciente Regulado, Aguardando confirmação de Vaga' not in status_regulacao:
+				print("entrou paciente regulado")
+				print("status escolhido ---:", status_regulacao_cap)
+				if 'Paciente Regulado, Aguardando confirmação de Vaga' in status_regulacao_cap:
+					print("entrou status capturado paciente regurado:", status_regulacao_cap)
+					status_regulacao = status_regulacao + status_regulacao_cap
+			elif 'Paciente Não Regulado' not in status_regulacao:
+				print("entrou paciente não regulado")
+				print("status escolhido:", status_regulacao_cap)
+				if 'Paciente Não Regulado' in status_regulacao_cap:
+					print("escolheu:", status_regulacao_cap)
+					status_regulacao = status_regulacao + status_regulacao_cap
+			elif 'Vaga confirmada com Internação Imediata' not in status_regulacao:
+				print("entrou vaga confirmada com internacao imediata")
+				print("status escolhido:", status_regulacao_cap)
+				if 'Vaga confirmada com Internação Imediata' in status_regulacao_cap:
+					print("entrou vaga confirmada internacao imediata:", status_regulacao_cap)
+					status_regulacao = status_regulacao + status_regulacao_cap
+			elif 'Aguardando em Lista de Espera' not in status_regulacao:
+				print("entrou aguardando em lista de espera")
+				print("status escolhido:", status_regulacao_cap)
+				if 'Aguardando em Lista de Espera' in status_regulacao_cap:
+					print("escolheu:", status_regulacao_cap)
+					status_regulacao = status_regulacao + status_regulacao_cap
 	
 	print("Status da regulação:", status_regulacao)	
 

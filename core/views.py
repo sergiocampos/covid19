@@ -543,16 +543,14 @@ def regulacao_set(request, id):
 			status_regulacao = '{Paciente Não Regulado}'
 		else:
 			#n = 'Paciente Não Regulado'
-			status_regulacao.append(status_regulacao_cap)
+			status_regulacao = status_regulacao + status_regulacao_cap
 		#else:
 		#	status_regulacao = status_regulacao + status_regulacao_cap
 	elif regulacao_paciente == 'Paciente preenche critérios para Regulação':
 		if status_regulacao == '' or status_regulacao == None:
 			status_regulacao = '{Paciente Regulado, Aguardando confirmação de Vaga}'
 		else:
-			status_regulacao.append(status_regulacao_cap)
-	else:
-		status_regulacao = '{}'
+			status_regulacao = status_regulacao + status_regulacao_cap
 	
 	print("Status da regulação:", status_regulacao)	
 

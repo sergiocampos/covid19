@@ -80,7 +80,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-4" style="background-color:;">
 					<div style="position: relative; left: 0; top: 20%; width: 100%; text-align: center;">
-						<img src="{% static "covid19/cerh_covid19.jpeg" %}" alt="" style=" background-color: ;width: 70%">
+						<img src="https://docs.google.com/uc?id=1g14C98IyGkVYPNNkoLk20rGYVikptzcC" alt="" style=" background-color: ;width: 70%">
 					</div>
 				</div>
 
@@ -94,7 +94,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 	      		</div>
 	      		<div class="col-sm-4" style="background-color:;">
 	      			<div style="position: relative; left: 0; top: 30%; width: 100%; text-align: center;">
-	      				<img src="{% static "covid19/governo.jpeg" %}" alt="" style="background-color: ;width: 70%">
+	      				<img src="https://docs.google.com/uc?id=11gNpuLZuHBRHHiSFZxcSp5CGlJla1PEw" alt="" style="background-color: ;width: 70%">
 	      			</div>
 	      		</div>
 	      	</div>
@@ -188,7 +188,12 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			</div><hr>
 			<div class="row">
 				<div class="col-sm-12">
-					<b>DESCRIÇÃO CLÍNICA (SIC, UNIDADE SOLICITANTE)</b>					
+					<b>DESCRIÇÃO CLÍNICA (SIC, UNIDADE SOLICITANTE)</b>
+					{% if registro.descricao_clinica == '' or registro.descricao_clinica == None %}
+					<textarea class="form-control" rows="15" id="" name="descricao_clinica" value="" style="width: 100%"></textarea>
+					{%else%}
+					<textarea class="form-control" rows="15" id="" name="descricao_clinica" value="" style="width: 100%">{{registro.descricao_clinica}}</textarea>
+					{%endif%}									
 				</div>
 			</div><br><br>
 			<div class="row">
@@ -1690,7 +1695,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-2"></div>
 				<!-- div da 1° tabela -->
-				<img src="{% static "covid19/tabela1.jpg" %}" alt="" style="width: 60%">
+				<img src="https://docs.google.com/uc?id=1D0bkULdbGoG7ASi-yR7Vwn9xOMt7zgER" alt="" style="width: 60%">
 			</div><hr>
 			<div class="row">
 				<div class="col-sm-2">
@@ -2652,6 +2657,18 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				    {%endif%}
 				</div>
 			</div><br>
+
+			<div class="row">
+				<div class="col-sm-12" style="text-align: center;">
+					<b>Parecer Médico</b>
+					{% if registro.parecer_medico == '' or registro.parecer_medico == None %}
+					<textarea class="form-control" rows="15" id="" name="parecer" value="" style="width: 100%"></textarea>
+					{%else%}
+					<textarea class="form-control" rows="15" id="" name="parecer" value="" style="width: 100%">{{registro.parecer_medico}}</textarea>
+					{%endif%}
+
+				</div>
+			</div><br>
 			
 				
 		</div>
@@ -2666,7 +2683,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			</div><br>
 			<div class="row">
 				<div class="col-sm-3"></div>
-				<img src="{% static "covid19/prioridades.jpg" %}" alt="" style="width: 60%">
+				<img src="https://docs.google.com/uc?id=1SgCj4B9Ug6ex9qwmVTAgZOBMHEWm_SzM" alt="" style="width: 60%">
 			</div>
 			<br>
 			<div class="row">

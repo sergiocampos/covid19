@@ -52,8 +52,6 @@ def registro_covid(request):
 		last_codigo_registro_mensal += 1
 
 
-	print("codigo total de registro:", last_codigo_registro_total)
-	print("codigo mensal de registro:", last_codigo_registro_mensal)
 	#último dia do mês:
 	#ultimo_dia = calendar.monthrange(int(strftime("%Y", gmtime())), int(strftime("%m", gmtime())))[1]
 	#if dia <= ultimo_dia:
@@ -537,7 +535,6 @@ def regulacao_set(request, id):
 	regulacao_paciente = request.POST.get('paciente_preenche_criterios')
 
 	status_regulacao_cap = request.POST.getlist('status_paciente')
-	print("status escolhido:", status_regulacao_cap)
 
 	if regulacao_paciente == 'Paciente não preenche critérios para Regulação':
 		if status_regulacao == '' or status_regulacao == None or status_regulacao == []:
@@ -570,7 +567,6 @@ def regulacao_set(request, id):
 			#			status_regulacao.append(v)
 			#print("nova lista:", status_regulacao)
 	
-	print("Status da regulação:", status_regulacao)	
 
 	#status_regulacao = request.POST.get('')
 	codigo_sescovid = request.POST.get('num_protocolo')

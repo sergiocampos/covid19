@@ -25,6 +25,20 @@ def registro_covid(request):
 	formateDate = data.strftime("%d-%m-%Y")
 	hora = data.strftime("%H:%M")
 
+	
+
+	return render(request, 'registro_covid.html', {'formateDate': formateDate, 'hora': hora})
+
+
+@login_required
+def registro_covid_set(request):
+	
+	responsavel_pelo_preenchimento = request.user
+
+	data = datetime.now()
+	data_notificacao = data.strftime("%d-%m-%Y")
+	hora_notificacao = data.strftime("%H:%M")
+
 	last_registro = RegistroCovid.objects.all().last()
 	if not last_registro:
 		last_codigo_registro_total = 0
@@ -67,20 +81,6 @@ def registro_covid(request):
 
 	num_registro = last_codigo_registro_total_str + last_codigo_registro_mensal_str
 
-	return render(request, 'registro_covid.html', {'formateDate': formateDate, 'hora': hora, 'num_registro':num_registro, 'last_codigo_registro_total_str': last_codigo_registro_total_str, 'last_codigo_registro_mensal_str':last_codigo_registro_mensal_str})
-
-
-@login_required
-def registro_covid_set(request):
-	
-	responsavel_pelo_preenchimento = request.user
-
-	data = datetime.now()
-	data_notificacao = data.strftime("%d-%m-%Y")
-	hora_notificacao = data.strftime("%H:%M")
-
-	#data_notificacao = request.POST.get('data_notificacao')
-	#hora_notificacao = request.POST.get('hora_notificacao')
 	
 	nome_solicitante = request.POST.get('nome_solicitante')
 	municipio_estabelecimento = request.POST.get("municipio_do_estabelecimento")
@@ -136,11 +136,12 @@ def registro_covid_set(request):
 
 
 	#implementar o algoritmo: codigo_registro = None
-	codigo_registro_total = request.POST.get('last_codigo_total')
-	codigo_registro_mensal = request.POST.get('last_codigo_mensal')
+	codigo_registro_total = last_codigo_registro_total_str
+	codigo_registro_mensal = last_codigo_registro_mensal_str
 
 
-	codigo_registro_completo = request.POST.get('num_total_registros')
+	codigo_registro_completo = last_codigo_registro_total_str + last_codigo_registro_mensal_str
+
 
 	registro = RegistroCovid.objects.create(
 		responsavel_pelo_preenchimento = responsavel_pelo_preenchimento,
@@ -168,8 +169,6 @@ def registro_covid_set(request):
 		observacao = observacao
 
 		)
-
-
 
 	return redirect('covid_list')
 

@@ -25,6 +25,20 @@ def registro_covid(request):
 	formateDate = data.strftime("%d-%m-%Y")
 	hora = data.strftime("%H:%M")
 
+	
+
+	return render(request, 'registro_covid.html', {'formateDate': formateDate, 'hora': hora})
+
+
+@login_required
+def registro_covid_set(request):
+	
+	responsavel_pelo_preenchimento = request.user
+
+	data = datetime.now()
+	data_notificacao = data.strftime("%d-%m-%Y")
+	hora_notificacao = data.strftime("%H:%M")
+
 	last_registro = RegistroCovid.objects.all().last()
 	if not last_registro:
 		last_codigo_registro_total = 0
@@ -52,8 +66,6 @@ def registro_covid(request):
 		last_codigo_registro_mensal += 1
 
 
-	print("codigo total de registro:", last_codigo_registro_total)
-	print("codigo mensal de registro:", last_codigo_registro_mensal)
 	#último dia do mês:
 	#ultimo_dia = calendar.monthrange(int(strftime("%Y", gmtime())), int(strftime("%m", gmtime())))[1]
 	#if dia <= ultimo_dia:
@@ -69,20 +81,6 @@ def registro_covid(request):
 
 	num_registro = last_codigo_registro_total_str + last_codigo_registro_mensal_str
 
-	return render(request, 'registro_covid.html', {'formateDate': formateDate, 'hora': hora, 'num_registro':num_registro, 'last_codigo_registro_total_str': last_codigo_registro_total_str, 'last_codigo_registro_mensal_str':last_codigo_registro_mensal_str})
-
-
-@login_required
-def registro_covid_set(request):
-	
-	responsavel_pelo_preenchimento = request.user
-
-	data = datetime.now()
-	data_notificacao = data.strftime("%d-%m-%Y")
-	hora_notificacao = data.strftime("%H:%M")
-
-	#data_notificacao = request.POST.get('data_notificacao')
-	#hora_notificacao = request.POST.get('hora_notificacao')
 	
 	nome_solicitante = request.POST.get('nome_solicitante')
 	municipio_estabelecimento = request.POST.get("municipio_do_estabelecimento")
@@ -138,11 +136,12 @@ def registro_covid_set(request):
 
 
 	#implementar o algoritmo: codigo_registro = None
-	codigo_registro_total = request.POST.get('last_codigo_total')
-	codigo_registro_mensal = request.POST.get('last_codigo_mensal')
+	codigo_registro_total = last_codigo_registro_total_str
+	codigo_registro_mensal = last_codigo_registro_mensal_str
 
 
-	codigo_registro_completo = request.POST.get('num_total_registros')
+	codigo_registro_completo = last_codigo_registro_total_str + last_codigo_registro_mensal_str
+
 
 	registro = RegistroCovid.objects.create(
 		responsavel_pelo_preenchimento = responsavel_pelo_preenchimento,
@@ -170,8 +169,6 @@ def registro_covid_set(request):
 		observacao = observacao
 
 		)
-
-
 
 	return redirect('covid_list')
 
@@ -539,22 +536,36 @@ def regulacao_set(request, id):
 	status_regulacao_cap = request.POST.getlist('status_paciente')
 
 	if regulacao_paciente == 'Paciente não preenche critérios para Regulação':
-		if status_regulacao == '' or status_regulacao == None:
+		if status_regulacao == '' or status_regulacao == None or status_regulacao == []:
 			status_regulacao = '{Paciente Não Regulado}'
 		else:
-			#n = 'Paciente Não Regulado'
-			status_regulacao.append(status_regulacao_cap)
-		#else:
-		#	status_regulacao = status_regulacao + status_regulacao_cap
+			status_regulacao = status_regulacao + status_regulacao_cap
+
 	elif regulacao_paciente == 'Paciente preenche critérios para Regulação':
-		if status_regulacao == '' or status_regulacao == None:
+		if status_regulacao == '' or status_regulacao == None or status_regulacao == []:
 			status_regulacao = '{Paciente Regulado, Aguardando confirmação de Vaga}'
 		else:
-			status_regulacao.append(status_regulacao_cap)
-	else:
-		status_regulacao = '{}'
+			status_regulacao = status_regulacao + status_regulacao_cap
+			#x = set(status_regulacao)
+			#y = set(status_regulacao_cap)
+			#print("lista do banco:", str(x))
+			#print("lista capturada:", str(y))
+
+			#dif = y.difference(x)
+			#print("diferença de opções:", str(dif))
+			#if dif != 'set()':
+			#	status_regulacao.append(str(dif))
+			#status_regulacao = status_regulacao + status_regulacao_cap
+			#status_regulacao = list(set(status_regulacao) - set(status_regulacao_cap))
+			#for k in status_regulacao:
+			#	print("valor do banco:",k)
+			#	for v in status_regulacao_cap:
+			#		print("valor escolhido:",v)
+			#		if k != v:
+			#			print("k é diferente de v")
+			#			status_regulacao.append(v)
+			#print("nova lista:", status_regulacao)
 	
-	print("Status da regulação:", status_regulacao)	
 
 	#status_regulacao = request.POST.get('')
 	codigo_sescovid = request.POST.get('num_protocolo')

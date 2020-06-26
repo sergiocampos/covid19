@@ -39,6 +39,18 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+	<script>
+  	function activeOutroEstabelecimento(){
+  		if (document.getElementById("check_outros_estabelecimentos").checked == true){
+  			$("#outro_estabelecimento_id").prop("disabled", false);
+  			}
+  		else {
+  			$("#outro_estabelecimento_id").val("");
+  			$("#outro_estabelecimento_id").prop("disabled", true);
+  			}
+  		}
+  </script>
+
   <script>
   $( function() {
     $.widget( "custom.combobox", {
@@ -4452,7 +4464,7 @@
 			<div class="row">
 				<div class="col-sm-4" style="background-color:;">
 					<div style="position: relative; left: 0; top: 20%; width: 100%; text-align: center;">
-						<img src="{% static "covid19/cerh_covid19.jpeg" %}" alt="" style=" background-color: ;width: 70%">
+						<img src="https://docs.google.com/uc?id=1g14C98IyGkVYPNNkoLk20rGYVikptzcC" alt="" style=" background-color: ;width: 70%">
 					</div>
 				</div>
 
@@ -4466,7 +4478,7 @@
 	      		</div>
 	      		<div class="col-sm-4" style="background-color:;">
 	      			<div style="position: relative; left: 0; top: 30%; width: 100%; text-align: center;">
-	      				<img src="{% static "covid19/governo.jpeg" %}" alt="" style="background-color: ;width: 70%">
+	      				<img src="https://docs.google.com/uc?id=11gNpuLZuHBRHHiSFZxcSp5CGlJla1PEw" alt="" style="background-color: ;width: 70%">
 	      			</div>
 	      		</div>
 	      	</div>

@@ -177,18 +177,9 @@ class RegistroCovid(models.Model):
 		return str(self.nome_paciente)
 
 class Cnes(models.Model):
-	CO_CNES = models.CharField(max_length=200, blank=True, default='', null=True)
-	NU_CNPJ_MANTENEDORA = models.CharField(max_length=200, blank=True, default='', null=True)
-	NO_RAZAO_SOCIAL = models.CharField(max_length=200, blank=True, default='', null=True)
-	NO_FANTASIA = models.CharField(max_length=200, blank=True, default='', null=True)
-	NO_LOGRADOURO = models.CharField(max_length=200, blank=True, default='', null=True)
-	NU_ENDERECO = models.CharField(max_length=200, blank=True, default='', null=True)
-	NO_BAIRRO = models.CharField(max_length=200, blank=True, default='', null=True)
-	CO_CEP = models.CharField(max_length=200, blank=True, default='', null=True)
-	CO_ESTADO_GESTOR = models.CharField(max_length=200, blank=True, default='', null=True)
 	MUNICIPIO = models.CharField(max_length=200, blank=True, default='', null=True)
-	NU_LATITUDE = models.CharField(max_length=200, blank=True, default='', null=True)
-	NU_LONGITUDE = models.CharField(max_length=200, blank=True, default='', null=True)
+	NO_FANTASIA = models.CharField(max_length=200, blank=True, default='', null=True)
+	CO_CNES = models.IntegerField(blank=True, null=True)
 
 	def __str__(self):
 		return str(self.MUNICIPIO)

@@ -42,7 +42,6 @@ def search_estabelecimento_set(request):
 
 	nome_solicitante = request.POST.get('nome_solicitante')
 	estabelecimento_outro = request.POST.get('desc_outro_estabelecimento')
-	unidade_origem = request.POST.get('unidade_origem')
 	nome_paciente = request.POST.get('nome_paciente')
 	
 	
@@ -58,21 +57,23 @@ def search_estabelecimento_set(request):
 
 	cidade = request.POST.get('municipio_solicitante')
 
-	#request.session['idade_paciente'] = 'idade_paciente'
-	#request.session['municipio_solicitante'] = 'municipio_solicitante'
+	request.session['nome_solicitante'] = nome_solicitante
+	request.session['idade_paciente'] = idade_paciente
+	request.session['nome_paciente'] = nome_paciente
+	request.session['municipio_solicitante'] = cidade
 
 	#context = {'cidade':cidade, 'idade_paciente':idade_paciente}
 	#print(idade_paciente)
 	#print(cidade)
-	base_url = reverse('registro_covid')
-	idade_paciente =  urlencode({'idade_paciente': idade_paciente})
-	cidade = urlencode({'cidade':cidade})
-	url = '{}?{}${}'.format(base_url, idade_paciente, cidade)
+	#base_url = reverse('registro_covid')
+	#idade_paciente =  urlencode({'idade_paciente': idade_paciente})
+	#cidade = urlencode({'cidade':cidade})
+	#url = '{}?{}${}'.format(base_url, idade_paciente, cidade)
 
-	print(idade_paciente)
-	print(cidade)
+	#print(idade_paciente)
+	#print(cidade)
 
-	return redirect(url)
+	return redirect('registro_covid')
 
 
 @login_required
@@ -83,15 +84,19 @@ def registro_covid(request):
 
 	municipios = Cnes.objects.order_by('MUNICIPIO').distinct('MUNICIPIO')
 
-	idade_paciente = request.GET.get('idade_paciente')
-	cidade = request.GET.get('municipio_solicitante')
+	#idade_paciente = request.GET.get('idade_paciente')
+	#cidade = request.GET.get('municipio_solicitante')
+	nome_solicitante = request.session['nome_solicitante']
+	idade_paciente = request.session['idade_paciente']
+	nome_paciente = request.session['nome_paciente']
+	cidade = request.session['municipio_solicitante']
 
-	print(idade_paciente)
-	print(cidade)
+	estabelecimentos = Cnes.objects.filter(MUNICIPIO = cidade)
 
 	return render(request, 'registro_covid.html', {'formateDate': formateDate, 
 		'hora': hora, 'municipios':municipios, 'idade_paciente':idade_paciente, 
-		'cidade':cidade})
+		'cidade':cidade, 'estabelecimentos':estabelecimentos, 'nome_paciente':nome_paciente, 
+		'nome_solicitante':nome_solicitante})
 
 
 
@@ -151,7 +156,6 @@ def registro_covid_set(request):
 	municipio_estabelecimento = request.POST.get("municipio_do_estabelecimento")
 	estabelecimento_solicitante = request.POST.get('estabelecimento_solicitante')
 	estabelecimento_outro = request.POST.get('desc_outro_estabelecimento')
-	unidade_origem = request.POST.get('unidade_origem')
 	nome_paciente = request.POST.get('nome_paciente')
 	
 	idade_paciente_cap = request.POST.get('idade_paciente')
@@ -217,7 +221,6 @@ def registro_covid_set(request):
 		municipio_estabelecimento = municipio_estabelecimento,
 		estabelecimento_solicitante = estabelecimento_solicitante,
 		estabelecimento_outro = estabelecimento_outro,
-		unidade_origem = unidade_origem,
 		nome_paciente = nome_paciente,
 		idade_paciente = idade_paciente,
 		recurso_que_precisa = recurso_que_precisa,
@@ -265,7 +268,6 @@ def regulacao_set(request, id):
 	municipio_estabelecimento = registro.municipio_estabelecimento
 	estabelecimento_solicitante = registro.estabelecimento_solicitante
 	estabelecimento_outro = registro.estabelecimento_outro
-	unidade_origem = request.POST.get('unidade_origem')
 	nome_paciente = request.POST.get('nome_paciente')
 	
 	idade_paciente_cap = request.POST.get('idade_paciente')
@@ -675,7 +677,6 @@ def regulacao_set(request, id):
 	registro.municipio_estabelecimento = municipio_estabelecimento
 	registro.estabelecimento_solicitante = estabelecimento_solicitante
 	registro.estabelecimento_outro = estabelecimento_outro
-	registro.unidade_origem = unidade_origem
 	registro.nome_paciente = nome_paciente
 	registro.idade_paciente = idade_paciente
 	registro.recurso_que_precisa = recurso_que_precisa
@@ -845,7 +846,6 @@ def regulacao_edit_set(request, id):
 	municipio_estabelecimento = request.POST.get("municipio_do_estabelecimento")
 	estabelecimento_solicitante = request.POST.get('estabelecimento_solicitante')
 	estabelecimento_outro = request.POST.get('desc_outro_estabelecimento')
-	unidade_origem = request.POST.get('unidade_origem')
 	nome_paciente = request.POST.get('nome_paciente')
 	
 	idade_paciente_cap = request.POST.get('idade_paciente')
@@ -899,7 +899,6 @@ def regulacao_edit_set(request, id):
 	registro.municipio_estabelecimento = municipio_estabelecimento
 	registro.estabelecimento_solicitante = estabelecimento_solicitante
 	registro.estabelecimento_outro = estabelecimento_outro
-	registro.unidade_origem = unidade_origem
 	registro.nome_paciente = nome_paciente
 	registro.idade_paciente = idade_paciente
 	registro.recurso_que_precisa = recurso_que_precisa

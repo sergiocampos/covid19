@@ -22,6 +22,8 @@ urlpatterns = [
     path('', include('core.urls')),
     path('covid_list/', views.covid_list, name='covid_list'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('search_estabelecimento/', views.search_estabelecimento, name='search_estabelecimento'),
+    path('search_estabelecimento/submit', views.search_estabelecimento_set),
     path('registro_covid/', views.registro_covid, name='registro_covid'),
     path('registro_covid/submit', views.registro_covid_set),
     path('registro_enfermeiro_medico/', views.registro_enfermeiro_medico, name='registro_enfermeiro_medico'),

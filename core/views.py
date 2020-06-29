@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from datetime import datetime, timezone
-from .models import RegistroCovid
+from .models import RegistroCovid, Cnes
 import calendar
 from time import gmtime, strftime
 from django.core.paginator import Paginator
+from django.urls import reverse
+from urllib.parse import urlencode
 
 # Create your views here.
 
@@ -20,14 +22,77 @@ def covid_list(request):
 
 
 @login_required
+def search_estabelecimento(request):
+	data = datetime.now()
+	formateDate = data.strftime("%d-%m-%Y")
+	hora = data.strftime("%H:%M")
+
+	municipios = Cnes.objects.order_by('MUNICIPIO').distinct('MUNICIPIO')
+
+	return render(request, 'search_estabelecimento.html', {'formateDate': formateDate, 'hora': hora, 'municipios':municipios})
+
+
+@login_required
+def search_estabelecimento_set(request):
+	data = datetime.now()
+	formateDate = data.strftime("%d-%m-%Y")
+	hora = data.strftime("%H:%M")
+
+	municipios = Cnes.objects.order_by('MUNICIPIO').distinct('MUNICIPIO')
+
+	nome_solicitante = request.POST.get('nome_solicitante')
+	estabelecimento_outro = request.POST.get('desc_outro_estabelecimento')
+	unidade_origem = request.POST.get('unidade_origem')
+	nome_paciente = request.POST.get('nome_paciente')
+	
+	
+	idade_paciente_cap = request.POST.get('idade_paciente')
+	if idade_paciente_cap != '':
+		idade_paciente = int(idade_paciente_cap)
+	else:
+		idade_paciente = None
+	
+	recurso_que_precisa = request.POST.get('recurso_que_precisa')
+	estado_origem = request.POST.get('estado_paciente')
+	cidade_origem = request.POST.get('cidade_paciente')
+
+	cidade = request.POST.get('municipio_solicitante')
+
+	#request.session['idade_paciente'] = 'idade_paciente'
+	#request.session['municipio_solicitante'] = 'municipio_solicitante'
+
+	#context = {'cidade':cidade, 'idade_paciente':idade_paciente}
+	#print(idade_paciente)
+	#print(cidade)
+	base_url = reverse('registro_covid')
+	idade_paciente =  urlencode({'idade_paciente': idade_paciente})
+	cidade = urlencode({'cidade':cidade})
+	url = '{}?{}${}'.format(base_url, idade_paciente, cidade)
+
+	print(idade_paciente)
+	print(cidade)
+
+	return redirect(url)
+
+
+@login_required
 def registro_covid(request):
 	data = datetime.now()
 	formateDate = data.strftime("%d-%m-%Y")
 	hora = data.strftime("%H:%M")
 
-	
+	municipios = Cnes.objects.order_by('MUNICIPIO').distinct('MUNICIPIO')
 
-	return render(request, 'registro_covid.html', {'formateDate': formateDate, 'hora': hora})
+	idade_paciente = request.GET.get('idade_paciente')
+	cidade = request.GET.get('municipio_solicitante')
+
+	print(idade_paciente)
+	print(cidade)
+
+	return render(request, 'registro_covid.html', {'formateDate': formateDate, 
+		'hora': hora, 'municipios':municipios, 'idade_paciente':idade_paciente, 
+		'cidade':cidade})
+
 
 
 @login_required

@@ -11,10 +11,11 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-	<title>Registro - Casos COVID19</title>
+	<title>Relatório de Registro - Casos COVID19</title>
 	<link rel="stylesheet" href="">
 
 	<script language="JavaScript" type="text/javascript" src="/static/js/cidades-estados-1.4-utf8.js"></script>
+
 
 </head>
 <body>
@@ -28,7 +29,7 @@
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		  <ul class="navbar-nav">
 		    <li class="nav-item">
-		      <a class="nav-link active" href="/">Principal</a>
+		      <a class="nav-link" href="/">Principal</a>
 		    </li>
 		    <li class="nav-item">
 		      <a class="nav-link" href="/search_estabelecimento/">Registrar Caso</a>
@@ -45,7 +46,7 @@
 		      <a class="nav-link" href="/search_register/">Localizar</a>
 		    </li>
 		    <li class="nav-item">
-		      <a class="nav-link" href="/gerar_relatorios/">Relatórios</a>
+		      <a class="nav-link active" href="/gerar_relatorios/">Relatórios</a>
 		    </li>
 		    <li>
 		    	<a class="nav-link" href="/accounts/logout">Sair</a>
@@ -81,44 +82,87 @@
 
 		<div class="row">
 			<div class="col-sm-5"></div>
-			<div class="col-sm-3">Notificações</div>
+			<div class="col-sm-3"></div>
 			<div class="col-sm-4"></div>
-		</div>            
-  <table class="table table-hover">
+		</div>
+
+		<div class="row">
+			<div class="col-sm-5"></div>
+			<div class="col-sm-3"><b class="btn btn-secondary btn-sm">Informe data de início e fim</b></div>
+			<div class="col-sm-4"></div>
+		</div><br />
+
+	<div class="container mt-3">
+	  	<form enctype="multipart/form-data" action="submit" method="POST">{% csrf_token %}
+	  		<div class="container">
+	  			<div class="row">
+	  				<div class="col-sm-1"></div>
+	  				<div class="col-sm-5">Início
+	  					<div class="form-check-inline">
+							<input type="date" class="form-control form-control-sm" id="" placeholder="" name="data_inicio" value="" required>
+					    </div>
+	  				</div>
+	  				<div class="col-sm-1"></div>
+	  				<div class="col-sm-5">Fim
+	  					<div class="form-check-inline">
+							<input type="date" class="form-control form-control-sm" id="" placeholder="" name="data_fim" value="" required>
+					    </div>
+	  				</div>
+	  			</div>
+	  		</div>
+	  		<br />
+
+	  		<div class="container-fluid" style="text-align: center;">
+				<a href="/gerar_relatorios/" class="btn btn-info btn-sm" style="background-color: #0066ff">Nova pesquisa</a>  
+	    	</div><br />
+	  	</form>
+	</div>
+
+	<hr />
+
+	
+
+	
+
+
+
+	<table class="table table-hover" style="font-size: 60%" id="tb_covid1" cellspacing="0" cellpadding="0">
     <thead>
       <tr>
-        <th>Data da notificação</th>
-        <th>Estabelecimento Solicitante</th>
-        <th>Paciente</th>
+      	<th>Protocolo</th>
+      	<th>Registro CERN</th>
+      	<th>Nome</th>
         <th>Idade</th>
-        <th>Ações</th>
+        <th>Sexo</th>
+        <th>Regulação</th>
+        <th>Município de Residencia</th>
+        <th>Estabelecimento de Origem</th>
+        <th>Estabelecimento Referencia Covid</th>
+        <th>Município do Estabelecimento</th>
+        <th>Perfil</th>
+        <th>Data</th>
+        <th>Comorbidades</th>
+        <th>Nível de Atenção</th>
+        <th>Tipo de Teste</th>
+        <th>Teste Covid</th>
       </tr>
     </thead>
     <tbody>
-    	{% for o in regs %}
+    	{% for v in values %}
       <tr>
-        <td>{{o.data_notificacao|date:'d/m/Y'}} - {{o.hora_notificacao|time:'H:i'}}</td>
-        <td>
-        	{% if o.estabelecimento_solicitante == '' or o.estabelecimento_solicitante == None %}
-        	<a href="#">{{o.estabelecimento_outro}}</a>
-        	{%else%}
-        	<a href="#">{{o.estabelecimento_solicitante}}</a>
-        	{%endif%}
-        </td>
-        <td>{{o.nome_paciente}}</td>
-        <td>
-        	{% if o.idade_paciente == '' or o.idade_paciente == None %}
-        	{%else%}
-        	{{o.idade_paciente}}
-        	{%endif%}
-        </td>
-        <td style="font-size: 87%">
-        	<a href="/regulacao_edit/{{o.id}}">Editar</a>
-        	
-        	<a href="/regulacao/{{o.id}}/">Regular</a>
-        	<a href="/regulacao_detail/{{o.id}}/">Ver</a>
-        	
-        </td>
+      	<td>SESCOVID{{v.codigo_sescovid}}</td>
+      	<td>{{v.codigo_registro_completo}}</td>
+      	<td>{{v.nome_paciente}}</td>
+      	<td>{{v.idade_paciente}}</td>
+      	<td>{{v.sexo_paciente}}</td>
+      	<td>
+      		{% if v.regulacao_paciente == 'Paciente preenche critérios para Regulação' %}
+      		Regulado
+      		{%else%}
+      		Não Regulado
+      		{%endif%}
+      	</td>
+      	<td>{{v.cidade_origem}}</td>        
       </tr>
       	{% endfor %}
       
@@ -126,22 +170,6 @@
   </table>
 
   <div style="height: 50px"></div>
-	<div class="pagination">
-	  <span class="step-links" style="margin: auto">
-	    {% if regs.has_previous %}
-	      <a href="?page={{regs.previous_page_number}}">Anterior</a>
-	    {% endif %}
-	    
-	    <span class="current">
-	        {{regs.number}} de {{regs.paginator.num_pages}}
-	    </span>
-	    {% if regs.has_next %}
-	      <a href="?page={{regs.next_page_number}}">Próximo</a>
-	    {% endif %}
-	    
-	  </span>  
-	    
-	</div>
 
 		
 	</div><br />

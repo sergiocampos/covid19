@@ -7,6 +7,7 @@ from time import gmtime, strftime
 from django.core.paginator import Paginator
 from django.urls import reverse
 from urllib.parse import urlencode
+import pandas as pds
 
 # Create your views here.
 
@@ -164,6 +165,7 @@ def registro_covid_set(request):
 	else:
 		idade_paciente = None
 	
+	sexo_paciente = request.POST.get('sexo_paciente')
 	recurso_que_precisa = request.POST.get('recurso_que_precisa')
 	estado_origem = request.POST.get('estado_paciente')
 	cidade_origem = request.POST.get('cidade_paciente')
@@ -223,6 +225,7 @@ def registro_covid_set(request):
 		estabelecimento_outro = estabelecimento_outro,
 		nome_paciente = nome_paciente,
 		idade_paciente = idade_paciente,
+		sexo_paciente = sexo_paciente,
 		recurso_que_precisa = recurso_que_precisa,
 		estado_origem = estado_origem,
 		cidade_origem = cidade_origem,
@@ -276,6 +279,7 @@ def regulacao_set(request, id):
 	else:
 		idade_paciente = int(float(idade_paciente_cap))
 
+	sexo_paciente = request.POST.get('sexo_paciente')
 	recurso_que_precisa = registro.recurso_que_precisa
 	estado_origem = registro.estado_origem
 	cidade_origem = registro.cidade_origem
@@ -679,6 +683,7 @@ def regulacao_set(request, id):
 	registro.estabelecimento_outro = estabelecimento_outro
 	registro.nome_paciente = nome_paciente
 	registro.idade_paciente = idade_paciente
+	registro.sexo_paciente = sexo_paciente
 	registro.recurso_que_precisa = recurso_que_precisa
 	registro.estado_origem = estado_origem
 	registro.cidade_origem = cidade_origem
@@ -854,6 +859,8 @@ def regulacao_edit_set(request, id):
 	else:
 		idade_paciente = None
 	
+	sexo_paciente = request.POST.get('sexo_paciente')
+
 	recurso_que_precisa = request.POST.get('recurso_que_precisa')
 	#estado_origem = request.POST.get('estado_paciente')
 	cidade_origem = request.POST.get('cidade_origem')
@@ -948,3 +955,24 @@ def result_search_between_date(request):
 
 
 	return render(request, 'result_search_between_date.html')
+
+
+@login_required
+def gerar_relatorios(request):
+	
+	return render(request, 'gerar_relatorios.html')
+
+
+@login_required
+def gerar_relatorios_set(request):
+	data_inicio = request.POST.get('data_inicio')
+	data_fim = request.POST.get('data_fim')
+
+	values = RegistroCovid.objects.filter(data_notificacao__range=[data_inicio, data_fim])
+	df = pds.DataFrame(values)
+	df.to_excel('home\desktop\exemplo.xlsx', index=None, header=True)
+	return render(request, 'result_for_relatorios.html', {'values':values})
+
+@login_required
+def result_for_relatorios(request):
+	return render(request, 'result_for_relatorios.html')

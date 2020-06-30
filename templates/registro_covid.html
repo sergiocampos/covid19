@@ -740,6 +740,24 @@ dgCidadesEstados.prototype = {
 				        <input type="number" class="form-control form-control-sm" id="" placeholder="" name="idade_paciente" value="{{idade_paciente}}" min="1" max="200" style="width: 60px">
 				    </div>
     			</div>
+    			<div class="col-sm-4">
+    				Sexo:
+					<div class="form-check-inline">
+						{% if registro.sexo_paciente == '' or registro.sexo_paciente == None %}
+						<select class="form-control form-control-sm" name="sexo_paciente" id="" style="width: 125px">
+							<option value="" selected>escolha...</option>
+							<option value="MASCULINO">MASCULINO</option>
+							<option value="FEMININO">FEMININO</option>
+						</select>
+					    {%else%}
+					    <select class="form-control form-control-sm" name="sexo_paciente" id="" style="width: 125px">
+							<option value="{{registro.sexo_paciente}}" selected>{{registro.sexo_paciente}}</option>
+							<option value="MASCULINO">MASCULINO</option>
+							<option value="FEMININO">FEMININO</option>
+						</select>
+					    {%endif%}
+					</div>
+    			</div>
 								
     			
 			</div>			

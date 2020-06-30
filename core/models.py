@@ -18,9 +18,10 @@ class RegistroCovid(models.Model):
 	municipio_estabelecimento = models.CharField(max_length=100, blank=True, default='', null=True)
 	estabelecimento_solicitante = models.CharField(max_length=200, blank=True, default='', null=True)
 	estabelecimento_outro = models.CharField(max_length=200, blank=True, default='', null=True)
-	unidade_origem = models.CharField(max_length=100, blank=True, default='', null=True)
+	
 	nome_paciente = models.CharField(max_length=100, blank=True, default='', null=True)
 	idade_paciente = models.IntegerField(blank=True, null=True)
+	sexo_paciente = models.CharField(max_length=10, blank=True, null=True)
 	recurso_que_precisa = models.TextField(blank=True, null=True)
 	estado_origem = models.CharField(max_length=100, blank=True, default='', null=True)
 	cidade_origem = models.CharField(max_length=100, blank=True, default='', null=True)

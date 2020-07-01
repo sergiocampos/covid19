@@ -973,7 +973,7 @@ def gerar_relatorios_set(request):
 	values = RegistroCovid.objects.filter(data_notificacao__range=[data_inicio, data_fim])
 	
 	df = pds.DataFrame(values)
-	df.columns = ['Paciente']
+	df.columns = ['Paciente', 'Senha']
 	excel_file = IO()
 	xlwriter = pds.ExcelWriter(excel_file, engine='xlsxwriter')
 

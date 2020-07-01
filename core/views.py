@@ -8,6 +8,8 @@ from django.core.paginator import Paginator
 from django.urls import reverse
 from urllib.parse import urlencode
 import pandas as pds
+from django.http import HttpResponse
+from io import BytesIO as IO
 
 # Create your views here.
 
@@ -969,9 +971,26 @@ def gerar_relatorios_set(request):
 	data_fim = request.POST.get('data_fim')
 
 	values = RegistroCovid.objects.filter(data_notificacao__range=[data_inicio, data_fim])
+	
 	df = pds.DataFrame(values)
-	df.to_excel('home\desktop\exemplo.xlsx', index=None, header=True)
-	return render(request, 'result_for_relatorios.html', {'values':values})
+	df.columns = ['Paciente']
+	excel_file = IO()
+	xlwriter = pds.ExcelWriter(excel_file, engine='xlsxwriter')
+
+
+	df.to_excel(xlwriter, 'report_covid', index=False, header=True)
+	xlwriter.save()
+	xlwriter.close()
+
+	excel_file.seek(0)
+
+	response = HttpResponse(excel_file.read(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+
+	response['Content-Disposition'] = 'attachment; filename=myfile.xlsx'
+
+	return response
+
+	#return render(request, 'result_for_relatorios.html', {'values':values})
 
 @login_required
 def result_for_relatorios(request):

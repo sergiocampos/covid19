@@ -10,6 +10,7 @@ from urllib.parse import urlencode
 import pandas as pds
 from django.http import HttpResponse
 from io import BytesIO as IO
+from openpyxl import Workbook
 
 # Create your views here.
 
@@ -971,22 +972,74 @@ def gerar_relatorios_set(request):
 	data_fim = request.POST.get('data_fim')
 
 	values = RegistroCovid.objects.filter(data_notificacao__range=[data_inicio, data_fim])
-	
-	df = pds.DataFrame(values)
-	df.columns = ['Paciente', 'Senha']
-	excel_file = IO()
-	xlwriter = pds.ExcelWriter(excel_file, engine='xlsxwriter')
 
-
-	df.to_excel(xlwriter, 'report_covid', index=False, header=True)
-	xlwriter.save()
-	xlwriter.close()
-
-	excel_file.seek(0)
-
-	response = HttpResponse(excel_file.read(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+	response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
 	response['Content-Disposition'] = 'attachment; filename=myfile.xlsx'
+
+	workbook = Workbook()
+	worksheet = workbook.active
+
+	columns = [
+		'Protocolo',
+		'Registro CERN',
+		'Nome',
+		'Idade',
+		'Sexo',
+		'Regulacao',
+		'Município de Residencia',
+		'Estabelecimento de Origem',
+		'Estabelecimento Referencia Covid',
+		'Município do Estabelecimento',
+		'Perfil',
+		'Data',
+		'Comorbidades',
+		'Nível de Atenção',
+		'Tipo de Teste',
+		'Teste Covid',
+
+	]
+
+	row_num = 1
+
+
+	for col_num, column_title in enumerate(columns, 1):
+		cell = worksheet.cell(row=row_num, column=col_num)
+		cell.value = column_title
+
+	for v in values:
+		row_num += 1
+
+		comorbidades_list = v.comorbidades
+		comorbidades = str(comorbidades_list)
+
+		row = [
+			v.codigo_sescovid,
+			v.codigo_registro_completo,
+			v.nome_paciente,
+			v.idade_paciente,
+			v.sexo_paciente,
+			v.regulacao_paciente,
+			v.cidade_origem,
+			v.estabelecimento_solicitante,
+			v.estabelecimento_outro,
+			v.municipio_estabelecimento,
+			v.leito,
+			v.data_notificacao,
+			v.comorbidades,
+			v.news_fast_pb,
+			v.rt_pcr_sars_cov_2,
+			v.pesquisa_teste_sars_cov_2,
+		]
+		for col_num, cell_value in enumerate(row, 1):
+			cell = worksheet.cell(row=row_num, column=col_num)
+			cell_value_ = str(cell_value)
+			cell.value = cell_value_
+
+	workbook.save(response)
+
+
+
 
 	return response
 

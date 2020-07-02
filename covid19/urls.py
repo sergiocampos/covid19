@@ -38,5 +38,6 @@ urlpatterns = [
     path('result_search_between_date/', views.result_search_between_date, name='result_search_between_date'),
     path('gerar_relatorios/', views.gerar_relatorios, name='gerar_relatorios'),
     path('gerar_relatorios/submit', views.gerar_relatorios_set),
-    path('result_for_relatorios/', views.result_for_relatorios, name='result_for_relatorios')
+    path('result_for_relatorios/', views.result_for_relatorios, name='result_for_relatorios'),
+    path('status_registro/<id>/', views.status_registro, name='status_registro')
 ]

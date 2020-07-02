@@ -26,6 +26,22 @@
 		});
 	</script>
 
+	<style>
+		#status_regulacao_id,
+		#paciente_regulado_id,
+		#paciente_lista_id,
+		#paciente_internado_id,
+		#paciente_obito_id,
+		#paciente_nao_regulado_id,
+		#paciente_regulado_id,
+		#paciente_obito_regulacao_id,
+		#paciente_lista_regulacao_id,
+		#paciente_internado_regulacao_id,
+		#ag_conf_vaga_regulacao_id {
+		display: none;
+	}
+	</style>
+
 </head>
 <body>
 
@@ -2731,8 +2747,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 				<div class="col-sm-3" style="margin-top: 30px">
 					<div class="form-check-inline" style="font-size: 83%; width: 150px">
-    					SESCOVID
-    					<input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="{{registro.codigo_sescovid}}">
+    					<input type="text" min="0" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="{{registro.codigo_sescovid}}">
 				    </div>
 				</div>			
 
@@ -2956,7 +2971,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					    </div>
 					    {%else%}
 					    <div class="form-check-inline">
-							<input type="text" class="form-control form-control-sm" id="" placeholder="" name="data_regulacao_bd" size="10" value="{{registro.data_regulacao}}">
+							<input type="text" class="form-control form-control-sm" id="" placeholder="" name="data_regulacao_bd" value="{{data_regulacao_template}}">
 					    </div>
 					    {%endif%}
 					    

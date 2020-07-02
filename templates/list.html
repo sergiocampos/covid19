@@ -100,12 +100,12 @@
         <td>{{o.data_notificacao|date:'d/m/Y'}} - {{o.hora_notificacao|time:'H:i'}}</td>
         <td>
         	{% if o.estabelecimento_solicitante == '' or o.estabelecimento_solicitante == None %}
-        	<a href="#">{{o.estabelecimento_outro}}</a>
+        	{{o.estabelecimento_outro}}
         	{%else%}
-        	<a href="#">{{o.estabelecimento_solicitante}}</a>
+        	{{o.estabelecimento_solicitante}}
         	{%endif%}
         </td>
-        <td>{{o.nome_paciente}}</td>
+        <td><a href="status_registro/{{o.id}}/">{{o.nome_paciente}}</a></td>
         <td>
         	{% if o.idade_paciente == '' or o.idade_paciente == None %}
         	{%else%}

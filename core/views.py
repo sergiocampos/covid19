@@ -157,8 +157,8 @@ def registro_covid_set(request):
 
 	
 	nome_solicitante = request.POST.get('nome_solicitante')
-	municipio_estabelecimento = request.POST.get("municipio_do_estabelecimento")
-	estabelecimento_solicitante = request.POST.get('estabelecimento_solicitante')
+	municipio_estabelecimento = request.POST.get('municipio_solicitante')
+	estabelecimento_solicitante = request.POST.get('estabelecimento_solicitante_new')
 	estabelecimento_outro = request.POST.get('desc_outro_estabelecimento')
 	nome_paciente = request.POST.get('nome_paciente')
 	
@@ -252,6 +252,8 @@ def registro_enfermeiro_medico(request):
 
 @login_required
 def regulacao(request, id):
+	data_regulacao = datetime.now()
+	data_regulacao_template = data_regulacao.strftime('%d/%m/%Y %H:%M')
 
 	registro = RegistroCovid.objects.get(id=id)
 	pa = registro.pa
@@ -260,7 +262,8 @@ def regulacao(request, id):
 	pa_1 = p[0]
 	pa_2 = p[1]
 
-	return render(request, 'regulacao.html', {'registro' : registro, 'pa_1':pa_1, 'pa_2':pa_2})
+	return render(request, 'regulacao.html', {'registro' : registro, 'pa_1':pa_1, 
+		'pa_2':pa_2, 'data_regulacao_template': data_regulacao_template})
 
 
 @login_required
@@ -603,23 +606,23 @@ def regulacao_set(request, id):
 		prioridade = int(float(prioridade_cap))
 		
 
-	status_regulacao = registro.status_regulacao
+	#status_regulacao = registro.status_regulacao
 	
 	regulacao_paciente = request.POST.get('paciente_preenche_criterios')
 
-	status_regulacao_cap = request.POST.getlist('status_paciente')
+	status_regulacao = request.POST.getlist('status_paciente')
 
-	if regulacao_paciente == 'Paciente não preenche critérios para Regulação':
-		if status_regulacao == '' or status_regulacao == None or status_regulacao == []:
-			status_regulacao = '{Paciente Não Regulado}'
-		else:
-			status_regulacao = status_regulacao + status_regulacao_cap
+	#if regulacao_paciente == 'Paciente não preenche critérios para Regulação':
+	#	if status_regulacao == '' or status_regulacao == None or status_regulacao == []:
+	#		status_regulacao = '{Paciente Não Regulado}'
+	#	else:
+	#		status_regulacao = status_regulacao + status_regulacao_cap
 
-	elif regulacao_paciente == 'Paciente preenche critérios para Regulação':
-		if status_regulacao == '' or status_regulacao == None or status_regulacao == []:
-			status_regulacao = '{Paciente Regulado, Aguardando confirmação de Vaga}'
-		else:
-			status_regulacao = status_regulacao + status_regulacao_cap
+	#elif regulacao_paciente == 'Paciente preenche critérios para Regulação':
+	#	if status_regulacao == '' or status_regulacao == None or status_regulacao == []:
+	#		status_regulacao = '{Paciente Regulado, Aguardando confirmação de Vaga}'
+	#	else:
+	#		status_regulacao = status_regulacao + status_regulacao_cap
 			#x = set(status_regulacao)
 			#y = set(status_regulacao_cap)
 			#print("lista do banco:", str(x))
@@ -642,7 +645,11 @@ def regulacao_set(request, id):
 	
 
 	#status_regulacao = request.POST.get('')
-	codigo_sescovid = request.POST.get('num_protocolo')
+	codigo_sescovid_cap = request.POST.get('num_protocolo')
+	if codigo_sescovid_cap == '' or codigo_sescovid_cap == None:
+		codigo_sescovid = registro.codigo_sescovid
+	else:
+		codigo_sescovid = 'SESCOVID' + codigo_sescovid_cap
 	justificativa = request.POST.get('justificativa')
 	observacao = request.POST.get('observacoes_medicas')
 	
@@ -655,15 +662,9 @@ def regulacao_set(request, id):
 	else:
 		pareceristas = pareceristas + pareceristas_cap
 
-	data_regulacao_bd_cap = request.POST.get('data_regulacao_bd')
-	data_regulacao_cap = request.POST.get('data_regulacao')
-	if data_regulacao_cap == '' or data_regulacao_cap == None:
-		if data_regulacao_bd_cap == '' or data_regulacao_bd_cap == None:
-			data_regulacao = None
-		else:
-			data_regulacao = datetime.strptime(data_regulacao_bd_cap, '%d/%m/%Y').date()
-	else:
-		data_regulacao = data_regulacao_cap
+	
+	data_regulacao = datetime.now()
+	#data_regulacao = data_regulacao_.strftime('%d/%m/%Y %H:%M')
 
 
 	data_obito_bd_cap = request.POST.get('data_obito_bd')
@@ -811,6 +812,10 @@ def regulacao_set(request, id):
 def regulacao_detail(request, id):
 	registro = RegistroCovid.objects.get(id=id)
 
+	data_regulacao = registro.data_regulacao
+	if data_regulacao:
+		data_regulacao_template = data_regulacao.strftime('%d/%m/%Y %H:%M')
+
 	responsavel_pelo_preenchimento = request.user
 
 	pa = registro.pa
@@ -820,7 +825,8 @@ def regulacao_detail(request, id):
 
 	
 
-	return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 'p2':p2})
+	return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
+		'p2':p2, 'data_regulacao_template':data_regulacao_template})
 
 @login_required
 def regulacao_edit(request, id):
@@ -851,7 +857,7 @@ def regulacao_edit_set(request, id):
 	#hora_notificacao = request.POST.get('hora_notificacao')
 	
 	nome_solicitante = request.POST.get('nome_solicitante')
-	municipio_estabelecimento = request.POST.get("municipio_do_estabelecimento")
+	municipio_estabelecimento = request.POST.get('municipio_do_estabelecimento')
 	estabelecimento_solicitante = request.POST.get('estabelecimento_solicitante')
 	estabelecimento_outro = request.POST.get('desc_outro_estabelecimento')
 	nome_paciente = request.POST.get('nome_paciente')
@@ -972,6 +978,8 @@ def gerar_relatorios_set(request):
 	data_fim = request.POST.get('data_fim')
 
 	values = RegistroCovid.objects.filter(data_notificacao__range=[data_inicio, data_fim])
+	#for vl in values:
+	#	print(', '.join(vl.comorbidades))
 
 	response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
@@ -1010,8 +1018,18 @@ def gerar_relatorios_set(request):
 	for v in values:
 		row_num += 1
 
-		comorbidades_list = v.comorbidades
-		comorbidades = str(comorbidades_list)
+		#comorbidades_list = v.comorbidades
+		#comorbidades = str(comorbidades_list)
+		#v.comorbidades.reverse()
+		#print(v.comorbidades)
+		if v.regulacao_paciente == 'Paciente preenche critérios para Regulação':
+			v.regulacao_paciente = 'Regulado'
+
+		if v.regulacao_paciente == 'Paciente não preenche critérios para Regulação':
+			v.regulacao_paciente = 'Não Regulado'
+
+		if v.data_regulacao:
+			data_ = v.data_regulacao.strftime("%d-%m-%Y")
 
 		row = [
 			v.codigo_sescovid,
@@ -1025,7 +1043,7 @@ def gerar_relatorios_set(request):
 			v.estabelecimento_outro,
 			v.municipio_estabelecimento,
 			v.leito,
-			v.data_notificacao,
+			data_,
 			v.comorbidades,
 			v.news_fast_pb,
 			v.rt_pcr_sars_cov_2,
@@ -1048,3 +1066,9 @@ def gerar_relatorios_set(request):
 @login_required
 def result_for_relatorios(request):
 	return render(request, 'result_for_relatorios.html')
+
+
+@login_required
+def status_registro(request, id):
+	registro = RegistroCovid.objects.get(id=id)
+	return render(request, 'status_registro.html', {'registro':registro})

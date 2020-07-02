@@ -170,7 +170,7 @@ class RegistroCovid(models.Model):
 	observacao = models.TextField(blank=True, default='', null=True)
 
 	pareceristas  = ArrayField(models.CharField(max_length=100), blank=True, null=True)
-	data_regulacao = models.DateField(blank=True, null=True, default=None)
+	data_regulacao = models.DateTimeField(blank=True, null=True, default=None)
 
 
 

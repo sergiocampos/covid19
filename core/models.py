@@ -159,7 +159,6 @@ class RegistroCovid(models.Model):
 	prioridade = models.IntegerField(blank=True, null=True)
 
 	regulacao_paciente = models.CharField(max_length=100, blank=True, default='', null=True)
-	status_regulacao = ArrayField(models.CharField(max_length=100), blank=True, null=True)
 	
 	data_obito = models.DateField(blank=True, null=True, default=None)
 
@@ -184,3 +183,13 @@ class Cnes(models.Model):
 
 	def __str__(self):
 		return str(self.MUNICIPIO)
+
+
+class Status(models.Model):
+	descricao = models.CharField(max_length=200, blank=True, default='', null=True)
+	data_notificacao = models.DateField(auto_now_add=True)
+	hora_notificacao = models.TimeField(auto_now_add=True)
+	registro_covid = models.ForeignKey(RegistroCovid, on_delete=models.CASCADE, null=True)
+
+	def __str__(self):
+		return str(self.descricao)

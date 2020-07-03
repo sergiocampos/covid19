@@ -61,7 +61,7 @@
 		      <a class="nav-link" href="/search_register/">Localizar</a>
 		    </li>
 		    <li class="nav-item">
-		      <a class="nav-link active" href="/gerar_relatorios/">Relatórios</a>
+		      <a class="nav-link" href="/gerar_relatorios/">Relatórios</a>
 		    </li>
 		    <li>
 		    	<a class="nav-link" href="/accounts/logout">Sair</a>
@@ -111,7 +111,7 @@
 
 		<div class="row">
 				<div class="col-sm-4"></div>
-				{% if 'Aguardando confirmação de Vaga' in registro.status_regulacao %}
+				{% if 'Aguardando confirmação de Vaga' in status_list_descricao %}
 				<div id="" class="col-sm-4" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
 					<b><i>Aguardando Confirmação de Vaga! - {{registro.data_regulacao}}</i></b>
 				</div>
@@ -125,7 +125,7 @@
 
 			<div class="row">
 				<div class="col-sm-4"></div>
-				{% if 'Obito' in registro.status_regulacao %}
+				{% if 'Obito' in status_list_descricao %}
 				<div id="" class="col-sm-4" style="background-color: #c6c6c6; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
 					<b><i>Paciente veio a óbito! - {{registro.data_regulacao}}</i></b>
 				</div>
@@ -139,7 +139,7 @@
 
 			<div class="row">
 				<div class="col-sm-4"></div>
-				{% if 'Aguardando em Lista de Espera' in registro.status_regulacao %}
+				{% if 'Aguardando em Lista de Espera' in status_list_descricao %}
 				<div id="" class="col-sm-4" style="background-color: #ffcc99; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
 					<b><i>Paciente em Lista de espera! - {{registro.data_regulacao}}</i></b>
 				</div>
@@ -154,7 +154,7 @@
 
 			<div class="row">
 				<div class="col-sm-4"></div>
-				{% if 'Vaga confirmada com Internação Imediata' in registro.status_regulacao %}
+				{% if 'Vaga confirmada com Internação Imediata' in status_list_descricao %}
 				<div id="" class="col-sm-4" style="background-color: #b3e6b3; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
 					<b><i>Paciente encaminhado para Internação! - {{registro.data_regulacao}}</i></b>
 				</div>
@@ -168,7 +168,7 @@
 
 			<div class="row">
 				<div class="col-sm-4"></div>
-				{% if 'Paciente não preenche critérios para Regulação' in registro.regulacao_paciente %}
+				{% if 'Paciente não preenche critérios para Regulação' in status_list_descricao %}
 				<div id="" class="col-sm-4" style="background-color: #ffbb99; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
 					<b><i>Paciente Não Regulado! - {{registro.data_regulacao}}</i></b>
 				</div>

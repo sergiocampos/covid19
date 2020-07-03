@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from datetime import datetime, timezone
-from .models import RegistroCovid, Cnes
+from .models import RegistroCovid, Cnes, Status
 import calendar
 from time import gmtime, strftime
 from django.core.paginator import Paginator
@@ -262,8 +262,17 @@ def regulacao(request, id):
 	pa_1 = p[0]
 	pa_2 = p[1]
 
+	status_registro = Status.objects.filter(registro_covid=registro.id)
+
+	status_list_descricao = []
+
+	for s in status_registro:
+		status_list_descricao.append(s.descricao)
+
+
 	return render(request, 'regulacao.html', {'registro' : registro, 'pa_1':pa_1, 
-		'pa_2':pa_2, 'data_regulacao_template': data_regulacao_template})
+		'pa_2':pa_2, 'data_regulacao_template': data_regulacao_template,
+		'status_list_descricao':status_list_descricao})
 
 
 @login_required
@@ -610,41 +619,30 @@ def regulacao_set(request, id):
 	
 	regulacao_paciente = request.POST.get('paciente_preenche_criterios')
 
-	status_regulacao = request.POST.getlist('status_paciente')
+	descricao = request.POST.get('status_paciente')
+	#status_obito = request.POST.get('status_paciente_obito')
+	#status_aguardando_em_lista = request.POST.get('status_paciente_l_e')
+	#status_aguardando_confirmacao_vaga = request.POST.get('status_paciente_a_c_v')
+	#if status_vaga_confirmada_i_imediata != '':
+	#	descricao = status_vaga_confirmada_i_imediata
+	#if status_obito != '':
+	#	descricao = status_obito
+	#if status_aguardando_em_lista != '':
+	#	descricao = status_aguardando_em_lista
+	#if status_aguardando_confirmacao_vaga != '':
+	#	descricao = status_aguardando_confirmacao_vaga
 
-	#if regulacao_paciente == 'Paciente não preenche critérios para Regulação':
-	#	if status_regulacao == '' or status_regulacao == None or status_regulacao == []:
-	#		status_regulacao = '{Paciente Não Regulado}'
-	#	else:
-	#		status_regulacao = status_regulacao + status_regulacao_cap
+	#data = datetime.now()
+	#data_notificacao = data.strftime("%d-%m-%Y")
+	#hora_notificacao = data.strftime("%H:%M")
 
-	#elif regulacao_paciente == 'Paciente preenche critérios para Regulação':
-	#	if status_regulacao == '' or status_regulacao == None or status_regulacao == []:
-	#		status_regulacao = '{Paciente Regulado, Aguardando confirmação de Vaga}'
-	#	else:
-	#		status_regulacao = status_regulacao + status_regulacao_cap
-			#x = set(status_regulacao)
-			#y = set(status_regulacao_cap)
-			#print("lista do banco:", str(x))
-			#print("lista capturada:", str(y))
+	registro_covid = registro
 
-			#dif = y.difference(x)
-			#print("diferença de opções:", str(dif))
-			#if dif != 'set()':
-			#	status_regulacao.append(str(dif))
-			#status_regulacao = status_regulacao + status_regulacao_cap
-			#status_regulacao = list(set(status_regulacao) - set(status_regulacao_cap))
-			#for k in status_regulacao:
-			#	print("valor do banco:",k)
-			#	for v in status_regulacao_cap:
-			#		print("valor escolhido:",v)
-			#		if k != v:
-			#			print("k é diferente de v")
-			#			status_regulacao.append(v)
-			#print("nova lista:", status_regulacao)
-	
+	status = Status.objects.create(
+		descricao=descricao,
+		registro_covid=registro_covid
+		)
 
-	#status_regulacao = request.POST.get('')
 	codigo_sescovid_cap = request.POST.get('num_protocolo')
 	if codigo_sescovid_cap == '' or codigo_sescovid_cap == None:
 		codigo_sescovid = registro.codigo_sescovid
@@ -795,7 +793,7 @@ def regulacao_set(request, id):
 	registro.parecer_medico = parecer_medico
 	registro.prioridade = prioridade
 	registro.regulacao_paciente = regulacao_paciente
-	registro.status_regulacao = status_regulacao
+	#registro.status_regulacao = status_regulacao
 	registro.codigo_sescovid = codigo_sescovid
 	registro.justificativa = justificativa
 	registro.observacao = observacao
@@ -823,10 +821,18 @@ def regulacao_detail(request, id):
 	p1 = p[0]
 	p2 = p[1]
 
+	status_registro = Status.objects.filter(registro_covid=registro.id)
+
+	status_list_descricao = []
+
+	for s in status_registro:
+		status_list_descricao.append(s.descricao)
+
 	
 
 	return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
-		'p2':p2, 'data_regulacao_template':data_regulacao_template})
+		'p2':p2, 'data_regulacao_template':data_regulacao_template, 
+		'status_list_descricao':status_list_descricao})
 
 @login_required
 def regulacao_edit(request, id):
@@ -1071,4 +1077,22 @@ def result_for_relatorios(request):
 @login_required
 def status_registro(request, id):
 	registro = RegistroCovid.objects.get(id=id)
-	return render(request, 'status_registro.html', {'registro':registro})
+	
+	status_registro = Status.objects.filter(registro_covid=registro.id)
+
+	status_list_descricao = []
+	status_list_datas = []
+	status_list_horas = []
+
+	for s in status_registro:
+		status_list_descricao.append(s.descricao)
+
+	for d in status_registro:
+		status_list_datas.append(d.data_notificacao)
+
+	for h in status_registro:
+		status_list_horas.append(h.hora_notificacao)
+
+	return render(request, 'status_registro.html', {'registro':registro, 
+		'status_list_descricao':status_list_descricao, 'status_list_datas':
+		status_list_datas, 'status_list_horas':status_list_horas})

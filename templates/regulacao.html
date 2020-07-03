@@ -489,6 +489,8 @@ function activeInternacaoImediata(){
 	else {
 		$("#paciente_internado_regulacao_id").hide();
 	}
+
+	$("#data_obito_id").val("");
 	
 }
 
@@ -512,6 +514,8 @@ function activeListaEspera(){
 	else {
 		$("#paciente_lista_regulacao_id").hide();
 	}
+
+	$("#data_obito_id").val("");
 	
 }
 
@@ -3270,16 +3274,16 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="row">
 				<div class="col-sm-5"></div>
 					<div class="col-sm-4">
-						{% if 'Vaga confirmada com Internação Imediata' in registro.status_regulacao %}
+						{% if 'Vaga confirmada com Internação Imediata' in status_list_descricao %}
 						<div class="form-check-inline" style="font-size: 83%">
 					      <label class="form-check-label" for="" id="lb_vaga_conf_internacao">
-					        <input type="checkbox" class="form-check-input" id="check_internacao_id" name="status_paciente" value="Vaga confirmada com Internação Imediata" onclick="activeInternacaoImediata()" checked>Vaga confirmada com Internação Imediata
+					        <input type="radio" class="form-check-input" id="check_internacao_id" name="status_paciente" value="Vaga confirmada com Internação Imediata" onclick="activeInternacaoImediata()" checked>Vaga confirmada com Internação Imediata
 					      </label>
 					    </div>
 					    {%else%}
 					    <div class="form-check-inline" style="font-size: 83%">
 					      <label class="form-check-label" for="" id="lb_vaga_conf_internacao">
-					        <input type="checkbox" class="form-check-input" id="check_internacao_id" name="status_paciente" value="Vaga confirmada com Internação Imediata" onclick="activeInternacaoImediata()">Vaga confirmada com Internação Imediata
+					        <input type="radio" class="form-check-input" id="check_internacao_id" name="status_paciente" value="Vaga confirmada com Internação Imediata" onclick="activeInternacaoImediata()">Vaga confirmada com Internação Imediata
 					      </label>
 					    </div>
 					    {%endif%}
@@ -3291,17 +3295,17 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-5"></div>
 				<div class="col-sm-3">
-					{% if 'Obito' in registro.status_regulacao %}
+					{% if 'Obito' in status_list_descricao %}
 					<div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="" id="">
-				        <input type="checkbox" class="form-check-input" id="check_obito_id" name="status_paciente" value="Obito" onclick="activeStatusObito()" checked>Óbito
-				        <input type="text" id="data_obito_id" name="data_obito_bd" value="{{registro.data_obito}}">
+				        <input type="radio" class="form-check-input" id="check_obito_id" name="status_paciente" value="Obito" onclick="activeStatusObito()" checked>Óbito
+				        <input type="text" id="data_obito_id_bd" name="data_obito_bd" value="{{registro.data_obito}}">
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="" id="">
-				        <input type="checkbox" class="form-check-input" id="check_obito_id" name="status_paciente" value="Obito" onclick="activeStatusObito()">Óbito
+				        <input type="radio" class="form-check-input" id="check_obito_id" name="status_paciente" value="Obito" onclick="activeStatusObito()">Óbito
 				        <input type="date" required disabled id="data_obito_id" name="data_obito">
 				      </label>
 				    </div>
@@ -3313,43 +3317,42 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-5"></div>
 				<div class="col-sm-4">
-					{% if 'Aguardando em Lista de Espera' in registro.status_regulacao %}
+					{% if 'Aguardando em Lista de Espera' in status_list_descricao %}
 					<div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" id="">
-				        <input type="checkbox" class="form-check-input" id="check_em_lista_espera_id" name="status_paciente" value="Aguardando em Lista de Espera" onclick="activeListaEspera()" checked>AGUARDANDO EM LISTA DE ESPERA
+				        <input type="radio" class="form-check-input" id="check_em_lista_espera_id" name="status_paciente" value="Aguardando em Lista de Espera" onclick="activeListaEspera()" checked>AGUARDANDO EM LISTA DE ESPERA
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" id="">
-				        <input type="checkbox" class="form-check-input" id="check_em_lista_espera_id" name="status_paciente" value="Aguardando em Lista de Espera" onclick="activeListaEspera()">AGUARDANDO EM LISTA DE ESPERA
+				        <input type="radio" class="form-check-input" id="check_em_lista_espera_id" name="status_paciente" value="Aguardando em Lista de Espera" onclick="activeListaEspera()">AGUARDANDO EM LISTA DE ESPERA
 				      </label>
 				    </div>
 				    {%endif%}
 				</div>
 				<div class="col-sm-3"></div>
 			</div>
-			<!--
+		
 			<div class="row">
 				<div class="col-sm-5"></div>
 				<div class="col-sm-4">
-					{% if 'Aguardando confirmação de Vaga' in registro.status_regulacao %}
+					{% if 'Aguardando confirmação de Vaga' in status_list_descricao %}
 					<div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" id="">
-				        <input type="checkbox" class="form-check-input" id="" name="status_paciente" value="Aguardando confirmação de Vaga" onclick="activeListaEspera()" checked>Aguardando confirmação de Vaga
+				        <input type="radio" class="form-check-input" id="check_a_c_vaga_id" name="status_paciente" value="Aguardando confirmação de Vaga" onclick="activeListaEspera()" checked>Aguardando confirmação de Vaga
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" id="">
-				        <input type="checkbox" class="form-check-input" id="" name="status_paciente" value="Aguardando confirmação de Vaga" onclick="activeListaEspera()">Aguardando confirmação de Vaga
+				        <input type="radio" class="form-check-input" id="check_a_c_vaga_id" name="status_paciente" value="Aguardando confirmação de Vaga" onclick="activeListaEspera()">Aguardando confirmação de Vaga
 				      </label>
 				    </div>
 				    {%endif%}
 				</div>
 				<div class="col-sm-3"></div>
 			</div>
-		-->
 		
 
 			<hr>

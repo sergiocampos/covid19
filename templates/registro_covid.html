@@ -696,6 +696,7 @@ dgCidadesEstados.prototype = {
 				<div class="col-sm-4" id="">
 					Escolha estabelecimento solicitante:
 					<select autofocus="autofocus" class="form-control form-control-sm" name="estabelecimento_solicitante_new" id="estabelecimento_id">
+						<option value="">...nenhum</option>
 						{% for e in estabelecimentos %}
 						<option value="{{e.NO_FANTASIA}}">{{e.NO_FANTASIA}}</option>
 						{%endfor%}						

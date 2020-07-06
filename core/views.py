@@ -244,7 +244,7 @@ def registro_covid_set(request):
 
 		)
 
-	return redirect('covid_list')
+	return redirect('/')
 
 @login_required
 def registro_enfermeiro_medico(request):
@@ -269,10 +269,20 @@ def regulacao(request, id):
 	for s in status_registro:
 		status_list_descricao.append(s.descricao)
 
+	status_aguard_conf_vaga_registro = Status.objects.filter(descricao='Aguardando confirmação de Vaga').last()
+	#status_obito_registro = Status.objects.filter(descricao='Obito').last()
+	status_aguard_lista_espera_registro = Status.objects.filter(descricao='Aguardando em Lista de Espera').last()
+	status_regulado_registro = Status.objects.filter(descricao='Regulado').last()
+	status_nao_regulado_registro = Status.objects.filter(descricao='Não Regulado').last()
+
 
 	return render(request, 'regulacao.html', {'registro' : registro, 'pa_1':pa_1, 
 		'pa_2':pa_2, 'data_regulacao_template': data_regulacao_template,
-		'status_list_descricao':status_list_descricao})
+		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
+		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
+		status_aguard_lista_espera_registro, 'status_regulado_registro':
+		status_regulado_registro, 'status_nao_regulado_registro':
+		status_nao_regulado_registro})
 
 
 @login_required
@@ -617,9 +627,9 @@ def regulacao_set(request, id):
 
 	#status_regulacao = registro.status_regulacao
 	
-	regulacao_paciente = request.POST.get('paciente_preenche_criterios')
+	#regulacao_paciente = request.POST.get('paciente_preenche_criterios')
 
-	descricao = request.POST.get('status_paciente')
+	
 	#status_obito = request.POST.get('status_paciente_obito')
 	#status_aguardando_em_lista = request.POST.get('status_paciente_l_e')
 	#status_aguardando_confirmacao_vaga = request.POST.get('status_paciente_a_c_v')
@@ -636,6 +646,7 @@ def regulacao_set(request, id):
 	#data_notificacao = data.strftime("%d-%m-%Y")
 	#hora_notificacao = data.strftime("%H:%M")
 
+	descricao = request.POST.get('status_paciente')
 	registro_covid = registro
 
 	status = Status.objects.create(
@@ -665,16 +676,16 @@ def regulacao_set(request, id):
 	#data_regulacao = data_regulacao_.strftime('%d/%m/%Y %H:%M')
 
 
-	data_obito_bd_cap = request.POST.get('data_obito_bd')
-	data_obito_cap = request.POST.get('data_obito')
+	#data_obito_bd_cap = request.POST.get('data_obito_bd')
+	#data_obito_cap = request.POST.get('data_obito')
 
-	if data_obito_cap == '' or data_obito_cap == None:
-		if data_obito_bd_cap == '' or data_obito_bd_cap == None:
-			data_obito = None
-		else:
-			data_obito = datetime.strptime(data_obito_bd_cap, '%d/%m/%Y').date()
-	else:
-		data_obito = data_obito_cap
+	#if data_obito_cap == '' or data_obito_cap == None:
+	#	if data_obito_bd_cap == '' or data_obito_bd_cap == None:
+	#		data_obito = None
+	#	else:
+	#		data_obito = datetime.strptime(data_obito_bd_cap, '%d/%m/%Y').date()
+	#else:
+	#	data_obito = data_obito_cap
 
 	
 	registro.responsavel_pelo_preenchimento = responsavel_pelo_preenchimento
@@ -792,14 +803,14 @@ def regulacao_set(request, id):
 	registro.leito = leito
 	registro.parecer_medico = parecer_medico
 	registro.prioridade = prioridade
-	registro.regulacao_paciente = regulacao_paciente
+	#registro.regulacao_paciente = regulacao_paciente
 	#registro.status_regulacao = status_regulacao
 	registro.codigo_sescovid = codigo_sescovid
 	registro.justificativa = justificativa
 	registro.observacao = observacao
 	registro.pareceristas = pareceristas
 	registro.data_regulacao = data_regulacao
-	registro.data_obito = data_obito
+	#registro.data_obito = data_obito
 
 	registro.save()
 
@@ -945,11 +956,11 @@ def regulacao_edit_set(request, id):
 def search_register(request):
 	registros = RegistroCovid.objects.all()
 
-	paginator = Paginator(registros, 5)
-	page = request.GET.get('page')
-	regs = paginator.get_page(page)
+	#paginator = Paginator(registros, 5)
+	#page = request.GET.get('page')
+	#regs = paginator.get_page(page)
 
-	return render(request, 'search_register.html', {'regs':regs})
+	return render(request, 'search_register.html', {'registros':registros})
 
 @login_required
 def search_between_date(request):
@@ -1081,18 +1092,20 @@ def status_registro(request, id):
 	status_registro = Status.objects.filter(registro_covid=registro.id)
 
 	status_list_descricao = []
-	status_list_datas = []
-	status_list_horas = []
 
 	for s in status_registro:
 		status_list_descricao.append(s.descricao)
 
-	for d in status_registro:
-		status_list_datas.append(d.data_notificacao)
 
-	for h in status_registro:
-		status_list_horas.append(h.hora_notificacao)
+	status_aguard_conf_vaga_registro = Status.objects.filter(descricao='Aguardando confirmação de Vaga').last()
+	#status_obito_registro = Status.objects.filter(descricao='Obito').last()
+	status_aguard_lista_espera_registro = Status.objects.filter(descricao='Aguardando em Lista de Espera').last()
+	status_regulado_registro = Status.objects.filter(descricao='Regulado').last()
+	status_nao_regulado_registro = Status.objects.filter(descricao='Não Regulado').last()
 
 	return render(request, 'status_registro.html', {'registro':registro, 
-		'status_list_descricao':status_list_descricao, 'status_list_datas':
-		status_list_datas, 'status_list_horas':status_list_horas})
+		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
+		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
+		status_aguard_lista_espera_registro, 'status_regulado_registro':
+		status_regulado_registro,'status_nao_regulado_registro':
+		status_nao_regulado_registro})

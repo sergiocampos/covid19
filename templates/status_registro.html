@@ -91,19 +91,51 @@
 	      	</div>
 	    <br>
 		</div>
-		<hr />
+		
 
 		<div class="row">
 			<div class="col-sm-5"></div>
-			<div class="col-sm-3"></div>
-			<div class="col-sm-4"></div>
+			<div class="col-sm-5"></div>
+			<div class="col-sm-2">
+				<button type="button" class="btn btn-outline-danger btn-sm" style="align-items: center;" id="btn_inicio"><a class="" href="/remove_registro_covid/{{registro.id}}/">Escluir Registro</a></button> 
+			</div>
 		</div>
+		<hr />
+		<br />
 
 		<div class="row">
 			<div class="col-sm-4"></div>
 			<div class="col-sm-4"><b class="">Status do paciente {{registro.nome_paciente}}:</b></div>
-			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Parecer Médico
+				</button>
+			</div>
 		</div><br />
+
+				<!-- The Modal -->
+		  <div class="modal fade" id="myModal">
+		    <div class="modal-dialog">
+		      <div class="modal-content">
+		      
+		        <!-- Modal Header -->
+		        <div class="modal-header">
+		          <h4 class="modal-title">Informações do Parecer:</h4>
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        </div>
+		        
+		        <!-- Modal body -->
+		        <div class="modal-body">
+		          <textarea name="" id="" cols="50" rows="10">{{registro.parecer_medico}}</textarea>
+		        </div>
+		        
+		        <!-- Modal footer -->
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
+		        </div>
+		        
+		      </div>
+		    </div>
+		  </div>
 
 
 
@@ -168,7 +200,8 @@
 	<div class="container mt-3">
 		<div class="container-fluid" style="text-align: center;">
 			<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/">Principal</a></button>
-			<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/regulacao/{{registro.id}}/">Regular</a></button> 
+			<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/regulacao/{{registro.id}}/">Regular</a></button>
+			
 		</div>
 		<br />
 		

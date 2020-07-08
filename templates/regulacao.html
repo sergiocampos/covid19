@@ -529,10 +529,29 @@ function activeListaEspera(){
 	
 }
 
+function activeIgGIgM(){
+	$("#sars_igg_id").show();
+	$("#sars_igm_id").show();
+
+	$("#sars_negativo_id").hide();
+	$("#sars_nao_realizado_id").hide();
+
+	$("#check_sars_negativo").prop("checked", false);
+	$("#check_sars_nao_realizado").prop("checked", false);
+
+}
+
 
 
 
 	</script>
+
+	<style>
+		#sars_igg_id,
+		#sars_igm_id {
+			display: none;
+		}
+	</style>
 
 </head>
 <body>
@@ -674,9 +693,15 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				
 				<div class="col-sm-12">
 					Estabelecimento Solicitante:
+					{% if registro.estabelecimento_solicitante == '' or registro.estabelecimento_solicitante == None %}
 					<div class="form-check-inline" style="width: 70%">
+						<input type="text" class="form-control form-control-sm" value="{{registro.estabelecimento_solicitante_outro}}">
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 70%">
 						<input type="text" class="form-control form-control-sm" value="{{registro.estabelecimento_solicitante}}">
 				    </div>
+				    {%endif%}
 				</div>
 				
     			
@@ -707,6 +732,39 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					    {%endif%}
 					</div>
 				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-5">
+					<b>Município do Estabelecimento de Referência:</b>
+					<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{cidade}}" />
+					
+				</div>
+				<div class="col-sm-2">
+					<button type="button" class="" style="align-items: center; border-radius: 5px; border: 2px solid #c2c2d6" id=""><a class="" href="/regulacao_edit/{{registro.id}}/">Alterar Cidade?</a></button>					
+				</div>
+				
+				<div class="col-sm-5" id="">
+					Escolha estabelecimento de Referência:
+					<select autofocus="autofocus" class="form-control form-control-sm" name="estabelecimento_referencia" id="estabelecimento_id">
+						<option value="">...nenhum</option>
+						{% for e in estabelecimentos %}
+						<option value="{{e.NO_FANTASIA}}">{{e.NO_FANTASIA}}</option>
+						{%endfor%}						
+					</select>
+				</div>
+				
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-6">
+					Outros:
+					<div class="form-check-inline" style="width: 100%">
+						<input type="text" class="form-control form-control-sm" name="estabelecimento_referencia_outro" value="" placeholder="Digite caso não encontrou estabelecimento">
+				    </div>
+				</div>
+				<div class="col-sm-6"></div>
+				
 			</div>
 			<hr>
 			<div class="row">
@@ -1869,7 +1927,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-4">
 					<b>Pesquisa de SARS CoV-2; teste rápido:</b>
 				</div>
-				<div class="col-sm-2">
+				<div class="col-sm-2" style="margin-left: -30px">
 					{% if registro.pesquisa_teste_sars_cov_2 == 'Positivo'  %}
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
@@ -1879,41 +1937,98 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				    {%else%}
 				    <div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo">Positivo
+				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" onclick="activeIgGIgM()">Positivo
 				      </label>
 				    </div>
 				    {%endif%}
 				</div>
-				<div class="col-sm-2">
+				{% if registro.pesquisa_teste_sars_cov_2 != 'Positivo' %}
+				<div class="col-sm-2" id="sars_negativo_id">
 					{% if registro.pesquisa_teste_sars_cov_2 == 'Negativo'  %}
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Negativo" checked>Negativo
+				        <input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo" checked>Negativo
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Negativo">Negativo
+				        <input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo">Negativo
 				      </label>
 				    </div>
 				    {%endif%}
 				</div>
-				<div class="col-sm-4">
+				{%endif%}
+				{% if registro.pesquisa_teste_sars_cov_2 == 'Positivo' %}
+				{% if registro.igm != '' or registro.igm != None %}
+				<div class="col-sm-1" id="" style="margin-left: -90px">
+					<div class="form-check-inline"><b>IgM:</b>
+						<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+				            <option value="{{registro.igm}}" selected>{{registro.igm}}</option>
+				            <option value="REAGENTE">REAGENTE</option>
+				            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+				        </select>
+				    </div>
+				</div>
+				{%else%}
+				<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
+					<div class="form-check-inline"><b>IgM:</b>
+						<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+				            <option value="REAGENTE">REAGENTE</option>
+				            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+				        </select>
+				    </div>
+				</div>
+				{%endif%}
+				{%endif%}
+				
+				{% if registro.pesquisa_teste_sars_cov_2 != 'Positivo' %}
+				<div class="col-sm-4" id="sars_nao_realizado_id">
 					{% if registro.pesquisa_teste_sars_cov_2 == 'Não Realizado'  %}
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Não Realizado" checked>Não Realizado
+				        <input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado" checked>Não Realizado
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Não Realizado">Não Realizado
+				        <input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado">Não Realizado
 				      </label>
 				    </div>
 				    {%endif%}
 				</div>
+				{%endif%}
+				{% if registro.pesquisa_teste_sars_cov_2 == 'Positivo' %}
+				{% if registro.igg != '' or registro.igg != None %}
+				<div class="col-sm-5" id="" style="margin-left: 100px">
+					<div class="form-check-inline"><b>IgG:</b>
+						<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
+				            <option value="{{registro.igg}}" selected>{{registro.igg}}</option>
+				            <option value="REAGENTE">REAGENTE</option>
+				            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+				        </select>
+				    </div>
+				    <div class="form-check-inline" style=""><b>Data:</b>
+				    	<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg_bd" value="{{registro.data_igm_igg}}" style="width: 140px">						
+				    </div>
+				</div>
+				{%else%}
+				<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
+					<div class="form-check-inline"><b>IgG:</b>
+						<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
+				            <option value="REAGENTE">REAGENTE</option>
+				            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+				        </select>
+				    </div>
+				    <div class="form-check-inline" style=""><b>Data:</b>
+				    	<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
+				    </div>
+				</div>
+				{%endif%}
+				{%endif%}
+				
+				
 			</div>
 			<hr>
 
@@ -2471,7 +2586,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				{% if registro.data_exames_laboratorio == '' or registro.data_exames_laboratorio == None %}
 				<div class="col-sm-12">
-					<button type="button" class="btn btn-info btn-sm" onclick="informarDataExamesLab()" id="btn_lancarDataExamesLab_id">Informar Exames</button>
+					<button type="button" class="btn btn-info btn-sm" onclick="informarDataExamesLb()" id="btn_lancarDataExamesLab_id">Informar Exames</button>
 					<button type="button" class="btn btn-warning btn-sm" onclick="calcelDataExamesLab()" id="btn_cancel_lancarDataExamesLab_id">Cancelar!</button>
 				</div>
 				{%endif%}
@@ -2482,18 +2597,38 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					}
 				</style>
 				<script type="text/javascript">
-					function informarDataExamesLab(){
-						$("#data_exames_lab_id").prop("disabled", false);
+					function informarDataExamesLb(){
+						$("#data_exames_lb_id").prop("disabled", false);
 						$("#btn_lancarDataExamesLab_id").hide();
 						$("#btn_cancel_lancarDataExamesLab_id").show();
 
 					}
 
 					function calcelDataExamesLab(){
-						$("#data_exames_lab_id").prop("disabled", true);
-						$("#data_exames_lab_id").val("");
+						$("#data_exames_lb_id").prop("disabled", true);
+						$("#data_exames_lb_id").val("");
 						$("#btn_lancarDataExamesLab_id").show();
 						$("#btn_cancel_lancarDataExamesLab_id").hide();
+
+						$("#leucocitos_id").val("");
+						$("#linfonodos_id").val("");
+						$("#hb_id").val("");
+						$("#ht_id").val("");
+						$("#pcr_id").val("");
+						$("#lactato_id").val("");
+						$("#dhl_id").val("");
+						$("#ferritina_id").val("");
+						$("#troponina_id").val("");
+						$("#cpk_id").val("");
+						$("#d_dimero_id").val("");
+						$("#ureia_id").val("");
+						$("#creatinina_id").val("");
+						$("#ap_id").val("");
+						$("#tap_id").val("");
+						$("#inr_id").val("");
+						$("#tgo_id").val("");
+						$("#tgp_id").val("");
+
 					}
 				</script>
 
@@ -2503,11 +2638,11 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					<b>Laboratório - Data</b>
 					{% if registro.data_exames_laboratorio == '' or registro.data_exames_laboratorio == None %}
 					<div class="form-check-inline" style="width: 200px">
-						<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_exames_laboratorio" value="" disabled>
+						<input type="date" class="form-control form-control-sm" id="data_exames_lb_id" placeholder="" name="data_exames_laboratorio" value="" disabled>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width: 200px">
-						<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_exames_laboratorio_bd" value="{{registro.data_exames_laboratorio}}">
+						<input type="text" class="form-control form-control-sm" id="data_exames_lb_id" placeholder="" name="data_exames_laboratorio_bd" value="{{registro.data_exames_laboratorio}}">
 				    </div>
 				    {%endif%}
 				</div>
@@ -2516,31 +2651,31 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-3">
 					Leucócitos:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="leucocito" value="{{registro.leucocito}}">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="leucocitos_id" placeholder="" name="leucocito" value="{{registro.leucocito}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					Linfócitos:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="linfocito" value="{{registro.linfocito}}">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="linfonodos_id" placeholder="" name="linfocito" value="{{registro.linfocito}}">
 				    </div>
 				</div>
 				<div class="col-sm-2">
 					HB:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" step="0.1" min="0" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="hb" value="{{registro.hb}}">
+						<input type="number" step="0.1" min="0" class="form-control form-control-sm" min="0" max="1000000" id="hb_id" placeholder="" name="hb" value="{{registro.hb}}">
 				    </div>
 				</div>
 				<div class="col-sm-2">
 					HT:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" step="0.1" min="0" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ht" value="{{registro.ht}}">
+						<input type="number" step="0.1" min="0" class="form-control form-control-sm" min="0" max="1000000" id="ht_id" placeholder="" name="ht" value="{{registro.ht}}">
 				    </div>
 				</div>
 				<div class="col-sm-2">
 					PCR:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="pcr" value="{{registro.pcr}}">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="pcr_id" placeholder="" name="pcr" value="{{registro.pcr}}">
 				    </div>
 				</div>
 				
@@ -2549,25 +2684,25 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-3">
 					Lactato:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="lactato" value="{{registro.lactato}}">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="lactato_id" placeholder="" name="lactato" value="{{registro.lactato}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					DHL:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="dhl" value="{{registro.dhl}}">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="dhl_id" placeholder="" name="dhl" value="{{registro.dhl}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					Ferritina:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ferritina" value="{{registro.ferritina}}">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="ferritina_id" placeholder="" name="ferritina" value="{{registro.ferritina}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					Troponina:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="troponina" value="{{registro.troponina}}">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="troponina_id" placeholder="" name="troponina" value="{{registro.troponina}}">
 				    </div>
 				</div>
 			</div><br>
@@ -2575,25 +2710,25 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-3">
 					CPK:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="cpk" value="{{registro.cpk}}">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="cpk_id" placeholder="" name="cpk" value="{{registro.cpk}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					D-dímero:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="d_dimero" value="{{registro.d_dimero}}">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="d_dimero_id" placeholder="" name="d_dimero" value="{{registro.d_dimero}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					Uréia:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ureia" value="{{registro.ureia}}">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="ureia_id" placeholder="" name="ureia" value="{{registro.ureia}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					Creatinina:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" step="0.1" min="0.00" class="form-control form-control-sm" id="" placeholder="" name="creatinina" value="{{registro.creatinina}}">
+						<input type="number" step="0.1" min="0.00" class="form-control form-control-sm" id="creatinina_id" placeholder="" name="creatinina" value="{{registro.creatinina}}">
 				    </div>
 				</div>
 			</div><br>
@@ -2601,31 +2736,31 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-2">
 					AP:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ap" value="{{registro.ap}}">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="ap_id" placeholder="" name="ap" value="{{registro.ap}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					TAP:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="tap" value="{{registro.tap}}">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="tap_id" placeholder="" name="tap" value="{{registro.tap}}">
 				    </div>
 				</div>
 				<div class="col-sm-2">
 					INR:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="inr" value="{{registro.inr}}">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="inr_id" placeholder="" name="inr" value="{{registro.inr}}">
 				    </div>
 				</div>
 				<div class="col-sm-3">
 					TGO:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="tgo" value="{{registro.tgo}}">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="tgo_id" placeholder="" name="tgo" value="{{registro.tgo}}">
 				    </div>
 				</div>
 				<div class="col-sm-2">
 					TGP:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="tgp" value="{{registro.tgp}}">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="tgp_id" placeholder="" name="tgp" value="{{registro.tgp}}">
 				    </div>
 				</div>
 			</div><hr>
@@ -2757,16 +2892,16 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-2">
-					{% if registro.news_fast_pb == 'eixo azul' %}
+					{% if registro.news_fast_pb == 'VERDE' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="new_fast" value="AZUL" checked>1 ponto (eixo azul)
+				        <input type="radio" class="form-check-input" id="" name="new_fast" value="VERDE" checked>1 ponto (eixo verde)
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="new_fast" value="AZUL">1 ponto (eixo azul)
+				        <input type="radio" class="form-check-input" id="" name="new_fast" value="VERDE">1 ponto (eixo verde)
 				      </label>
 				    </div>
 				    {%endif%}
@@ -2784,7 +2919,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
-					{% if registro.news_fast_pb == 'eixo amarelo' %}
+					{% if registro.news_fast_pb == 'AMARELO' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_fast" value="AMARELO" checked>2 ponto (eixo amarelo)
@@ -2809,7 +2944,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
-					{% if registro.news_fast_pb == 'eixo laranja' %}
+					{% if registro.news_fast_pb == 'LARANJA' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_fast" value="LARANJA" checked>2 ponto (eixo laranja)
@@ -2834,7 +2969,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
-					{% if registro.news_fast_pb == 'eixo vermelho' %}
+					{% if registro.news_fast_pb == 'VERMELHO' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_fast" value="VERMELHO" checked> >=3 ponto (eixo vermelho)
@@ -3504,7 +3639,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 		
 		<hr>
 		<div class="container-fluid" style="text-align: center;">
-			<button type="submit" class="btn btn-primary" style="align-items: center;" id="btn_inserir_paciente">Inserir</button>  
+			<button type="submit" class="btn btn-primary" style="align-items: center;" id="btn_inserir_paciente">Atualizar</button>  
 	    </div>
 	   </div>
 

@@ -39,5 +39,6 @@ urlpatterns = [
     path('gerar_relatorios/', views.gerar_relatorios, name='gerar_relatorios'),
     path('gerar_relatorios/submit', views.gerar_relatorios_set),
     path('result_for_relatorios/', views.result_for_relatorios, name='result_for_relatorios'),
-    path('status_registro/<id>/', views.status_registro, name='status_registro')
+    path('status_registro/<id>/', views.status_registro, name='status_registro'),
+    path('remove_registro_covid/<id>/', views.remove_registro_covid, name='remove_registro_covid')
 ]

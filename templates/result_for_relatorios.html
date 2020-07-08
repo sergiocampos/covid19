@@ -120,54 +120,54 @@
 
 	<hr />
 
-	
 
-	
+	<table class="table table-hover" style="font-size: 55%" id="tb_covid1" cellspacing="0" cellpadding="0">
 
-
-
-	<table class="table table-hover" style="font-size: 60%" id="tb_covid1" cellspacing="0" cellpadding="0">
-    <thead>
-      <tr>
-      	<th>Protocolo</th>
-      	<th>Registro CERN</th>
-      	<th>Nome</th>
-        <th>Idade</th>
-        <th>Sexo</th>
-        <th>Regulação</th>
-        <th>Município de Residencia</th>
-        <th>Estabelecimento de Origem</th>
-        <th>Estabelecimento Referencia Covid</th>
-        <th>Município do Estabelecimento</th>
-        <th>Perfil</th>
-        <th>Data</th>
-        <th>Comorbidades</th>
-        <th>Nível de Atenção</th>
-        <th>Tipo de Teste</th>
-        <th>Teste Covid</th>
-      </tr>
-    </thead>
-    <tbody>
-    	{% for v in values %}
-      <tr>
-      	<td>SESCOVID{{v.codigo_sescovid}}</td>
-      	<td>{{v.codigo_registro_completo}}</td>
-      	<td>{{v.nome_paciente}}</td>
-      	<td>{{v.idade_paciente}}</td>
-      	<td>{{v.sexo_paciente}}</td>
-      	<td>
-      		{% if v.regulacao_paciente == 'Paciente preenche critérios para Regulação' %}
-      		Regulado
-      		{%else%}
-      		Não Regulado
-      		{%endif%}
-      	</td>
-      	<td>{{v.cidade_origem}}</td>        
-      </tr>
-      	{% endfor %}
-      
-    </tbody>
-  </table>
+	    <thead>
+	      <tr>
+	      	<th>Protocolo</th>
+	      	<th>Registro CERN</th>
+	      	<th>Nome</th>
+	        <th>Idade</th>
+	        <th>Sexo</th>
+	        <th>Regulacao</th>
+	        <th>Municipio de Residencia</th>
+	        <th>Estabelecimento de Origem</th>
+	        <th>Estabelecimento Referencia Covid</th>
+	        <th>Municipio do Estabelecimento</th>
+	        <th>Perfil</th>
+	        <th>Data</th>
+	        <th>Comorbidades</th>
+	        <th>Nivel de Atencao</th>
+	        <th>Tipo de Teste</th>
+	        <th>Teste Covid</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	    	{% for v in values %}
+	      <tr>
+	      	<td>SESCOVID{{v.codigo_sescovid}}</td>
+	      	<td>{{v.codigo_registro_completo}}</td>
+	      	<td>{{v.nome_paciente}}</td>
+	      	<td>{{v.idade_paciente}}</td>
+	      	<td>{{v.sexo_paciente}}</td>
+	      	<td>
+	      		{% if v.regulacao_paciente == 'Paciente preenche criterios para Regulação' %}
+	      		Regulado
+	      		{%else%}
+	      		Nao Regulado
+	      		{%endif%}
+	      	</td>
+	      	<td>{{v.cidade_origem}}</td>        
+	      </tr>
+	      	{% endfor %}
+	      
+	    </tbody>
+  	</table>
+  	<br />
+  	<div class="container-fluid" style="text-align: center;">
+  		<button autofocus="autofocus" class="btn btn-warning" style="align-items: center;" id="" onclick="exceller()">Export to Excel</button>  
+	</div><br />
 
   <div style="height: 50px"></div>
 
@@ -180,6 +180,30 @@
 			<br /><br />
 		
 	</div>
+
+	<script>
+		function exceller() {
+			var uri = 'data:application/vnd.ms-excel;base64,',
+	      template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+	      base64 = function(s) {
+	        return window.btoa(unescape(encodeURIComponent(s)))
+	      },
+	      format = function(s, c) {
+	        return s.replace(/{(\w+)}/g, function(m, p) {
+	          return c[p];
+	        })
+	      }
+	    var tb_covid1 = document.getElementById("tb_covid1").innerHTML;
+	    var ctx = {
+	      worksheet: name || '',
+	      table: tb_covid1
+	    };
+	    var link = document.createElement("a");
+	    link.download = "export.xls";
+	    link.href = uri + base64(format(template, ctx))
+	    link.click();
+	  }
+	</script>
 	
 </body>
 </html>

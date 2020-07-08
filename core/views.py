@@ -157,9 +157,9 @@ def registro_covid_set(request):
 
 	
 	nome_solicitante = request.POST.get('nome_solicitante')
-	municipio_estabelecimento = request.POST.get('municipio_solicitante')
+	municipio_estabelecimento_solicitante = request.POST.get('municipio_solicitante')
 	estabelecimento_solicitante = request.POST.get('estabelecimento_solicitante_new')
-	estabelecimento_outro = request.POST.get('desc_outro_estabelecimento')
+	estabelecimento_solicitante_outro = request.POST.get('desc_outro_estabelecimento')
 	nome_paciente = request.POST.get('nome_paciente')
 	
 	idade_paciente_cap = request.POST.get('idade_paciente')
@@ -223,9 +223,9 @@ def registro_covid_set(request):
 		codigo_registro_mensal = codigo_registro_mensal,
 		codigo_registro_completo = codigo_registro_completo,
 		nome_solicitante = nome_solicitante,
-		municipio_estabelecimento = municipio_estabelecimento,
+		municipio_estabelecimento_solicitante = municipio_estabelecimento_solicitante,
 		estabelecimento_solicitante = estabelecimento_solicitante,
-		estabelecimento_outro = estabelecimento_outro,
+		estabelecimento_solicitante_outro = estabelecimento_solicitante_outro,
 		nome_paciente = nome_paciente,
 		idade_paciente = idade_paciente,
 		sexo_paciente = sexo_paciente,
@@ -276,13 +276,41 @@ def regulacao(request, id):
 	status_nao_regulado_registro = Status.objects.filter(descricao='Não Regulado').last()
 
 
+	#request.session['nome_solicitante'] = nome_solicitante
+	#request.session['idade_paciente'] = idade_paciente
+	#request.session['nome_paciente'] = nome_paciente
+	#request.session['sexo_paciente'] = sexo_paciente
+	municipio_estabelecimento_solicitante = request.session['municipio_estabelecimento_solicitante']
+	estabelecimento_solicitante = request.session['estabelecimento_solicitante']
+	estabelecimento_solicitante_outro = request.session['estabelecimento_solicitante_outro']
+	#request.session['recurso_que_precisa'] = recurso_que_precisa
+	#request.session['cidade_origem'] = cidade_origem
+	#request.session['telefone_retorno'] = telefone_retorno
+	#request.session['frequencia_respiratoria'] = frequencia_respiratoria
+	#request.session['saturacao_paciente'] = saturacao_paciente
+	#request.session['frequencia_cardiaca'] = frequencia_cardiaca
+	#request.session['conciencia'] = conciencia
+	#request.session['temperatura'] = temperatura
+	#request.session['observacao'] = observacao
+	#request.session['pa_1'] = pa_1
+	#request.session['pa_2'] = pa_2
+	cidade = request.session['municipio_referencia']
+
+
+	estabelecimentos = Cnes.objects.filter(MUNICIPIO = cidade)
+
+
 	return render(request, 'regulacao.html', {'registro' : registro, 'pa_1':pa_1, 
 		'pa_2':pa_2, 'data_regulacao_template': data_regulacao_template,
 		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
 		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
 		status_aguard_lista_espera_registro, 'status_regulado_registro':
 		status_regulado_registro, 'status_nao_regulado_registro':
-		status_nao_regulado_registro})
+		status_nao_regulado_registro, 'municipio_estabelecimento_solicitante':
+		municipio_estabelecimento_solicitante, 'estabelecimento_solicitante':
+		estabelecimento_solicitante, 'estabelecimento_solicitante_outro':
+		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
+		estabelecimentos})
 
 
 @login_required
@@ -293,9 +321,12 @@ def regulacao_set(request, id):
 	
 	
 	nome_solicitante = request.POST.get('nome_solicitante')
-	municipio_estabelecimento = registro.municipio_estabelecimento
+	municipio_estabelecimento_solicitante = registro.municipio_estabelecimento_solicitante
 	estabelecimento_solicitante = registro.estabelecimento_solicitante
-	estabelecimento_outro = registro.estabelecimento_outro
+	estabelecimento_solicitante_outro = registro.estabelecimento_solicitante_outro
+	municipio_estabelecimento_referencia = request.POST.get('municipio_estabelecimento_referencia')
+	estabelecimento_referencia = request.POST.get('estabelecimento_referencia')
+	estabelecimento_referencia_outro = request.POST.get('estabelecimento_referencia_outro')
 	nome_paciente = request.POST.get('nome_paciente')
 	
 	idade_paciente_cap = request.POST.get('idade_paciente')
@@ -478,6 +509,41 @@ def regulacao_set(request, id):
 	foco = request.POST.getlist('foco')
 	uso_antibioticoterapia = request.POST.get('uso_antibioticoterapia')
 	pesquisa_teste_sars_cov_2 = request.POST.get('pesquisa_sars_cov2')
+	igg_cap = request.POST.get('igg')
+	igg_bd = request.POST.get('igg_bd')
+	if igg_cap == '' or igg_cap == None:
+		if igg_bd == '' or igg_bd == None:
+			igg = None
+		else:
+			igg = igg_bd
+	else:
+		igg = igg_cap
+
+	igm_do_bd = registro.igm
+	igm_cap = request.POST.get('igm')
+
+	igm_bd_cap = request.POST.get('igm_bd')
+	if igm_cap == '' or igm_cap == None:
+		if igm_bd_cap == '' or igm_bd_cap == None:
+			igm = None
+		else:
+			igm = igm_bd_cap
+	else:
+		igm = igm_cap
+
+	
+	data_igm_igg_cap = request.POST.get('data_igm_igg')
+	data_igm_igg_bd_cap = request.POST.get('data_igm_igg_bd')
+
+	if data_igm_igg_cap == '' or data_igm_igg_cap == None:
+		if data_igm_igg_bd_cap == '' or data_igm_igg_bd_cap == None:
+			data_igm_igg = None
+		else:
+			data_igm_igg = datetime.strptime(data_igm_igg_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_igm_igg = data_igm_igg_cap
+
+
 	rt_pcr_sars_cov_2 = request.POST.get('pcr_sars_cov2')
 	
 	data_da_coleta_bd_cap = request.POST.get('data_da_coleta_bd')
@@ -691,9 +757,12 @@ def regulacao_set(request, id):
 	registro.responsavel_pelo_preenchimento = responsavel_pelo_preenchimento
 	#registro.codigo_registro = codigo_registro
 	registro.nome_solicitante = nome_solicitante
-	registro.municipio_estabelecimento = municipio_estabelecimento
+	registro.municipio_estabelecimento_solicitante = municipio_estabelecimento_solicitante
 	registro.estabelecimento_solicitante = estabelecimento_solicitante
-	registro.estabelecimento_outro = estabelecimento_outro
+	registro.estabelecimento_solicitante_outro = estabelecimento_solicitante_outro
+	registro.municipio_estabelecimento_referencia = municipio_estabelecimento_referencia
+	registro.estabelecimento_referencia = estabelecimento_referencia
+	registro.estabelecimento_referencia_outro = estabelecimento_referencia_outro
 	registro.nome_paciente = nome_paciente
 	registro.idade_paciente = idade_paciente
 	registro.sexo_paciente = sexo_paciente
@@ -750,6 +819,9 @@ def regulacao_set(request, id):
 	registro.foco = foco
 	registro.uso_antibioticoterapia = uso_antibioticoterapia
 	registro.pesquisa_teste_sars_cov_2 = pesquisa_teste_sars_cov_2
+	registro.igg = igg
+	registro.igm = igm
+	registro.data_igm_igg = data_igm_igg
 	registro.rt_pcr_sars_cov_2 = rt_pcr_sars_cov_2
 	registro.data_coleta = data_coleta
 	registro.em_uso_corticosteroide = em_uso_corticosteroide
@@ -856,7 +928,10 @@ def regulacao_edit(request, id):
 	p1 = p[0]
 	p2 = p[1]
 
-	return render(request, 'regulacao_edit.html', {'registro':registro, 'p1': p1, 'p2': p2})
+	municipios = Cnes.objects.order_by('MUNICIPIO').distinct('MUNICIPIO')
+
+	return render(request, 'regulacao_edit.html', {'registro':registro, 
+		'p1': p1, 'p2': p2, 'municipios':municipios})
 
 @login_required
 def regulacao_edit_set(request, id):
@@ -874,9 +949,9 @@ def regulacao_edit_set(request, id):
 	#hora_notificacao = request.POST.get('hora_notificacao')
 	
 	nome_solicitante = request.POST.get('nome_solicitante')
-	municipio_estabelecimento = request.POST.get('municipio_do_estabelecimento')
+	municipio_estabelecimento_solicitante = request.POST.get('municipio_do_estabelecimento')
 	estabelecimento_solicitante = request.POST.get('estabelecimento_solicitante')
-	estabelecimento_outro = request.POST.get('desc_outro_estabelecimento')
+	estabelecimento_solicitante_outro = request.POST.get('desc_outro_estabelecimento')
 	nome_paciente = request.POST.get('nome_paciente')
 	
 	idade_paciente_cap = request.POST.get('idade_paciente')
@@ -915,6 +990,9 @@ def regulacao_edit_set(request, id):
 	pa_part1 = request.POST.get('pa_part1')
 	pa_part2 = request.POST.get('pa_part2')
 
+	pa_1 = pa_part1
+	pa_2 = pa_part2
+
 	pa = pa_part1 +"x"+ pa_part2
 	conciencia = request.POST.get('consciencia_paciente')
 	
@@ -927,30 +1005,29 @@ def regulacao_edit_set(request, id):
 	observacao = request.POST.get('observacao_paciente')
 
 	
-	registro.responsavel_pelo_preenchimento = responsavel_pelo_preenchimento
-	registro.nome_solicitante = nome_solicitante
-	registro.municipio_estabelecimento = municipio_estabelecimento
-	registro.estabelecimento_solicitante = estabelecimento_solicitante
-	registro.estabelecimento_outro = estabelecimento_outro
-	registro.nome_paciente = nome_paciente
-	registro.idade_paciente = idade_paciente
-	registro.recurso_que_precisa = recurso_que_precisa
-	#registro.estado_origem = estado_origem
-	registro.cidade_origem = cidade_origem
-	registro.telefone_retorno = telefone_retorno
-	registro.frequencia_respiratoria = frequencia_respiratoria
-	registro.saturacao_paciente = saturacao_paciente
-	registro.ar_o2 = ar_o2
-	registro.frequencia_cardiaca = frequencia_cardiaca
-	registro.pa = pa
-	registro.conciencia = conciencia
-	registro.temperatura = temperatura	
-	registro.observacao = observacao
-	
+	cidade = request.POST.get('municipio_referencia')
 
-	registro.save()
+	request.session['nome_solicitante'] = nome_solicitante
+	request.session['idade_paciente'] = idade_paciente
+	request.session['nome_paciente'] = nome_paciente
+	request.session['sexo_paciente'] = sexo_paciente
+	request.session['municipio_estabelecimento_solicitante'] = municipio_estabelecimento_solicitante
+	request.session['estabelecimento_solicitante'] = estabelecimento_solicitante
+	request.session['estabelecimento_solicitante_outro'] = estabelecimento_solicitante_outro
+	request.session['recurso_que_precisa'] = recurso_que_precisa
+	request.session['cidade_origem'] = cidade_origem
+	request.session['telefone_retorno'] = telefone_retorno
+	request.session['frequencia_respiratoria'] = frequencia_respiratoria
+	request.session['saturacao_paciente'] = saturacao_paciente
+	request.session['frequencia_cardiaca'] = frequencia_cardiaca
+	request.session['conciencia'] = conciencia
+	request.session['temperatura'] = temperatura
+	request.session['observacao'] = observacao
+	request.session['pa_1'] = pa_1
+	request.session['pa_2'] = pa_2
+	request.session['municipio_referencia'] = cidade
 
-	return redirect('covid_list')
+	return redirect('regulacao', id=id)
 
 @login_required
 def search_register(request):
@@ -995,6 +1072,17 @@ def gerar_relatorios_set(request):
 	data_fim = request.POST.get('data_fim')
 
 	values = RegistroCovid.objects.filter(data_notificacao__range=[data_inicio, data_fim])
+	#values = RegistroCovid.objects.all()
+	status = Status.objects.all()
+	
+	for s in status:
+		for v in values:
+			if v.id == s.registro_covid_id and s.descricao != None:
+				regulacao_ = s.descricao
+				#print(regulacao_)
+				
+		
+
 	#for vl in values:
 	#	print(', '.join(vl.comorbidades))
 
@@ -1006,7 +1094,7 @@ def gerar_relatorios_set(request):
 	worksheet = workbook.active
 
 	columns = [
-		'Protocolo',
+		'Senha',
 		'Registro CERN',
 		'Nome',
 		'Idade',
@@ -1027,26 +1115,61 @@ def gerar_relatorios_set(request):
 
 	row_num = 1
 
+	regulacao_status = []
+
 
 	for col_num, column_title in enumerate(columns, 1):
 		cell = worksheet.cell(row=row_num, column=col_num)
 		cell.value = column_title
 
+	
 	for v in values:
+		result_exames = []
 		row_num += 1
 
 		#comorbidades_list = v.comorbidades
 		#comorbidades = str(comorbidades_list)
 		#v.comorbidades.reverse()
 		#print(v.comorbidades)
-		if v.regulacao_paciente == 'Paciente preenche critérios para Regulação':
-			v.regulacao_paciente = 'Regulado'
+		#if v.regulacao_paciente == 'Paciente preenche critérios para Regulação':
+		#	v.regulacao_paciente = 'Regulado'
 
-		if v.regulacao_paciente == 'Paciente não preenche critérios para Regulação':
-			v.regulacao_paciente = 'Não Regulado'
+		#if v.regulacao_paciente == 'Paciente não preenche critérios para Regulação':
+		#	v.regulacao_paciente = 'Não Regulado'
+		
+		if v.news_fast_pb != None:
+			nivel_atencao = v.news_fast_pb
+		nivel_atencao_ = nivel_atencao
+
+		if v.pesquisa_teste_sars_cov_2 != None:
+			result_exames.append(v.pesquisa_teste_sars_cov_2)
+		if v.rt_pcr_sars_cov_2 != None:
+			result_exames.append(v.rt_pcr_sars_cov_2)
+
+		result_exames_ = str(result_exames)[1 : -1]
+
+
+		if v.pesquisa_teste_sars_cov_2 != '' or v.pesquisa_teste_sars_cov_2 != None:
+			if v.rt_pcr_sars_cov_2 == '' or v.rt_pcr_sars_cov_2 == None:
+				testes_covid = "Teste rápido"
+		elif v.rt_pcr_sars_cov_2 != '' or v.rt_pcr_sars_cov_2 != None:
+			if v.pesquisa_teste_sars_cov_2 == '' or v.pesquisa_teste_sars_cov_2 == None:
+				testes_covid = "PCR"
+		else:
+			testes_covid = "Teste rápido, PCR"
+
+
 
 		if v.data_regulacao:
 			data_ = v.data_regulacao.strftime("%d-%m-%Y")
+		else:
+			data_ = None
+
+		for s in status:
+			if v.id == s.registro_covid_id and s.descricao != None:
+				v.regulacao_status = s.descricao
+				#print(v.regulacao_status)
+
 
 		row = [
 			v.codigo_sescovid,
@@ -1054,17 +1177,17 @@ def gerar_relatorios_set(request):
 			v.nome_paciente,
 			v.idade_paciente,
 			v.sexo_paciente,
-			v.regulacao_paciente,
-			v.cidade_origem,
+			v.regulacao_status,
+			v.municipio_estabelecimento_solicitante,
 			v.estabelecimento_solicitante,
-			v.estabelecimento_outro,
-			v.municipio_estabelecimento,
+			v.estabelecimento_referencia,
+			v.municipio_estabelecimento_referencia,
 			v.leito,
 			data_,
 			v.comorbidades,
-			v.news_fast_pb,
-			v.rt_pcr_sars_cov_2,
-			v.pesquisa_teste_sars_cov_2,
+			nivel_atencao_,
+			testes_covid,
+			result_exames_,
 		]
 		for col_num, cell_value in enumerate(row, 1):
 			cell = worksheet.cell(row=row_num, column=col_num)
@@ -1109,3 +1232,9 @@ def status_registro(request, id):
 		status_aguard_lista_espera_registro, 'status_regulado_registro':
 		status_regulado_registro,'status_nao_regulado_registro':
 		status_nao_regulado_registro})
+
+@login_required
+def remove_registro_covid(request, id):
+	registro = RegistroCovid.objects.filter(id=id).delete()
+
+	return redirect('/')

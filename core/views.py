@@ -1,3 +1,7 @@
+from django.utils.translation import gettext as _
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from datetime import datetime, timezone
@@ -13,6 +17,21 @@ from io import BytesIO as IO
 from openpyxl import Workbook
 
 # Create your views here.
+@login_required
+def change_password(request):
+	if request.method == 'POST':
+		form = PasswordChangeForm(request.user, request.POST)
+		if form.is_valid():
+			user = form.save()
+			update_session_auth_hash(request, user)
+			messages.success(request, _('Your password was successfully updated!'))
+			return redirect('/')
+		else:
+			messages.error(request, _('Please correct the error below.'))
+	else:
+		form = PasswordChangeForm(request.user)
+	return render(request, 'change_password.html', {'form': form})
+
 
 @login_required
 def covid_list(request):

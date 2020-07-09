@@ -16,6 +16,48 @@
 
 	<script language="JavaScript" type="text/javascript" src="/static/js/cidades-estados-1.4-utf8.js"></script>
 
+	<style> 
+        table.scrolldown { 
+            width: 100%; 
+              
+            /* border-collapse: collapse; */ 
+            border-spacing: 0;
+        } 
+          
+        /* To display the block as level element */ 
+        table.scrolldown tbody, table.scrolldown thead { 
+            display: block; 
+        }  
+          
+        thead tr th { 
+            height: 40px;  
+            line-height: 40px; 
+        } 
+          
+        table.scrolldown tbody { 
+              
+            /* Set the height of table body */ 
+            height: 50px;  
+              
+            /* Set vertical scroll */ 
+            overflow-y: auto; 
+              
+            /* Hide the horizontal scroll */ 
+            overflow-x: hidden;  
+        } 
+          
+        tbody {  
+            
+        } 
+          
+        tbody td, thead th { 
+            width : ;
+        } 
+        td, th { 
+            text-align:center; 
+        } 
+    </style>
+
 </head>
 <body>
 
@@ -82,39 +124,51 @@
 
   <div class="container mt-3">
 		
-	  	<h2>Encontre um Registro</h2>
+	  	
+	  	<div class="row">
+	  		<div class="col-sm-4"><h2>Encontre um Registro</h2></div>
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<a href="/search_between_date/" class="btn btn-info btn-sm">Localizar entre datas</a>
+			</div>
+			
+		</div>
 	  	 
 		  <input class="form-control" id="myInput" type="text" placeholder="Digite qualquer letra, palavra..">
 	  	<br>
-	  	<table class="table table-bordered">
-	    <thead>
-	      <tr>
-	        <th>Data de notificação</th>
-	        <th>Estabelecimento Solicitante</th>
-	        <th>Paciente</th>
-	        <th>Idade</th>
-	        <th>Ações</th>
+	  	
+	  	<div style="overflow-y: scroll">
+	  		
+	  	</div>
+	  	<table class="table table-bordered" style="width: 100%">
+	    <thead style="display: block; width: 100%">
+	      <tr style="">
+	        <th style="width: 200px">Data de notificação</th>
+	        <th style="width: 350px">Estabelecimento Solicitante</th>
+	        <th style="width: 250px">Paciente</th>
+	        <th style="width: 100px">Idade</th>
+	        <th style="width: 150px">Ações</th>
 	      </tr>
 	    </thead>
-	    <tbody id="myTable">
-	    	{% for o in regs %}
+	    <tbody id="myTable" style="display: block; overflow-y: auto; overflow-x: hidden; height: 200px; width: 100%">
+	    	{% for o in registros %}
 	      <tr>
-	        <td>{{o.data_notificacao|date:'d/m/Y'}} - {{o.hora_notificacao|time:'H:i'}}</td>
-	        <td>
+	        <td style="width: 200px">{{o.data_notificacao|date:'d/m/Y'}} - {{o.hora_notificacao|time:'H:i'}}</td>
+	        <td style="width: 350px">
 	        	{% if o.estabelecimento_solicitante == '' or o.estabelecimento_solicitante == None %}
 	        	{{o.estabelecimento_outro}}
 	        	{%else%}
 	        	{{o.estabelecimento_solicitante}}
 	        	{%endif%}
         	</td>
-	        <td>{{o.nome_paciente}}</td>
-	        <td>
+	        <td style="width: 250px"><a href="/status_registro/{{o.id}}/">{{o.nome_paciente}}</a></td>
+	        <td style="width: 100px">
 	        	{% if o.idade_paciente == '' or o.idade_paciente == None %}
 	        	{%else%}
 	        	{{o.idade_paciente}}
 	        	{%endif%}
 	        </td>
-	        <td style="font-size: 87%">
+	        <td style="font-size: 87%; width: 150px">
 	        	<a href="/regulacao_edit/{{o.id}}">Editar</a>
 	        	
 	        	<a href="/regulacao/{{o.id}}/">Regular</a>
@@ -125,7 +179,7 @@
 	      {% endfor %}
 	    </tbody>
 	  	</table>
-
+	  	<!--
 	  	<div class="pagination">
 		  <span class="step-links" style="margin: auto">
 		    {% if regs.has_previous %}
@@ -142,14 +196,9 @@
 		  </span>  
 		    
 		</div>
+	-->
 
-		<div class="row">
-			<div class="col-sm-4">
-				<a href="/search_between_date/" class="btn btn-info btn-sm">Localizar entre datas</a>
-			</div>
-			<div class="col-sm-4"></div>
-			<div class="col-sm-4"></div>
-		</div>
+		
   
 	</div>
 

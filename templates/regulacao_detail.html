@@ -26,6 +26,22 @@
 		});
 	</script>
 
+	<style>
+		#status_regulacao_id,
+		#paciente_regulado_id,
+		#paciente_lista_id,
+		#paciente_internado_id,
+		#paciente_obito_id,
+		#paciente_nao_regulado_id,
+		#paciente_regulado_id,
+		#paciente_obito_regulacao_id,
+		#paciente_lista_regulacao_id,
+		#paciente_internado_regulacao_id,
+		#ag_conf_vaga_regulacao_id {
+		display: none;
+	}
+	</style>
+
 </head>
 <body>
 
@@ -164,28 +180,74 @@ máxima de 12h de validação para recepção na unidade solicitante.
 		<div class="container" style="">
 			<div class="row">
 				
-				<div class="col-sm-6">
-					Unidade de Origem
-					<div class="form-check-inline">
-						<select name="unidade_origem" id="" class="form-control form-control-sm" style="width: auto">
-				            <option value="{{registro.unidade_origem}}" selected="">{{registro.unidade_origem}}</option>
-				            <option value="upa cruz das armas">UPA CRUZ DAS ARMAS</option>
-				            <option value="upa bancarios">UPA BANCÁRIOS</option>
-				            <option value="upa tibiri">UPA TIBIRI</option>
-				            <option value="upa oceania">UPA OCEANIA</option>
-				            
-				        </select>
+				<div class="col-sm-12">
+					Estabelecimento Solicitante:
+					{% if registro.estabelecimento_solicitante == '' or registro.estabelecimento_solicitante == None %}
+					<div class="form-check-inline" style="width: 70%">
+						<input type="text" class="form-control form-control-sm" value="{{registro.estabelecimento_solicitante_outro}}">
 				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 70%">
+						<input type="text" class="form-control form-control-sm" value="{{registro.estabelecimento_solicitante}}">
+				    </div>
+				    {%endif%}
 				</div>
 				
-    			<div class="col-sm-6">
+    			
+    			
+			</div><br>
+			<div class="row">
+				<div class="col-sm-6">
     				Idade:
 				    <div class="form-check-inline">
 				        <input type="number" class="form-control form-control-sm" id="" placeholder="" name="idade_paciente" value="{{registro.idade_paciente}}" min="1" max="200">
 				    </div>
     			</div>
-    			
-			</div><hr>
+				<div class="col-sm-6">
+					Sexo:
+					<div class="form-check-inline">
+						{% if registro.sexo_paciente == '' or registro.sexo_paciente == None %}
+						<select class="form-control form-control-sm" name="sexo_paciente" id="" style="width: 125px">
+							<option value=""></option>
+							<option value="MASCULINO">MASCULINO</option>
+							<option value="FEMININO">FEMININO</option>
+						</select>
+					    {%else%}
+					    <select class="form-control form-control-sm" name="sexo_paciente" id="" style="width: 125px">
+							<option value="{{registro.sexo_paciente}}" selected>{{registro.sexo_paciente}}</option>
+							<option value="MASCULINO">MASCULINO</option>
+							<option value="FEMININO">FEMININO</option>
+						</select>
+					    {%endif%}
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-5">
+					<b>Município do Estabelecimento de Referência:</b>
+					<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{registro.municipio_estabelecimento_referencia}}" />
+					
+				</div>
+				<div class="col-sm-2">
+										
+				</div>
+				
+				<div class="col-sm-5" id="">
+					<b>Estabelecimento de Referência:</b>
+					<select autofocus="autofocus" class="form-control form-control-sm" name="estabelecimento_referencia" id="estabelecimento_id">
+						{% if registro.estabelecimento_referencia == '' or registro.estabelecimento_referencia == None %}
+						<option value="{{registro.estabelecimento_referencia_outro}}">{{registro.estabelecimento_referencia_outro}}</option>
+						{% else %}
+						<option value="{{registro.estabelecimento_referencia}}">{{registro.estabelecimento_referencia}}</option>
+						{%endif%}						
+					</select>
+				</div>
+				
+			</div>
+			<br>
+			
+			<hr>
 			<div class="row">
 				<div class="col-sm-12">
 					<b>DESCRIÇÃO CLÍNICA (SIC, UNIDADE SOLICITANTE)</b>
@@ -1346,21 +1408,37 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-4">
 					<b>Pesquisa de SARS CoV-2; teste rápido:</b>
 				</div>
-				<div class="col-sm-2">
-					{% if registro.pesquisa_teste_sars_cov_2 == 'Positivo'  %}
+				{% if registro.pesquisa_teste_sars_cov_2 == 'Positivo' %}
+				<div class="col-sm-2" style="margin-left: -30px">
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" checked>Positivo
 				      </label>
 				    </div>
-				    {%else%}
-				    <div class="form-check-inline" style="width:">
-				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo">Positivo
-				      </label>
-				    </div>
-				    {%endif%}
 				</div>
+				<div class="col-sm-1" id="" style="margin-left: -90px">
+					<div class="form-check-inline"><b>IgM:</b>
+						<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+				            <option value="{{registro.igm}}" selected>{{registro.igm}}</option>
+				            <option value="REAGENTE">REAGENTE</option>
+				            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+				        </select>
+				    </div>
+				</div>
+
+				<div class="col-sm-5" id="" style="margin-left: 100px">
+					<div class="form-check-inline"><b>IgG:</b>
+						<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
+				            <option value="{{registro.igg}}" selected>{{registro.igg}}</option>
+				            <option value="REAGENTE">REAGENTE</option>
+				            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+				        </select>
+				    </div>
+				    <div class="form-check-inline" style=""><b>Data:</b>
+				    	<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg_bd" value="{{registro.data_igm_igg}}" style="width: 140px">						
+				    </div>
+				</div>
+				{%else%}
 				<div class="col-sm-2">
 					{% if registro.pesquisa_teste_sars_cov_2 == 'Negativo'  %}
 					<div class="form-check-inline" style="width:">
@@ -1391,24 +1469,39 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				    </div>
 				    {%endif%}
 				</div>
+				{%endif%}
 			</div>
 			<hr>
 
 			<div class="row">
-				<div class="col-sm-3">
+				<div class="col-sm-6">
 					<b>RT PCR SARS CoV-2:</b>
+					Data da Coleta:
+					{% if registro.data_coleta == '' or registro.data_coleta == None %}
+				    <div class="form-check-inline" style="">
+				    	<label for="">
+				    		<input type="date" class="form-control form-control-sm" id="" name="data_da_coleta" style="">				      	
+					    </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="">
+				    <label for="" style="">
+				    	<input type="text" class="form-control form-control-sm" id="" name="data_da_coleta_bd" value="{{registro.data_coleta}}">				      	
+				    </label>
+				    </div>
+				    {%endif%}
 				</div>
-				<div class="col-sm-2">
+				<div class="col-sm-1">
 					{% if registro.rt_pcr_sars_cov_2 == 'Detectável' %}
-					<div class="form-check-inline" style="width: 90%">
+					<div class="form-check-inline" style="width: 90%; margin-left: -40px">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Detectável" onclick="desactiveDataColeta()" checked>Detectável
+				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Detectável" onclick="desactiveDataColeta()" checked style="margin-left: -30px">Detectável
 				      </label>
 				    </div>
 				    {%else%}
-				    <div class="form-check-inline" style="width: 90%">
+				    <div class="form-check-inline" style="width: 90%; margin-left: -40px">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Detectável" onclick="desactiveDataColeta()">Detectável
+				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Detectável" onclick="desactiveDataColeta()" style="margin-left: -30px">Detectável
 				      </label>
 				    </div>
 				    {%endif%}
@@ -1428,21 +1521,18 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				    </div>
 				    {%endif%}
 				</div>
-				<div class="col-sm-5">
+				<div class="col-sm-3">
 					{% if registro.rt_pcr_sars_cov_2 == 'Aguardando Resultado' %}
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Aguardando Resultado" onclick="activeDataColeta()" checked>Aguarda resultado – data coleta:
-				      </label><b>{{registro.data_coleta}}</b>
+				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Aguardando Resultado" onclick="activeDataColeta()" checked>Aguarda resultado
+				      </label>
 				      
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Aguardando Resultado" onclick="activeDataColeta()">Aguarda resultado – data coleta:
-				      </label>
-				      <label for="">
-				      	<input type="date" class="form-control form-control-sm" id="data_coleta" name="data_da_coleta" disabled>				      	
+				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Aguardando Resultado" onclick="activeDataColeta()">Aguarda resultado
 				      </label>
 				    </div>
 				    {%endif%}
@@ -2220,7 +2310,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-2">
-					{% if registro.news_fast_pb == 'eixo azul' %}
+					{% if registro.news_fast_pb == 'AZUL' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_fast" value="eixo azul" checked>1 ponto (eixo azul)
@@ -2247,7 +2337,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
-					{% if registro.news_fast_pb == 'eixo amarelo' %}
+					{% if registro.news_fast_pb == 'AMARELO' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_fast" value="eixo amarelo" checked>2 ponto (eixo amarelo)
@@ -2272,7 +2362,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
-					{% if registro.news_fast_pb == 'eixo laranja' %}
+					{% if registro.news_fast_pb == 'LARANJA' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_fast" value="eixo laranja" checked>2 ponto (eixo laranja)
@@ -2297,7 +2387,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
-					{% if registro.news_fast_pb == 'eixo vermelho' %}
+					{% if registro.news_fast_pb == 'VERMELHO' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_fast" value="eixo vermelho" checked> >=3 ponto (eixo vermelho)
@@ -2359,7 +2449,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
-					{% if registro.news_modificado == 'amarelo' %}
+					{% if registro.news_modificado == 'AMARELO' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="amarelo" checked>1-4 pontos (amarelo)
@@ -2384,7 +2474,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
-					{% if registro.news_modificado == 'laranja' %}
+					{% if registro.news_modificado == 'LARANJA' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="laranja" checked>5-6 pontos (laranja)
@@ -2409,7 +2499,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
-					{% if registro.news_modificado == 'vermelho' %}
+					{% if registro.news_modificado == 'VERMELHO' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="vermelho" checked> >=7 pontos (vermelho)
@@ -2434,7 +2524,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
-					{% if registro.news_modificado == 'preto' %}
+					{% if registro.news_modificado == 'PRETO' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="new_modificado" value="preto" checked> >=7 pontos (preto)
@@ -2698,203 +2788,101 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			</div>
 			<br>
 			<div class="container" style="border: 2px solid #cccccc; border-radius: 10px">
-				<div class="row" style="">
-				<div class="col-sm-5" style="margin-top: 30px">
-					{% if registro.regulacao_paciente == 'Paciente não preenche critérios para Regulação' %}
-					<div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="paciente_preenche_criterios" value="Paciente não preenche critérios para Regulação" onclick="activeStatusNaoRegulado()" checked>PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
-				      </label>
-				    </div>
-				    {%else%}
-				    <div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="paciente_preenche_criterios" value="Paciente não preenche critérios para Regulação" onclick="activeStatusNaoRegulado()">PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
-				      </label>
-				    </div>
-				    {%endif%}
-				</div>
-				<div class="col-sm-4" style="margin-top: 30px; background-color: ">
-					{% if registro.regulacao_paciente == 'Paciente preenche critérios para Regulação' %}
-					<div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="paciente_preenche_criterios" value="Paciente preenche critérios para Regulação" onclick="activeStatusAguardVaga()" checked>PACIENTE REGULADO - Protocolo:
-				      </label>
-				    </div>
-				    {%else%}
-				    <div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="paciente_preenche_criterios" value="Paciente preenche critérios para Regulação" onclick="activeStatusAguardVaga()">PACIENTE REGULADO - Protocolo:
-				      </label>
-				    </div>
-				    {%endif%}
-				</div>
-				<div class="col-sm-3" style="margin-top: 30px">
-					<div class="form-check-inline" style="font-size: 83%; width: 150px">
-    					SESCOVID
-    					<input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="{{registro.codigo_sescovid}}">
-				    </div>
-				</div>			
-
-				</div>
-
 				<div class="row">
-				<div class="col-sm-5"></div>
-					<div class="col-sm-4">
-						{% if 'Vaga confirmada com Internação Imediata' in registro.status_regulacao %}
-						<div class="form-check-inline" style="font-size: 83%">
-					      <label class="form-check-label" for="" id="lb_vaga_conf_internacao">
-					        <input type="checkbox" class="form-check-input" id="check_internacao_id" name="status_paciente" value="Vaga confirmada com Internação Imediata" onclick="activeInternacaoImediata()" checked>Vaga confirmada com Internação Imediata
+					<div class="col-sm-3"></div>
+					<div class="col-sm-3"></div>
+					<div class="col-sm-3"></div>
+					<div class="col-sm-3" style="margin-top: 30px">
+						<div class="form-check-inline" style="font-size: 83%; width: 150px">
+	    					{% if registro.codigo_sescovid == '' or registro.codigo_sescovid == None %}
+	    					SESCOVID
+	    					<input type="number" min="0" max="200000" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="">
+	    					{%else%}
+	    					
+	    					<input type="text" min="0" max="200000" class="form-control form-control-sm" id="" placeholder="" name="" value="{{registro.codigo_sescovid}}" disabled>
+	    					{%endif%}
+					    </div>
+					</div>
+					
+				</div>
+				<div class="row" style="">
+					<div class="col-sm-4"></div>
+				<div class="col-sm-8" style="margin-top: 30px">
+					{% if 'Não Regulado' in status_list_descricao %}
+					<div class="form-check-inline" style="font-size: 83%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="check_paciente_nao_regulado_id" name="" value="Não Regulado" onclick="activeStatusNaoRegulado()" checked>PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="font-size: 83%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="check_paciente_nao_regulado_id" name="status_paciente" value="Não Regulado" onclick="activeStatusNaoRegulado()">PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+											
+
+				</div>
+		
+			<div class="row">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4" style="background-color: ">
+						{% if 'Regulado' in status_list_descricao %}
+						<div class="form-check-inline" style="font-size: 83%" id="div_paciente_regulado">
+					      <label class="form-check-label" for="">
+					        <input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="" value="Regulado" onclick="activeStatusAguardVaga()" checked>PACIENTE REGULADO
 					      </label>
 					    </div>
 					    {%else%}
 					    <div class="form-check-inline" style="font-size: 83%">
-					      <label class="form-check-label" for="" id="lb_vaga_conf_internacao">
-					        <input type="checkbox" class="form-check-input" id="check_internacao_id" name="status_paciente" value="Vaga confirmada com Internação Imediata" onclick="activeInternacaoImediata()">Vaga confirmada com Internação Imediata
+					      <label class="form-check-label" for="">
+					        <input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="status_paciente" value="Regulado" onclick="activeStatusAguardVaga()">PACIENTE REGULADO
 					      </label>
 					    </div>
 					    {%endif%}
-
 					</div>
-				
-				<div class="col-sm-3"></div>					
-			</div>
-			<div class="row">
-				<div class="col-sm-5"></div>
-				<div class="col-sm-3">
-					{% if 'Obito' in registro.status_regulacao %}
-					<div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" for="" id="">
-				        <input type="checkbox" class="form-check-input" id="check_obito_id" name="status_paciente" value="Obito" onclick="activeStatusObito()" checked>Óbito
-				        <input type="text" id="data_obito_id" name="data_obito_bd" value="{{registro.data_obito}}">
-				      </label>
-				    </div>
-				    {%else%}
-				    <div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" for="" id="">
-				        <input type="checkbox" class="form-check-input" id="check_obito_id" name="status_paciente" value="Obito" onclick="activeStatusObito()">Óbito
-				        <input type="date" required disabled id="data_obito_id" name="data_obito">
-				      </label>
-				    </div>
-				    {%endif%}
-				</div>
-				<div class="col-sm-4"></div>
-			</div>
-
-			<div class="row">
-				<div class="col-sm-5"></div>
-				<div class="col-sm-4">
-					{% if 'Aguardando em Lista de Espera' in registro.status_regulacao %}
-					<div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" id="">
-				        <input type="checkbox" class="form-check-input" id="check_em_lista_espera_id" name="status_paciente" value="Aguardando em Lista de Espera" onclick="activeListaEspera()" checked>AGUARDANDO EM LISTA DE ESPERA
-				      </label>
-				    </div>
-				    {%else%}
-				    <div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" id="">
-				        <input type="checkbox" class="form-check-input" id="check_em_lista_espera_id" name="status_paciente" value="Aguardando em Lista de Espera" onclick="activeListaEspera()">AGUARDANDO EM LISTA DE ESPERA
-				      </label>
-				    </div>
-				    {%endif%}
-				</div>
-				<div class="col-sm-3"></div>
-			</div>
-			
-			<div class="row">
-				<div class="col-sm-5"></div>
-				<div class="col-sm-4">
-					{% if 'Aguardando confirmação de Vaga' in registro.status_regulacao %}
-					<div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" id="">
-				        <input type="checkbox" class="form-check-input" id="" name="status_paciente" value="Aguardando confirmação de Vaga" onclick="activeListaEspera()" checked>Aguardando confirmação de Vaga
-				      </label>
-				    </div>
-				    {%else%}
-				    <div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" id="">
-				        <input type="checkbox" class="form-check-input" id="" name="status_paciente" value="Aguardando confirmação de Vaga" onclick="activeListaEspera()">Aguardando confirmação de Vaga
-				      </label>
-				    </div>
-				    {%endif%}
-				</div>
-				<div class="col-sm-3"></div>
+					<div class="col-sm-4"></div>
 			</div>
 		
-
-			<hr>
-			<div class="row">
-				<div class="col-sm-12" style="background-color: #cccccc"></div>
-			</div>
-
 			<div class="row">
 				<div class="col-sm-4"></div>
-				{% if 'Aguardando confirmação de Vaga' in registro.status_regulacao %}
-				<div id="" class="col-sm-4" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b>status:<i>Aguardando Confirmação de Vaga!</i></b>
+				<div class="col-sm-4">
+					{% if 'Aguardando em Lista de Espera' in status_list_descricao %}
+					<div class="form-check-inline" style="font-size: 83%" id="div_paciente_aguard_lista">
+				      <label class="form-check-label">
+				        <input type="radio" class="form-check-input" id="check_em_lista_espera_id" name="" value="Aguardando em Lista de Espera" onclick="activeListaEspera()" checked>AGUARDANDO EM LISTA DE ESPERA
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="font-size: 83%">
+				      <label class="form-check-label" id="">
+				        <input type="radio" class="form-check-input" id="check_em_lista_espera_id" name="status_paciente" value="Aguardando em Lista de Espera" onclick="activeListaEspera()">AGUARDANDO EM LISTA DE ESPERA
+				      </label>
+				    </div>
+				    {%endif%}
 				</div>
-				{%else%}
-				<div id="paciente_regulado_id" class="col-sm-4" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b>status:<i>Aguardando Confirmação de Vaga!</i></b>
-				</div>
-				{%endif%}
-				<div class="col-sm-4"></div>
-			</div>
-
-			<div class="row">
-				<div class="col-sm-4"></div>
-				{% if 'Obito' in registro.status_regulacao %}
-				<div id="" class="col-sm-4" style="background-color: #c6c6c6; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b>status:<i>Paciente veio a óbito!</i></b>
-				</div>
-				{%else%}
-				<div id="paciente_obito_regulacao_id" class="col-sm-4" style="background-color: #c6c6c6; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b>status:<i>Paciente veio a óbito!</i></b>
-				</div>
-				{%endif%}
 				<div class="col-sm-4"></div>
 			</div>
-
+		
 			<div class="row">
 				<div class="col-sm-4"></div>
-				{% if 'Aguardando em Lista de Espera' in registro.status_regulacao %}
-				<div id="" class="col-sm-4" style="background-color: #ffcc99; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b>status:<i>Paciente em Lista de espera!</i></b>
+				<div class="col-sm-4">
+					{% if 'Aguardando confirmação de Vaga' in status_list_descricao %}
+					<div class="form-check-inline" style="font-size: 83%" id="div_paciente_aguard_vaga">
+				      <label class="form-check-label" id="">
+				        <input type="radio" class="form-check-input" id="check_a_c_vaga_id" name="" value="Aguardando confirmação de Vaga" onclick="activeListaEspera()" checked>Aguardando confirmação de Vaga
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="font-size: 83%">
+				      <label class="form-check-label" id="">
+				        <input type="radio" class="form-check-input" id="check_a_c_vaga_id" name="status_paciente" value="Aguardando confirmação de Vaga" onclick="activeListaEspera()">Aguardando confirmação de Vaga
+				      </label>
+				    </div>
+				    {%endif%}
 				</div>
-				{%else%}
-				<div id="paciente_lista_regulacao_id" class="col-sm-4" style="background-color: #ffcc99; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b>status:<i>Paciente em Lista de espera!</i></b>
-				</div>
-				{%endif%}
-				<div class="col-sm-4"></div>
-				
-			</div>
-
-			<div class="row">
-				<div class="col-sm-4"></div>
-				{% if 'Vaga confirmada com Internação Imediata' in registro.status_regulacao %}
-				<div id="" class="col-sm-4" style="background-color: #b3e6b3; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b>status:<i>Paciente encaminhado para Internação!</i></b>
-				</div>
-				{%else%}
-				<div id="paciente_internado_regulacao_id" class="col-sm-4" style="background-color: #b3e6b3; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b>status:<i>Paciente encaminhado para Internação!</i></b>
-				</div>
-				{%endif%}
-				<div class="col-sm-4"></div>
-			</div>
-
-			<div class="row">
-				<div class="col-sm-4"></div>
-				{% if 'Paciente não preenche critérios para Regulação' in registro.regulacao_paciente %}
-				<div id="" class="col-sm-4" style="background-color: #ffbb99; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b>status:<i>Paciente Não Regulado!</i></b>
-				</div>
-				{%else%}
-				<div id="paciente_nao_regulado_id" class="col-sm-4" style="background-color: #ffbb99; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b>status:<i>Paciente Não Regulado!</i></b>
-				</div>
-				{%endif%}
 				<div class="col-sm-4"></div>
 			</div>
 			
@@ -2956,7 +2944,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					    </div>
 					    {%else%}
 					    <div class="form-check-inline">
-							<input type="text" class="form-control form-control-sm" id="" placeholder="" name="data_regulacao_bd" size="10" value="{{registro.data_regulacao}}">
+							<input type="text" class="form-control form-control-sm" id="" placeholder="" name="data_regulacao_bd" value="{{data_regulacao_template}}">
 					    </div>
 					    {%endif%}
 					    
@@ -2984,7 +2972,9 @@ máxima de 12h de validação para recepção na unidade solicitante.
 	</div>
 
 	<div class="container-fluid" style="text-align: center;">
-		<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/">Principal</a></button>  
+		<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/">Principal</a></button>
+
+		<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/status_registro/{{registro.id}}/">Status</a></button>  
 	</div>
 	<div style="height: 50px"></div>
 	

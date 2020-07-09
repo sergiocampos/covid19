@@ -182,6 +182,7 @@
   } );
   </script>
 
+
   <script>
   	$(function(){
   		var cidades = [
@@ -677,35 +678,29 @@ dgCidadesEstados.prototype = {
 				<div class="col-sm-6" style="">
 					Médico Solicitante:
 					<div class="form-check-inline" style="width: 60%">
-						<input type="text" class="form-control form-control-sm" id="nome_solicitante_id" placeholder="" name="nome_solicitante" value="{{nome_solicitante}}">
+						<input type="text" class="form-control form-control-sm" id="nome_solicitante_id" placeholder="" name="nome_solicitante" value="">
 				    </div>
 				</div>
 
     			
 			</div><hr />
 			<div class="row">
-				<div class="col-sm-3">
-					<b>Município Solicitante:</b>
-					<input type="text" class="form-control form-control-sm" name="municipio_solicitante" value="{{cidade}}" />
-					
-				</div>
-				<div class="col-sm-2">
-					<button type="button" class="" style="align-items: center; border-radius: 5px; border: 2px solid #c2c2d6" id=""><a class="" href="/search_estabelecimento/">Alterar Cidade?</a></button>					
-				</div>
-				
-				<div class="col-sm-4" id="">
-					Escolha estabelecimento solicitante:
-					<select autofocus="autofocus" class="form-control form-control-sm" name="estabelecimento_solicitante_new" id="estabelecimento_id">
-						<option value="">...nenhum</option>
-						{% for e in estabelecimentos %}
-						<option value="{{e.NO_FANTASIA}}">{{e.NO_FANTASIA}}</option>
-						{%endfor%}						
+				<div class="col-sm-4">
+					Escolha município solicitante:
+					<select class="form-control form-control-sm" autofocus="autofocus" name="municipio_solicitante" id="" required>
+						{% for m in municipios %}
+						<option value="{{m.MUNICIPIO}}">{{m.MUNICIPIO}}</option>
+						{%endfor%}
 					</select>
 				</div>
-				<div class="col-sm-3">
+				<div class="col-sm-4">
+					<button type="submit" class="" style="align-items: center; border-radius: 5px; border: 2px solid #c2c2d6" id="btn_inicio">Pesquisar Estabelecimento:</button>
+				</div>
+				<div class="col-sm-4" id="">
 					
 				</div>
-			</div>
+				
+			</div><br />
 			<br />
 			<div class="row">
 				
@@ -718,7 +713,7 @@ dgCidadesEstados.prototype = {
 				    </div>
 					
 					<div class="form-check-inline" style="width: 80%">
-						<input type="text" class="form-control form-control-sm" id="outro_estabelecimento_id" placeholder="" name="desc_outro_estabelecimento" value="{{estabelecimento_outro}}" disabled>
+						<input type="text" class="form-control form-control-sm" id="outro_estabelecimento_id" placeholder="" name="desc_outro_estabelecimento" value="" disabled>
 				    </div>
 				</div>
 
@@ -732,34 +727,19 @@ dgCidadesEstados.prototype = {
 				<div class="col-sm-6" style="">
 					Nome do Paciente
 					<div class="form-check-inline">
-						<input type="text" class="form-control form-control-sm" id="nome_paciente_id" placeholder="" name="nome_paciente" size="40" value="{{nome_paciente}}">
+						<input type="text" class="form-control form-control-sm" id="nome_paciente_id" placeholder="" name="nome_paciente" size="40" value="">
 				    </div>
 				</div>
 				<div class="col-sm-2" style="">
     				Idade:
 				    <div class="form-check-inline">
-				        <input type="number" class="form-control form-control-sm" id="" placeholder="" name="idade_paciente" value="{{idade_paciente}}" min="1" max="200" style="width: 60px">
+				        <input type="number" class="form-control form-control-sm" id="" placeholder="" name="idade_paciente" value="" min="1" max="200" style="width: 60px">
 				    </div>
     			</div>
-    			<div class="col-sm-4">
-    				Sexo:
-					<div class="form-check-inline">
-						{% if registro.sexo_paciente == '' or registro.sexo_paciente == None %}
-						<select class="form-control form-control-sm" name="sexo_paciente" id="" style="width: 125px">
-							<option value="" selected>escolha...</option>
-							<option value="MASCULINO">MASCULINO</option>
-							<option value="FEMININO">FEMININO</option>
-						</select>
-					    {%else%}
-					    <select class="form-control form-control-sm" name="sexo_paciente" id="" style="width: 125px">
-							<option value="{{registro.sexo_paciente}}" selected>{{registro.sexo_paciente}}</option>
-							<option value="MASCULINO">MASCULINO</option>
-							<option value="FEMININO">FEMININO</option>
-						</select>
-					    {%endif%}
-					</div>
-    			</div>
-								
+				<div class="col-sm-4" style="">
+					
+				</div>
+				
     			
 			</div>			
 		</div>
@@ -769,18 +749,17 @@ dgCidadesEstados.prototype = {
 				<div class="col-sm-5">
 					Recurso que precisa:
 					<div class="form-check-inline" style="width: 200px">
-						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="recurso_que_precisa" size="8" value="{{recurso_que_precisa}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="recurso_que_precisa" size="8" value="">
 				    </div>
 				</div>
 				<div class="col-sm-7">
 					Município de Residência:
 					<div class="form-check-inline" style="width: ">
 						<select name="estado_paciente" id="estado" class="form-control form-control-sm" style="width: 80%">
-							<option value="{{estado_origem}}">{{estado_origem}}</option>
 				            				            
 				        </select>
 				        <select name="cidade_paciente" id="cidade" class="form-control form-control-sm" style="width: 80%">			            
-				            <option value="{{cidade_origem}}">{{cidade_origem}}</option>
+				            
 				        </select>
 					</div>
 						
@@ -795,10 +774,7 @@ dgCidadesEstados.prototype = {
 				
     			
 			</div><br>
-			<div class="row">
-				
-				
-			</div><br />
+			
 			<div class="row">
 				<div class="col-sm-4">
 					Telefone-Retorno
@@ -844,10 +820,10 @@ dgCidadesEstados.prototype = {
 					</div>
 
 					<div class="form-check-inline">
-		              <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" size="2" required style="width: 100px">
+		              <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" size="2" style="width: 100px">
 		              <div class="invalid-feedback"></div>
 		              <label for="">X</label>
-		              <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" size="2" required style="width: 100px">
+		              <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" size="2" style="width: 100px">
 		              <div class="invalid-feedback"></div>
 		              
 		            </div>
@@ -876,7 +852,7 @@ dgCidadesEstados.prototype = {
 						<label for="" class="form-check-label">Temperatura:</label>
 					</div>
 					<div class="form-check-inline">
-						<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" max="100" name="temperatura_paciente" size="5" required>
+						<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" max="100" name="temperatura_paciente" size="5">
 						<div class="invalid-feedback"></div>
 
 						<label for="">°C</label>					
@@ -892,9 +868,11 @@ dgCidadesEstados.prototype = {
 			</div><hr>
 		</div>
 
+		<!--
 		<div class="container-fluid" style="text-align: center;">
 			<button type="submit" class="btn btn-primary" style="align-items: center;" id="btn_inserir_paciente">Inserir</button>  
 	    </div>
+	-->
 
 	    <div style="height: 50px"></div>
 

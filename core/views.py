@@ -1,12 +1,37 @@
+from django.utils.translation import gettext as _
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from datetime import datetime, timezone
-from .models import RegistroCovid
+from .models import RegistroCovid, Cnes, Status
 import calendar
 from time import gmtime, strftime
 from django.core.paginator import Paginator
+from django.urls import reverse
+from urllib.parse import urlencode
+import pandas as pds
+from django.http import HttpResponse
+from io import BytesIO as IO
+from openpyxl import Workbook
 
 # Create your views here.
+@login_required
+def change_password(request):
+	if request.method == 'POST':
+		form = PasswordChangeForm(request.user, request.POST)
+		if form.is_valid():
+			user = form.save()
+			update_session_auth_hash(request, user)
+			messages.success(request, _('Your password was successfully updated!'))
+			return redirect('/')
+		else:
+			messages.error(request, _('Please correct the error below.'))
+	else:
+		form = PasswordChangeForm(request.user)
+	return render(request, 'change_password.html', {'form': form})
+
 
 @login_required
 def covid_list(request):
@@ -20,14 +45,82 @@ def covid_list(request):
 
 
 @login_required
+def search_estabelecimento(request):
+	data = datetime.now()
+	formateDate = data.strftime("%d-%m-%Y")
+	hora = data.strftime("%H:%M")
+
+	municipios = Cnes.objects.order_by('MUNICIPIO').distinct('MUNICIPIO')
+
+	return render(request, 'search_estabelecimento.html', {'formateDate': formateDate, 'hora': hora, 'municipios':municipios})
+
+
+@login_required
+def search_estabelecimento_set(request):
+	data = datetime.now()
+	formateDate = data.strftime("%d-%m-%Y")
+	hora = data.strftime("%H:%M")
+
+	municipios = Cnes.objects.order_by('MUNICIPIO').distinct('MUNICIPIO')
+
+	nome_solicitante = request.POST.get('nome_solicitante')
+	estabelecimento_outro = request.POST.get('desc_outro_estabelecimento')
+	nome_paciente = request.POST.get('nome_paciente')
+	
+	
+	idade_paciente_cap = request.POST.get('idade_paciente')
+	if idade_paciente_cap != '':
+		idade_paciente = int(idade_paciente_cap)
+	else:
+		idade_paciente = None
+	
+	recurso_que_precisa = request.POST.get('recurso_que_precisa')
+	estado_origem = request.POST.get('estado_paciente')
+	cidade_origem = request.POST.get('cidade_paciente')
+
+	cidade = request.POST.get('municipio_solicitante')
+
+	request.session['nome_solicitante'] = nome_solicitante
+	request.session['idade_paciente'] = idade_paciente
+	request.session['nome_paciente'] = nome_paciente
+	request.session['municipio_solicitante'] = cidade
+
+	#context = {'cidade':cidade, 'idade_paciente':idade_paciente}
+	#print(idade_paciente)
+	#print(cidade)
+	#base_url = reverse('registro_covid')
+	#idade_paciente =  urlencode({'idade_paciente': idade_paciente})
+	#cidade = urlencode({'cidade':cidade})
+	#url = '{}?{}${}'.format(base_url, idade_paciente, cidade)
+
+	#print(idade_paciente)
+	#print(cidade)
+
+	return redirect('registro_covid')
+
+
+@login_required
 def registro_covid(request):
 	data = datetime.now()
 	formateDate = data.strftime("%d-%m-%Y")
 	hora = data.strftime("%H:%M")
 
-	
+	municipios = Cnes.objects.order_by('MUNICIPIO').distinct('MUNICIPIO')
 
-	return render(request, 'registro_covid.html', {'formateDate': formateDate, 'hora': hora})
+	#idade_paciente = request.GET.get('idade_paciente')
+	#cidade = request.GET.get('municipio_solicitante')
+	nome_solicitante = request.session['nome_solicitante']
+	idade_paciente = request.session['idade_paciente']
+	nome_paciente = request.session['nome_paciente']
+	cidade = request.session['municipio_solicitante']
+
+	estabelecimentos = Cnes.objects.filter(MUNICIPIO = cidade)
+
+	return render(request, 'registro_covid.html', {'formateDate': formateDate, 
+		'hora': hora, 'municipios':municipios, 'idade_paciente':idade_paciente, 
+		'cidade':cidade, 'estabelecimentos':estabelecimentos, 'nome_paciente':nome_paciente, 
+		'nome_solicitante':nome_solicitante})
+
 
 
 @login_required
@@ -83,10 +176,9 @@ def registro_covid_set(request):
 
 	
 	nome_solicitante = request.POST.get('nome_solicitante')
-	municipio_estabelecimento = request.POST.get("municipio_do_estabelecimento")
-	estabelecimento_solicitante = request.POST.get('estabelecimento_solicitante')
-	estabelecimento_outro = request.POST.get('desc_outro_estabelecimento')
-	unidade_origem = request.POST.get('unidade_origem')
+	municipio_estabelecimento_solicitante = request.POST.get('municipio_solicitante')
+	estabelecimento_solicitante = request.POST.get('estabelecimento_solicitante_new')
+	estabelecimento_solicitante_outro = request.POST.get('desc_outro_estabelecimento')
 	nome_paciente = request.POST.get('nome_paciente')
 	
 	idade_paciente_cap = request.POST.get('idade_paciente')
@@ -95,6 +187,7 @@ def registro_covid_set(request):
 	else:
 		idade_paciente = None
 	
+	sexo_paciente = request.POST.get('sexo_paciente')
 	recurso_que_precisa = request.POST.get('recurso_que_precisa')
 	estado_origem = request.POST.get('estado_paciente')
 	cidade_origem = request.POST.get('cidade_paciente')
@@ -149,12 +242,12 @@ def registro_covid_set(request):
 		codigo_registro_mensal = codigo_registro_mensal,
 		codigo_registro_completo = codigo_registro_completo,
 		nome_solicitante = nome_solicitante,
-		municipio_estabelecimento = municipio_estabelecimento,
+		municipio_estabelecimento_solicitante = municipio_estabelecimento_solicitante,
 		estabelecimento_solicitante = estabelecimento_solicitante,
-		estabelecimento_outro = estabelecimento_outro,
-		unidade_origem = unidade_origem,
+		estabelecimento_solicitante_outro = estabelecimento_solicitante_outro,
 		nome_paciente = nome_paciente,
 		idade_paciente = idade_paciente,
+		sexo_paciente = sexo_paciente,
 		recurso_que_precisa = recurso_que_precisa,
 		estado_origem = estado_origem,
 		cidade_origem = cidade_origem,
@@ -170,7 +263,7 @@ def registro_covid_set(request):
 
 		)
 
-	return redirect('covid_list')
+	return redirect('/')
 
 @login_required
 def registro_enfermeiro_medico(request):
@@ -178,6 +271,8 @@ def registro_enfermeiro_medico(request):
 
 @login_required
 def regulacao(request, id):
+	data_regulacao = datetime.now()
+	data_regulacao_template = data_regulacao.strftime('%d/%m/%Y %H:%M')
 
 	registro = RegistroCovid.objects.get(id=id)
 	pa = registro.pa
@@ -186,7 +281,55 @@ def regulacao(request, id):
 	pa_1 = p[0]
 	pa_2 = p[1]
 
-	return render(request, 'regulacao.html', {'registro' : registro, 'pa_1':pa_1, 'pa_2':pa_2})
+	status_registro = Status.objects.filter(registro_covid=registro.id)
+
+	status_list_descricao = []
+
+	for s in status_registro:
+		status_list_descricao.append(s.descricao)
+
+	status_aguard_conf_vaga_registro = Status.objects.filter(descricao='Aguardando confirmação de Vaga').last()
+	#status_obito_registro = Status.objects.filter(descricao='Obito').last()
+	status_aguard_lista_espera_registro = Status.objects.filter(descricao='Aguardando em Lista de Espera').last()
+	status_regulado_registro = Status.objects.filter(descricao='Regulado').last()
+	status_nao_regulado_registro = Status.objects.filter(descricao='Não Regulado').last()
+
+
+	#request.session['nome_solicitante'] = nome_solicitante
+	#request.session['idade_paciente'] = idade_paciente
+	#request.session['nome_paciente'] = nome_paciente
+	#request.session['sexo_paciente'] = sexo_paciente
+	municipio_estabelecimento_solicitante = request.session['municipio_estabelecimento_solicitante']
+	estabelecimento_solicitante = request.session['estabelecimento_solicitante']
+	estabelecimento_solicitante_outro = request.session['estabelecimento_solicitante_outro']
+	#request.session['recurso_que_precisa'] = recurso_que_precisa
+	#request.session['cidade_origem'] = cidade_origem
+	#request.session['telefone_retorno'] = telefone_retorno
+	#request.session['frequencia_respiratoria'] = frequencia_respiratoria
+	#request.session['saturacao_paciente'] = saturacao_paciente
+	#request.session['frequencia_cardiaca'] = frequencia_cardiaca
+	#request.session['conciencia'] = conciencia
+	#request.session['temperatura'] = temperatura
+	#request.session['observacao'] = observacao
+	#request.session['pa_1'] = pa_1
+	#request.session['pa_2'] = pa_2
+	cidade = request.session['municipio_referencia']
+
+
+	estabelecimentos = Cnes.objects.filter(MUNICIPIO = cidade)
+
+
+	return render(request, 'regulacao.html', {'registro' : registro, 'pa_1':pa_1, 
+		'pa_2':pa_2, 'data_regulacao_template': data_regulacao_template,
+		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
+		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
+		status_aguard_lista_espera_registro, 'status_regulado_registro':
+		status_regulado_registro, 'status_nao_regulado_registro':
+		status_nao_regulado_registro, 'municipio_estabelecimento_solicitante':
+		municipio_estabelecimento_solicitante, 'estabelecimento_solicitante':
+		estabelecimento_solicitante, 'estabelecimento_solicitante_outro':
+		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
+		estabelecimentos})
 
 
 @login_required
@@ -197,10 +340,12 @@ def regulacao_set(request, id):
 	
 	
 	nome_solicitante = request.POST.get('nome_solicitante')
-	municipio_estabelecimento = registro.municipio_estabelecimento
+	municipio_estabelecimento_solicitante = registro.municipio_estabelecimento_solicitante
 	estabelecimento_solicitante = registro.estabelecimento_solicitante
-	estabelecimento_outro = registro.estabelecimento_outro
-	unidade_origem = request.POST.get('unidade_origem')
+	estabelecimento_solicitante_outro = registro.estabelecimento_solicitante_outro
+	municipio_estabelecimento_referencia = request.POST.get('municipio_estabelecimento_referencia')
+	estabelecimento_referencia = request.POST.get('estabelecimento_referencia')
+	estabelecimento_referencia_outro = request.POST.get('estabelecimento_referencia_outro')
 	nome_paciente = request.POST.get('nome_paciente')
 	
 	idade_paciente_cap = request.POST.get('idade_paciente')
@@ -209,6 +354,7 @@ def regulacao_set(request, id):
 	else:
 		idade_paciente = int(float(idade_paciente_cap))
 
+	sexo_paciente = request.POST.get('sexo_paciente')
 	recurso_que_precisa = registro.recurso_que_precisa
 	estado_origem = registro.estado_origem
 	cidade_origem = registro.cidade_origem
@@ -382,6 +528,41 @@ def regulacao_set(request, id):
 	foco = request.POST.getlist('foco')
 	uso_antibioticoterapia = request.POST.get('uso_antibioticoterapia')
 	pesquisa_teste_sars_cov_2 = request.POST.get('pesquisa_sars_cov2')
+	igg_cap = request.POST.get('igg')
+	igg_bd = request.POST.get('igg_bd')
+	if igg_cap == '' or igg_cap == None:
+		if igg_bd == '' or igg_bd == None:
+			igg = None
+		else:
+			igg = igg_bd
+	else:
+		igg = igg_cap
+
+	igm_do_bd = registro.igm
+	igm_cap = request.POST.get('igm')
+
+	igm_bd_cap = request.POST.get('igm_bd')
+	if igm_cap == '' or igm_cap == None:
+		if igm_bd_cap == '' or igm_bd_cap == None:
+			igm = None
+		else:
+			igm = igm_bd_cap
+	else:
+		igm = igm_cap
+
+	
+	data_igm_igg_cap = request.POST.get('data_igm_igg')
+	data_igm_igg_bd_cap = request.POST.get('data_igm_igg_bd')
+
+	if data_igm_igg_cap == '' or data_igm_igg_cap == None:
+		if data_igm_igg_bd_cap == '' or data_igm_igg_bd_cap == None:
+			data_igm_igg = None
+		else:
+			data_igm_igg = datetime.strptime(data_igm_igg_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_igm_igg = data_igm_igg_cap
+
+
 	rt_pcr_sars_cov_2 = request.POST.get('pcr_sars_cov2')
 	
 	data_da_coleta_bd_cap = request.POST.get('data_da_coleta_bd')
@@ -529,46 +710,40 @@ def regulacao_set(request, id):
 		prioridade = int(float(prioridade_cap))
 		
 
-	status_regulacao = registro.status_regulacao
+	#status_regulacao = registro.status_regulacao
 	
-	regulacao_paciente = request.POST.get('paciente_preenche_criterios')
+	#regulacao_paciente = request.POST.get('paciente_preenche_criterios')
 
-	status_regulacao_cap = request.POST.getlist('status_paciente')
-
-	if regulacao_paciente == 'Paciente não preenche critérios para Regulação':
-		if status_regulacao == '' or status_regulacao == None or status_regulacao == []:
-			status_regulacao = '{Paciente Não Regulado}'
-		else:
-			status_regulacao = status_regulacao + status_regulacao_cap
-
-	elif regulacao_paciente == 'Paciente preenche critérios para Regulação':
-		if status_regulacao == '' or status_regulacao == None or status_regulacao == []:
-			status_regulacao = '{Paciente Regulado, Aguardando confirmação de Vaga}'
-		else:
-			status_regulacao = status_regulacao + status_regulacao_cap
-			#x = set(status_regulacao)
-			#y = set(status_regulacao_cap)
-			#print("lista do banco:", str(x))
-			#print("lista capturada:", str(y))
-
-			#dif = y.difference(x)
-			#print("diferença de opções:", str(dif))
-			#if dif != 'set()':
-			#	status_regulacao.append(str(dif))
-			#status_regulacao = status_regulacao + status_regulacao_cap
-			#status_regulacao = list(set(status_regulacao) - set(status_regulacao_cap))
-			#for k in status_regulacao:
-			#	print("valor do banco:",k)
-			#	for v in status_regulacao_cap:
-			#		print("valor escolhido:",v)
-			#		if k != v:
-			#			print("k é diferente de v")
-			#			status_regulacao.append(v)
-			#print("nova lista:", status_regulacao)
 	
+	#status_obito = request.POST.get('status_paciente_obito')
+	#status_aguardando_em_lista = request.POST.get('status_paciente_l_e')
+	#status_aguardando_confirmacao_vaga = request.POST.get('status_paciente_a_c_v')
+	#if status_vaga_confirmada_i_imediata != '':
+	#	descricao = status_vaga_confirmada_i_imediata
+	#if status_obito != '':
+	#	descricao = status_obito
+	#if status_aguardando_em_lista != '':
+	#	descricao = status_aguardando_em_lista
+	#if status_aguardando_confirmacao_vaga != '':
+	#	descricao = status_aguardando_confirmacao_vaga
 
-	#status_regulacao = request.POST.get('')
-	codigo_sescovid = request.POST.get('num_protocolo')
+	#data = datetime.now()
+	#data_notificacao = data.strftime("%d-%m-%Y")
+	#hora_notificacao = data.strftime("%H:%M")
+
+	descricao = request.POST.get('status_paciente')
+	registro_covid = registro
+
+	status = Status.objects.create(
+		descricao=descricao,
+		registro_covid=registro_covid
+		)
+
+	codigo_sescovid_cap = request.POST.get('num_protocolo')
+	if codigo_sescovid_cap == '' or codigo_sescovid_cap == None:
+		codigo_sescovid = registro.codigo_sescovid
+	else:
+		codigo_sescovid = 'SESCOVID' + codigo_sescovid_cap
 	justificativa = request.POST.get('justificativa')
 	observacao = request.POST.get('observacoes_medicas')
 	
@@ -581,38 +756,35 @@ def regulacao_set(request, id):
 	else:
 		pareceristas = pareceristas + pareceristas_cap
 
-	data_regulacao_bd_cap = request.POST.get('data_regulacao_bd')
-	data_regulacao_cap = request.POST.get('data_regulacao')
-	if data_regulacao_cap == '' or data_regulacao_cap == None:
-		if data_regulacao_bd_cap == '' or data_regulacao_bd_cap == None:
-			data_regulacao = None
-		else:
-			data_regulacao = datetime.strptime(data_regulacao_bd_cap, '%d/%m/%Y').date()
-	else:
-		data_regulacao = data_regulacao_cap
+	
+	data_regulacao = datetime.now()
+	#data_regulacao = data_regulacao_.strftime('%d/%m/%Y %H:%M')
 
 
-	data_obito_bd_cap = request.POST.get('data_obito_bd')
-	data_obito_cap = request.POST.get('data_obito')
+	#data_obito_bd_cap = request.POST.get('data_obito_bd')
+	#data_obito_cap = request.POST.get('data_obito')
 
-	if data_obito_cap == '' or data_obito_cap == None:
-		if data_obito_bd_cap == '' or data_obito_bd_cap == None:
-			data_obito = None
-		else:
-			data_obito = datetime.strptime(data_obito_bd_cap, '%d/%m/%Y').date()
-	else:
-		data_obito = data_obito_cap
+	#if data_obito_cap == '' or data_obito_cap == None:
+	#	if data_obito_bd_cap == '' or data_obito_bd_cap == None:
+	#		data_obito = None
+	#	else:
+	#		data_obito = datetime.strptime(data_obito_bd_cap, '%d/%m/%Y').date()
+	#else:
+	#	data_obito = data_obito_cap
 
 	
 	registro.responsavel_pelo_preenchimento = responsavel_pelo_preenchimento
 	#registro.codigo_registro = codigo_registro
 	registro.nome_solicitante = nome_solicitante
-	registro.municipio_estabelecimento = municipio_estabelecimento
+	registro.municipio_estabelecimento_solicitante = municipio_estabelecimento_solicitante
 	registro.estabelecimento_solicitante = estabelecimento_solicitante
-	registro.estabelecimento_outro = estabelecimento_outro
-	registro.unidade_origem = unidade_origem
+	registro.estabelecimento_solicitante_outro = estabelecimento_solicitante_outro
+	registro.municipio_estabelecimento_referencia = municipio_estabelecimento_referencia
+	registro.estabelecimento_referencia = estabelecimento_referencia
+	registro.estabelecimento_referencia_outro = estabelecimento_referencia_outro
 	registro.nome_paciente = nome_paciente
 	registro.idade_paciente = idade_paciente
+	registro.sexo_paciente = sexo_paciente
 	registro.recurso_que_precisa = recurso_que_precisa
 	registro.estado_origem = estado_origem
 	registro.cidade_origem = cidade_origem
@@ -666,6 +838,9 @@ def regulacao_set(request, id):
 	registro.foco = foco
 	registro.uso_antibioticoterapia = uso_antibioticoterapia
 	registro.pesquisa_teste_sars_cov_2 = pesquisa_teste_sars_cov_2
+	registro.igg = igg
+	registro.igm = igm
+	registro.data_igm_igg = data_igm_igg
 	registro.rt_pcr_sars_cov_2 = rt_pcr_sars_cov_2
 	registro.data_coleta = data_coleta
 	registro.em_uso_corticosteroide = em_uso_corticosteroide
@@ -719,14 +894,14 @@ def regulacao_set(request, id):
 	registro.leito = leito
 	registro.parecer_medico = parecer_medico
 	registro.prioridade = prioridade
-	registro.regulacao_paciente = regulacao_paciente
-	registro.status_regulacao = status_regulacao
+	#registro.regulacao_paciente = regulacao_paciente
+	#registro.status_regulacao = status_regulacao
 	registro.codigo_sescovid = codigo_sescovid
 	registro.justificativa = justificativa
 	registro.observacao = observacao
 	registro.pareceristas = pareceristas
 	registro.data_regulacao = data_regulacao
-	registro.data_obito = data_obito
+	#registro.data_obito = data_obito
 
 	registro.save()
 
@@ -737,6 +912,10 @@ def regulacao_set(request, id):
 def regulacao_detail(request, id):
 	registro = RegistroCovid.objects.get(id=id)
 
+	data_regulacao = registro.data_regulacao
+	if data_regulacao:
+		data_regulacao_template = data_regulacao.strftime('%d/%m/%Y %H:%M')
+
 	responsavel_pelo_preenchimento = request.user
 
 	pa = registro.pa
@@ -744,9 +923,18 @@ def regulacao_detail(request, id):
 	p1 = p[0]
 	p2 = p[1]
 
+	status_registro = Status.objects.filter(registro_covid=registro.id)
+
+	status_list_descricao = []
+
+	for s in status_registro:
+		status_list_descricao.append(s.descricao)
+
 	
 
-	return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 'p2':p2})
+	return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
+		'p2':p2, 'data_regulacao_template':data_regulacao_template, 
+		'status_list_descricao':status_list_descricao})
 
 @login_required
 def regulacao_edit(request, id):
@@ -759,7 +947,10 @@ def regulacao_edit(request, id):
 	p1 = p[0]
 	p2 = p[1]
 
-	return render(request, 'regulacao_edit.html', {'registro':registro, 'p1': p1, 'p2': p2})
+	municipios = Cnes.objects.order_by('MUNICIPIO').distinct('MUNICIPIO')
+
+	return render(request, 'regulacao_edit.html', {'registro':registro, 
+		'p1': p1, 'p2': p2, 'municipios':municipios})
 
 @login_required
 def regulacao_edit_set(request, id):
@@ -777,10 +968,9 @@ def regulacao_edit_set(request, id):
 	#hora_notificacao = request.POST.get('hora_notificacao')
 	
 	nome_solicitante = request.POST.get('nome_solicitante')
-	municipio_estabelecimento = request.POST.get("municipio_do_estabelecimento")
+	municipio_estabelecimento_solicitante = request.POST.get('municipio_do_estabelecimento')
 	estabelecimento_solicitante = request.POST.get('estabelecimento_solicitante')
-	estabelecimento_outro = request.POST.get('desc_outro_estabelecimento')
-	unidade_origem = request.POST.get('unidade_origem')
+	estabelecimento_solicitante_outro = request.POST.get('desc_outro_estabelecimento')
 	nome_paciente = request.POST.get('nome_paciente')
 	
 	idade_paciente_cap = request.POST.get('idade_paciente')
@@ -789,6 +979,8 @@ def regulacao_edit_set(request, id):
 	else:
 		idade_paciente = None
 	
+	sexo_paciente = request.POST.get('sexo_paciente')
+
 	recurso_que_precisa = request.POST.get('recurso_que_precisa')
 	#estado_origem = request.POST.get('estado_paciente')
 	cidade_origem = request.POST.get('cidade_origem')
@@ -817,6 +1009,9 @@ def regulacao_edit_set(request, id):
 	pa_part1 = request.POST.get('pa_part1')
 	pa_part2 = request.POST.get('pa_part2')
 
+	pa_1 = pa_part1
+	pa_2 = pa_part2
+
 	pa = pa_part1 +"x"+ pa_part2
 	conciencia = request.POST.get('consciencia_paciente')
 	
@@ -829,41 +1024,39 @@ def regulacao_edit_set(request, id):
 	observacao = request.POST.get('observacao_paciente')
 
 	
-	registro.responsavel_pelo_preenchimento = responsavel_pelo_preenchimento
-	registro.nome_solicitante = nome_solicitante
-	registro.municipio_estabelecimento = municipio_estabelecimento
-	registro.estabelecimento_solicitante = estabelecimento_solicitante
-	registro.estabelecimento_outro = estabelecimento_outro
-	registro.unidade_origem = unidade_origem
-	registro.nome_paciente = nome_paciente
-	registro.idade_paciente = idade_paciente
-	registro.recurso_que_precisa = recurso_que_precisa
-	#registro.estado_origem = estado_origem
-	registro.cidade_origem = cidade_origem
-	registro.telefone_retorno = telefone_retorno
-	registro.frequencia_respiratoria = frequencia_respiratoria
-	registro.saturacao_paciente = saturacao_paciente
-	registro.ar_o2 = ar_o2
-	registro.frequencia_cardiaca = frequencia_cardiaca
-	registro.pa = pa
-	registro.conciencia = conciencia
-	registro.temperatura = temperatura	
-	registro.observacao = observacao
-	
+	cidade = request.POST.get('municipio_referencia')
 
-	registro.save()
+	request.session['nome_solicitante'] = nome_solicitante
+	request.session['idade_paciente'] = idade_paciente
+	request.session['nome_paciente'] = nome_paciente
+	request.session['sexo_paciente'] = sexo_paciente
+	request.session['municipio_estabelecimento_solicitante'] = municipio_estabelecimento_solicitante
+	request.session['estabelecimento_solicitante'] = estabelecimento_solicitante
+	request.session['estabelecimento_solicitante_outro'] = estabelecimento_solicitante_outro
+	request.session['recurso_que_precisa'] = recurso_que_precisa
+	request.session['cidade_origem'] = cidade_origem
+	request.session['telefone_retorno'] = telefone_retorno
+	request.session['frequencia_respiratoria'] = frequencia_respiratoria
+	request.session['saturacao_paciente'] = saturacao_paciente
+	request.session['frequencia_cardiaca'] = frequencia_cardiaca
+	request.session['conciencia'] = conciencia
+	request.session['temperatura'] = temperatura
+	request.session['observacao'] = observacao
+	request.session['pa_1'] = pa_1
+	request.session['pa_2'] = pa_2
+	request.session['municipio_referencia'] = cidade
 
-	return redirect('covid_list')
+	return redirect('regulacao', id=id)
 
 @login_required
 def search_register(request):
 	registros = RegistroCovid.objects.all()
 
-	paginator = Paginator(registros, 5)
-	page = request.GET.get('page')
-	regs = paginator.get_page(page)
+	#paginator = Paginator(registros, 5)
+	#page = request.GET.get('page')
+	#regs = paginator.get_page(page)
 
-	return render(request, 'search_register.html', {'regs':regs})
+	return render(request, 'search_register.html', {'registros':registros})
 
 @login_required
 def search_between_date(request):
@@ -884,3 +1077,201 @@ def result_search_between_date(request):
 
 
 	return render(request, 'result_search_between_date.html')
+
+
+@login_required
+def gerar_relatorios(request):
+	
+	return render(request, 'gerar_relatorios.html')
+
+
+@login_required
+def gerar_relatorios_set(request):
+	data_inicio = request.POST.get('data_inicio')
+	data_fim = request.POST.get('data_fim')
+
+	print("data final:",data_fim)
+
+	values = RegistroCovid.objects.filter(data_notificacao__range=[data_inicio, data_fim])
+	#values = RegistroCovid.objects.all()
+	status = Status.objects.all()
+	
+	for s in status:
+		for v in values:
+			if v.id == s.registro_covid_id and s.descricao != None:
+				regulacao_ = s.descricao
+				#print(regulacao_)
+				
+		
+
+	#for vl in values:
+	#	print(', '.join(vl.comorbidades))
+
+	response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+
+	response['Content-Disposition'] = 'attachment; filename=myfile.xlsx'
+
+	workbook = Workbook()
+	worksheet = workbook.active
+
+	columns = [
+		'Senha',
+		'Registro CERN',
+		'Nome',
+		'Idade',
+		'Sexo',
+		'Regulacao',
+		'Município de Residencia',
+		'Estabelecimento de Origem',
+		'Estabelecimento Referencia Covid',
+		'Município do Estabelecimento',
+		'Perfil',
+		'Data',
+		'Comorbidades',
+		'Nível de Atenção',
+		'Tipo de Teste',
+		'Teste Covid',
+
+	]
+
+	row_num = 1
+
+	regulacao_status = []
+
+
+	for col_num, column_title in enumerate(columns, 1):
+		cell = worksheet.cell(row=row_num, column=col_num)
+		cell.value = column_title
+
+	
+	for v in values:
+		result_exames = []
+		row_num += 1
+		
+
+		#comorbidades_list = v.comorbidades
+		#comorbidades = str(comorbidades_list)
+		#v.comorbidades.reverse()
+		#print(v.comorbidades)
+		#if v.regulacao_paciente == 'Paciente preenche critérios para Regulação':
+		#	v.regulacao_paciente = 'Regulado'
+
+		#if v.regulacao_paciente == 'Paciente não preenche critérios para Regulação':
+		#	v.regulacao_paciente = 'Não Regulado'
+		sexo = ""
+		if v.sexo_paciente != None:
+			sexo = v.sexo_paciente
+
+		estabelecimento_referencia_covid = ""
+		if v.estabelecimento_referencia != None:
+			estabelecimento_referencia_covid = v.estabelecimento_referencia
+		
+		perfil = ""
+		if v.leito != None:
+			perfil = v.leito
+
+		nivel_atencao = ""
+		if v.news_fast_pb != None:
+			nivel_atencao = v.news_fast_pb
+		#nivel_atencao_ = nivel_atencao
+
+		if v.pesquisa_teste_sars_cov_2 != None:
+			result_exames.append(v.pesquisa_teste_sars_cov_2)
+		if v.rt_pcr_sars_cov_2 != None:
+			result_exames.append(v.rt_pcr_sars_cov_2)
+
+		result_exames_ = str(result_exames)[1 : -1]
+
+
+		testes_covid = ""
+		if v.pesquisa_teste_sars_cov_2 != None and v.rt_pcr_sars_cov_2 != None:
+			testes_covid = "Teste rápido, PCR"
+		elif v.pesquisa_teste_sars_cov_2 != None and v.rt_pcr_sars_cov_2 == None:
+			testes_covid = "Teste rápido"
+		elif v.pesquisa_teste_sars_cov_2 == None and v.rt_pcr_sars_cov_2 != None:
+			testes_covid = "PCR"
+		
+
+
+		if v.data_regulacao:
+			data_ = v.data_regulacao.strftime("%d-%m-%Y")
+		else:
+			data_ = None
+
+		regulacao = ""
+		for s in status:
+			if v.id == s.registro_covid_id and s.descricao != None:
+				v.regulacao_status = s.descricao
+
+			if v.regulacao_status != None:
+				regulacao = v.regulacao_status
+				#print(v.regulacao_status)
+
+
+		row = [
+			v.codigo_sescovid,
+			v.codigo_registro_completo,
+			v.nome_paciente,
+			v.idade_paciente,
+			sexo,
+			regulacao,
+			v.municipio_estabelecimento_solicitante,
+			v.estabelecimento_solicitante,
+			estabelecimento_referencia_covid,
+			v.municipio_estabelecimento_referencia,
+			perfil,
+			data_,
+			v.comorbidades,
+			nivel_atencao,
+			testes_covid,
+			result_exames_,
+		]
+		for col_num, cell_value in enumerate(row, 1):
+			cell = worksheet.cell(row=row_num, column=col_num)
+			cell_value_ = str(cell_value)
+			cell.value = cell_value_
+
+	workbook.save(response)
+
+
+
+
+	return response
+
+	#return render(request, 'result_for_relatorios.html', {'values':values})
+
+@login_required
+def result_for_relatorios(request):
+	return render(request, 'result_for_relatorios.html')
+
+
+@login_required
+def status_registro(request, id):
+	registro = RegistroCovid.objects.get(id=id)
+	
+	status_registro = Status.objects.filter(registro_covid=registro.id)
+
+	status_list_descricao = []
+
+	for s in status_registro:
+		status_list_descricao.append(s.descricao)
+
+
+	status_aguard_conf_vaga_registro = Status.objects.filter(descricao='Aguardando confirmação de Vaga').last()
+	#status_obito_registro = Status.objects.filter(descricao='Obito').last()
+	status_aguard_lista_espera_registro = Status.objects.filter(descricao='Aguardando em Lista de Espera').last()
+	status_regulado_registro = Status.objects.filter(descricao='Regulado').last()
+	status_nao_regulado_registro = Status.objects.filter(descricao='Não Regulado').last()
+
+	return render(request, 'status_registro.html', {'registro':registro, 
+		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
+		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
+		status_aguard_lista_espera_registro, 'status_regulado_registro':
+		status_regulado_registro,'status_nao_regulado_registro':
+		status_nao_regulado_registro})
+
+@login_required
+def remove_registro_covid(request, id):
+	registro = RegistroCovid.objects.filter(id=id).delete()
+
+	return redirect('/')

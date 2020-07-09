@@ -1,0 +1,1 @@
+﻿COPY core_cnes FROM '/home/sergio/Documentos/tabelaCnes.csv' DELIMITERS ',' CSV header;

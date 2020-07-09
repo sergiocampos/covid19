@@ -15,12 +15,18 @@ class RegistroCovid(models.Model):
 	codigo_registro_mensal = models.IntegerField(blank=True, null=True)
 	codigo_registro_completo = models.CharField(max_length=100, blank=True, default='', null=True)
 	nome_solicitante = models.CharField(max_length=100, blank=True, default='', null=True)
-	municipio_estabelecimento = models.CharField(max_length=100, blank=True, default='', null=True)
+	municipio_estabelecimento_solicitante = models.CharField(max_length=100, blank=True, default='', null=True)
 	estabelecimento_solicitante = models.CharField(max_length=200, blank=True, default='', null=True)
-	estabelecimento_outro = models.CharField(max_length=200, blank=True, default='', null=True)
-	unidade_origem = models.CharField(max_length=100, blank=True, default='', null=True)
+	estabelecimento_solicitante_outro = models.CharField(max_length=200, blank=True, default='', null=True)
+
+	municipio_estabelecimento_referencia = models.CharField(max_length=100, blank=True, default='', null=True)
+	estabelecimento_referencia = models.CharField(max_length=200, blank=True, default='', null=True)
+	estabelecimento_referencia_outro = models.CharField(max_length=200, blank=True, default='', null=True)
+	
 	nome_paciente = models.CharField(max_length=100, blank=True, default='', null=True)
 	idade_paciente = models.IntegerField(blank=True, null=True)
+	sexo_paciente = models.CharField(max_length=10, blank=True, null=True)
+	regulacao_status = ArrayField(models.CharField(max_length=100), blank=True, null=True)
 	recurso_que_precisa = models.TextField(blank=True, null=True)
 	estado_origem = models.CharField(max_length=100, blank=True, default='', null=True)
 	cidade_origem = models.CharField(max_length=100, blank=True, default='', null=True)
@@ -88,6 +94,10 @@ class RegistroCovid(models.Model):
 	uso_antibioticoterapia = models.CharField(max_length=200, blank=True, default='', null=True)
 
 	pesquisa_teste_sars_cov_2 = models.CharField(max_length=100, blank=True, default='', null=True)
+
+	igg = models.CharField(max_length=100, blank=True, default='', null=True)
+	igm = models.CharField(max_length=100, blank=True, default='', null=True)
+	data_igm_igg = models.DateField(blank=True, null=True, default=None)
 
 	rt_pcr_sars_cov_2 = models.CharField(max_length=100, blank=True, default='', null=True)
 	data_coleta = models.DateField(blank=True, null=True, default=None)
@@ -157,11 +167,6 @@ class RegistroCovid(models.Model):
 
 	prioridade = models.IntegerField(blank=True, null=True)
 
-	regulacao_paciente = models.CharField(max_length=100, blank=True, default='', null=True)
-	status_regulacao = ArrayField(models.CharField(max_length=100), blank=True, null=True)
-	
-	data_obito = models.DateField(blank=True, null=True, default=None)
-
 	codigo_sescovid = models.CharField(max_length=100, blank=True, default='', null=True)
 
 	justificativa = models.TextField(blank=True, default='', null=True)
@@ -169,7 +174,7 @@ class RegistroCovid(models.Model):
 	observacao = models.TextField(blank=True, default='', null=True)
 
 	pareceristas  = ArrayField(models.CharField(max_length=100), blank=True, null=True)
-	data_regulacao = models.DateField(blank=True, null=True, default=None)
+	data_regulacao = models.DateTimeField(blank=True, null=True, default=None)
 
 
 
@@ -177,18 +182,19 @@ class RegistroCovid(models.Model):
 		return str(self.nome_paciente)
 
 class Cnes(models.Model):
-	CO_CNES = models.CharField(max_length=200, blank=True, default='', null=True)
-	NU_CNPJ_MANTENEDORA = models.CharField(max_length=200, blank=True, default='', null=True)
-	NO_RAZAO_SOCIAL = models.CharField(max_length=200, blank=True, default='', null=True)
-	NO_FANTASIA = models.CharField(max_length=200, blank=True, default='', null=True)
-	NO_LOGRADOURO = models.CharField(max_length=200, blank=True, default='', null=True)
-	NU_ENDERECO = models.CharField(max_length=200, blank=True, default='', null=True)
-	NO_BAIRRO = models.CharField(max_length=200, blank=True, default='', null=True)
-	CO_CEP = models.CharField(max_length=200, blank=True, default='', null=True)
-	CO_ESTADO_GESTOR = models.CharField(max_length=200, blank=True, default='', null=True)
 	MUNICIPIO = models.CharField(max_length=200, blank=True, default='', null=True)
-	NU_LATITUDE = models.CharField(max_length=200, blank=True, default='', null=True)
-	NU_LONGITUDE = models.CharField(max_length=200, blank=True, default='', null=True)
+	NO_FANTASIA = models.CharField(max_length=200, blank=True, default='', null=True)
+	CO_CNES = models.IntegerField(blank=True, null=True)
 
 	def __str__(self):
 		return str(self.MUNICIPIO)
+
+
+class Status(models.Model):
+	descricao = models.CharField(max_length=200, blank=True, default='', null=True)
+	data_notificacao = models.DateField(auto_now_add=True)
+	hora_notificacao = models.TimeField(auto_now_add=True)
+	registro_covid = models.ForeignKey(RegistroCovid, on_delete=models.CASCADE, null=True)
+
+	def __str__(self):
+		return str(self.descricao)

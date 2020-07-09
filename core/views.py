@@ -1071,6 +1071,8 @@ def gerar_relatorios_set(request):
 	data_inicio = request.POST.get('data_inicio')
 	data_fim = request.POST.get('data_fim')
 
+	print("data final:",data_fim)
+
 	values = RegistroCovid.objects.filter(data_notificacao__range=[data_inicio, data_fim])
 	#values = RegistroCovid.objects.all()
 	status = Status.objects.all()
@@ -1126,6 +1128,7 @@ def gerar_relatorios_set(request):
 	for v in values:
 		result_exames = []
 		row_num += 1
+		
 
 		#comorbidades_list = v.comorbidades
 		#comorbidades = str(comorbidades_list)
@@ -1136,10 +1139,22 @@ def gerar_relatorios_set(request):
 
 		#if v.regulacao_paciente == 'Paciente não preenche critérios para Regulação':
 		#	v.regulacao_paciente = 'Não Regulado'
+		sexo = ""
+		if v.sexo_paciente != None:
+			sexo = v.sexo_paciente
+
+		estabelecimento_referencia_covid = ""
+		if v.estabelecimento_referencia != None:
+			estabelecimento_referencia_covid = v.estabelecimento_referencia
 		
+		perfil = ""
+		if v.leito != None:
+			perfil = v.leito
+
+		nivel_atencao = ""
 		if v.news_fast_pb != None:
 			nivel_atencao = v.news_fast_pb
-		nivel_atencao_ = nivel_atencao
+		#nivel_atencao_ = nivel_atencao
 
 		if v.pesquisa_teste_sars_cov_2 != None:
 			result_exames.append(v.pesquisa_teste_sars_cov_2)
@@ -1149,15 +1164,14 @@ def gerar_relatorios_set(request):
 		result_exames_ = str(result_exames)[1 : -1]
 
 
-		if v.pesquisa_teste_sars_cov_2 != '' or v.pesquisa_teste_sars_cov_2 != None:
-			if v.rt_pcr_sars_cov_2 == '' or v.rt_pcr_sars_cov_2 == None:
-				testes_covid = "Teste rápido"
-		elif v.rt_pcr_sars_cov_2 != '' or v.rt_pcr_sars_cov_2 != None:
-			if v.pesquisa_teste_sars_cov_2 == '' or v.pesquisa_teste_sars_cov_2 == None:
-				testes_covid = "PCR"
-		else:
+		testes_covid = ""
+		if v.pesquisa_teste_sars_cov_2 != None and v.rt_pcr_sars_cov_2 != None:
 			testes_covid = "Teste rápido, PCR"
-
+		elif v.pesquisa_teste_sars_cov_2 != None and v.rt_pcr_sars_cov_2 == None:
+			testes_covid = "Teste rápido"
+		elif v.pesquisa_teste_sars_cov_2 == None and v.rt_pcr_sars_cov_2 != None:
+			testes_covid = "PCR"
+		
 
 
 		if v.data_regulacao:
@@ -1165,9 +1179,13 @@ def gerar_relatorios_set(request):
 		else:
 			data_ = None
 
+		regulacao = ""
 		for s in status:
 			if v.id == s.registro_covid_id and s.descricao != None:
 				v.regulacao_status = s.descricao
+
+			if v.regulacao_status != None:
+				regulacao = v.regulacao_status
 				#print(v.regulacao_status)
 
 
@@ -1176,16 +1194,16 @@ def gerar_relatorios_set(request):
 			v.codigo_registro_completo,
 			v.nome_paciente,
 			v.idade_paciente,
-			v.sexo_paciente,
-			v.regulacao_status,
+			sexo,
+			regulacao,
 			v.municipio_estabelecimento_solicitante,
 			v.estabelecimento_solicitante,
-			v.estabelecimento_referencia,
+			estabelecimento_referencia_covid,
 			v.municipio_estabelecimento_referencia,
-			v.leito,
+			perfil,
 			data_,
 			v.comorbidades,
-			nivel_atencao_,
+			nivel_atencao,
 			testes_covid,
 			result_exames_,
 		]

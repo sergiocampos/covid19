@@ -16,6 +16,26 @@
 
 	<script language="JavaScript" type="text/javascript" src="/static/js/cidades-estados-1.4-utf8.js"></script>
 
+	<script>
+		function compareDates (date) {
+			let parts = date.split('/') // separa a data pelo caracter '/'
+  			let today = new Date()      // pega a data atual
+  
+  			date = new Date(parts[2], parts[1] - 1, parts[0])
+  			 // formata 'date'
+  
+			  // compara se a data informada é maior que a data atual
+			  // e retorna true ou false
+			return date >= today ? true : false
+		}
+
+		// * Utilizando a função
+		// -> Veja o resultado no console. tecla [F12]
+
+		//console.log('Estou no Futuro? ' + compareDates ('25/12/2017')) // Retorna false
+		//console.log('Estou no Futuro? ' + compareDates ('25/12/2033')) // Retorna True
+	</script>
+
 </head>
 <body>
 
@@ -107,6 +127,9 @@
 							<input type="date" class="form-control form-control-sm" id="" placeholder="" name="data_fim" value="" required>
 					    </div>
 	  				</div>
+	  			</div>
+	  			<div class="row">
+	  				<a href="" onclick="compareDates()">Buscar</a>
 	  			</div>
 	  		</div>
 	  		<br />

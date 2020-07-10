@@ -630,14 +630,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		  <ul class="navbar-nav">
 		    <li class="nav-item">
-		      <a class="nav-link" href="/">Principal</a>
+		      <a class="nav-link" href="/">Home</a>
 		    </li>
 		    <li class="nav-item">
-		      <a class="nav-link" href="/registro_covid/">Registrar Caso</a>
+		      <a class="nav-link" href="/covid_list/">Principal</a>
 		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="/search_estabelecimento/">Registrar Caso</a>
+		    </li>
+		    <!--
 		    <li class="nav-item">
 		      <a class="nav-link" href="/regulacao_edit/{{registro.id}}/">Registro/Edição</a>
 		    </li>
+			-->
 		    <li class="nav-item">
 		      <a class="nav-link active" href="#">Regulação</a>
 		    </li>
@@ -737,11 +742,11 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			<div class="row">
 				<div class="col-sm-5">
 					<b>Município do Estabelecimento de Referência:</b>
-					<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{cidade}}" />
+					<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{municipio_estabelecimento_referencia}}" />
 					
 				</div>
 				<div class="col-sm-2">
-					<button type="button" class="" style="align-items: center; border-radius: 5px; border: 2px solid #c2c2d6" id=""><a class="" href="/regulacao_edit/{{registro.id}}/">Alterar Cidade?</a></button>					
+					<button type="button" class="" style="align-items: center; border-radius: 5px; border: 2px solid #c2c2d6" id=""><a class="" href="/regulacao_search_estabelecimento/{{registro.id}}/">Alterar Cidade?</a></button>					
 				</div>
 				
 				<div class="col-sm-5" id="">

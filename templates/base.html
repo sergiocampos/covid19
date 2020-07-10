@@ -10,11 +10,9 @@
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
         <ul class="nav navbar-nav">
-{# Django Home Link / Admin Link / Register Link#}
           <li><a class="navbar-brand" href="{% url 'index' %}">Home</a></li>
           <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
-          <li><a class="navbar-link" href="{% url 'core:register' %}">Registrar</a></li>     
-          {# Some logic on what to display for last item#}
+          <li><a class="navbar-link" href="{% url 'core:register' %}">Registre-se</a></li>
           {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}">Sair</a></li>
           {% else %}

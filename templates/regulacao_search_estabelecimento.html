@@ -653,7 +653,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 		  </ul>
 		</nav><hr>
 
-		<form enctype="multipart/form-data" action="submit" method="POST">{% csrf_token %}
+		<form enctype="multipart/form-data" method="POST" action="{% url 'regulacao' registro.id %}?municipio_estabelecimento_referencia={{municipio_estabelecimento_referencia}}">{% csrf_token %}
 
 		<div class="container">
 
@@ -729,18 +729,26 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			</div>
 			<br>
 			<div class="row">
+				<div class="col-sm-4" id=""></div>
 				<div class="col-sm-4">
 					Município do Estabelecimento de Referência:
-					<select class="form-control form-control-sm" autofocus="autofocus" name="municipio_solicitante" id="" required>
+					<select class="form-control form-control-sm" autofocus="autofocus" name="municipio_estabelecimento_referencia" id="" required>
 						{% for m in municipios %}
 						<option value="{{m.MUNICIPIO}}">{{m.MUNICIPIO}}</option>
 						{%endfor%}
 					</select>
 				</div>
+				<div class="col-sm-4" id=""></div>
+				
+			</div><br>
+			<div class="row">
 				<div class="col-sm-4"></div>
 				<div class="col-sm-4">
-					<button type="submit" class="" style="align-items: center; border-radius: 5px; border: 2px solid #c2c2d6" id="btn_inicio">Pesquisar Estabelecimento Referência:</button>
+					<div class="container-fluid" style="text-align: center;">
+						<button type="submit" class="btn btn-primary" style="align-items: center;" id="btn_inserir_paciente">Pesquisar Estabelecimento</button>  
+				    </div>
 				</div>
+				<div class="col-sm-4" id=""></div>
 			</div>
 			<hr>
 

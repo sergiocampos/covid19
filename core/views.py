@@ -338,11 +338,28 @@ def registro_covid_set(request):
 
 		)
 
-	return redirect('/')
+	return redirect('/covid_list/')
 
 @login_required
 def registro_enfermeiro_medico(request):
     return render(request, 'registro_enfermeiro_medico.html')
+
+
+@login_required
+def regulacao_search_estabelecimento(request, id):
+	registro = RegistroCovid.objects.get(id=id)
+	municipios = Cnes.objects.order_by('MUNICIPIO').distinct('MUNICIPIO')
+
+	return render(request, 'regulacao_search_estabelecimento.html', {'registro':
+		registro, 'municipios':municipios})
+
+
+@login_required
+def regulacao_search_estabelecimento_set(request, id):
+	municipio_estabelecimento_referencia = request.session['municipio_estabelecimento_referencia']
+
+	return redirect('regulacao', id=id)
+
 
 @login_required
 def regulacao(request, id):
@@ -370,13 +387,14 @@ def regulacao(request, id):
 	status_nao_regulado_registro = Status.objects.filter(descricao='Não Regulado').last()
 
 
+	municipio_estabelecimento_referencia = request.POST.get('municipio_estabelecimento_referencia')
 	#request.session['nome_solicitante'] = nome_solicitante
 	#request.session['idade_paciente'] = idade_paciente
 	#request.session['nome_paciente'] = nome_paciente
 	#request.session['sexo_paciente'] = sexo_paciente
-	municipio_estabelecimento_solicitante = request.session['municipio_estabelecimento_solicitante']
-	estabelecimento_solicitante = request.session['estabelecimento_solicitante']
-	estabelecimento_solicitante_outro = request.session['estabelecimento_solicitante_outro']
+	municipio_estabelecimento_solicitante = request.POST.get('municipio_estabelecimento_solicitante')
+	estabelecimento_solicitante = request.POST.get('estabelecimento_solicitante')
+	estabelecimento_solicitante_outro = request.POST.get('estabelecimento_solicitante_outro')
 	#request.session['recurso_que_precisa'] = recurso_que_precisa
 	#request.session['cidade_origem'] = cidade_origem
 	#request.session['telefone_retorno'] = telefone_retorno
@@ -388,10 +406,10 @@ def regulacao(request, id):
 	#request.session['observacao'] = observacao
 	#request.session['pa_1'] = pa_1
 	#request.session['pa_2'] = pa_2
-	cidade = request.session['municipio_referencia']
+	cidade = request.POST.get('municipio_referencia')
 
 
-	estabelecimentos = Cnes.objects.filter(MUNICIPIO = cidade)
+	estabelecimentos = Cnes.objects.filter(MUNICIPIO = municipio_estabelecimento_referencia)
 
 
 	return render(request, 'regulacao.html', {'registro' : registro, 'pa_1':pa_1, 
@@ -404,7 +422,8 @@ def regulacao(request, id):
 		municipio_estabelecimento_solicitante, 'estabelecimento_solicitante':
 		estabelecimento_solicitante, 'estabelecimento_solicitante_outro':
 		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
-		estabelecimentos})
+		estabelecimentos, 'municipio_estabelecimento_referencia':
+		municipio_estabelecimento_referencia})
 
 
 @login_required
@@ -1105,7 +1124,7 @@ def regulacao_edit_set(request, id):
 	request.session['idade_paciente'] = idade_paciente
 	request.session['nome_paciente'] = nome_paciente
 	request.session['sexo_paciente'] = sexo_paciente
-	request.session['municipio_estabelecimento_solicitante'] = municipio_estabelecimento_solicitante
+	municipio_estabelecimento_solicitante = request.POST.get('municipio_estabelecimento_solicitante')
 	request.session['estabelecimento_solicitante'] = estabelecimento_solicitante
 	request.session['estabelecimento_solicitante_outro'] = estabelecimento_solicitante_outro
 	request.session['recurso_que_precisa'] = recurso_que_precisa

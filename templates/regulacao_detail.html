@@ -119,10 +119,13 @@ máxima de 12h de validação para recepção na unidade solicitante.
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		  <ul class="navbar-nav">
 		    <li class="nav-item">
-		      <a class="nav-link" href="/">Principal</a>
+		      <a class="nav-link" href="/">Home</a>
 		    </li>
 		    <li class="nav-item">
-		      <a class="nav-link" href="/registro_covid/">Registrar Caso</a>
+		      <a class="nav-link" href="/covid_list/">Principal</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="/search_estabelecimento/">Registrar Caso</a>
 		    </li>
 		    <li class="nav-item">
 		      <a class="nav-link" href="/regulacao/{{registro.id}}/">Regular Caso</a>
@@ -130,9 +133,9 @@ máxima de 12h de validação para recepção na unidade solicitante.
 		    <li class="nav-item">
 		      <a class="nav-link active" href="/regulacao_detail/{{registro.id}}/">Detalhes da Regulação</a>
 		    </li>
-		    <li class="nav-item">
+		    <!--<li class="nav-item">
 		      <a class="nav-link" href="/regulacao_edit/{{registro.id}}/">Edição de Registro</a>
-		    </li>
+		    </li>-->
 		    <li class="nav-item">
 		      <a class="nav-link" href="/search_register/">Localizar</a>
 		    </li>
@@ -2972,7 +2975,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 	</div>
 
 	<div class="container-fluid" style="text-align: center;">
-		<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/">Principal</a></button>
+		<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/covid_list/">Principal</a></button>
 
 		<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/status_registro/{{registro.id}}/">Status</a></button>  
 	</div>

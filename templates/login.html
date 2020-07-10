@@ -5,10 +5,9 @@
       <h1>Login para o CERH :</h1>
 <form method="post" action="{% url 'core:user_login' %}">
           {% csrf_token %}
-          {# A more "HTML" way of creating the login form#}
-          <label for="username">Username:</label>
+          <label for="username">Usuário:</label>
           <input type="text" name="username" placeholder="Username">
-<label for="password">Password:</label>
+<label for="password">Senha:</label>
           <input type="password" name="password" placeholder="Password">
 <input type="submit" name="" value="Login">
 </form>

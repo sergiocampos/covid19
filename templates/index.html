@@ -4,7 +4,7 @@
   <div class="jumbotron">
     <h1>Bem vindo ao CERH!</h1>
     {% if user.is_authenticated %}
-        <h2>Hello {{ user.username }}</h2>
+        <h3><a href="/covid_list/">Acessar Sistema</a></h3>
     {% else %}
         <h2></h2>
     {% endif %}

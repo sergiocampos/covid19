@@ -148,6 +148,8 @@ MEDIA_ROOT = (
 
 MEDIA_URL = '/media/'
 
+LOGIN_URL = '/core/user_login/'
+
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 

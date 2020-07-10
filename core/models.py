@@ -7,6 +7,16 @@ from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
 
+class UserProfileInfo(models.Model):
+	user = models.OneToOneField(User,on_delete=models.CASCADE)
+	#portfolio_site = models.URLField(blank=True)
+	#profile_pic = models.ImageField(upload_to='profile_pics',blank=True)
+
+	def __str__(self):
+		return self.user.username
+
+
+
 class RegistroCovid(models.Model):
 	responsavel_pelo_preenchimento = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
 	data_notificacao = models.DateField(auto_now_add=True)

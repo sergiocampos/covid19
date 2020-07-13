@@ -375,16 +375,26 @@ def regulacao(request, id):
 
 	status_registro = Status.objects.filter(registro_covid=registro.id)
 
-	status_list_descricao = []
+	status_list_descricao_ = []
 
 	for s in status_registro:
-		status_list_descricao.append(s.descricao)
+		status_list_descricao_.append(s.descricao)
 
+
+
+	status_list_descricao = []
+	if len(status_list_descricao_) != 0:
+		status_list_descricao = status_list_descricao_.pop()
+	else:
+		status_list_descricao
 	status_aguard_conf_vaga_registro = Status.objects.filter(descricao='Aguardando confirmação de Vaga').last()
 	#status_obito_registro = Status.objects.filter(descricao='Obito').last()
 	status_aguard_lista_espera_registro = Status.objects.filter(descricao='Aguardando em Lista de Espera').last()
 	status_regulado_registro = Status.objects.filter(descricao='Regulado').last()
+	
+	#status_nao_regulado_registro = []
 	status_nao_regulado_registro = Status.objects.filter(descricao='Não Regulado').last()
+	#status_nao_regulado = status_nao_regulado_registro.last()
 
 
 	municipio_estabelecimento_referencia = request.POST.get('municipio_estabelecimento_referencia')
@@ -1019,12 +1029,12 @@ def regulacao_detail(request, id):
 
 	status_registro = Status.objects.filter(registro_covid=registro.id)
 
-	status_list_descricao = []
+	status_list_descricao_ = []
 
 	for s in status_registro:
-		status_list_descricao.append(s.descricao)
+		status_list_descricao_.append(s.descricao)
 
-	
+	status_list_descricao = status_list_descricao_.pop()
 
 	return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 		'p2':p2, 'data_regulacao_template':data_regulacao_template, 

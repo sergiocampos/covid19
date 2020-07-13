@@ -529,7 +529,7 @@ function activeListaEspera(){
 	
 }
 
-function activeIgGIgM(){
+function active_IgGIgM(){
 	$("#sars_igg_id").show();
 	$("#sars_igm_id").show();
 
@@ -1932,93 +1932,82 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-4">
 					<b>Pesquisa de SARS CoV-2; teste rápido:</b>
 				</div>
+				{% if registro.pesquisa_teste_sars_cov_2 == 'Positivo' %}
 				<div class="col-sm-2" style="margin-left: -30px">
-					{% if registro.pesquisa_teste_sars_cov_2 == 'Positivo'  %}
+					
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
 				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" checked>Positivo
 				      </label>
 				    </div>
-				    {%else%}
+				    
+				</div>
+					{% if registro.igm != '' or registro.igm != None %}
+					<div class="col-sm-1" id="" style="margin-left: -90px">
+						<div class="form-check-inline"><b>IgM:</b>
+							<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+					            <option value="{{registro.igm}}" selected>{{registro.igm}}</option>
+					            <option value="REAGENTE">REAGENTE</option>
+					            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+					        </select>
+					    </div>
+					</div>
+					{%else%}
+					<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
+						<div class="form-check-inline"><b>IgM:</b>
+							<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+					            <option value="REAGENTE">REAGENTE</option>
+					            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+					        </select>
+					    </div>
+					</div>
+					{%endif%}
+					{% if registro.igg != '' or registro.igg != None %}
+					<div class="col-sm-5" id="" style="margin-left: 100px">
+						<div class="form-check-inline"><b>IgG:</b>
+							<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
+					            <option value="{{registro.igg}}" selected>{{registro.igg}}</option>
+					            <option value="REAGENTE">REAGENTE</option>
+					            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+					        </select>
+					    </div>
+					    <div class="form-check-inline" style=""><b>Data:</b>
+					    	<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg_bd" value="{{registro.data_igm_igg}}" style="width: 140px">						
+					    </div>
+					</div>
+					{%else%}
+					<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
+						<div class="form-check-inline"><b>IgG:</b>
+							<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
+					            <option value="REAGENTE">REAGENTE</option>
+					            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+					        </select>
+					    </div>
+					    <div class="form-check-inline" style=""><b>Data:</b>
+					    	<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
+					    </div>
+					</div>
+					{%endif%}
+
+
+				{%elif registro.pesquisa_teste_sars_cov_2 == 'Negativo' %}
+				<div class="col-sm-2" style="margin-left: -30px">
 				    <div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" onclick="activeIgGIgM()">Positivo
+				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" onclick="active_IgGIgM()">Positivo
 				      </label>
 				    </div>
-				    {%endif%}
 				</div>
-				{% if registro.pesquisa_teste_sars_cov_2 != 'Positivo' %}
-				<div class="col-sm-2" id="sars_negativo_id">
-					{% if registro.pesquisa_teste_sars_cov_2 == 'Negativo'  %}
-					<div class="form-check-inline" style="width:">
-				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo" checked>Negativo
-				      </label>
-				    </div>
-				    {%else%}
-				    <div class="form-check-inline" style="width:">
-				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo">Negativo
-				      </label>
-				    </div>
-				    {%endif%}
-				</div>
-				{%endif%}
-				{% if registro.pesquisa_teste_sars_cov_2 == 'Positivo' %}
-				{% if registro.igm != '' or registro.igm != None %}
-				<div class="col-sm-1" id="" style="margin-left: -90px">
-					<div class="form-check-inline"><b>IgM:</b>
-						<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
-				            <option value="{{registro.igm}}" selected>{{registro.igm}}</option>
-				            <option value="REAGENTE">REAGENTE</option>
-				            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
-				        </select>
-				    </div>
-				</div>
-				{%else%}
+
 				<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
 					<div class="form-check-inline"><b>IgM:</b>
 						<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
-				            <option value="REAGENTE">REAGENTE</option>
-				            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
-				        </select>
-				    </div>
+							<option value="REAGENTE">REAGENTE</option>
+							<option value="NÃO REAGENTE">NÃO REAGENTE</option>
+						</select>
+					</div>
 				</div>
-				{%endif%}
-				{%endif%}
-				
-				{% if registro.pesquisa_teste_sars_cov_2 != 'Positivo' %}
-				<div class="col-sm-4" id="sars_nao_realizado_id">
-					{% if registro.pesquisa_teste_sars_cov_2 == 'Não Realizado'  %}
-					<div class="form-check-inline" style="width:">
-				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado" checked>Não Realizado
-				      </label>
-				    </div>
-				    {%else%}
-				    <div class="form-check-inline" style="width:">
-				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado">Não Realizado
-				      </label>
-				    </div>
-				    {%endif%}
-				</div>
-				{%endif%}
-				{% if registro.pesquisa_teste_sars_cov_2 == 'Positivo' %}
-				{% if registro.igg != '' or registro.igg != None %}
-				<div class="col-sm-5" id="" style="margin-left: 100px">
-					<div class="form-check-inline"><b>IgG:</b>
-						<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
-				            <option value="{{registro.igg}}" selected>{{registro.igg}}</option>
-				            <option value="REAGENTE">REAGENTE</option>
-				            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
-				        </select>
-				    </div>
-				    <div class="form-check-inline" style=""><b>Data:</b>
-				    	<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg_bd" value="{{registro.data_igm_igg}}" style="width: 140px">						
-				    </div>
-				</div>
-				{%else%}
+
 				<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
 					<div class="form-check-inline"><b>IgG:</b>
 						<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
@@ -2030,10 +2019,120 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				    	<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
 				    </div>
 				</div>
+
+				<div class="col-sm-2" id="sars_negativo_id">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo" checked>Negativo
+				      </label>
+				    </div>
+				   
+				</div>
+
+				<div class="col-sm-4" id="sars_nao_realizado_id">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado">Não Realizado
+				      </label>
+				    </div>
+				</div>
+				{%elif registro.pesquisa_teste_sars_cov_2 == 'Não Realizado' %}
+				<div class="col-sm-2" style="margin-left: -30px">
+				    <div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" onclick="active_IgGIgM()">Positivo
+				      </label>
+				    </div>
+				</div>
+
+				<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
+					<div class="form-check-inline"><b>IgM:</b>
+						<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+							<option value="">selecione</option>
+							<option value="REAGENTE">REAGENTE</option>
+							<option value="NÃO REAGENTE">NÃO REAGENTE</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
+					<div class="form-check-inline"><b>IgG:</b>
+						<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
+				            <option value="">selecione</option>
+				            <option value="REAGENTE">REAGENTE</option>
+				            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+				        </select>
+				    </div>
+				    <div class="form-check-inline" style=""><b>Data:</b>
+				    	<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
+				    </div>
+				</div>
+
+				<div class="col-sm-2" id="sars_negativo_id">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo">Negativo
+				      </label>
+				    </div>
+				   
+				</div>
+
+				<div class="col-sm-4" id="sars_nao_realizado_id">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado" checked>Não Realizado
+				      </label>
+				    </div>
+				</div>
+				{%else%}
+				<div class="col-sm-2" style="margin-left: -30px">
+				    <div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" onclick="active_IgGIgM()">Positivo
+				      </label>
+				    </div>
+				</div>
+
+				<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
+					<div class="form-check-inline"><b>IgM:</b>
+						<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+							<option value="">selecione</option>
+							<option value="REAGENTE">REAGENTE</option>
+							<option value="NÃO REAGENTE">NÃO REAGENTE</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
+					<div class="form-check-inline"><b>IgG:</b>
+						<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
+				            <option value="">selecione</option>
+				            <option value="REAGENTE">REAGENTE</option>
+				            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+				        </select>
+				    </div>
+				    <div class="form-check-inline" style=""><b>Data:</b>
+				    	<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
+				    </div>
+				</div>
+
+				<div class="col-sm-2" id="sars_negativo_id">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo">Negativo
+				      </label>
+				    </div>
+				   
+				</div>
+
+				<div class="col-sm-4" id="sars_nao_realizado_id">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado">Não Realizado
+				      </label>
+				    </div>
+				</div>
 				{%endif%}
-				{%endif%}
-				
-				
 			</div>
 			<hr>
 
@@ -3389,10 +3488,10 @@ máxima de 12h de validação para recepção na unidade solicitante.
 						<div class="form-check-inline" style="font-size: 83%; width: 150px">
 	    					{% if registro.codigo_sescovid == '' or registro.codigo_sescovid == None %}
 	    					SESCOVID
-	    					<input type="number" min="0" max="200000" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="">
+	    					<input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="">
 	    					{%else%}
 	    					
-	    					<input type="text" min="0" max="200000" class="form-control form-control-sm" id="" placeholder="" name="" value="{{registro.codigo_sescovid}}" disabled>
+	    					<input type="text" min="0" class="form-control form-control-sm" id="" placeholder="" name="" value="{{registro.codigo_sescovid}}" disabled>
 	    					{%endif%}
 					    </div>
 					</div>
@@ -3400,22 +3499,22 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 				<div class="row" style="">
 					<div class="col-sm-4"></div>
-				<div class="col-sm-8" style="margin-top: 30px">
-					{% if 'Não Regulado' in status_list_descricao %}
-					<div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="check_paciente_nao_regulado_id" name="" value="Não Regulado" onclick="activeStatusNaoRegulado()" checked>PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
-				      </label>
-				    </div>
-				    {%else%}
-				    <div class="form-check-inline" style="font-size: 83%">
-				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="check_paciente_nao_regulado_id" name="status_paciente" value="Não Regulado" onclick="activeStatusNaoRegulado()">PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
-				      </label>
-				    </div>
-				    {%endif%}
-				</div>
-											
+					<div class="col-sm-8" style="margin-top: 30px">
+						{% if 'Não Regulado' in status_list_descricao %}
+						<div class="form-check-inline" style="font-size: 83%">
+					      <label class="form-check-label" for="">
+					        <input type="radio" class="form-check-input" id="check_paciente_nao_regulado_id" name="status_paciente" value="Não Regulado" onclick="activeStatusNaoRegulado()" checked>PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
+					      </label>
+					    </div>
+					    {%else%}
+					    <div class="form-check-inline" style="font-size: 83%">
+					      <label class="form-check-label" for="">
+					        <input type="radio" class="form-check-input" id="check_paciente_nao_regulado_id" name="status_paciente" value="Não Regulado" onclick="activeStatusNaoRegulado()">PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
+					      </label>
+					    </div>
+					    {%endif%}
+					</div>
+												
 
 				</div>
 
@@ -3470,7 +3569,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					{% if 'Regulado' in status_list_descricao %}
 					<div class="form-check-inline" style="font-size: 83%" id="div_paciente_regulado">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="" value="Regulado" onclick="activeStatusAguardVaga()" checked>PACIENTE REGULADO
+				        <input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="status_paciente" value="Regulado" onclick="activeStatusAguardVaga()" checked>PACIENTE REGULADO
 				      </label>
 				    </div>
 				    {%else%}
@@ -3490,7 +3589,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					{% if 'Aguardando em Lista de Espera' in status_list_descricao %}
 					<div class="form-check-inline" style="font-size: 83%" id="div_paciente_aguard_lista">
 				      <label class="form-check-label">
-				        <input type="radio" class="form-check-input" id="check_em_lista_espera_id" name="" value="Aguardando em Lista de Espera" onclick="activeListaEspera()" checked>AGUARDANDO EM LISTA DE ESPERA
+				        <input type="radio" class="form-check-input" id="check_em_lista_espera_id" name="status_paciente" value="Aguardando em Lista de Espera" onclick="activeListaEspera()" checked>AGUARDANDO EM LISTA DE ESPERA
 				      </label>
 				    </div>
 				    {%else%}
@@ -3510,7 +3609,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					{% if 'Aguardando confirmação de Vaga' in status_list_descricao %}
 					<div class="form-check-inline" style="font-size: 83%" id="div_paciente_aguard_vaga">
 				      <label class="form-check-label" id="">
-				        <input type="radio" class="form-check-input" id="check_a_c_vaga_id" name="" value="Aguardando confirmação de Vaga" onclick="activeListaEspera()" checked>Aguardando confirmação de Vaga
+				        <input type="radio" class="form-check-input" id="check_a_c_vaga_id" name="status_paciente" value="Aguardando confirmação de Vaga" onclick="activeListaEspera()" checked>Aguardando confirmação de Vaga
 				      </label>
 				    </div>
 				    {%else%}

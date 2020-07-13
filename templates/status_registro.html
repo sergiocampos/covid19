@@ -100,7 +100,9 @@
 			<div class="col-sm-5"></div>
 			<div class="col-sm-5"></div>
 			<div class="col-sm-2">
-				<button type="button" class="btn btn-outline-danger btn-sm" style="align-items: center;" id="btn_inicio"><a class="" href="/remove_registro_covid/{{registro.id}}/">Escluir Registro</a></button> 
+				{% if user.is_staff %}
+				<button type="button" class="btn btn-outline-danger btn-sm" style="align-items: center;" id="btn_inicio"><a class="" href="/remove_registro_covid/{{registro.id}}/">Escluir Registro</a></button>
+				{%endif%}
 			</div>
 		</div>
 		<hr />
@@ -112,6 +114,7 @@
 			<div class="col-sm-4">
 				<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Parecer Médico
 				</button>
+				<button type="button" class="btn btn-warning btn-sm">Cancelar processo!</button>
 			</div>
 		</div><br />
 
@@ -195,6 +198,30 @@
 					<b><i>Paciente Não Regulado!</i></b>
 				</div>
 				{%endif%}
+				<div class="col-sm-4"></div>
+			</div>
+			<br />
+			<div class="row" id="justif_cancelar_regulacao_id">
+				<div class="col-sm-4"></div>
+				
+				<div class="col-sm-4">
+					<form action="">
+						<div class="col-sm-12">
+							<label for="comment"style="float: left;">Justificativa:</label>
+							{% if registro.justificativa == '' or registro.justificativa == None %}
+							<textarea class="form-control" rows="8" id="comment" name="justificativa" value="" style="width: 100%"></textarea>
+							{%else%}
+							<textarea class="form-control" rows="8" id="comment" name="justificativa" value="" style="width: 100%">{{registro.justificativa}}</textarea>
+							{%endif%}
+							<div class="invalid-feedback"></div>
+		      			</div>
+		      			<br />
+
+		      			<div class="container-fluid" style="text-align: center;">
+							<button type="submit" class="btn btn-primary btn-sm" style="align-items: center;" id="">Salvar</button>  
+					    </div>
+					</form>
+				</div>
 				<div class="col-sm-4"></div>
 			</div>
 

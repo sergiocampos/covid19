@@ -221,10 +221,15 @@ def registro_covid_set(request):
 	#mês:
 	if last_registro:
 		mes_ultimo_registro=last_registro.data_notificacao.month
+		ano_ultimo_registro=last_registro.data_notificacao.year
 	else:
 		mes_ultimo_registro=data.month
 	mes_corrente=data.month
 	
+	#Ano
+	ano_corrente = data.year
+	print("Ano do ultimo registro:", ano_ultimo_registro)
+	print("Ano corrente:", ano_corrente)
 	#Verifica se o mês mudou:
 	if mes_corrente > mes_ultimo_registro:
 		last_codigo_registro_mensal = 1

@@ -16,6 +16,8 @@
 
 	<script language="JavaScript" type="text/javascript" src="/static/js/cidades-estados-1.4-utf8.js"></script>
 
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 	<style>
 		#status_regulacao_id,
 		#paciente_regulado_id,
@@ -27,10 +29,17 @@
 		#paciente_obito_regulacao_id,
 		#paciente_lista_regulacao_id,
 		#paciente_internado_regulacao_id,
-		#ag_conf_vaga_regulacao_id {
+		#ag_conf_vaga_regulacao_id,
+		#justif_cancelar_regulacao_id {
 		display: none;
 	}
 	</style>
+
+	<script>
+		function exibirJustCanc(){
+			$("#justif_cancelar_regulacao_id").show();
+		}
+	</script>
 
 </head>
 <body>
@@ -114,7 +123,7 @@
 			<div class="col-sm-4">
 				<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Parecer Médico
 				</button>
-				<button type="button" class="btn btn-warning btn-sm">Cancelar processo!</button>
+				<button type="button" class="btn btn-warning btn-sm" onclick="exibirJustCanc()">Cancelar processo!</button>
 			</div>
 		</div><br />
 
@@ -201,27 +210,70 @@
 				<div class="col-sm-4"></div>
 			</div>
 			<br />
-			<div class="row" id="justif_cancelar_regulacao_id">
+			<div class="row">
+				<div class="col-sm-4"></div>
+					{% if registro.andamento_processo == 'Cancelado' %}
+					<div id="" class="col-sm-4" style="background-color: red; font-size: 80%; border: 2px solid #cccccc; border-radius: 10px">
+					<b><i>Processo cancelado!</i></b>
+					</div>
+					{%else%}
+					<div class="col-sm-4"></div>
+					{%endif%}
+				
+				<div class="col-sm-4"></div>
+			</div>
+			<div class="row">
 				<div class="col-sm-4"></div>
 				
-				<div class="col-sm-4">
-					<form action="">
-						<div class="col-sm-12">
-							<label for="comment"style="float: left;">Justificativa:</label>
-							{% if registro.justificativa == '' or registro.justificativa == None %}
-							<textarea class="form-control" rows="8" id="comment" name="justificativa" value="" style="width: 100%"></textarea>
-							{%else%}
-							<textarea class="form-control" rows="8" id="comment" name="justificativa" value="" style="width: 100%">{{registro.justificativa}}</textarea>
-							{%endif%}
+				{% if registro.andamento_processo != '' %}
+				<div class="col-sm-4" id="">
+					<form action="submit" method="POST">{% csrf_token %}
+						
+							<label for="comment"style="">Justificativa:</label>
+							
+							<textarea class="form-control" rows="8" id="just_cancelar_id" name="justif_cancelar_regulacao" value="" style="width: 100%">{{registro.justificativa_cancelamento}}</textarea>
+							<br />
+
+							<div class="form-check-inline" style=""><b>Data:</b>
+					    	<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="" value="{{registro.data_cancelamento}} - {{registro.hora_cancelamento|time:'H:i'}}" style="width: 140px" disabled>						
+					   		</div><br />
+							
 							<div class="invalid-feedback"></div>
-		      			</div>
+		      			
+		      			<br />
+
+		      			<!--
+		      			<div class="container-fluid" style="text-align: center;">
+							<button type="submit" class="btn btn-primary btn-sm" style="align-items: center;" id="">Salvar</button>  
+					    </div>
+					-->
+					</form>
+					
+				</div>
+				{%else%}
+				<div class="col-sm-4" id="justif_cancelar_regulacao_id">
+					<form action="submit" method="POST">{% csrf_token %}
+						
+							<label for="comment"style="">Justificativa:</label>
+							
+							<textarea class="form-control" rows="8" id="just_cancelar_id" name="justif_cancelar_regulacao" value="" style="width: 100%"></textarea>
+							<br />
+
+							<div class="form-check-inline" style=""><b>Data:</b>
+					    	<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="" value="{{formateDate}} - {{hora}}" style="width: 140px" disabled>						
+					   		</div><br />
+							
+							<div class="invalid-feedback"></div>
+		      			
 		      			<br />
 
 		      			<div class="container-fluid" style="text-align: center;">
 							<button type="submit" class="btn btn-primary btn-sm" style="align-items: center;" id="">Salvar</button>  
 					    </div>
 					</form>
+					
 				</div>
+				{%endif%}
 				<div class="col-sm-4"></div>
 			</div>
 
@@ -230,7 +282,9 @@
 	<div class="container mt-3">
 		<div class="container-fluid" style="text-align: center;">
 			<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/covid_list/">Principal</a></button>
-			<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/regulacao/{{registro.id}}/">Regular</a></button>
+			{% if registro.andamento_processo != '' %}
+			{%else%}<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/regulacao/{{registro.id}}/">Regular</a></button>
+			{%endif%}
 			
 		</div>
 		<br />

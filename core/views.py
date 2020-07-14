@@ -1367,12 +1367,32 @@ def status_registro(request, id):
 	status_regulado_registro = Status.objects.filter(descricao='Regulado').last()
 	status_nao_regulado_registro = Status.objects.filter(descricao='Não Regulado').last()
 
+	data_cancelamento = datetime.now()
+	formateDate = data_cancelamento.strftime("%d-%m-%Y")
+	hora = data_cancelamento.strftime("%H:%M")
+
 	return render(request, 'status_registro.html', {'registro':registro, 
 		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
 		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
 		status_aguard_lista_espera_registro, 'status_regulado_registro':
 		status_regulado_registro,'status_nao_regulado_registro':
-		status_nao_regulado_registro})
+		status_nao_regulado_registro, 'formateDate':formateDate, 'hora':hora})
+
+
+@login_required
+def status_registro_set(request, id):
+	registro = RegistroCovid.objects.get(id=id)
+
+	andamento_processo = ''
+	justificativa_cancelamento = request.POST.get('justif_cancelar_regulacao')
+	if justificativa_cancelamento != '':
+		andamento_processo = "Cancelado"
+
+	registro.andamento_processo = andamento_processo
+	registro.justificativa_cancelamento = justificativa_cancelamento
+	registro.save()
+
+	return redirect('status_registro', id=id)
 
 @login_required
 def remove_registro_covid(request, id):

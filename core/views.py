@@ -112,11 +112,13 @@ def change_password(request):
 def covid_list(request):
 	registros = RegistroCovid.objects.all()
 
+	status = Status.objects.all()
+
 	paginator = Paginator(registros, 10)
 	page = request.GET.get('page')
 	regs = paginator.get_page(page)
 
-	return render(request, 'list.html', {'regs':regs})
+	return render(request, 'list.html', {'regs':regs, 'status':status})
 
 
 @login_required

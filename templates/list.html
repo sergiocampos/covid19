@@ -98,12 +98,33 @@
         <th>Paciente</th>
         <th>Idade</th>
         <th>Ações</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
     	{% for o in regs %}
       <tr>
-        <td>{{o.data_notificacao|date:'d/m/Y'}} - {{o.hora_notificacao|time:'H:i'}}</td>
+        {% if o.andamento_processo == 'Cancelado' %}
+        <td style="color: #ff8566">
+        
+        {{o.data_notificacao|date:'d/m/Y'}} - {{o.hora_notificacao|time:'H:i'}}
+    	</td>
+    	{%else%}
+    	<td>
+     
+        {{o.data_notificacao|date:'d/m/Y'}} - {{o.hora_notificacao|time:'H:i'}}
+    	</td>
+    	{%endif%}
+
+        {% if o.andamento_processo == 'Cancelado' %}
+        <td style="color: #ff8566">
+        	{% if o.estabelecimento_solicitante == '' or o.estabelecimento_solicitante == None %}
+        	{{o.estabelecimento_outro}}
+        	{%else%}
+        	{{o.estabelecimento_solicitante}}
+        	{%endif%}
+        </td>
+        {%else%}
         <td>
         	{% if o.estabelecimento_solicitante == '' or o.estabelecimento_solicitante == None %}
         	{{o.estabelecimento_outro}}
@@ -111,13 +132,39 @@
         	{{o.estabelecimento_solicitante}}
         	{%endif%}
         </td>
+        {%endif%}
+
+        {% if o.andamento_processo == 'Cancelado' %}
+        <td><a href="/status_registro/{{o.id}}/" style="color: #ff8566">{{o.nome_paciente}}</a></td>
+        {%else%}
         <td><a href="/status_registro/{{o.id}}/">{{o.nome_paciente}}</a></td>
+        {%endif%}
+        {% if o.andamento_processo == 'Cancelado' %}
+        <td style="color: #ff8566">
+        	{% if o.idade_paciente == '' or o.idade_paciente == None %}
+        	{%else%}
+        	{{o.idade_paciente}}
+        	{%endif%}
+        </td>
+        {%else%}
         <td>
         	{% if o.idade_paciente == '' or o.idade_paciente == None %}
         	{%else%}
         	{{o.idade_paciente}}
         	{%endif%}
         </td>
+        {%endif%}
+
+        {% if o.andamento_processo == 'Cancelado' %}
+        <td style="font-size: 87%">
+        	<!--<a href="/regulacao_edit/{{o.id}}">Editar</a>-->
+        	{% if o.andamento_processo == '' %}
+        	<a href="/regulacao_search_estabelecimento/{{o.id}}/" style="color: #ff8566">Regular</a>
+        	{%endif%}
+        	<a href="/regulacao_detail/{{o.id}}/" style="color: #ff8566">Ver</a>
+        	
+        </td>
+        {%else%}
         <td style="font-size: 87%">
         	<!--<a href="/regulacao_edit/{{o.id}}">Editar</a>-->
         	{% if o.andamento_processo == '' %}
@@ -126,6 +173,33 @@
         	<a href="/regulacao_detail/{{o.id}}/">Ver</a>
         	
         </td>
+        {%endif%}
+
+        {% if o.andamento_processo == 'Cancelado' %}
+        <td style="color: #800000">
+        	{{o.andamento_processo}}        	
+        </td>
+        {%else%}
+        <td style="font-size: 87%">
+        	{% for e in status %}
+        	{% if e.registro_covid_id == o.id %}
+        	
+        	{% if e.descricao == 'Regulado' %}
+        	<b style="color: #009933">{{e.descricao}}<br/></b>
+        	{%endif%}
+        	{% if e.descricao == 'Não Regulado' %}
+        	<b style="color: #cc6600">{{e.descricao}}<br/></b>
+        	{%endif%}
+        	{% if e.descricao == 'Aguardando confirmação de Vaga' %}
+        	<b style="color: #666699">{{e.descricao}}<br/></b>
+        	{%endif%}
+        	{% if e.descricao == 'Aguardando em Lista de Espera' %}
+        	<b style="color: #cccc00">{{e.descricao}}<br/></b>
+        	{%endif%}
+        	{%endif%}
+        	{%endfor%}
+        </td>
+        {%endif%}
       </tr>
       	{% endfor %}
       

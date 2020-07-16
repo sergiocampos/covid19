@@ -16,6 +16,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from io import BytesIO as IO
 from openpyxl import Workbook
 from core.forms import UserForm, UserProfileInfoForm
+from django.db.models import Max
 
 # Create your views here.
 def index(request):
@@ -112,13 +113,29 @@ def change_password(request):
 def covid_list(request):
 	registros = RegistroCovid.objects.all()
 
-	status = Status.objects.all()
+
+	status_regulado = Status.objects.filter(descricao='Regulado')
+	status_aguardando_confirmacao_vaga = Status.objects.filter(descricao='Aguardando confirmação de Vaga')
+	status_nao_regulado = Status.objects.filter(descricao='Não Regulado')
+	status_aguardando_lista = Status.objects.filter(descricao='Aguardando em Lista de Espera')
+
+
+	#status = Status.objects.all()
+	#print("ultimo status:", status.last())
+	s = [i['descricao'] for i in Status.objects.values('descricao').annotate(Max('id'))]
+	for r in registros:
+		for o in status_regulado:
+			if o.registro_covid_id == r.id:
+				print("Status",o,"paciente:",r, "Id:",r.id)
+		for e in status_aguardando_confirmacao_vaga:
+			if e.registro_covid_id == r.id:
+				print("Status",e,"paciente:",r,"Id:",r.id)
 
 	paginator = Paginator(registros, 10)
 	page = request.GET.get('page')
 	regs = paginator.get_page(page)
 
-	return render(request, 'list.html', {'regs':regs, 'status':status})
+	return render(request, 'list.html', {'regs':regs})
 
 
 @login_required
@@ -858,6 +875,8 @@ def regulacao_set(request, id):
 		registro_covid=registro_covid
 		)
 
+	last_status = descricao
+
 	codigo_sescovid_cap = request.POST.get('num_protocolo')
 	if codigo_sescovid_cap == '' or codigo_sescovid_cap == None:
 		codigo_sescovid = registro.codigo_sescovid
@@ -1020,6 +1039,7 @@ def regulacao_set(request, id):
 	registro.observacao = observacao
 	registro.pareceristas = pareceristas
 	registro.data_regulacao = data_regulacao
+	registro.last_status = last_status
 	#registro.data_obito = data_obito
 
 	registro.save()

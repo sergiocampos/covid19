@@ -191,6 +191,8 @@ class RegistroCovid(models.Model):
 	data_cancelamento = models.DateField(auto_now_add=True, null=True)
 	hora_cancelamento = models.TimeField(auto_now_add=True, null=True)
 
+	last_status = models.CharField(max_length=200, blank=True, default='', null=True)
+
 
 
 

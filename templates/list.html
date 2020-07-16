@@ -181,23 +181,20 @@
         </td>
         {%else%}
         <td style="font-size: 87%">
-        	{% for e in status %}
-        	{% if e.registro_covid_id == o.id %}
         	
-        	{% if e.descricao == 'Regulado' %}
-        	<b style="color: #009933">{{e.descricao}}<br/></b>
+        	{% if 'Regulado' in o.last_status %}
+        	<b style="color: #009933">{{o.last_status}}<br/></b>
         	{%endif%}
-        	{% if e.descricao == 'Não Regulado' %}
-        	<b style="color: #cc6600">{{e.descricao}}<br/></b>
+        	{% if 'Não Regulado' in o.last_status %}
+        	<b style="color: #cc6600">{{o.last_status}}<br/></b>
         	{%endif%}
-        	{% if e.descricao == 'Aguardando confirmação de Vaga' %}
-        	<b style="color: #666699">{{e.descricao}}<br/></b>
+        	{% if 'Aguardando confirmação de Vaga' in o.last_status %}
+        	<b style="color: #666699">{{o.last_status}}<br/></b>
         	{%endif%}
-        	{% if e.descricao == 'Aguardando em Lista de Espera' %}
-        	<b style="color: #cccc00">{{e.descricao}}<br/></b>
+        	{% if 'Aguardando em Lista de Espera' in o.last_status %}
+        	<b style="color: #cccc00">{{o.last_status}}<br/></b>
         	{%endif%}
-        	{%endif%}
-        	{%endfor%}
+        	
         </td>
         {%endif%}
       </tr>

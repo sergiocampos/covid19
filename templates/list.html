@@ -105,7 +105,7 @@
     	{% for o in regs %}
       <tr>
         {% if o.andamento_processo == 'Cancelado' %}
-        <td style="color: #ff8566">
+        <td style="color: #ff0000">
         
         {{o.data_notificacao|date:'d/m/Y'}} - {{o.hora_notificacao|time:'H:i'}}
     	</td>
@@ -117,7 +117,7 @@
     	{%endif%}
 
         {% if o.andamento_processo == 'Cancelado' %}
-        <td style="color: #ff8566">
+        <td style="color: #ff0000">
         	{% if o.estabelecimento_solicitante == '' or o.estabelecimento_solicitante == None %}
         	{{o.estabelecimento_outro}}
         	{%else%}
@@ -135,12 +135,12 @@
         {%endif%}
 
         {% if o.andamento_processo == 'Cancelado' %}
-        <td><a href="/status_registro/{{o.id}}/" style="color: #ff8566">{{o.nome_paciente}}</a></td>
+        <td><a href="/status_registro/{{o.id}}/" style="color: #ff0000">{{o.nome_paciente}}</a></td>
         {%else%}
         <td><a href="/status_registro/{{o.id}}/">{{o.nome_paciente}}</a></td>
         {%endif%}
         {% if o.andamento_processo == 'Cancelado' %}
-        <td style="color: #ff8566">
+        <td style="color: #ff0000">
         	{% if o.idade_paciente == '' or o.idade_paciente == None %}
         	{%else%}
         	{{o.idade_paciente}}
@@ -159,9 +159,9 @@
         <td style="font-size: 87%">
         	<!--<a href="/regulacao_edit/{{o.id}}">Editar</a>-->
         	{% if o.andamento_processo == '' %}
-        	<a href="/regulacao_search_estabelecimento/{{o.id}}/" style="color: #ff8566">Regular</a>
+        	<a href="/regulacao_search_estabelecimento/{{o.id}}/" style="color: #ff0000">Regular</a>
         	{%endif%}
-        	<a href="/regulacao_detail/{{o.id}}/" style="color: #ff8566">Ver</a>
+        	<a href="/regulacao_detail/{{o.id}}/" style="color: #ff0000">Ver</a>
         	
         </td>
         {%else%}
@@ -176,7 +176,7 @@
         {%endif%}
 
         {% if o.andamento_processo == 'Cancelado' %}
-        <td style="color: #800000">
+        <td style="color: #ff0000">
         	{{o.andamento_processo}}        	
         </td>
         {%else%}
@@ -185,8 +185,8 @@
         	{% if 'Regulado' in o.last_status %}
         	<b style="color: #009933">{{o.last_status}}<br/></b>
         	{%endif%}
-        	{% if 'Não Regulado' in o.last_status %}
-        	<b style="color: #cc6600">{{o.last_status}}<br/></b>
+        	{% if 'Não Preenche Critérios' in o.last_status %}
+        	<b style="color: #993300">{{o.last_status}}<br/></b>
         	{%endif%}
         	{% if 'Aguardando confirmação de Vaga' in o.last_status %}
         	<b style="color: #666699">{{o.last_status}}<br/></b>
@@ -194,6 +194,9 @@
         	{% if 'Aguardando em Lista de Espera' in o.last_status %}
         	<b style="color: #cccc00">{{o.last_status}}<br/></b>
         	{%endif%}
+            {% if 'Obito' in o.last_status %}
+            <b style="color: #595959">{{o.last_status}}<br/></b>
+            {%endif%}
         	
         </td>
         {%endif%}

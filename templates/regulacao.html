@@ -3503,13 +3503,13 @@ máxima de 12h de validação para recepção na unidade solicitante.
 						{% if 'Não Regulado' in status_list_descricao %}
 						<div class="form-check-inline" style="font-size: 83%">
 					      <label class="form-check-label" for="">
-					        <input type="radio" class="form-check-input" id="check_paciente_nao_regulado_id" name="status_paciente" value="Não Regulado" onclick="activeStatusNaoRegulado()" checked>PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
+					        <input type="radio" class="form-check-input" id="check_paciente_nao_regulado_id" name="status_paciente" value="Não Preenche Critérios" onclick="activeStatusNaoRegulado()" checked>PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
 					      </label>
 					    </div>
 					    {%else%}
 					    <div class="form-check-inline" style="font-size: 83%">
 					      <label class="form-check-label" for="">
-					        <input type="radio" class="form-check-input" id="check_paciente_nao_regulado_id" name="status_paciente" value="Não Regulado" onclick="activeStatusNaoRegulado()">PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
+					        <input type="radio" class="form-check-input" id="check_paciente_nao_regulado_id" name="status_paciente" value="Não Preenche Critérios" onclick="activeStatusNaoRegulado()">PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
 					      </label>
 					    </div>
 					    {%endif%}
@@ -3540,9 +3540,10 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				
 				<div class="col-sm-3"></div>					
 			</div>
+			-->
 			<div class="row">
-				<div class="col-sm-5"></div>
-				<div class="col-sm-3">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4">
 					{% if 'Obito' in status_list_descricao %}
 					<div class="form-check-inline" style="font-size: 83%">
 				      <label class="form-check-label" for="" id="">
@@ -3561,7 +3562,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 				<div class="col-sm-4"></div>
 			</div>
-		-->
+		
 		
 		<div class="row">
 			<div class="col-sm-4"></div>

@@ -113,24 +113,6 @@ def change_password(request):
 def covid_list(request):
 	registros = RegistroCovid.objects.all()
 
-
-	status_regulado = Status.objects.filter(descricao='Regulado')
-	status_aguardando_confirmacao_vaga = Status.objects.filter(descricao='Aguardando confirmação de Vaga')
-	status_nao_regulado = Status.objects.filter(descricao='Não Regulado')
-	status_aguardando_lista = Status.objects.filter(descricao='Aguardando em Lista de Espera')
-
-
-	#status = Status.objects.all()
-	#print("ultimo status:", status.last())
-	s = [i['descricao'] for i in Status.objects.values('descricao').annotate(Max('id'))]
-	for r in registros:
-		for o in status_regulado:
-			if o.registro_covid_id == r.id:
-				print("Status",o,"paciente:",r, "Id:",r.id)
-		for e in status_aguardando_confirmacao_vaga:
-			if e.registro_covid_id == r.id:
-				print("Status",e,"paciente:",r,"Id:",r.id)
-
 	paginator = Paginator(registros, 10)
 	page = request.GET.get('page')
 	regs = paginator.get_page(page)
@@ -899,16 +881,16 @@ def regulacao_set(request, id):
 	#data_regulacao = data_regulacao_.strftime('%d/%m/%Y %H:%M')
 
 
-	#data_obito_bd_cap = request.POST.get('data_obito_bd')
-	#data_obito_cap = request.POST.get('data_obito')
+	data_obito_bd_cap = request.POST.get('data_obito_bd')
+	data_obito_cap = request.POST.get('data_obito')
 
-	#if data_obito_cap == '' or data_obito_cap == None:
-	#	if data_obito_bd_cap == '' or data_obito_bd_cap == None:
-	#		data_obito = None
-	#	else:
-	#		data_obito = datetime.strptime(data_obito_bd_cap, '%d/%m/%Y').date()
-	#else:
-	#	data_obito = data_obito_cap
+	if data_obito_cap == '' or data_obito_cap == None:
+		if data_obito_bd_cap == '' or data_obito_bd_cap == None:
+			data_obito = None
+		else:
+			data_obito = datetime.strptime(data_obito_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_obito = data_obito_cap
 
 	
 	registro.responsavel_pelo_preenchimento = responsavel_pelo_preenchimento
@@ -1040,7 +1022,7 @@ def regulacao_set(request, id):
 	registro.pareceristas = pareceristas
 	registro.data_regulacao = data_regulacao
 	registro.last_status = last_status
-	#registro.data_obito = data_obito
+	registro.data_obito = data_obito
 
 	registro.save()
 

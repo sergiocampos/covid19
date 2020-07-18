@@ -1422,7 +1422,11 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-1" id="" style="margin-left: -90px">
 					<div class="form-check-inline"><b>IgM:</b>
 						<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+				            {% if registro.igm != '' or registro.igm != None %}
 				            <option value="{{registro.igm}}" selected>{{registro.igm}}</option>
+				            {%else%}
+				            <option value="" selected></option>
+				            {%endif%}
 				            <option value="REAGENTE">REAGENTE</option>
 				            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
 				        </select>

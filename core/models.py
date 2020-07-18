@@ -193,6 +193,8 @@ class RegistroCovid(models.Model):
 
 	last_status = models.CharField(max_length=200, blank=True, default='', null=True)
 
+	data_obito = models.DateField(blank=True, null=True, default=None)
+
 
 
 

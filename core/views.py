@@ -1389,6 +1389,11 @@ def status_registro(request, id):
 	registro = RegistroCovid.objects.get(id=id)
 	
 	status_registro = Status.objects.filter(registro_covid=registro.id)
+	status_registro_last = Status.objects.filter(registro_covid=registro.id).last()
+
+
+	for f in status_registro:
+		print(f,"data:",f.data_notificacao,"hora",f.hora_notificacao)
 
 	status_list_descricao = []
 
@@ -1396,22 +1401,20 @@ def status_registro(request, id):
 		status_list_descricao.append(s.descricao)
 
 
-	status_aguard_conf_vaga_registro = Status.objects.filter(descricao='Aguardando confirmação de Vaga').last()
+	#status_aguard_conf_vaga_registro = Status.objects.filter(descricao='Aguardando confirmação de Vaga').last()
 	#status_obito_registro = Status.objects.filter(descricao='Obito').last()
-	status_aguard_lista_espera_registro = Status.objects.filter(descricao='Aguardando em Lista de Espera').last()
-	status_regulado_registro = Status.objects.filter(descricao='Regulado').last()
-	status_nao_regulado_registro = Status.objects.filter(descricao='Não Regulado').last()
+	#status_aguard_lista_espera_registro = Status.objects.filter(descricao='Aguardando em Lista de Espera').last()
+	#status_regulado_registro = Status.objects.filter(descricao='Regulado').last()
+	#status_nao_regulado_registro = Status.objects.filter(descricao='Não Regulado').last()
 
 	data_cancelamento = datetime.now()
 	formateDate = data_cancelamento.strftime("%d-%m-%Y")
 	hora = data_cancelamento.strftime("%H:%M")
 
 	return render(request, 'status_registro.html', {'registro':registro, 
-		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
-		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
-		status_aguard_lista_espera_registro, 'status_regulado_registro':
-		status_regulado_registro,'status_nao_regulado_registro':
-		status_nao_regulado_registro, 'formateDate':formateDate, 'hora':hora})
+		'status_registro':status_registro, 
+		'formateDate':formateDate, 'hora':hora, 'status_registro_last':
+		status_registro_last})
 
 
 @login_required

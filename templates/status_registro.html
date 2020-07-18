@@ -159,6 +159,21 @@
 
 
 
+			{% for sr in status_registro %}
+			<div class="row">
+				<div class="col-sm-4"></div>
+				{% if 'Aguardando confirmação de Vaga' in sr.descricao %}
+				<div id="" class="col-sm-4" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b><i>Aguardando Confirmação de Vaga! - {{status_registro.data_notificacao}} - {{status_registro.hora_notificacao|time:"H:i"}}</i></b>
+				</div>
+				{%else%}
+				<div id="paciente_regulado_id" class="col-sm-4" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b><i>Aguardando Confirmação de Vaga!</i></b>
+				</div>
+				{%endif%}
+				<div class="col-sm-4"></div>
+			</div>
+			{%endfor%}
 			<div class="row">
 				<div class="col-sm-4"></div>
 				{% if 'Aguardando confirmação de Vaga' in status_list_descricao %}

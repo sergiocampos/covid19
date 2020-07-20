@@ -587,6 +587,239 @@ dgCidadesEstados.prototype = {
 };
   </script>
 
+  <script>
+
+  	Filevalidation = () => { 
+        const fi = document.getElementById('file_descricao_clinica_id'); 
+        // Check if any file is selected. 
+        if (fi.files.length > 0) { 
+            for (const i = 0; i <= fi.files.length - 1; i++) { 
+  
+                const fsize = fi.files.item(i).size; 
+                const file = Math.round((fsize / 1024)); 
+                // The size of the file. 
+                if (file >= 2048) { 
+                    alert( 
+                      "Arquivo muito grande, selecione imagem de até 2 megabytes"); 
+                } else { 
+                    document.getElementById('size').innerHTML = '<b>'
+                    + file + '</b> KB'; 
+                } 
+            } 
+        } 
+    }
+
+    validationImgTc = () => { 
+        const fi = document.getElementById('laudo_tc_torax_id'); 
+        // Check if any file is selected. 
+        if (fi.files.length > 0) { 
+            for (const i = 0; i <= fi.files.length - 1; i++) { 
+  
+                const fsize = fi.files.item(i).size; 
+                const file = Math.round((fsize / 1024)); 
+                // The size of the file. 
+                if (file >= 2048) { 
+                    alert( 
+                      "Arquivo muito grande, selecione imagem de até 2 megabytes"); 
+                } else { 
+                    document.getElementById('size').innerHTML = '<b>'
+                    + file + '</b> KB'; 
+                } 
+            } 
+        } 
+    }
+
+    validationImgRx = () => { 
+        const fi = document.getElementById('laudo_rx_torax_id'); 
+        // Check if any file is selected. 
+        if (fi.files.length > 0) { 
+            for (const i = 0; i <= fi.files.length - 1; i++) { 
+  
+                const fsize = fi.files.item(i).size; 
+                const file = Math.round((fsize / 1024)); 
+                // The size of the file. 
+                if (file >= 2048) { 
+                    alert( 
+                      "Arquivo muito grande, selecione imagem de até 2 megabytes"); 
+                } else { 
+                    document.getElementById('size').innerHTML = '<b>'
+                    + file + '</b> KB'; 
+                } 
+            } 
+        } 
+    }
+
+
+  	function activeOutrasComorbidades_(){
+			if (document.getElementById('outras_comorbidades').checked == true) {
+				$("#desc_outras_comorbidades").prop("disabled", false);
+				}
+				else{
+					$("#desc_outras_comorbidades").prop("disabled", true);
+					$("#desc_outras_comorbidades").val("");
+				}
+			}
+	function activeOutrasCardiopatias_(){
+			if (document.getElementById('check_outras_cardiopatias').checked == true) {
+				$("#outras_cardiopatias").prop("disabled", false);
+			}
+			else {
+				$("#outras_cardiopatias").val("");
+				$("#outras_cardiopatias").prop("disabled", true);
+			}
+		}
+	function activeIdadeGestacional_(){
+			if (document.getElementById("check_idade_gestacional").checked == true) {
+				$("#idade_gestacional").prop("disabled", false);
+				$("#gesta_para").prop("disabled", false);
+			}
+			else {
+				$("#idade_gestacional").val("");
+				$("#idade_gestacional").prop("disabled", true);
+				$("#gesta_para").val("");
+				$("#gesta_para").prop("disabled", true);
+			}
+		}
+	function comorbidadesObstetrica_(){
+		if (document.getElementById("check_comorbidades_obstetrica").checked == true) {
+			$("#comorbidades_obstetrica").prop("disabled", false);
+			}
+		else {
+			$("#comorbidades_obstetrica").val("");
+			$("#comorbidades_obstetrica").prop("disabled", true);
+		}
+	}
+	function activeLaudoTc_(){
+		if (document.getElementById("check_tc_torax_id").checked == true){
+			$("#laudo_tc_torax_id").prop("disabled", false);
+		}
+		else {
+			$("#laudo_tc_torax_id").val('');
+			$("#laudo_tc_torax_id").prop("disabled", true);
+		}
+	}
+	function activeLaudoRx_(){
+		if (document.getElementById("check_rx_torax_id").checked == true){
+			$("#laudo_rx_torax_id").prop("disabled", false);
+		}
+		else {
+			$("#laudo_rx_torax_id").val("");
+			$("#laudo_rx_torax_id").prop("disabled", true);
+		}
+	}
+
+  </script>
+
+  <script>
+  	$(document).ready(function() {
+	  $('#deleteImgRx').click(function() {
+	    $('#laudo_rx_torax_id').val('');
+	    $('#laudo_rx_torax_id').prop("disabled", true);
+
+	  });
+
+	});
+
+  </script>
+
+  <script>
+  	$(document).ready(function() {
+	  $('#deleteImgRx').click(function() {
+	    $('#laudo_tc_torax_id').val('');
+	    $('#laudo_tc_torax_id').prop("disabled", true);
+
+	  });
+
+	});
+  	
+  </script>
+
+  <script>
+  	(function($) {
+    $.fn.checkFileType = function(options) {
+        var defaults = {
+            allowedExtensions: [],
+            success: function() {},
+            error: function() {}
+        };
+        options = $.extend(defaults, options);
+
+        return this.each(function() {
+
+            $(this).on('change', function() {
+                var value = $(this).val(),
+                    file = value.toLowerCase(),
+                    extension = file.substring(file.lastIndexOf('.') + 1);
+
+                if ($.inArray(extension, options.allowedExtensions) == -1) {
+                    options.error();
+                    $(this).focus();
+                } else {
+                    options.success();
+
+                }
+
+            });
+
+        });
+    };
+
+})(jQuery);
+
+$(function() {
+    $('#laudo_tc_torax_id').checkFileType({
+        allowedExtensions: ['jpg', 'jpeg', 'png'],
+        
+        error: function() {
+            alert('Formato de Imagem não permitido');
+        }
+    });
+
+});
+
+(function($) {
+    $.fn.checkFileType = function(options) {
+        var defaults = {
+            allowedExtensions: [],
+            success: function() {},
+            error: function() {}
+        };
+        options = $.extend(defaults, options);
+
+        return this.each(function() {
+
+            $(this).on('change', function() {
+                var value = $(this).val(),
+                    file = value.toLowerCase(),
+                    extension = file.substring(file.lastIndexOf('.') + 1);
+
+                if ($.inArray(extension, options.allowedExtensions) == -1) {
+                    options.error();
+                    $(this).focus();
+                } else {
+                    options.success();
+
+                }
+
+            });
+
+        });
+    };
+
+})(jQuery);
+
+$(function() {
+    $('#laudo_rx_torax_id').checkFileType({
+        allowedExtensions: ['jpg', 'jpeg', 'png'],
+        
+        error: function() {
+            alert('Formato de Imagem não permitido');
+        }
+    });
+
+});
+  </script>
+
 	<script type="text/javascript" src='/static/js/covid.js/'></script>
 </head>
 <body>
@@ -883,6 +1116,2153 @@ dgCidadesEstados.prototype = {
 					</div>
 				</div>
 			</div><hr>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<b>DESCRIÇÃO CLÍNICA (SIC, UNIDADE SOLICITANTE)</b>
+					{% if registro.descricao_clinica == '' or registro.descricao_clinica == None %}
+					<textarea class="form-control" rows="10" id="" name="descricao_clinica" value="" style="width: 100%"></textarea>
+					{%else%}
+					<textarea class="form-control" rows="15" id="" name="descricao_clinica" value="" style="width: 100%">{{registro.descricao_clinica}}</textarea>
+					{%endif%}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-8">
+					<div class="custom-file mb-3">
+						<input type="file" class="custom-file-input" id="file_descricao_clinica_id" name="file_descricao_clinica" onchange="Filevalidation()">
+						<label class="custom-file-label" for="customFile">Selecione...</label>
+					</div>
+				</div>
+				<div class="col-sm4">
+					<p id="size"></p>
+				</div>
+			</div><br><br>
+			<div class="row">
+				<div class="col-sm-12">
+					<b>Síndrome Gripal?</b> – Aspectos relacionados a síndrome gripal
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-1">
+					{% if 'Tosse' in registro.sindrome_gripal %}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Tosse" id="" checked>Tosse
+					</label>
+					</div>
+					{% else %}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Tosse" id="">Tosse
+					</label>
+					</div>
+					{% endif %}
+				</div>
+				<div class="col-sm-2">
+					{% if 'Coriza Nasal' in registro.sindrome_gripal %}
+					<div class="form-check-inline" style="width: 140%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Coriza Nasal" id="" checked>Coriza Nasal
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 140%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Coriza Nasal" id="">Coriza Nasal
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				<div class="col-sm-1">
+					{% if 'Anosmia' in registro.sindrome_gripal %}
+					<div class="form-check-inline" style="width: 130%; margin-left: -20px">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Anosmia" id="" checked>Anosmia
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 130%; margin-left: -20px">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Anosmia" id="">Anosmia
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				<div class="col-sm-1">
+					{% if 'Febre' in registro.sindrome_gripal %}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Febre" id="" checked>Febre
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Febre" id="">Febre
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				<div class="col-sm-1">
+					{% if 'Mialgia' in registro.sindrome_gripal %}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Mialgia" id="" checked>Mialgia
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Mialgia" id="">Mialgia
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				<div class="col-sm-1">
+					{% if 'Fadiga' in registro.sindrome_gripal %}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Fadiga" id="" checked>Fadiga
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Fadiga" id="">Fadiga
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				<div class="col-sm-1">
+					{% if 'Dispnéia' in registro.sindrome_gripal %}
+					<div class="form-check-inline" style="width: 140%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Dispnéia" id="" checked>Dispnéia
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 140%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Dispnéia" id="">Dispnéia
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				<div class="col-sm-1">
+					{% if 'Astenia' in registro.sindrome_gripal %}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Astenia" id="" checked>Astenia
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Astenia" id="">Astenia
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				<div class="col-sm-2">
+					{% if 'Cefaléia' in registro.sindrome_gripal %}
+					<div class="form-check-inline">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Cefaléia" id="orgaos-doados" checked>Cefaléia
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline">
+						<label class="form-check-label">
+						<input type="checkbox" class="" name="s_gripal" value="Cefaléia" id="orgaos-doados">Cefaléia
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				
+				
+			</div><hr>
+
+			<div class="row">
+				<div class="col-sm-12">
+					Tempo de início de quadro sintomático:
+					<div class="form-check-inline">
+				        <input type="number" class="form-control form-control-sm" id="" placeholder="" name="tempo_inicio_sintomas" value="{{registro.tempo_quadro_sintomatico}}" min="1" max="200">
+				    </div>
+				    dias.
+				</div>
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-12">
+					Exposição epidemiológica a qualquer pessoa infectada pelo SARS CoV-2?
+					{% if registro.exposicao_pessoa_infectada == 'Sim' %}
+					<div class="form-check-inline">
+			          <label class="form-check-label">
+			            <input type="radio" class="form-check-input" name="exposicao_epidemiologica_sim" value="Sim" checked>Sim
+			          </label>
+			        </div>
+			        <div class="form-check-inline">
+			          <label class="form-check-label">
+			            <input type="radio" class="form-check-input" name="exposicao_epidemiologica_sim" value="Não">Não
+			          </label>
+			        </div>
+			        {%elif registro.exposicao_pessoa_infectada == 'Não' %}
+			        <div class="form-check-inline">
+			          <label class="form-check-label">
+			            <input type="radio" class="form-check-input" name="exposicao_epidemiologica_sim" value="Sim">Sim
+			          </label>
+			        </div>
+			        <div class="form-check-inline">
+			          <label class="form-check-label">
+			            <input type="radio" class="form-check-input" name="exposicao_epidemiologica_sim" value="Não">Não
+			          </label>
+			        </div>
+			        {%else%}
+			        <div class="form-check-inline">
+			          <label class="form-check-label">
+			            <input type="radio" class="form-check-input" name="exposicao_epidemiologica_sim" value="Sim">Sim
+			          </label>
+			        </div>
+			        <div class="form-check-inline">
+			          <label class="form-check-label">
+			            <input type="radio" class="form-check-input" name="exposicao_epidemiologica_sim" value="Não">Não
+			          </label>
+			        </div>
+			        {%endif%}
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					Grau de parentesco:
+					<div class="form-check-inline">
+						<select name="grau_parentesco" id="" class="form-control form-control-sm" style="width: auto">
+				            <option value="{{registro.parentesco}}" selected>{{registro.parentesco}}</option>
+				            <option value="Mãe">Mãe</option>
+				            <option value="Pai">Pai</option>
+				            <option value="Irmão">Irmão(a)</option>
+				            <option value="Tio">Tio(a)</option>
+				            <option value="Cunhado">Cunhado</option>
+				            <option value="Avó">Avó</option>
+				            <option value="Avô">Avô</option>
+				            <option value="Primo">Primo</option>
+				            
+				        </select>
+				    </div>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					<b>Comorbidades</b>
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2">
+					{% if 'Obesidade' in registro.comorbidades %}
+					<div class="form-check-inline" style="">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Obesidade" id="" checked>Obesidade;
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline" style="">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Obesidade" id="">Obesidade;
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				<div class="col-sm-2">
+					{% if 'HAS' in registro.comorbidades %}
+					<div class="form-check-inline" style="">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="HAS" id="" checked>HAS
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline" style="">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="HAS" id="">HAS
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				<div class="col-sm-2">
+					{% if 'DM-2' in registro.comorbidades %}
+					<div class="form-check-inline" style="">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="DM-2" id="" checked>DM-2;
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline" style="">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="DM-2" id="">DM-2;
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				<div class="col-sm-6">
+					{% if 'Cardiopatia isquêmica prévia - FE' in registro.comorbidades %}
+					<div class="form-check-inline" style="">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Cardiopatia isquêmica prévia - FE" id="" checked>Cardiopatia isquêmica prévia - FE
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline" style="">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Cardiopatia isquêmica prévia - FE" id="">Cardiopatia isquêmica prévia - FE
+					</label>
+					</div>
+					{%endif%}
+				</div>
+
+				<div class="col-sm-6">
+					{% if 'Outros' in registro.comorbidades %}
+					<div class="form-check-inline" style="">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Outros" id="outras_comorbidades" onclick="activeOutrasComorbidades_()" checked>Outros
+					</label>
+					</div>
+					
+				    {%else%}
+				    <div class="form-check-inline" style="">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Outros" id="outras_comorbidades" onclick="activeOutrasComorbidades_()">Outros
+					</label>
+					</div>
+					{%endif%}
+					{% if registro.outras_comorbidades == '' or registro.outras_comorbidades == None %}
+					<div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="desc_outras_comorbidades" placeholder="" name="descricao_outras_comorbidades" value="" disabled>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="desc_outras_comorbidades" placeholder="" name="descricao_outras_comorbidades" value="{{registro.outras_comorbidades}}">
+				    </div>
+				    {%endif%}
+				</div>
+				
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-2">
+					{% if 'AVEi prévio' in registro.comorbidades %}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="AVEi prévio" id="" checked>AVEi prévio;
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="AVEi prévio" id="">AVEi prévio;
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				<div class="col-sm-3">
+					{% if 'Doença pulmonar pré-existente' in registro.comorbidades %}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Doença pulmonar pré-existente" id="" checked>Doença pulmonar pré-existente
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Doença pulmonar pré-existente" id="">Doença pulmonar pré-existente
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				<div class="col-sm-3">
+					{% if 'Lesão Renal Crônica – estágio' in registro.comorbidades %}
+					<div class="form-check-inline" style="width: 140%">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Lesão Renal Crônica – estágio" id="" checked>Lesão Renal Crônica – estágio:
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 140%">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Lesão Renal Crônica – estágio" id="">Lesão Renal Crônica – estágio:
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				<div class="col-sm-3">
+					{% if 'Uso de imunobiológicos' in registro.comorbidades %}
+					<div class="form-check-inline" style="width: 140%">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Uso de imunobiológicos" id="">Uso de imunobiológicos;
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 140%">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Uso de imunobiológicos" id="">Uso de imunobiológicos;
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				
+			</div><br>
+			<div class="row">
+				<div class="col-sm-3">
+					{% if 'História de Transplantes' in registro.comorbidades %}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="História de Transplantes" id="" checked>História de Transplantes;
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline" style="width: 120%">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="História de Transplantes" id="">História de Transplantes;
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				<div class="col-sm-6">
+					{% if 'Imunossupressor prévio (corticosteróide,quimioterápicos)' in registro.comorbidades %}
+					<div class="form-check-inline">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Imunossupressor prévio (corticosteróide,quimioterápicos)" id="" checked>Imunossupressor prévio (corticosteróide,quimioterápicos);
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Imunossupressor prévio (corticosteróide,quimioterápicos)" id="">Imunossupressor prévio (corticosteróide,quimioterápicos);
+					</label>
+					</div>
+					{%endif%}
+				</div>
+				<div class="col-sm-3">
+					{% if 'Diagnóstico de HIV' in registro.comorbidades %}
+					<div class="form-check-inline">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Diagnóstico de HIV" id="" checked>Diagnóstico de HIV;
+					</label>
+					</div>
+					{%else%}
+					<div class="form-check-inline">
+						<label class="form-check-label">
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Diagnóstico de HIV" id="">Diagnóstico de HIV;
+					</label>
+					</div>
+					{%endif%}
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					{% if 'Outras cardiopatias' in registro.comorbidades %}
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_outras_cardiopatias" name="comorbidades" value="Outras cardiopatias" onclick="activeOutrasCardiopatias_()" checked>Outras cardiopatias – Descrever:
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_outras_cardiopatias" name="comorbidades" value="Outras cardiopatias" onclick="activeOutrasCardiopatias_()">Outras cardiopatias – Descrever:
+				      </label>
+				    </div>
+				    {%endif%}
+
+					{% if registro.outras_cardiopatias == '' or registro.outras_cardiopatias == None %}
+					<div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="outras_cardiopatias" placeholder="" name="desc_outras_cardiopatias" value="">
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="outras_cardiopatias" placeholder="" name="desc_outras_cardiopatias" value="{{registro.outras_cardiopatias}}">
+				    </div>
+				    {%endif%}
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-6">
+					{% if 'Gestação' in registro.comorbidades %}
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_idade_gestacional" name="comorbidades" value="Gestação" onclick="activeIdadeGestacional_()" checked>Gestação – Idade Gestacional:
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_idade_gestacional" name="comorbidades" value="Gestação" onclick="activeIdadeGestacional_()">Gestação – Idade Gestacional:
+				      </label>
+				    </div>
+				    {%endif%}
+					
+					{% if registro.idade_gestacional == '' or registro.idade_gestacional == None %}
+					<div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="idade_gestacional" placeholder="" name="idade_gestacao" value="" disabled>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="idade_gestacional" placeholder="" name="idade_gestacao" value="{{registro.idade_gestacional}}">
+				    </div>
+				    {%endif%}
+
+
+				</div>
+				<div class="col-sm-6">
+					Gesta/Para:
+					{% if registro.gesta_para == '' or registro.gesta_para == None %}
+					<div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="gesta_para" placeholder="" name="gestacao_para" value="" disabled>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="gesta_para" placeholder="" name="gestacao_para" value="{{registro.gesta_para}}">
+				    </div>
+				    {%endif%}
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					{% if 'Comorbidades obstétricas' in registro.comorbidades %}
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_comorbidades_obstetrica" name="comorbidades" value="Comorbidades obstétricas" onclick="comorbidadesObstetrica_()" checked>Comorbidades obstétricas:
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_comorbidades_obstetrica" name="comorbidades" value="Comorbidades obstétricas" onclick="comorbidadesObstetrica_()">Comorbidades obstétricas:
+				      </label>
+				    </div>
+				    {%endif%}
+				    {% if registro.comorbidades_obstetricas == '' or registro.comorbidades_obstetricas == None %}
+				    <div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="comorbidades_obstetrica" placeholder="" name="comorbidade_obstetrica" value="" disabled>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="comorbidades_obstetrica" placeholder="" name="comorbidade_obstetrica" value="{{registro.comorbidades_obstetricas}}">
+				    </div>
+				    {%endif%}
+				    
+				   
+				    
+				    
+					
+				</div>
+			</div><br><hr>
+			<div class="row">
+				<div class="col-sm-12">
+					<b>Medicamentos de uso habitual?</b>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-5">
+					{% if 'BRA (Losartana, Valsartana, Olmesartana, etc)' in registro.medicamentos_uso_habitual %}
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="medicamento_uso_habitual" value="BRA (Losartana, Valsartana, Olmesartana, etc)" checked>BRA (Losartana, Valsartana, Olmesartana, etc)
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="medicamento_uso_habitual" value="BRA (Losartana, Valsartana, Olmesartana, etc)">BRA (Losartana, Valsartana, Olmesartana, etc)
+				      </label>
+				    </div>
+				    {%endif%}
+					
+				</div>
+				<div class="col-sm-2">
+					{% if 'IECA' in registro.medicamentos_uso_habitual %}
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="medicamento_uso_habitual" value="IECA" checked>IECA
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="medicamento_uso_habitual" value="IECA">IECA
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-5" style="">
+					{% if 'Outros' in registro.medicamentos_uso_habitual %}
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="outros_medicamento" name="medicamento_uso_habitual" value="Outros" onclick="check_outro_medicamento()" checked>Outros
+				      </label>
+				    </div>
+					
+					<div class="form-check-inline" style="">
+						<input type="text" class="form-control form-control-sm" id="descricao_outro_medicamento" placeholder="" name="descricao_outros_medicamento" value="{{registro.medicamento_outros}}">
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="outros_medicamento" name="medicamento_uso_habitual" value="Outros" onclick="check_outro_medicamento()">Outros
+				      </label>
+				    </div>
+					
+					<div class="form-check-inline" style="">
+						<input type="text" class="form-control form-control-sm" id="descricao_outro_medicamento" placeholder="" name="descricao_outros_medicamento" disabled value="">
+				    </div>
+				    {%endif%}
+				</div>
+			</div><br>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<b>Oximetria periférica – Sistema Respiratório e Ventilação</b>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-3">
+					SPO2:
+				    <div class="form-check-inline">
+				        <input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="spo2" style="width: 60px" value="{{registro.saturacao_paciente}}">
+				    </div><label for="" style="margin-left: -10px">%</label>
+				</div>
+				<div class="col-sm-3">
+					FR:
+				    <div class="form-check-inline">
+				        <input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="fr_irpm" style="width: 100px" value="{{registro.frequencia_respiratoria}}">
+				    </div><label for="" style="margin-left: -10px">IRPM</label>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-1"><b>Ventilação</b>:</div>
+				<div class="col-sm-2">
+					{% if registro.ventilacao_tipo == 'Espontânea' %}
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="ventilacao" value="Espontânea" checked>Espontânea
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="ventilacao" value="Espontânea">Espontânea
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-2">
+					{% if registro.ventilacao_tipo == 'IOT' %}
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="ventilacao" value="IOT" checked>IOT
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="ventilacao" value="IOT">IOT
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-2">
+					<b>O2 suporte:</b>
+				</div>
+				{% if 'CN' in registro.o2_suporte %}
+				<div class="col-sm-4">
+					<label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_cn_id" name="o2_suporte" value="CN" onclick="activeValorCn()" checked>CN:
+				      </label>
+
+				    <div class="form-check-inline">
+				        <input type="number" min="0" class="form-control form-control-sm" id="dose_cn_id" placeholder="" name="dose_cn" style="width: 60px" value="{{registro.dose_cn}}">
+				    </div><label for="" style="margin-left: -10px">lts/min</label>
+				</div>
+				{%else%}
+				<div class="col-sm-4">
+					<label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_cn_id" name="o2_suporte" value="CN" onclick="activeValorCn()">CN:
+				      </label>
+
+				    <div class="form-check-inline">
+				        <input type="number" min="0" class="form-control form-control-sm" id="dose_cn_id" placeholder="" name="dose_cn" style="width: 60px" value="" disabled>
+				    </div><label for="" style="margin-left: -10px">lts/min</label>
+				</div>
+				{%endif%}
+				{% if 'Venturi' in registro.o2_suporte %}
+				<div class="col-sm-2">
+					<label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_venturi_id" name="o2_suporte" value="Venturi" onclick="activeValorVenturi()" checked>Venturi
+				      </label>
+
+					<div class="form-check-inline">
+				        <input type="number" min="0" class="form-control form-control-sm" id="venturi_id" placeholder="" name="dose_venturi" style="width: 60px" value="{{registro.dose_venturi}}">
+				    </div><label for="" style="margin-left: -10px">%</label>
+				</div>
+				{%else%}
+				<div class="col-sm-2">
+					<label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_venturi_id" name="o2_suporte" value="Venturi" onclick="activeValorVenturi()">Venturi
+				      </label>
+
+					<div class="form-check-inline">
+				        <input type="number" min="0" class="form-control form-control-sm" id="venturi_id" placeholder="" name="dose_venturi" style="width: 60px" value="" disabled>
+				    </div><label for="" style="margin-left: -10px">%</label>
+				</div>
+				{%endif%}
+				
+				{% if 'Máscara com reservatório' in registro.o2_suporte %}
+				<div class="col-sm-4">
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="o2_suporte" value="Máscara com reservatório" checked>Máscara com reservatório
+				      </label>
+				    </div>
+
+					
+				</div>
+				{%else%}
+				<div class="col-sm-4">
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="o2_suporte" value="Máscara com reservatório">Máscara com reservatório
+				      </label>
+				    </div>
+
+					
+				</div>
+				{%endif%}
+			</div><br>
+			<div class="row">
+				<div class="col-sm-1">
+					<b>VMI:</b>
+				</div>
+				<div class="col-sm-1">
+					{% if 'PCV' in registro.vmi %}
+					<div class="form-check-inline" style="width: 130px">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="vmi" value="PCV" checked>PCV
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 130px">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="vmi" value="PCV">PCV
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-1">
+					{% if 'PSV' in registro.vmi %}
+					<div class="form-check-inline" style="width: 130px">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="vmi" value="PSV" checked>PSV
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 130px">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="vmi" value="PSV">PSV
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-1">
+					{% if 'VCV' in registro.vmi %}
+					<div class="form-check-inline" style="width: 130px">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="vmi" value="VCV" checked>VCV
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 130px">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="vmi" value="VCV">VCV
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-2">
+					Vt:
+				    <div class="form-check-inline">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="vt" style="width: 60px" value="{{registro.vt}}">
+				    </div><label for="" style="margin-left: -10px">mL/Kg</label>
+				</div>
+				<div class="col-sm-3" style="font-size: 90%">
+					Delta pressure:
+				    <div class="form-check-inline" style="width:">
+				        <input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="delta_pressure" style="width: 80px" value="{{registro.delta_pressure}}">cmH2O
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					Pplatô:
+				    <div class="form-check-inline" style="width:">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pplato" style="width: 80px" value="{{registro.pplato}}">
+				    </div><label for="" style="">cmH2O</label>
+				</div>
+				<div class="col-sm-2">
+					Raw:
+				    <div class="form-check-inline">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="raw" style="width: 100px" value="{{registro.raw}}">
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					Cest:
+				    <div class="form-check-inline">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="cest" style="width: 100px" value="{{registro.cest}}">
+				    </div>
+				</div>
+				
+			</div><br>
+			<div class="row">
+				<div class="col-sm-2">
+					SaO2:
+				    <div class="form-check-inline">
+				        <input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="sao2" style="width: 60px" value="{{registro.sao2}}">
+				    </div><label for="" style="margin-left: -10px">%</label>
+				</div>
+				<div class="col-sm-3">
+					PaO2:
+				    <div class="form-check-inline" style="width:">
+				        <input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="pao2" style="width: 80px" value="{{registro.pao2}}">
+				    </div><label for="" style="">mmHg</label>
+				</div>
+				<div class="col-sm-3">
+					FiO2:
+				    <div class="form-check-inline" style="width:">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="fio2" style="width: 80px" value="{{registro.fio2}}">
+				    </div><label for="" style="">%</label>
+				</div>
+				<div class="col-sm-3">
+					PaCO2:
+				    <div class="form-check-inline">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="paco2" style="width: 100px" value="{{registro.paco2}}">
+				    </div><label for="">mmHg</label>
+				</div>
+				
+				
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					<b>Verificação de PA/FC/FR – Cardiovascular e Infecção</b>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-3">
+					PA:
+				    <div class="form-check-inline">
+				        <input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" style="width: 60px" value="{{pa_1}}">
+				        <label for="">x</label>
+				        <input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" style="width: 60px" value="{{pa_2}}">
+				    </div><label for="" style="">mmHg</label>
+				</div>
+				<div class="col-sm-3">
+					FC:
+				    <div class="form-check-inline" style="width:">
+				        <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="fc" style="width: 80px" value="{{registro.frequencia_cardiaca}}">
+				    </div><label for="" style="">bpm</label>
+				</div>
+				<div class="col-sm-4">
+					Temperatura axilar:
+				    <div class="form-check-inline" style="width:">
+				        <input type="number" min="0" max="500" step="0.1" class="form-control form-control-sm" id="" placeholder="" name="temp_auxiliar" style="width: 80px" value="{{registro.temperatura_axilar}}">
+				    </div><label for="" style="">°C</label>
+				</div>
+				
+			</div><br>
+			<div class="row">
+				<div class="col-sm-2" style="">
+					<b>Uso de DVA:</b>
+				</div>
+				<div class="col-sm-5" style="">
+					{% if 'Noradrenalina' in registro.droga_vasoativa %}
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_nora_id" name="droga_vasoativa" value="Noradrenalina" onclick="activeDoseNora()" checked>Noradrenalina - Dose
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="dose_nora_id" step="0.01" min="0" max="100" name="qtd_nora" style="width: 100px" value="{{registro.qtd_nora}}">
+	              		<div class="invalid-feedback"></div>
+	              		<label for="">mcg/kg/min</label>
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_nora_id" name="droga_vasoativa" value="Noradrenalina" onclick="activeDoseNora()">Noradrenalina - Dose
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="dose_nora_id" step="0.01" min="0" max="100" name="qtd_nora" style="width: 100px" disabled>
+	              		<div class="invalid-feedback"></div>
+	              		<label for="">mcg/kg/min</label>
+	              	</div>
+	              	{%endif%}
+				</div>
+				<div class="col-sm-5" style="">
+					{% if 'Adrenalina' in registro.droga_vasoativa %}
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_adrenalina_id" name="droga_vasoativa" value="Adrenalina" onclick="activeDoseAdrenalina()" checked>Adrenalina - Dose
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="dose_adrenalina_id" step="0.01" min="0" max="100" name="qtd_adrenalina" style="width: 100px" value="{{registro.qtd_adrenalina}}">
+	              		<div class="invalid-feedback"></div>
+	              		<label for="">mcg/kg/min</label>
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_adrenalina_id" name="droga_vasoativa" value="Adrenalina" onclick="activeDoseAdrenalina()">Adrenalina - Dose
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="dose_adrenalina_id" step="0.01" min="0" max="100" name="qtd_adrenalina" style="width: 100px" disabled>
+	              		<div class="invalid-feedback"></div>
+	              		<label for="">mcg/kg/min</label>
+	              	</div>
+	              	{%endif%}
+				</div>
+				<div class="col-sm-2"></div>
+				
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-5" style="">
+					{% if 'Vasopressina' in registro.droga_vasoativa %}
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_vasopressina_id" name="droga_vasoativa" value="Vasopressina" onclick="activeDoseVaso()" checked>Vasopressina - Dose
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="dose_vasopressina_id" step="0.01" min="0" max="100" name="qtd_vasopressina" style="width: 100px" value="{{registro.qtd_vasopressina}}">
+	              		<div class="invalid-feedback"></div>
+	              		<label for="">UI/min</label>
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_vasopressina_id" name="droga_vasoativa" value="Vasopressina" onclick="activeDoseVaso()">Vasopressina - Dose
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="dose_vasopressina_id" step="0.01" min="0" max="100" name="qtd_vasopressina" style="width: 100px" disabled>
+	              		<div class="invalid-feedback"></div>
+	              		<label for="">UI/min</label>
+	              	</div>
+	              	{%endif%}
+				</div>
+				<div class="col-sm-5" style="">
+					{% if 'Dobutamina' in registro.droga_vasoativa %}
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_dobutamina_id" name="droga_vasoativa" value="Dobutamina" onclick="activeDoseDobutamina()" checked>Dobutamina - Dose
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="dose_dobutamina_id" step="0.01" min="0" max="100" name="qtd_dobutamina" style="width: 100px" value="{{registro.qtd_dobutamina}}">
+	              		<div class="invalid-feedback"></div>
+	              		<label for="">mcg/kg/min</label>
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_dobutamina_id" name="droga_vasoativa" value="Dobutamina" onclick="activeDoseDobutamina()">Dobutamina - Dose
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="dose_dobutamina_id" step="0.01" min="0" max="100" name="qtd_dobutamina" style="width: 100px" disabled>
+	              		<div class="invalid-feedback"></div>
+	              		<label for="">mcg/kg/min</label>
+	              	</div>
+	              	{%endif%}
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-2">
+					<b>Arritmia:</b>
+				</div>
+				<div class="col-sm-1" style="">
+					{% if 'FA' in registro.arritmia %}
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="arritmia" value="FA" checked>FA
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="arritmia" value="FA">FA
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-1" style="">
+					{% if 'Flutter' in registro.arritmia %}
+					<div class="form-check-inline" style="width:110%">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="arritmia" value="Flutter" checked>Flutter
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:110%">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="arritmia" value="Flutter">Flutter
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-1" style="">
+					{% if 'TSV' in registro.arritmia %}
+					<div class="form-check-inline" style="width:110%">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="arritmia" value="TSV" checked>TSV
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:110%">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="arritmia" value="TSV">TSV
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-1" style="">
+					{% if 'TV' in registro.arritmia %}
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="arritmia" value="TV" checked>TV
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="" name="arritmia" value="TV">TV
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-4">
+					<b>Infecção bacteriana concomitante:</b>
+				</div>
+				<div class="col-sm-2" style="">
+					{% if registro.infeccao_bacteriana == 'Sim' %}
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="infeccao_bacteriana" value="Sim" onclick="desactiveFoco()" checked>Sim
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="infeccao_bacteriana" value="Sim" onclick="desactiveFoco()">Sim
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-2" style="">
+					{% if registro.infeccao_bacteriana == 'Não' %}
+					<div class="form-check-inline" style="width:110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="infeccao_bacteriana" value="Não" onclick="activeFoco()" checked>Não
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="infeccao_bacteriana" value="Não" onclick="activeFoco()">Não
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-1" style="background-color: ">
+					<b>Foco:</b>
+				</div>
+				<div class="col-sm-2" style="background-color: ">
+					{% if 'Pulmonar' in registro.foco %}
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="foco_pulmonar" name="foco" value="Pulmonar" checked>Pulmonar
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="foco_pulmonar" name="foco" value="Pulmonar" disabled>Pulmonar
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-2" style="background-color: ">
+					{% if 'Urinário' in registro.foco %}
+					<div class="form-check-inline" style="width:110%">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="foco_urinario" name="foco" value="Urinário" checked>Urinário
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:110%">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="foco_urinario" name="foco" value="Urinário" disabled>Urinário
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-2" style="background-color: ">
+					{% if 'Pele/tecidos moles' in registro.foco %}
+					<div class="form-check-inline" style="width:110%">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="foco_pele" name="foco" value="Pele/tecidos moles" checked>Pele/tecidos moles
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:110%">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="foco_pele" name="foco" value="Pele/tecidos moles" disabled>Pele/tecidos moles
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-3" style="background-color: ">
+					{% if 'Corrente sanguínea' in registro.foco %}
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="foco_corrente_sanguinea" name="foco" value="Corrente sanguínea" checked>Corrente sanguínea
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="foco_corrente_sanguinea" name="foco" value="Corrente sanguínea" disabled>Corrente sanguínea
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-2" style="margin-left: ; background-color: ">
+					{% if 'Abdominal' in registro.foco %}
+					<div class="form-check-inline" style="">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="foco_abdominal" name="foco" value="Abdominal" checked>Abdominal
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="foco_abdominal" name="foco" value="Abdominal" disabled>Abdominal
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<b>Uso de antibioticoterapia:</b>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-check-inline" style="width: 300px">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="uso_antibioticoterapia" value="{{registro.uso_antibioticoterapia}}">
+				    </div>
+				</div>
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-4">
+					<b>Pesquisa de SARS CoV-2; teste rápido:</b>
+				</div>
+				{% if registro.pesquisa_teste_sars_cov_2 == 'Positivo' %}
+				<div class="col-sm-2" style="margin-left: -30px">
+					
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" checked>Positivo
+				      </label>
+				    </div>
+				    
+				</div>
+					{% if registro.igm != '' or registro.igm != None %}
+					<div class="col-sm-1" id="" style="margin-left: -90px">
+						<div class="form-check-inline"><b>IgM:</b>
+							<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+					            <option value="{{registro.igm}}" selected>{{registro.igm}}</option>
+					            <option value="REAGENTE">REAGENTE</option>
+					            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+					        </select>
+					    </div>
+					</div>
+					{%else%}
+					<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
+						<div class="form-check-inline"><b>IgM:</b>
+							<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+					            <option value="REAGENTE">REAGENTE</option>
+					            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+					        </select>
+					    </div>
+					</div>
+					{%endif%}
+					{% if registro.igg != '' or registro.igg != None %}
+					<div class="col-sm-5" id="" style="margin-left: 100px">
+						<div class="form-check-inline"><b>IgG:</b>
+							<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
+					            <option value="{{registro.igg}}" selected>{{registro.igg}}</option>
+					            <option value="REAGENTE">REAGENTE</option>
+					            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+					        </select>
+					    </div>
+					    <div class="form-check-inline" style=""><b>Data:</b>
+					    	<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg_bd" value="{{registro.data_igm_igg}}" style="width: 140px">						
+					    </div>
+					</div>
+					{%else%}
+					<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
+						<div class="form-check-inline"><b>IgG:</b>
+							<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
+					            <option value="REAGENTE">REAGENTE</option>
+					            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+					        </select>
+					    </div>
+					    <div class="form-check-inline" style=""><b>Data:</b>
+					    	<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
+					    </div>
+					</div>
+					{%endif%}
+
+
+				{%elif registro.pesquisa_teste_sars_cov_2 == 'Negativo' %}
+				<div class="col-sm-2" style="margin-left: -30px">
+				    <div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" onclick="active_IgGIgM()">Positivo
+				      </label>
+				    </div>
+				</div>
+
+				<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
+					<div class="form-check-inline"><b>IgM:</b>
+						<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+							<option value="REAGENTE">REAGENTE</option>
+							<option value="NÃO REAGENTE">NÃO REAGENTE</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
+					<div class="form-check-inline"><b>IgG:</b>
+						<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
+				            <option value="REAGENTE">REAGENTE</option>
+				            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+				        </select>
+				    </div>
+				    <div class="form-check-inline" style=""><b>Data:</b>
+				    	<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
+				    </div>
+				</div>
+
+				<div class="col-sm-2" id="sars_negativo_id">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo" checked>Negativo
+				      </label>
+				    </div>
+				   
+				</div>
+
+				<div class="col-sm-4" id="sars_nao_realizado_id">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado">Não Realizado
+				      </label>
+				    </div>
+				</div>
+				{%elif registro.pesquisa_teste_sars_cov_2 == 'Não Realizado' %}
+				<div class="col-sm-2" style="margin-left: -30px">
+				    <div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" onclick="active_IgGIgM()">Positivo
+				      </label>
+				    </div>
+				</div>
+
+				<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
+					<div class="form-check-inline"><b>IgM:</b>
+						<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+							<option value="">selecione</option>
+							<option value="REAGENTE">REAGENTE</option>
+							<option value="NÃO REAGENTE">NÃO REAGENTE</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
+					<div class="form-check-inline"><b>IgG:</b>
+						<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
+				            <option value="">selecione</option>
+				            <option value="REAGENTE">REAGENTE</option>
+				            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+				        </select>
+				    </div>
+				    <div class="form-check-inline" style=""><b>Data:</b>
+				    	<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
+				    </div>
+				</div>
+
+				<div class="col-sm-2" id="sars_negativo_id">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo">Negativo
+				      </label>
+				    </div>
+				   
+				</div>
+
+				<div class="col-sm-4" id="sars_nao_realizado_id">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado" checked>Não Realizado
+				      </label>
+				    </div>
+				</div>
+				{%else%}
+				<div class="col-sm-2" style="margin-left: -30px">
+				    <div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" onclick="active_IgGIgM()">Positivo
+				      </label>
+				    </div>
+				</div>
+
+				<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
+					<div class="form-check-inline"><b>IgM:</b>
+						<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+							<option value="">selecione</option>
+							<option value="REAGENTE">REAGENTE</option>
+							<option value="NÃO REAGENTE">NÃO REAGENTE</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
+					<div class="form-check-inline"><b>IgG:</b>
+						<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
+				            <option value="">selecione</option>
+				            <option value="REAGENTE">REAGENTE</option>
+				            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+				        </select>
+				    </div>
+				    <div class="form-check-inline" style=""><b>Data:</b>
+				    	<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
+				    </div>
+				</div>
+
+				<div class="col-sm-2" id="sars_negativo_id">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo">Negativo
+				      </label>
+				    </div>
+				   
+				</div>
+
+				<div class="col-sm-4" id="sars_nao_realizado_id">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado">Não Realizado
+				      </label>
+				    </div>
+				</div>
+				{%endif%}
+			</div>
+			<hr>
+
+			<div class="row">
+				<div class="col-sm-6">
+					<b>RT PCR SARS CoV-2-</b>
+					Data da Coleta:
+					{% if registro.data_coleta == '' or registro.data_coleta == None %}
+				    <div class="form-check-inline" style="">
+				    	<label for="">
+				    		<input type="date" class="form-control form-control-sm" id="" name="data_da_coleta" style="">				      	
+					    </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="">
+				    <label for="" style="">
+				    	<input type="text" class="form-control form-control-sm" id="" name="data_da_coleta_bd" value="{{registro.data_coleta}}">				      	
+				    </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-1" style="">
+					{% if registro.rt_pcr_sars_cov_2 == 'Detectável' %}
+					<div class="form-check-inline" style="width: 90%; margin-left: -40px">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Detectável" onclick="desactiveDataColeta()" checked style="margin-left: -30px">Detectável
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 90%; margin-left: -40px">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Detectável" onclick="desactiveDataColeta()" style="margin-left: -30px">Detectável
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-2" style="">
+					{% if registro.rt_pcr_sars_cov_2 == 'Não Detectável' %}
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Não Detectável" onclick="desactiveDataColeta()" checked>Não Detectável
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Não Detectável" onclick="desactiveDataColeta()">Não Detectável
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-3" style="">
+					{% if registro.rt_pcr_sars_cov_2 == 'Aguardando Resultado' %}
+					<div class="form-check-inline" style="font-size: 95%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Aguardando Resultado" onclick="activeDataColeta()" checked>Aguarda resultado
+				      </label>
+				      
+				      
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="pcr_sars_cov2" value="Aguardando Resultado" onclick="activeDataColeta()">Aguarda resultado
+				      </label>
+				    </div>
+				    {%endif%}
+				    
+				</div>
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<b>Em uso de Corticosteróide?</b>
+				</div>
+				<div class="col-sm-2">
+					{% if registro.em_uso_corticosteroide == 'Sim' %}
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_corticosteroide" value="Sim" onclick="activeDoseCorticosteroide()" checked>Sim - Qual Dose:
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_corticosteroide" value="Sim" onclick="activeDoseCorticosteroide()">Sim - Qual Dose:
+				      </label>
+				    </div>
+				    {%endif%}
+				    
+				</div>
+				<div class="col-sm-2">
+					{% if registro.dose_corticosteroide == '' or registro.dose_corticosteroide == None %}
+					<div class="form-check-inline" style="width: 100px">
+						<input type="text" class="form-control form-control-sm" id="corticosteroide_id" placeholder="" name="dose_corticosteroide" value="">
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 100px">
+						<input type="text" class="form-control form-control-sm" id="corticosteroide_id" placeholder="" name="dose_corticosteroide" value="{{registro.dose_corticosteroide}}">
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-3" style="">
+					<div class="form-check-inline" style="">
+				      Data de Início:
+				      {% if registro.data_inicio_corticosteroide == '' or registro.data_inicio_corticosteroide == None %}
+				      <input type="date" class="form-control form-control-sm" id="data_inicio_corticosteroide_id" name="data_inicio_corticosteroide" value="" disabled style="width: 110px">
+
+				      {%else%}
+				      <input type="text" class="" id="data_inicio_corticosteroide_id" name="data_inicio_corticosteroide_bd" value="{{registro.data_inicio_corticosteroide}}" style="width: 110px">
+				      {%endif%}
+				    </div>
+				</div>
+				<div class="col-sm-1">
+					{% if registro.em_uso_corticosteroide == 'Não' %}
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_corticosteroide" value="Não" onclick="desactiveDoseCorticosteroide()" checked>Não
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_corticosteroide" value="Não" onclick="desactiveDoseCorticosteroide()">Não
+				      </label>
+				    </div>
+				    {%endif%}
+				    
+				</div>
+				
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<b>Em uso de Hidroxicloroquina?</b>
+				</div>
+				<div class="col-sm-2">
+					{% if registro.em_uso_hidroxicloroquina == 'Sim' %}
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_hidrocloroquina" value="Sim" onclick="activeDataInicioHC()" checked>Sim - Data de Início:
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_hidrocloroquina" value="Sim" onclick="activeDataInicioHC()">Sim - Data de Início:
+				      </label>
+				    </div>
+				    {%endif%}
+				    
+				</div>
+				<div class="col-sm-2">
+					{% if registro.data_inicio_hidroxicloroquina == '' or registro.data_inicio_hidroxicloroquina == None %}
+					<div class="form-check-inline" style="">
+						<input type="date" class="form-control form-control-sm" id="data_inicio_hidroxicloroquina_id" name="data_inicio_hidroxicloroquina" value="" disabled>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="">
+						<input type="text" class="form-control form-control-sm" id="data_inicio_hidroxicloroquina_id" name="data_inicio_hidroxicloroquina_bd" value="{{registro.data_inicio_hidroxicloroquina}}">
+				    </div>
+				    {%endif%}
+				</div>
+				
+				<div class="col-sm-1">
+					{% if registro.em_uso_hidroxicloroquina == 'Não' %}
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_hidrocloroquina" value="Não" onclick="desactiveDataInicioHC()" checked>Não
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_hidrocloroquina" value="Não" onclick="desactiveDataInicioHC()">Não
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-3">
+					<b>Em uso de Oseltamivir?</b>
+				</div>
+				<div class="col-sm-2">
+					{% if registro.em_uso_oseltamivir == 'Sim' %}
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Sim" onclick="dataInicioOseltamivir()" checked>Sim - Data de Início:
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Sim" onclick="dataInicioOseltamivir()">Sim - Data de Início:
+				      </label>
+				    </div>
+				    {%endif%}
+				    
+				</div>
+				<div class="col-sm-2">
+					{% if registro.data_inicio_oseltamivir == '' or registro.data_inicio_oseltamivir == None %}
+					<div class="form-check-inline" style="">
+						<input type="date" class="form-control form-control-sm" id="data_inicio_oseltamivir_id" name="data_inicio_oseltamivir" value="" disabled>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="">
+						<input type="text" class="form-control form-control-sm" id="data_inicio_oseltamivir_id" name="data_inicio_oseltamivir_bd" value="{{registro.data_inicio_oseltamivir}}">
+				    </div>
+				    {%endif%}
+				</div>
+				
+				<div class="col-sm-1">
+					{% if registro.em_uso_oseltamivir == 'Não' %}
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Não" onclick="desactiveDataInicioOseltamivir()" checked>Não
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Não" onclick="desactiveDataInicioOseltamivir()">Não
+				      </label>
+				    </div>
+				    {%endif%}
+				    
+				</div>
+				
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-3" style="">
+					<b style="font-size:">Em uso de Heparina?</b>
+				</div>
+				<div class="col-sm-2" style="">
+					{% if registro.em_uso_heparina == 'Sim' %}
+					<div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="" style="font-size: ; margin-left:">
+				        <input type="radio" class="form-check-input" id="uso_heparina_sim" name="em_uso_heparina" onclick="activeDateHeparina()" value="Sim" checked>Sim - Data de Início:
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 110%">
+				      <label class="form-check-label" for="" style="font-size: ; margin-left:">
+				        <input type="radio" class="form-check-input" id="uso_heparina_sim" name="em_uso_heparina" onclick="activeDateHeparina()" value="Sim">Sim - Data de Início:
+				      </label>
+				    </div>
+				    {%endif%}
+				    
+				</div>
+				<div class="col-sm-2" style="">
+					{% if registro.data_inicio_heparina == '' or registro.data_inicio_heparina == None %}
+					<div class="form-check-inline" style="margin-left:">
+						<input type="date" class="form-control form-control-sm" id="date_inicio_heparina" name="data_inicio_heparina" value="" disabled>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="margin-left:">
+						<input type="text" class="form-control form-control-sm" id="date_inicio_heparina" name="data_inicio_heparina_bd" value="{{registro.data_inicio_heparina}}">
+				    </div>
+				    {%endif%}
+				</div>
+
+				<div class="col-sm-3" style="">
+					<b>Tipo de Heparina</b>
+					{% if registro.tipo_heparina == '' or registro.tipo_heparina == None %}
+					<div class="form-check-inline" style="width: 100px">
+						<input type="text" class="form-control form-control-sm" id="heparina_tipo" placeholder="" name="tipo_heparina" value="" disabled>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 100px">
+						<input type="text" class="form-control form-control-sm" id="heparina_tipo" placeholder="" name="tipo_heparina" value="{{registro.tipo_heparina}}">
+				    </div>
+				    {%endif%}
+
+				</div>
+				<div class="col-sm-2" style="">
+					<b style="font-size: 90%">Dose:</b>
+					{% if registro.dose_heparina == '' or registro.dose_heparina == None %}
+					<div class="form-check-inline" style="width: 60%;">
+						<input type="text" class="form-control form-control-sm" id="heparina_dose" placeholder="" name="dose_heparina" value="" disabled>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 60%;">
+						<input type="text" class="form-control form-control-sm" id="heparina_dose" placeholder="" name="dose_heparina" value="{{registro.dose_heparina}}">
+				    </div>
+				    {%endif%}
+				</div>
+				
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-9">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="radio" class="form-check-input" id="" name="em_uso_heparina" value="Não" onclick="desactiveDateHeparina()">Não
+				      </label>
+				    </div>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-1">
+					<b>Idade</b>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="" style="width: 100px" value="{{registro.idade_paciente}}">
+	              	</div>
+				</div>
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-12">
+					<b>Pacientes com idade ≥ 65 anos, aplicar Escala de Performance Paliativa</b>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<!-- div da 1° tabela -->
+				<img src="https://docs.google.com/uc?id=1D0bkULdbGoG7ASi-yR7Vwn9xOMt7zgER" alt="" style="width: 60%">
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-2">
+					<b>PPS</b>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="pps_paciente" style="width:60px" value="{{registro.pps}}"><label for="">%</label>
+	              	</div>
+				</div>
+				
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					<b>Desorientação? Padrão neurológico, nível de consciência</b>
+				</div>
+			</div><br>
+
+			<div class="row">
+				<div class="col-sm-5" style="">
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_escala_glasgow" name="" value="" onclick="activeValorGlasgow()">Escala de Coma de Glasgow
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="number" size="2" class="form-control form-control-sm" id="escala_glasgow_id" step="" min="0" max="100" name="escala_glasgow" style="width: 100px" disabled>
+	              		<div class="invalid-feedback"></div>
+	              		<label for="">pontos</label>
+	              	</div>
+				</div>
+				<div class="col-sm-3" style="">
+					
+				</div>
+				<div class="col-sm-4">
+					
+				</div>
+			</div>
+		
+
+			<div class="row">
+				<div class="col-sm-3">
+					{% if not registro.bloqueador_neuromuscular %}
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_bloqueador_neuromuscular_id" name="bloqueador_neuromuscular" value="Bloqueador Neuromuscular" onclick="activeBloqueadores()">Bloqueador Neuromuscular:
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_bloqueador_neuromuscular_id" name="bloqueador_neuromuscular" value="Bloqueador Neuromuscular" onclick="activeBloqueadores()" checked>Bloqueador Neuromuscular:
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-3">
+					
+				</div>
+				
+				<div class="col-sm-3">
+					{% if not registro.sedacao_continua %}
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_sedacao_continua_id" name="sedacao_continua" value="Sedação Continua" onclick="activeSedacaoContinua()">Sedação contínua
+				      </label>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_sedacao_continua_id" name="sedacao_continua" value="Sedação Continua" onclick="activeSedacaoContinua()" checked>Sedação contínua
+				      </label>
+				    </div>
+				    {%endif%}
+				</div>
+				<div class="col-sm-3">
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2" style="background-color: ">
+				</div>
+				<div class="col-sm-4" style="margin-left: ">
+					{%if 'Midazolam' in registro.bloqueador_neuromuscular %}
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_midazolam" name="desc_bloqueador_neuromuscular" value="Midazolam" onclick="activeDoseMidazolam()" checked>Midazolam - Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="text" size="2" class="form-control form-control-sm" id="dose_midazolam_id" name="midazolam_dose" style="width: 100px" value="{{registro.midazolam_dose}}">
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_midazolam" name="desc_bloqueador_neuromuscular" value="Midazolam" disabled onclick="activeDoseMidazolam()">Midazolam - Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+	              		<input type="text" size="2" class="form-control form-control-sm" id="dose_midazolam_id" name="midazolam_dose" style="width: 100px" value="" disabled>
+	              	</div>
+	              	{%endif%}
+				</div>
+				<div class="col-sm-2" style="background-color: ">
+					
+				</div>
+				<div class="col-sm-4" style="background-color: ">
+					{% if 'Rocurônio' in registro.sedacao_continua %}
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_rocuronio_id" name="desc_sedacao_continua" value="Rocurônio" onclick="activeDoseRocuronio()" checked>Rocurônio – Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="margin-left:">
+						<input type="text" size="2" class="form-control form-control-sm" id="rocuronio_dose_id" name="rocuronio_dose" style="width: 100px" value="{{registro.rocuronio_dose}}">
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_rocuronio_id" name="desc_sedacao_continua" value="Rocurônio" disabled onclick="activeDoseRocuronio()">Rocurônio – Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="margin-left:">
+						<input type="text" size="2" class="form-control form-control-sm" id="rocuronio_dose_id" name="rocuronio_dose" style="width: 100px" disabled>
+	              	</div>
+	              	{%endif%}
+
+					
+				</div>
+			</div>
+
+			<div class="row" style="margin-top: 10px">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-4">
+					{% if 'Fentanil' in registro.bloqueador_neuromuscular %}
+					<div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_fentanil_id" name="desc_bloqueador_neuromuscular" value="Fentanil" checked onclick="activeDoseFentanil()">Fentanil - Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="margin-left:">
+						<input type="text" size="2" class="form-control form-control-sm" id="dose_fentanil_id" name="fentanil_dose" style="width: 100px" value="{{registro.fentanil_dose}}">
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_fentanil_id" name="desc_bloqueador_neuromuscular" value="Fentanil" disabled onclick="activeDoseFentanil()">Fentanil - Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="margin-left:">
+						<input type="text" size="2" class="form-control form-control-sm" id="dose_fentanil_id" name="fentanil_dose" style="width: 100px" disabled>
+	              	</div>
+	              	{%endif%}
+				</div>
+				<div class="col-sm-2"></div>
+				<div class="col-sm-4">
+					{% if 'Pancurônio' in registro.sedacao_continua %}
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_pancuronio_id" name="desc_sedacao_continua" value="Pancurônio" checked onclick="activeDosePacuronio()">Pancurônio – Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+						<input type="text" size="2" class="form-control form-control-sm" id="pacuronio_dose_id" name="pacuronio_dose" style="width: 100px" value="{{registro.pacuronio_dose}}">
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_pancuronio_id" name="desc_sedacao_continua" value="Pancurônio" disabled onclick="activeDosePacuronio()">Pancurônio – Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+						<input type="text" size="2" class="form-control form-control-sm" id="pacuronio_dose_id" name="pacuronio_dose" style="width: 100px" disabled>
+	              	</div>
+	              	{%endif%}
+				</div>
+			</div>
+			
+			<div class="row" style="margin-top: 10px">
+				
+				<div class="col-sm-2" style="">
+					
+				</div>
+				<div class="col-sm-4" style="">
+					{% if 'Propofol' in registro.bloqueador_neuromuscular %}
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_propofol_id" name="desc_bloqueador_neuromuscular" value="Propofol" checked onclick="activeDosePropofol()">Propofol - Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+						<input type="text" size="2" class="form-control form-control-sm" id="dose_propofol_id" name="propofol_dose" style="width: 100px" value="{{registro.propofol_dose}}">
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_propofol_id" name="desc_bloqueador_neuromuscular" value="Propofol" disabled onclick="activeDosePropofol()">Propofol - Dose:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="">
+						<input type="text" size="2" class="form-control form-control-sm" id="dose_propofol_id" name="propofol_dose" style="width: 100px" disabled>
+	              	</div>
+	              	{%endif%}
+				</div>
+				<div class="col-sm-2" style="">
+					
+				</div>
+				<div class="col-sm-4" style="">
+					{% if 'Cisatracúrio' in registro.sedacao_continua %}
+					<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_cisatracurio_id" name="desc_sedacao_continua" value="Cisatracúrio" checked onclick="activeDoseCisatracurio()">Cisatracúrio – Dose:
+				      </label>
+				    </div>
+				    <div class="form-check-inline" style="margin-left:">
+						<input type="text" size="2" class="form-control form-control-sm" id="cisatracurio_dose_id" name="cisatracurio_dose" style="width: 100px" value="{{registro.cisatracurio_dose}}">
+	              	</div>
+	              	{%else%}
+	              	<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_cisatracurio_id" name="desc_sedacao_continua" value="Cisatracúrio" disabled onclick="activeDoseCisatracurio()">Cisatracúrio – Dose:
+				      </label>
+				    </div>
+				    <div class="form-check-inline" style="margin-left:">
+						<input type="text" size="2" class="form-control form-control-sm" id="cisatracurio_dose_id" name="cisatracurio_dose" style="width: 100px" disabled>
+	              	</div>
+	              	{%endif%}
+				</div>
+
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					<b>RASS:</b>
+					<div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="rass" value="{{registro.rass}}">
+				    </div>
+				</div>
+			</div><hr>
+			<div class="row">
+				{% if registro.data_exames_laboratorio == '' or registro.data_exames_laboratorio == None %}
+				<div class="col-sm-12">
+					<button type="button" class="btn btn-info btn-sm" onclick="informarDataExamesLb()" id="btn_lancarDataExamesLab_id">Informar Exames</button>
+					<button type="button" class="btn btn-warning btn-sm" onclick="calcelDataExamesLab()" id="btn_cancel_lancarDataExamesLab_id">Cancelar!</button>
+				</div>
+				{%endif%}
+
+				<style type="text/css">
+					#btn_cancel_lancarDataExamesLab_id {
+						display: none;
+					}
+				</style>
+				<script type="text/javascript">
+					function informarDataExamesLb(){
+						$("#data_exames_lb_id").prop("disabled", false);
+						$("#btn_lancarDataExamesLab_id").hide();
+						$("#btn_cancel_lancarDataExamesLab_id").show();
+
+					}
+
+					function calcelDataExamesLab(){
+						$("#data_exames_lb_id").prop("disabled", true);
+						$("#data_exames_lb_id").val("");
+						$("#btn_lancarDataExamesLab_id").show();
+						$("#btn_cancel_lancarDataExamesLab_id").hide();
+
+						$("#leucocitos_id").val("");
+						$("#linfonodos_id").val("");
+						$("#hb_id").val("");
+						$("#ht_id").val("");
+						$("#pcr_id").val("");
+						$("#lactato_id").val("");
+						$("#dhl_id").val("");
+						$("#ferritina_id").val("");
+						$("#troponina_id").val("");
+						$("#cpk_id").val("");
+						$("#d_dimero_id").val("");
+						$("#ureia_id").val("");
+						$("#creatinina_id").val("");
+						$("#ap_id").val("");
+						$("#tap_id").val("");
+						$("#inr_id").val("");
+						$("#tgo_id").val("");
+						$("#tgp_id").val("");
+
+					}
+				</script>
+
+			</div><p></p>
+			<div class="row">
+				<div class="col-sm-12">
+					<b>Laboratório - Data</b>
+					{% if registro.data_exames_laboratorio == '' or registro.data_exames_laboratorio == None %}
+					<div class="form-check-inline" style="width: 200px">
+						<input type="date" class="form-control form-control-sm" id="data_exames_lb_id" placeholder="" name="data_exames_laboratorio" value="" disabled>
+				    </div>
+				    {%else%}
+				    <div class="form-check-inline" style="width: 200px">
+						<input type="text" class="form-control form-control-sm" id="data_exames_lb_id" placeholder="" name="data_exames_laboratorio_bd" value="{{registro.data_exames_laboratorio}}">
+				    </div>
+				    {%endif%}
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-3">
+					Leucócitos:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="leucocitos_id" placeholder="" name="leucocito" value="{{registro.leucocito}}">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					Linfócitos:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="linfonodos_id" placeholder="" name="linfocito" value="{{registro.linfocito}}">
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					HB:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" step="0.1" min="0" class="form-control form-control-sm" min="0" max="1000000" id="hb_id" placeholder="" name="hb" value="{{registro.hb}}">
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					HT:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" step="0.1" min="0" class="form-control form-control-sm" min="0" max="1000000" id="ht_id" placeholder="" name="ht" value="{{registro.ht}}">
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					PCR:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="pcr_id" placeholder="" name="pcr" value="{{registro.pcr}}">
+				    </div>
+				</div>
+				
+			</div><br>
+			<div class="row">
+				<div class="col-sm-3">
+					Lactato:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="lactato_id" placeholder="" name="lactato" value="{{registro.lactato}}">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					DHL:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="dhl_id" placeholder="" name="dhl" value="{{registro.dhl}}">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					Ferritina:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="ferritina_id" placeholder="" name="ferritina" value="{{registro.ferritina}}">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					Troponina:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="troponina_id" placeholder="" name="troponina" value="{{registro.troponina}}">
+				    </div>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-3">
+					CPK:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="cpk_id" placeholder="" name="cpk" value="{{registro.cpk}}">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					D-dímero:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="d_dimero_id" placeholder="" name="d_dimero" value="{{registro.d_dimero}}">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					Uréia:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="ureia_id" placeholder="" name="ureia" value="{{registro.ureia}}">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					Creatinina:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" step="0.1" min="0.00" class="form-control form-control-sm" id="creatinina_id" placeholder="" name="creatinina" value="{{registro.creatinina}}">
+				    </div>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-2">
+					AP:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="ap_id" placeholder="" name="ap" value="{{registro.ap}}">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					TAP:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="tap_id" placeholder="" name="tap" value="{{registro.tap}}">
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					INR:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="inr_id" placeholder="" name="inr" value="{{registro.inr}}">
+				    </div>
+				</div>
+				<div class="col-sm-3">
+					TGO:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="tgo_id" placeholder="" name="tgo" value="{{registro.tgo}}">
+				    </div>
+				</div>
+				<div class="col-sm-2">
+					TGP:
+					<div class="form-check-inline" style="width: 100px">
+						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="tgp_id" placeholder="" name="tgp" value="{{registro.tgp}}">
+				    </div>
+				</div>
+			</div><hr>
+			<div class="row">
+				<div class="col-sm-12"><b>Imagem:</b></div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-12">
+					
+	              	<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_tc_torax_id" name="exame_imagem" value="TC Tórax" onclick="activeLaudoTc_()">TC Tórax; Laudo:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="width: 80%">
+						<div class="custom-file mb-3">
+							<input type="file" class="form-control-file border" id="laudo_tc_torax_id" name="file_tc_torax" disabled onchange="validationImgTc()">
+							
+						</div>
+	              	</div>
+
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+		
+	              	<div class="form-check-inline" style="width:">
+				      <label class="form-check-label" for="">
+				        <input type="checkbox" class="form-check-input" id="check_rx_torax_id" name="exame_imagem" value="RX Tórax" onclick="activeLaudoRx_()">RX Tórax; Laudo:
+				      </label>
+				    </div>
+					<div class="form-check-inline" style="width: 80%">
+						<div class="custom-file mb-3">
+							<input type="file" class="form-control-file border" id="laudo_rx_torax_id" name="file_rx_torax" disabled onchange="validationImgRx()">
+							
+						</div>
+	              	</div>
+	            
+				</div>
+				
+			</div><hr>
 			<div class="row">
 				<div class="col-sm-12">
 					<label for="comment"style="float: left;">Observação:</label>
@@ -890,6 +3270,8 @@ dgCidadesEstados.prototype = {
 					<div class="invalid-feedback">Descreva História do paciente</div>
 		      </div>
 			</div><hr>
+
+
 		</div>
 
 		<div class="container-fluid" style="text-align: center;">
@@ -900,6 +3282,13 @@ dgCidadesEstados.prototype = {
 
 
 		</form>
+		<script>
+		// Add the following code if you want the name of the file appear on select
+		$(".custom-file-input").on("change", function() {
+		  var fileName = $(this).val().split("\\").pop();
+		  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+		});
+		</script>
 	</div><br />
 
 	<div style="background-color: #e6e6e6;">

@@ -51,6 +51,8 @@ class RegistroCovid(models.Model):
 
 	descricao_clinica = models.TextField(blank=True, default='', null=True)
 
+	image_descricao_clinica = models.BinaryField(blank=True, null=True, editable=True)
+
 	sindrome_gripal = ArrayField(models.CharField(max_length=100), blank=True, null=True)
 	tempo_quadro_sintomatico = models.IntegerField(blank=True, null=True)
 	exposicao_pessoa_infectada = models.CharField(max_length=100, default='', blank=True, null=True)
@@ -164,8 +166,10 @@ class RegistroCovid(models.Model):
 	tgp = models.CharField(max_length=100, blank=True, default='', null=True)
 
 	exame_imagem = ArrayField(models.CharField(max_length=100), blank=True, null=True)
-	laudo_tc_torax = models.TextField(blank=True, default='', null=True)
-	laudo_rx_torax = models.TextField(blank=True, default='', null=True)
+	#laudo_tc_torax = models.TextField(blank=True, default='', null=True)
+	#laudo_rx_torax = models.TextField(blank=True, default='', null=True)
+	image_laudo_tc = models.BinaryField(blank=True, null=True, editable=True)
+	image_laudo_rx = models.BinaryField(blank=True, null=True, editable=True)
 
 	is_sindrome_gripal = models.CharField(max_length=100, blank=True, default='', null=True)
 	news_fast_pb = models.CharField(max_length=100, blank=True, default='', null=True)

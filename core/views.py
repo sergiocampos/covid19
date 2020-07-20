@@ -17,6 +17,7 @@ from io import BytesIO as IO
 from openpyxl import Workbook
 from core.forms import UserForm, UserProfileInfoForm
 from django.db.models import Max
+import base64
 
 # Create your views here.
 def index(request):
@@ -324,6 +325,11 @@ def registro_covid_set(request):
 
 	codigo_registro_completo = last_codigo_registro_total_str + last_codigo_registro_mensal_str
 
+	image_descricao_clinica = request.FILES['file_descricao_clinica'].file.read()
+
+	image_laudo_tc = request.FILES['file_tc_torax'].file.read()
+	image_laudo_rx = request.FILES['file_rx_torax'].file.read()
+
 
 	registro = RegistroCovid.objects.create(
 		responsavel_pelo_preenchimento = responsavel_pelo_preenchimento,
@@ -348,6 +354,9 @@ def registro_covid_set(request):
 		pa = pa,
 		conciencia = conciencia,
 		temperatura = temperatura,
+		image_descricao_clinica = image_descricao_clinica,
+		image_laudo_tc = image_laudo_tc,
+		image_laudo_rx = image_laudo_rx,
 		observacao = observacao
 
 		)
@@ -1034,6 +1043,7 @@ def regulacao_detail(request, id):
 	registro = RegistroCovid.objects.get(id=id)
 
 	data_regulacao = registro.data_regulacao
+	data_regulacao_template = None
 	if data_regulacao:
 		data_regulacao_template = data_regulacao.strftime('%d/%m/%Y %H:%M')
 
@@ -1051,11 +1061,21 @@ def regulacao_detail(request, id):
 	for s in status_registro:
 		status_list_descricao_.append(s.descricao)
 
-	status_list_descricao = status_list_descricao_.pop()
+	status_list_descricao = []
+	if len(status_list_descricao_) > 0:
+		status_list_descricao = status_list_descricao_.pop()
+
+	encoded = base64.b64encode(registro.image_descricao_clinica).decode('ascii')
+
+	img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
+
+	img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
+
 
 	return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 		'p2':p2, 'data_regulacao_template':data_regulacao_template, 
-		'status_list_descricao':status_list_descricao})
+		'status_list_descricao':status_list_descricao, 'encoded':encoded, 
+		'img_tc':img_tc, 'img_rx':img_rx})
 
 @login_required
 def regulacao_edit(request, id):

@@ -257,8 +257,21 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					{% if registro.descricao_clinica == '' or registro.descricao_clinica == None %}
 					<textarea class="form-control" rows="15" id="" name="descricao_clinica" value="" style="width: 100%"></textarea>
 					{%else%}
-					<textarea class="form-control" rows="15" id="" name="descricao_clinica" value="" style="width: 100%">{{registro.descricao_clinica}}</textarea>
+					<textarea class="form-control" rows="15" id="" name="descricao_clinica" value="" style="width: 100%">{{registro.descricao_clinica}}<img src="data: encoded/png; base64, {{encoded}}" alt=""></textarea>
 					{%endif%}									
+				</div>
+			</div><br>
+
+			<div class="row">
+				<div class="col-sm-3">Anexos!</div>
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<img src="data: encoded/png; base64, {{encoded}}" alt="">
 				</div>
 			</div><br><br>
 			<div class="row">
@@ -2218,6 +2231,20 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				</div>
 			</div><br>
 			<div class="row">
+				<div class="col-sm-3">Anexos!</div>
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<img src="data: img_tc/png; base64, {{img_tc}}" alt="">
+				</div>
+			</div><br><br>
+
+
+			<div class="row">
 				<div class="col-sm-12">
 					{% if 'RX Tórax' in registro.exame_imagem %}
 					<div class="form-check-inline" style="width:">
@@ -2240,6 +2267,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 	              	{%endif%}
 				</div>
 			</div><hr>
+
+			<div class="row">
+				<div class="col-sm-3">Anexos!</div>
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<img src="data: img_rx/png; base64, {{img_rx}}" alt="">
+				</div>
+			</div><br><br>
 
 			
 		<div class="container" style="border: 2px solid #cccccc; border-radius: 10px">

@@ -476,6 +476,8 @@ function activeInternacao(){
 
 function activeStatusNaoRegulado(){
 	$("#paciente_nao_regulado_id").show();
+	$("#data_obito_id").val("");
+	$("#data_obito_id").prop("disabled", true);
 
 	//$("#check_paciente_regulado_id").prop("checked", false);
 	//$("#check_em_lista_espera_id").prop("checked", false);
@@ -490,17 +492,21 @@ function activeStatusAguardVaga(){
 	$("#paciente_regulado_id").show();
 
 	$("#check_paciente_nao_regulado_id").prop("checked", false);
-}
-
-function activeInternacaoImediata(){
-	if (document.getElementById("check_internacao_id").checked == true){
-		$("#paciente_internado_regulacao_id").show();
-	}
-	else {
-		$("#paciente_internado_regulacao_id").hide();
-	}
 
 	$("#data_obito_id").val("");
+	$("#data_obito_id").prop("disabled", true);
+}
+
+function activeAguardInformacoes(){
+	//if (document.getElementById("check_internacao_id").checked == true){
+	//	$("#paciente_internado_regulacao_id").show();
+	//}
+	//else {
+	//	$("#paciente_internado_regulacao_id").hide();
+	//}
+
+	$("#data_obito_id").val("");
+	$("#data_obito_id").prop("disabled", true);
 	
 }
 
@@ -526,6 +532,7 @@ function activeListaEspera(){
 	}
 
 	$("#data_obito_id").val("");
+	$("#data_obito_id").prop("disabled", true);
 	
 }
 
@@ -541,10 +548,179 @@ function active_IgGIgM(){
 
 }
 
-
-
-
 	</script>
+
+	<script>
+			Filevalidation = () => { 
+        const fi = document.getElementById('file_descricao_clinica_id'); 
+        // Check if any file is selected. 
+        if (fi.files.length > 0) { 
+            for (const i = 0; i <= fi.files.length - 1; i++) { 
+  
+                const fsize = fi.files.item(i).size; 
+                const file = Math.round((fsize / 1024)); 
+                // The size of the file. 
+                if (file >= 2048) { 
+                    alert( 
+                      "Arquivo muito grande, selecione imagem de até 2 megabytes"); 
+                } else { 
+                    document.getElementById('size').innerHTML = '<b>'
+                    + file + '</b> KB'; 
+                } 
+            } 
+        } 
+    }
+
+    validationImgTc = () => { 
+        const fi = document.getElementById('laudo_tc_torax_id'); 
+        // Check if any file is selected. 
+        if (fi.files.length > 0) { 
+            for (const i = 0; i <= fi.files.length - 1; i++) { 
+  
+                const fsize = fi.files.item(i).size; 
+                const file = Math.round((fsize / 1024)); 
+                // The size of the file. 
+                if (file >= 2048) { 
+                    alert( 
+                      "Arquivo muito grande, selecione imagem de até 2 megabytes"); 
+                } else { 
+                    document.getElementById('size').innerHTML = '<b>'
+                    + file + '</b> KB'; 
+                } 
+            } 
+        } 
+    }
+
+    validationImgRx = () => { 
+        const fi = document.getElementById('laudo_rx_torax_id'); 
+        // Check if any file is selected. 
+        if (fi.files.length > 0) { 
+            for (const i = 0; i <= fi.files.length - 1; i++) { 
+  
+                const fsize = fi.files.item(i).size; 
+                const file = Math.round((fsize / 1024)); 
+                // The size of the file. 
+                if (file >= 2048) { 
+                    alert( 
+                      "Arquivo muito grande, selecione imagem de até 2 megabytes"); 
+                } else { 
+                    document.getElementById('size').innerHTML = '<b>'
+                    + file + '</b> KB'; 
+                } 
+            } 
+        } 
+    }
+	</script>
+
+	<script>
+  	$(document).ready(function() {
+	  $('#deleteImgRx').click(function() {
+	    $('#laudo_rx_torax_id').val('');
+	    $('#laudo_rx_torax_id').prop("disabled", true);
+
+	  });
+
+	});
+
+  </script>
+
+  <script>
+  	$(document).ready(function() {
+	  $('#deleteImgRx').click(function() {
+	    $('#laudo_tc_torax_id').val('');
+	    $('#laudo_tc_torax_id').prop("disabled", true);
+
+	  });
+
+	});
+  	
+  </script>
+
+  <script>
+  	(function($) {
+    $.fn.checkFileType = function(options) {
+        var defaults = {
+            allowedExtensions: [],
+            success: function() {},
+            error: function() {}
+        };
+        options = $.extend(defaults, options);
+
+        return this.each(function() {
+
+            $(this).on('change', function() {
+                var value = $(this).val(),
+                    file = value.toLowerCase(),
+                    extension = file.substring(file.lastIndexOf('.') + 1);
+
+                if ($.inArray(extension, options.allowedExtensions) == -1) {
+                    options.error();
+                    $(this).focus();
+                } else {
+                    options.success();
+
+                }
+
+            });
+
+        });
+    };
+
+})(jQuery);
+
+$(function() {
+    $('#laudo_tc_torax_id').checkFileType({
+        allowedExtensions: ['jpg', 'jpeg', 'png'],
+        
+        error: function() {
+            alert('Formato de Imagem não permitido');
+        }
+    });
+
+});
+
+(function($) {
+    $.fn.checkFileType = function(options) {
+        var defaults = {
+            allowedExtensions: [],
+            success: function() {},
+            error: function() {}
+        };
+        options = $.extend(defaults, options);
+
+        return this.each(function() {
+
+            $(this).on('change', function() {
+                var value = $(this).val(),
+                    file = value.toLowerCase(),
+                    extension = file.substring(file.lastIndexOf('.') + 1);
+
+                if ($.inArray(extension, options.allowedExtensions) == -1) {
+                    options.error();
+                    $(this).focus();
+                } else {
+                    options.success();
+
+                }
+
+            });
+
+        });
+    };
+
+})(jQuery);
+
+$(function() {
+    $('#laudo_rx_torax_id').checkFileType({
+        allowedExtensions: ['jpg', 'jpeg', 'png'],
+        
+        error: function() {
+            alert('Formato de Imagem não permitido');
+        }
+    });
+
+});
+  </script>
 
 	<style>
 		#sars_igg_id,
@@ -776,10 +952,33 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-12">
 					<b>DESCRIÇÃO CLÍNICA (SIC, UNIDADE SOLICITANTE)</b>
 					{% if registro.descricao_clinica == '' or registro.descricao_clinica == None %}
-					<textarea class="form-control" rows="15" id="" name="descricao_clinica" value="" style="width: 100%"></textarea>
+					<textarea class="form-control" rows="10" id="" name="descricao_clinica" value="" style="width: 100%"></textarea>
 					{%else%}
-					<textarea class="form-control" rows="15" id="" name="descricao_clinica" value="" style="width: 100%">{{registro.descricao_clinica}}</textarea>
+					<textarea class="form-control" rows="10" id="" name="descricao_clinica" value="" style="width: 100%">{{registro.descricao_clinica}}</textarea>
 					{%endif%}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">Anexo da Descrição Clínica!</div>
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<img src="data: encoded/png; base64, {{encoded}}" alt="" style="border: 2px solid #8c8c8c; border-radius: 5px">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-8">
+					<div class="custom-file mb-3">
+						<input type="file" class="custom-file-input" id="file_descricao_clinica_id" name="file_descricao_clinica" onchange="Filevalidation()">
+						<label class="custom-file-label" for="customFile">Selecione...</label>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<p id="size"></p>
 				</div>
 			</div><br><br>
 			<div class="row">
@@ -2881,7 +3080,12 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="width: 80%">
-						<input type="text" size="" class="form-control form-control-sm" id="laudo_tc_torax_id" step="" name="laudo_tc_torax" style="" value="{{registro.laudo_tc_torax}}">
+						<!--
+						<input type="text" size="" class="form-control form-control-sm" id="laudo_tc_torax_id" step="" name="laudo_tc_torax" style="" value="{{registro.laudo_tc_torax}}">-->
+						<div class="custom-file mb-3">
+							<input type="file" class="form-control-file border" id="laudo_tc_torax_id" name="file_tc_torax_regulacao" disabled onchange="validationImgTc()">
+							
+						</div>
 	              	</div>	
 	              	{%else%}
 	              	<div class="form-check-inline" style="width:">
@@ -2890,11 +3094,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="width: 80%">
-						<input type="text" size="" class="form-control form-control-sm" id="laudo_tc_torax_id" step="" name="laudo_tc_torax" style="" disabled>
+						<div class="custom-file mb-3">
+							<input type="file" class="form-control-file border" id="laudo_tc_torax_id" name="file_tc_torax_regulacao" disabled onchange="validationImgTc()">
+							
+						</div>
 	              	</div>	
 	              	{%endif%}				
 				</div>
 			</div><br>
+			<div class="row">
+				<div class="col-sm-12">
+					<img src="data: img_tc/png; base64, {{img_tc}}" alt="" style="border: 2px solid #8c8c8c; border-radius: 5px">
+				</div>
+			</div><br><br>
 			<div class="row">
 				<div class="col-sm-12">
 					{% if 'RX Tórax' in registro.exame_imagem %}
@@ -2904,7 +3116,12 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="width: 80%">
-						<input type="text" size="" class="form-control form-control-sm" id="laudo_rx_torax_id" step="" name="laudo_rx_torax" style="" value="{{registro.laudo_rx_torax}}">
+						<!--
+						<input type="text" size="" class="form-control form-control-sm" id="laudo_rx_torax_id" step="" name="laudo_rx_torax" style="" value="{{registro.laudo_rx_torax}}">-->
+						<div class="custom-file mb-3">
+							<input type="file" class="form-control-file border" id="laudo_rx_torax_id" name="file_rx_torax_regulacao" disabled onchange="validationImgRx()">
+							
+						</div>
 	              	</div>	
 	              	{%else%}
 	              	<div class="form-check-inline" style="width:">
@@ -2913,11 +3130,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="width: 80%">
-						<input type="text" size="" class="form-control form-control-sm" id="laudo_rx_torax_id" step="" name="laudo_rx_torax" style="" disabled>
+						<div class="custom-file mb-3">
+							<input type="file" class="form-control-file border" id="laudo_rx_torax_id" name="file_rx_torax_regulacao" disabled onchange="validationImgRx()">
+							
+						</div>
 	              	</div>
 	              	{%endif%}
 				</div>
-			</div><hr>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<img src="data: img_rx/png; base64, {{img_rx}}" alt="" style="border: 2px solid #8c8c8c; border-radius: 5px">
+				</div>
+			</div><br><br>
 
 		{% if user.first_name == 'videofonista' %}
         {%else%}	
@@ -3518,20 +3743,19 @@ máxima de 12h de validação para recepção na unidade solicitante.
 
 				</div>
 
-				<!--
 				<div class="row">
-				<div class="col-sm-5"></div>
-					<div class="col-sm-4">
-						{% if 'Vaga confirmada com Internação Imediata' in status_list_descricao %}
+				<div class="col-sm-4"></div>
+					<div class="col-sm-5">
+						{% if 'Aguardando informações' in status_list_descricao %}
 						<div class="form-check-inline" style="font-size: 83%">
 					      <label class="form-check-label" for="" id="lb_vaga_conf_internacao">
-					        <input type="radio" class="form-check-input" id="check_internacao_id" name="status_paciente" value="Vaga confirmada com Internação Imediata" onclick="activeInternacaoImediata()" checked>Vaga confirmada com Internação Imediata
+					        <input type="radio" class="form-check-input" id="check_aguardando_informacoes_id" name="status_paciente" value="Aguardando informações" onclick="activeAguardInformacoes()" checked>Aguardando informações
 					      </label>
 					    </div>
 					    {%else%}
 					    <div class="form-check-inline" style="font-size: 83%">
 					      <label class="form-check-label" for="" id="lb_vaga_conf_internacao">
-					        <input type="radio" class="form-check-input" id="check_internacao_id" name="status_paciente" value="Vaga confirmada com Internação Imediata" onclick="activeInternacaoImediata()">Vaga confirmada com Internação Imediata
+					        <input type="radio" class="form-check-input" id="check_aguardando_informacoes_id" name="status_paciente" value="Aguardando informações" onclick="activeAguardInformacoes()">Aguardando informações
 					      </label>
 					    </div>
 					    {%endif%}
@@ -3540,7 +3764,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				
 				<div class="col-sm-3"></div>					
 			</div>
-			-->
+
 			<div class="row">
 				<div class="col-sm-4"></div>
 				<div class="col-sm-4">

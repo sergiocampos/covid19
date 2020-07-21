@@ -444,8 +444,28 @@ def regulacao(request, id):
 
 	estabelecimentos = Cnes.objects.filter(MUNICIPIO = municipio_estabelecimento_referencia)
 
+	encoded = base64.b64encode(registro.image_descricao_clinica).decode('ascii')
 
-	return render(request, 'regulacao.html', {'registro' : registro, 'pa_1':pa_1, 
+	if not registro.image_laudo_tc and not registro.image_laudo_rx:
+		return render(request, 'regulacao.html', {'registro' : registro, 
+			'pa_1':pa_1, 'pa_2':pa_2, 'data_regulacao_template':
+			data_regulacao_template,'status_list_descricao':
+			status_list_descricao, 'status_aguard_conf_vaga_registro':
+			status_aguard_conf_vaga_registro, 
+			'status_aguard_lista_espera_registro':
+			status_aguard_lista_espera_registro, 'status_regulado_registro':
+			status_regulado_registro, 'status_nao_regulado_registro':
+			status_nao_regulado_registro, 'municipio_estabelecimento_solicitante':
+			municipio_estabelecimento_solicitante, 'estabelecimento_solicitante':
+			estabelecimento_solicitante, 'estabelecimento_solicitante_outro':
+			estabelecimento_solicitante_outro, 'cidade':cidade, 
+			'estabelecimentos':estabelecimentos, 
+			'municipio_estabelecimento_referencia':
+			municipio_estabelecimento_referencia, 'encoded':encoded})
+	elif not registro.image_laudo_rx:
+		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
+
+		return render(request, 'regulacao.html', {'registro' : registro, 'pa_1':pa_1, 
 		'pa_2':pa_2, 'data_regulacao_template': data_regulacao_template,
 		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
 		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
@@ -456,8 +476,46 @@ def regulacao(request, id):
 		estabelecimento_solicitante, 'estabelecimento_solicitante_outro':
 		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
 		estabelecimentos, 'municipio_estabelecimento_referencia':
-		municipio_estabelecimento_referencia})
+		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_tc':
+		img_tc})
+	elif not registro.image_laudo_tc:
+		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
 
+		return render(request, 'regulacao.html', {'registro' : registro, 'pa_1':pa_1, 
+		'pa_2':pa_2, 'data_regulacao_template': data_regulacao_template,
+		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
+		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
+		status_aguard_lista_espera_registro, 'status_regulado_registro':
+		status_regulado_registro, 'status_nao_regulado_registro':
+		status_nao_regulado_registro, 'municipio_estabelecimento_solicitante':
+		municipio_estabelecimento_solicitante, 'estabelecimento_solicitante':
+		estabelecimento_solicitante, 'estabelecimento_solicitante_outro':
+		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
+		estabelecimentos, 'municipio_estabelecimento_referencia':
+		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_rx':img_rx})
+	else:
+		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
+		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
+
+		return render(request, 'regulacao.html', {'registro' : registro, 'pa_1':pa_1, 
+		'pa_2':pa_2, 'data_regulacao_template': data_regulacao_template,
+		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
+		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
+		status_aguard_lista_espera_registro, 'status_regulado_registro':
+		status_regulado_registro, 'status_nao_regulado_registro':
+		status_nao_regulado_registro, 'municipio_estabelecimento_solicitante':
+		municipio_estabelecimento_solicitante, 'estabelecimento_solicitante':
+		estabelecimento_solicitante, 'estabelecimento_solicitante_outro':
+		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
+		estabelecimentos, 'municipio_estabelecimento_referencia':
+		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_tc':
+		img_tc, 'img_rx':img_rx})
+
+
+
+
+
+	
 
 @login_required
 def regulacao_set(request, id):
@@ -499,6 +557,11 @@ def regulacao_set(request, id):
 	temperatura = registro.temperatura
 
 	descricao_clinica = request.POST.get('descricao_clinica')
+
+	image_descricao_clinica = request.FILES['file_descricao_clinica'].file.read()
+
+	image_laudo_tc = request.FILES['file_tc_torax_regulacao'].file.read()
+	image_laudo_rx = request.FILES['file_rx_torax_regulacao'].file.read()
 	
 	sindrome_gripal = request.POST.getlist('s_gripal')
 	
@@ -926,6 +989,7 @@ def regulacao_set(request, id):
 	registro.conciencia = conciencia
 	registro.temperatura = temperatura
 	registro.descricao_clinica = descricao_clinica
+	registro.image_descricao_clinica = image_descricao_clinica
 	registro.sindrome_gripal = sindrome_gripal
 	registro.tempo_quadro_sintomatico = tempo_quadro_sintomatico
 	registro.exposicao_pessoa_infectada = exposicao_pessoa_infectada
@@ -1014,6 +1078,8 @@ def regulacao_set(request, id):
 	registro.tgo = tgo
 	registro.tgp = tgp
 	registro.exame_imagem = exame_imagem
+	registro.image_laudo_tc = image_laudo_tc
+	registro.image_laudo_rx = image_laudo_rx
 	registro.laudo_tc_torax = laudo_tc_torax
 	registro.laudo_rx_torax = laudo_rx_torax
 	registro.is_sindrome_gripal = is_sindrome_gripal
@@ -1439,3 +1505,61 @@ def remove_registro_covid(request, id):
 	registro = RegistroCovid.objects.filter(id=id).delete()
 
 	return redirect('/')
+
+
+@login_required
+def image_descricao_clinica_alter(request, id):
+	registro = RegistroCovid.objects.get(id=id)
+	encoded = base64.b64encode(registro.image_descricao_clinica).decode('ascii')
+
+	return render(request, 'image_descricao_clinica_alter.html', {'registro':
+		registro, 'encoded':encoded})
+
+
+@login_required
+def image_descricao_clinica_alter_set(request, id):
+	registro = RegistroCovid.objects.get(id=id)
+
+	image_descricao_clinica = request.FILES['file_descricao_clinica'].file.read()
+	registro.image_descricao_clinica = image_descricao_clinica
+	registro.save()
+	return redirect('regulacao_detail', id=id)
+
+
+@login_required
+def image_rx_torax_alter(request, id):
+	registro = RegistroCovid.objects.get(id=id)
+
+	img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
+
+	return render(request, 'image_rx_torax_alter.html', {'registro':
+		registro, 'img_rx':img_rx})
+
+
+@login_required
+def image_rx_torax_alter_set(request, id):
+	registro = RegistroCovid.objects.get(id=id)
+
+	image_laudo_rx = request.FILES['file_rx_torax'].file.read()
+	registro.image_laudo_rx = image_laudo_rx
+	registro.save()
+	return redirect('regulacao_detail', id=id)
+
+
+@login_required
+def image_tc_torax_alter(request, id):
+	registro = RegistroCovid.objects.get(id=id)
+
+	img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
+	return render(request, 'image_tc_torax_alter.html', {'registro':
+		registro, 'img_tc':img_tc})
+
+
+@login_required
+def image_tc_torax_alter_set(request, id):
+	registro = RegistroCovid.objects.get(id=id)
+
+	image_laudo_tc = request.FILES['file_tc_torax'].file.read()
+	registro.image_laudo_tc = image_laudo_tc
+	registro.save()
+	return redirect('regulacao_detail', id=id)

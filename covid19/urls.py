@@ -54,5 +54,11 @@ urlpatterns = [
     path('result_for_relatorios/', views.result_for_relatorios, name='result_for_relatorios'),
     path('status_registro/<id>/', views.status_registro, name='status_registro'),
     path('status_registro/<id>/submit', views.status_registro_set),
-    path('remove_registro_covid/<id>/', views.remove_registro_covid, name='remove_registro_covid')
+    path('remove_registro_covid/<id>/', views.remove_registro_covid, name='remove_registro_covid'),
+    path('image_descricao_clinica_alter/<id>/', views.image_descricao_clinica_alter, name='image_descricao_clinica_alter'),
+    path('image_descricao_clinica_alter/<id>/submit', views.image_descricao_clinica_alter_set),
+    path('image_rx_torax_alter/<id>/', views.image_rx_torax_alter, name='image_rx_torax_alter'),
+    path('image_rx_torax_alter/<id>/submit', views.image_rx_torax_alter_set),
+    path('image_tc_torax_alter/<id>/', views.image_tc_torax_alter, name='image_tc_torax_alter'),
+    path('image_tc_torax_alter/<id>/submit', views.image_tc_torax_alter_set),
 ]

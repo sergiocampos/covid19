@@ -1,0 +1,352 @@
+{% load static %}
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+	<title>Status de Registro - Casos COVID19</title>
+	<link rel="stylesheet" href="">
+
+	<script language="JavaScript" type="text/javascript" src="/static/js/cidades-estados-1.4-utf8.js"></script>
+
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+	<style>
+		#status_regulacao_id,
+		#paciente_regulado_id,
+		#paciente_lista_id,
+		#paciente_internado_id,
+		#paciente_obito_id,
+		#paciente_nao_regulado_id,
+		#paciente_regulado_id,
+		#paciente_obito_regulacao_id,
+		#paciente_lista_regulacao_id,
+		#paciente_internado_regulacao_id,
+		#ag_conf_vaga_regulacao_id,
+		#justif_cancelar_regulacao_id {
+			display: none;
+		}
+	</style>
+
+	<script>
+		function exibirJustCanc(){
+			$("#justif_cancelar_regulacao_id").show();
+		}
+	</script>
+
+	<script>
+
+		FilevalidationDescClin = () => { 
+			const fi = document.getElementById('file_descricao_clinica_id'); 
+        // Check if any file is selected. 
+        if (fi.files.length > 0) { 
+        	for (const i = 0; i <= fi.files.length - 1; i++) { 
+
+        		const fsize = fi.files.item(i).size; 
+        		const file = Math.round((fsize / 1024)); 
+                // The size of the file. 
+                if (file >= 2048) { 
+                	alert( 
+                		"Arquivo muito grande, selecione imagem de até 2 megabytes"); 
+                } else { 
+                	document.getElementById('size').innerHTML = '<b>'
+                	+ file + '</b> KB'; 
+                } 
+            } 
+        } 
+    }
+
+    validationImgTc = () => { 
+    	const fi = document.getElementById('laudo_tc_torax_id'); 
+        // Check if any file is selected. 
+        if (fi.files.length > 0) { 
+        	for (const i = 0; i <= fi.files.length - 1; i++) { 
+
+        		const fsize = fi.files.item(i).size; 
+        		const file = Math.round((fsize / 1024)); 
+                // The size of the file. 
+                if (file >= 2048) { 
+                	alert( 
+                		"Arquivo muito grande, selecione imagem de até 2 megabytes"); 
+                } else { 
+                	document.getElementById('size').innerHTML = '<b>'
+                	+ file + '</b> KB'; 
+                } 
+            } 
+        } 
+    }
+
+    validationImgRx = () => { 
+    	const fi = document.getElementById('laudo_rx_torax_id'); 
+        // Check if any file is selected. 
+        if (fi.files.length > 0) { 
+        	for (const i = 0; i <= fi.files.length - 1; i++) { 
+
+        		const fsize = fi.files.item(i).size; 
+        		const file = Math.round((fsize / 1024)); 
+                // The size of the file. 
+                if (file >= 2048) { 
+                	alert( 
+                		"Arquivo muito grande, selecione imagem de até 2 megabytes"); 
+                } else { 
+                	document.getElementById('size').innerHTML = '<b>'
+                	+ file + '</b> KB'; 
+                } 
+            } 
+        } 
+    }
+
+
+    function activeOutrasComorbidades_(){
+    	if (document.getElementById('outras_comorbidades').checked == true) {
+    		$("#desc_outras_comorbidades").prop("disabled", false);
+    	}
+    	else{
+    		$("#desc_outras_comorbidades").prop("disabled", true);
+    		$("#desc_outras_comorbidades").val("");
+    	}
+    }
+    function activeOutrasCardiopatias_(){
+    	if (document.getElementById('check_outras_cardiopatias').checked == true) {
+    		$("#outras_cardiopatias").prop("disabled", false);
+    	}
+    	else {
+    		$("#outras_cardiopatias").val("");
+    		$("#outras_cardiopatias").prop("disabled", true);
+    	}
+    }
+    function activeIdadeGestacional_(){
+    	if (document.getElementById("check_idade_gestacional").checked == true) {
+    		$("#idade_gestacional").prop("disabled", false);
+    		$("#gesta_para").prop("disabled", false);
+    	}
+    	else {
+    		$("#idade_gestacional").val("");
+    		$("#idade_gestacional").prop("disabled", true);
+    		$("#gesta_para").val("");
+    		$("#gesta_para").prop("disabled", true);
+    	}
+    }
+    function comorbidadesObstetrica_(){
+    	if (document.getElementById("check_comorbidades_obstetrica").checked == true) {
+    		$("#comorbidades_obstetrica").prop("disabled", false);
+    	}
+    	else {
+    		$("#comorbidades_obstetrica").val("");
+    		$("#comorbidades_obstetrica").prop("disabled", true);
+    	}
+    }
+    function activeLaudoTc_(){
+    	if (document.getElementById("check_tc_torax_id").checked == true){
+    		$("#laudo_tc_torax_id").prop("disabled", false);
+    	}
+    	else {
+    		$("#laudo_tc_torax_id").val('');
+    		$("#laudo_tc_torax_id").prop("disabled", true);
+    	}
+    }
+    function activeLaudoRx_(){
+    	if (document.getElementById("check_rx_torax_id").checked == true){
+    		$("#laudo_rx_torax_id").prop("disabled", false);
+    	}
+    	else {
+    		$("#laudo_rx_torax_id").val("");
+    		$("#laudo_rx_torax_id").prop("disabled", true);
+    	}
+    }
+
+</script>
+
+<script>
+	(function($) {
+    $.fn.checkFileType = function(options) {
+        var defaults = {
+            allowedExtensions: [],
+            success: function() {},
+            error: function() {}
+        };
+        options = $.extend(defaults, options);
+
+        return this.each(function() {
+
+            $(this).on('change', function() {
+                var value = $(this).val(),
+                    file = value.toLowerCase(),
+                    extension = file.substring(file.lastIndexOf('.') + 1);
+
+                if ($.inArray(extension, options.allowedExtensions) == -1) {
+                    options.error();
+                    $(this).focus();
+                } else {
+                    options.success();
+
+                }
+
+            });
+
+        });
+    };
+
+})(jQuery);
+
+$(function() {
+    $('#file_descricao_clinica_id').checkFileType({
+        allowedExtensions: ['jpg', 'jpeg', 'png'],
+        
+        error: function() {
+            alert('Formato de Imagem não permitido');
+        }
+    });
+
+});
+</script>
+
+</head>
+<body>
+
+	<div class="container" style="border: 2px solid #cccccc; border-radius: 10px">
+		<div class="jumbotron">
+			<h1>SES COVID - Registro - Casos COVID19</h1>
+			<p></p>
+		</div>
+
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="/">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/covid_list/">Principal</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/search_estabelecimento/">Registrar Caso</a>
+				</li>
+		    <!--<li class="nav-item">
+		      <a class="nav-link" href="/regulacao_edit/{{registro.id}}/">Registro/Edição</a>
+		  </li>-->
+		  <li class="nav-item">
+		  	<a class="nav-link" href="#"></a>
+		  </li>
+		  <li class="nav-item">
+		  	<a class="nav-link" href="/search_register/">Localizar</a>
+		  </li>
+		  <li class="nav-item">
+		  	<a class="nav-link" href="/gerar_relatorios/">Relatórios</a>
+		  </li>
+		  <li>
+		  	<a class="nav-link" href="/accounts/logout">Sair</a>
+		  </li>
+		</ul>
+	</nav><br>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-4" style="background-color:;">
+				<div style="position: relative; left: 0; top: 20%; width: 100%; text-align: center;">
+					<img src="https://docs.google.com/uc?id=1g14C98IyGkVYPNNkoLk20rGYVikptzcC" alt="" style=" background-color: ;width: 70%">
+				</div>
+			</div>
+
+			<div class="col-sm-4" style="">
+				<div class="col" style="text-align: center;">
+					<p>GOVERNO DO ESTADO DA PARAÍBA</p>
+					<p>SECRETARIA DE ESTADO DA SAÚDE</p>
+					<p></p>
+					<p><h7><b>Registro de Casos - Perfil {{user.first_name}} - Usuário: <i>{{user}}</i></b></h7></p>
+				</div>
+			</div>
+			<div class="col-sm-4" style="background-color:;">
+				<div style="position: relative; left: 0; top: 30%; width: 100%; text-align: center;">
+					<img src="https://docs.google.com/uc?id=11gNpuLZuHBRHHiSFZxcSp5CGlJla1PEw" alt="" style="background-color: ;width: 70%">
+				</div>
+			</div>
+		</div>
+		<br>
+	</div>
+
+
+	<div class="row">
+		<div class="col-sm-5"></div>
+		<div class="col-sm-5"></div>
+		<div class="col-sm-2">
+			{% if user.is_staff %}
+				<!--
+				<button type="button" class="btn btn-outline-danger btn-sm" style="align-items: center;" id="btn_inicio"><a class="" href="/remove_registro_covid/{{registro.id}}/">Escluir Registro</a></button>
+			-->
+			{%endif%}
+		</div>
+	</div>
+	<hr />
+	<br />
+
+	<form enctype="multipart/form-data" action="submit" method="POST">{% csrf_token %}
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<b>DESCRIÇÃO CLÍNICA (SIC, UNIDADE SOLICITANTE)</b>
+					{% if registro.descricao_clinica == '' or registro.descricao_clinica == None %}
+					<textarea class="form-control" rows="10" id="" name="descricao_clinica" value="" style="width: 100%"></textarea>
+					{%else%}
+					<textarea class="form-control" rows="15" id="" name="descricao_clinica" value="" style="width: 100%">{{registro.descricao_clinica}}</textarea>
+					{%endif%}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">Anexo da Descrição Clínica!</div>
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3"></div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<img src="data: encoded/png; base64, {{encoded}}" alt="" style="border: 2px solid #8c8c8c; border-radius: 5px">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-8">
+					<div class="custom-file mb-3">
+						<input type="file" class="form-control-file border" id="file_descricao_clinica_id" name="file_descricao_clinica" onchange="FilevalidationDescClin()" required>
+						
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<p id="size"></p>
+				</div>
+			</div><br><br>
+
+
+
+
+
+			<div class="container-fluid" style="text-align: center;">
+				<button type="submit" class="btn btn-primary btn-sm" style="align-items: center;" id="">Salvar</button>  
+			</div>
+		</div>
+	</form>
+	
+
+	<br /><br />
+
+	<div class="container mt-3">
+		<div class="container-fluid" style="text-align: center;">
+			<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/covid_list/">Principal</a></button>
+		</div>
+		<br />
+	</div>
+
+	<div style="height: 50px"></div>
+
+</div><br />
+
+<div style="background-color: #e6e6e6;"><br /><br /></div>
+
+</body>
+</html>

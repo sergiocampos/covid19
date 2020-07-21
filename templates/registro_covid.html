@@ -1077,10 +1077,10 @@ $(function() {
 					</div>
 
 					<div class="form-check-inline">
-		              <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" size="2" required style="width: 100px">
+		              <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" size="2" style="width: 100px">
 		              <div class="invalid-feedback"></div>
 		              <label for="">X</label>
-		              <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" size="2" required style="width: 100px">
+		              <input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" size="2" style="width: 100px">
 		              <div class="invalid-feedback"></div>
 		              
 		            </div>
@@ -1109,7 +1109,7 @@ $(function() {
 						<label for="" class="form-check-label">Temperatura:</label>
 					</div>
 					<div class="form-check-inline">
-						<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" max="100" name="temperatura_paciente" size="5" required>
+						<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" max="100" name="temperatura_paciente" size="5">
 						<div class="invalid-feedback"></div>
 
 						<label for="">°C</label>					
@@ -1130,11 +1130,11 @@ $(function() {
 			<div class="row">
 				<div class="col-sm-8">
 					<div class="custom-file mb-3">
-						<input type="file" class="custom-file-input" id="file_descricao_clinica_id" name="file_descricao_clinica" onchange="Filevalidation()">
+						<input type="file" class="custom-file-input" id="file_descricao_clinica_id" name="file_descricao_clinica" onchange="Filevalidation()" required>
 						<label class="custom-file-label" for="customFile">Selecione...</label>
 					</div>
 				</div>
-				<div class="col-sm4">
+				<div class="col-sm-4">
 					<p id="size"></p>
 				</div>
 			</div><br><br>
@@ -3233,12 +3233,12 @@ $(function() {
 					
 	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_tc_torax_id" name="exame_imagem" value="TC Tórax" onclick="activeLaudoTc_()">TC Tórax; Laudo:
+				        <input type="checkbox" class="form-check-input" id="check_tc_torax_id" name="exame_imagem" value="TC Tórax" onclick="activeLaudoTc_()" required>TC Tórax; Laudo:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="width: 80%">
 						<div class="custom-file mb-3">
-							<input type="file" class="form-control-file border" id="laudo_tc_torax_id" name="file_tc_torax" disabled onchange="validationImgTc()">
+							<input type="file" class="form-control-file border" id="laudo_tc_torax_id" name="file_tc_torax" disabled onchange="validationImgTc()" required>
 							
 						</div>
 	              	</div>
@@ -3250,12 +3250,12 @@ $(function() {
 		
 	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_rx_torax_id" name="exame_imagem" value="RX Tórax" onclick="activeLaudoRx_()">RX Tórax; Laudo:
+				        <input type="checkbox" class="form-check-input" id="check_rx_torax_id" name="exame_imagem" value="RX Tórax" onclick="activeLaudoRx_()" required>RX Tórax; Laudo:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="width: 80%">
 						<div class="custom-file mb-3">
-							<input type="file" class="form-control-file border" id="laudo_rx_torax_id" name="file_rx_torax" disabled onchange="validationImgRx()">
+							<input type="file" class="form-control-file border" id="laudo_rx_torax_id" name="file_rx_torax" disabled onchange="validationImgRx()" required>
 							
 						</div>
 	              	</div>

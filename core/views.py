@@ -330,6 +330,382 @@ def registro_covid_set(request):
 	image_laudo_tc = request.FILES['file_tc_torax'].file.read()
 	image_laudo_rx = request.FILES['file_rx_torax'].file.read()
 
+	descricao_clinica = request.POST.get('descricao_clinica')
+	
+	sindrome_gripal = request.POST.getlist('s_gripal')
+	
+	tempo_quadro_sintomatico_cap = request.POST.get('tempo_inicio_sintomas')
+	if tempo_quadro_sintomatico_cap == '' or tempo_quadro_sintomatico_cap == None:
+		tempo_quadro_sintomatico = None
+	else:
+		tempo_quadro_sintomatico = int(float(tempo_quadro_sintomatico_cap))
+
+	exposicao_pessoa_infectada = request.POST.get('exposicao_epidemiologica_sim')
+	parentesco = request.POST.get('grau_parentesco')
+	comorbidades = request.POST.getlist('comorbidades')
+	outras_comorbidades = request.POST.get('descricao_outras_comorbidades')
+	outras_cardiopatias = request.POST.get('desc_outras_cardiopatias')
+	idade_gestacional = request.POST.get('idade_gestacao')
+	comorbidades_obstetricas = request.POST.get('comorbidade_obstetrica')
+	gesta_para = request.POST.get('gestacao_para')
+	medicamentos_uso_habitual = request.POST.getlist('medicamento_uso_habitual')
+	medicamento_outros = request.POST.get('descricao_outros_medicamento')
+	
+	spo2_cap = request.POST.get('spo2')
+	if spo2_cap == '' or spo2_cap == None:
+		spo2 = None
+	else:
+		spo2 = int(float(spo2_cap))
+		
+
+	fr_irpm_cap = request.POST.get('fr_irpm')
+	if fr_irpm_cap == '' or fr_irpm_cap == None:
+		fr_irpm = None
+	else:
+		fr_irpm = int(float(fr_irpm_cap))
+		
+
+	ventilacao_tipo = request.POST.get('ventilacao')
+	o2_suporte = request.POST.getlist('o2_suporte')
+	
+	dose_cn_cap = request.POST.get('dose_cn')
+	if dose_cn_cap == '' or dose_cn_cap == None:
+		dose_cn = None
+	else:
+		dose_cn = float(dose_cn_cap)
+
+	dose_venturi_cap = request.POST.get('dose_venturi')
+	if dose_venturi_cap == '' or dose_venturi_cap == None:
+		dose_venturi = None
+	else:
+		dose_venturi = float(dose_venturi_cap)
+	
+
+	vmi = request.POST.getlist('vmi')
+	
+	vt_cap = request.POST.get('vt')
+	if vt_cap == '' or vt_cap == None:
+		vt = None
+	else:
+		vt = float(vt_cap)
+		
+
+	delta_pressure_cap = request.POST.get('delta_pressure')
+	if delta_pressure_cap == '' or delta_pressure_cap == None:
+		delta_pressure = None
+	else:
+		delta_pressure = float(delta_pressure_cap)
+		
+
+	pplato_cap = request.POST.get('pplato')
+	if pplato_cap == '' or pplato_cap == None:
+		pplato = None
+	else:
+		pplato = float(pplato_cap)
+		
+
+	raw_cap = request.POST.get('raw')
+	if raw_cap == '' or raw_cap == None:
+		raw = None
+	else:
+		raw = float(raw_cap)
+		
+
+	cest_cap = request.POST.get('cest')
+	if cest_cap == '' or cest_cap == None :
+		cest = None
+	else:
+		cest = float(cest_cap)
+		
+
+	sao2_cap = request.POST.get('sao2')
+	if sao2_cap == '' or sao2_cap == None:
+		sao2 = None
+	else:
+		sao2 = float(sao2_cap)
+
+	pao2_cap = request.POST.get('pao2')
+	if pao2_cap == '' or pao2_cap == None:
+		pao2 = None
+	else:
+		pao2 = float(pao2_cap)
+
+	fio2_cap = request.POST.get('fio2')
+	if fio2_cap == '' or fio2_cap == None:
+		fio2 = None
+	else:
+		fio2 = float(fio2_cap)
+
+	paco2_cap = request.POST.get('paco2')
+	if paco2_cap == '' or paco2_cap == None:
+		paco2 = None
+	else:
+		paco2 = float(paco2_cap)
+	
+	fc_cap = request.POST.get('fc')
+	if fc_cap == '' or fc_cap == None:
+		fc = None
+	else:
+		fc = int(float(fc_cap))
+		
+
+	temperatura_axilar_cap = request.POST.get('temp_auxiliar')
+	if temperatura_axilar_cap == '' or temperatura_axilar_cap == None :
+		temperatura_axilar = None
+	else:
+		temperatura_axilar = float(temperatura_axilar_cap)
+		
+
+	droga_vasoativa = request.POST.getlist('droga_vasoativa')
+	
+	qtd_nora_cap = request.POST.get('qtd_nora')
+	if qtd_nora_cap == '' or qtd_nora_cap == None:
+		qtd_nora = None
+	else:
+		qtd_nora = float(qtd_nora_cap)
+
+	qtd_adrenalina_cap = request.POST.get('qtd_adrenalina')
+	if qtd_adrenalina_cap == '' or qtd_adrenalina_cap == None:
+		qtd_adrenalina = None
+	else:
+		qtd_adrenalina = float(qtd_adrenalina_cap)
+
+	qtd_vasopressina_cap = request.POST.get('qtd_vasopressina')
+	if qtd_vasopressina_cap == '' or qtd_vasopressina_cap == None:
+		qtd_vasopressina = None
+	else:
+		qtd_vasopressina = float(qtd_vasopressina_cap)
+
+	qtd_dobutamina_cap = request.POST.get('qtd_dobutamina')
+	if qtd_dobutamina_cap == '' or qtd_dobutamina_cap == None:
+		qtd_dobutamina = None
+	else:
+		qtd_dobutamina = float(qtd_dobutamina_cap)
+
+	arritmia = request.POST.getlist('arritmia')
+	infeccao_bacteriana = request.POST.get('infeccao_bacteriana')
+	foco = request.POST.getlist('foco')
+	uso_antibioticoterapia = request.POST.get('uso_antibioticoterapia')
+	pesquisa_teste_sars_cov_2 = request.POST.get('pesquisa_sars_cov2')
+	igg_cap = request.POST.get('igg')
+	igg_bd = request.POST.get('igg_bd')
+	if igg_cap == '' or igg_cap == None:
+		if igg_bd == '' or igg_bd == None:
+			igg = None
+		else:
+			igg = igg_bd
+	else:
+		igg = igg_cap
+
+	igm_do_bd = registro.igm
+	igm_cap = request.POST.get('igm')
+
+	igm_bd_cap = request.POST.get('igm_bd')
+	if igm_cap == '' or igm_cap == None:
+		if igm_bd_cap == '' or igm_bd_cap == None:
+			igm = None
+		else:
+			igm = igm_bd_cap
+	else:
+		igm = igm_cap
+
+	
+	data_igm_igg_cap = request.POST.get('data_igm_igg')
+	data_igm_igg_bd_cap = request.POST.get('data_igm_igg_bd')
+
+	if data_igm_igg_cap == '' or data_igm_igg_cap == None:
+		if data_igm_igg_bd_cap == '' or data_igm_igg_bd_cap == None:
+			data_igm_igg = None
+		else:
+			data_igm_igg = datetime.strptime(data_igm_igg_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_igm_igg = data_igm_igg_cap
+
+
+	rt_pcr_sars_cov_2 = request.POST.get('pcr_sars_cov2')
+	
+	data_da_coleta_bd_cap = request.POST.get('data_da_coleta_bd')
+	data_coleta_cap = request.POST.get('data_da_coleta')
+	if data_coleta_cap == '' or data_coleta_cap == None:
+		if data_da_coleta_bd_cap == '' or data_da_coleta_bd_cap == None:
+			data_coleta = None
+		else:
+			data_coleta = datetime.strptime(data_da_coleta_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_coleta = data_coleta_cap
+	
+	em_uso_corticosteroide = request.POST.get('em_uso_corticosteroide')
+	dose_corticosteroide = request.POST.get('dose_corticosteroide')
+	
+	data_inicio_corticosteroide_bd_cap = request.POST.get('data_inicio_corticosteroide_bd')
+	data_inicio_corticosteroide_cap = request.POST.get('data_inicio_corticosteroide')
+	if data_inicio_corticosteroide_cap == '' or data_inicio_corticosteroide_cap == None:
+		if data_inicio_corticosteroide_bd_cap == '' or data_inicio_corticosteroide_bd_cap == None:
+			data_inicio_corticosteroide = None
+		else:
+			data_inicio_corticosteroide = datetime.strptime(data_inicio_corticosteroide_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_inicio_corticosteroide = data_inicio_corticosteroide_cap
+	
+
+	em_uso_hidroxicloroquina = request.POST.get('em_uso_hidrocloroquina')
+	
+	data_inicio_hidroxicloroquina_cap = request.POST.get('data_inicio_hidroxicloroquina')
+	data_inicio_hidroxicloroquina_bd_cap = request.POST.get('data_inicio_hidroxicloroquina_bd')
+
+
+	if data_inicio_hidroxicloroquina_cap == '' or data_inicio_hidroxicloroquina_cap == None:
+		if data_inicio_hidroxicloroquina_bd_cap == '' or data_inicio_hidroxicloroquina_bd_cap == None:
+			data_inicio_hidroxicloroquina = None	
+		else:
+			data_inicio_hidroxicloroquina = datetime.strptime(data_inicio_hidroxicloroquina_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_inicio_hidroxicloroquina = data_inicio_hidroxicloroquina_cap
+
+
+	em_uso_oseltamivir = request.POST.get('em_uso_oseltamivir')
+	
+	data_inicio_oseltamivir_cap = request.POST.get('data_inicio_oseltamivir')
+	data_inicio_oseltamivir_bd_cap = request.POST.get('data_inicio_oseltamivir_bd')
+
+
+	if data_inicio_oseltamivir_cap == '' or data_inicio_oseltamivir_cap == None:
+		if data_inicio_oseltamivir_bd_cap == '' or data_inicio_oseltamivir_bd_cap == None:
+			data_inicio_oseltamivir = None
+		else:
+			data_inicio_oseltamivir = datetime.strptime(data_inicio_oseltamivir_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_inicio_oseltamivir = data_inicio_oseltamivir_cap
+
+
+
+	em_uso_heparina = request.POST.get('em_uso_heparina')
+
+	data_inicio_heparina_bd_cap = request.POST.get('data_inicio_heparina_bd')
+	data_inicio_heparina_cap = request.POST.get('data_inicio_heparina')
+
+	if data_inicio_heparina_cap == '' or data_inicio_heparina_cap == None:
+		if data_inicio_heparina_bd_cap == '' or data_inicio_heparina_bd_cap == None:
+			data_inicio_heparina = None
+		else:
+			data_inicio_heparina = datetime.strptime(data_inicio_heparina_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_inicio_heparina = data_inicio_heparina_cap
+		
+
+	tipo_heparina = request.POST.get('tipo_heparina')
+	dose_heparina = request.POST.get('dose_heparina')
+	
+	pps_cap = request.POST.get('pps_paciente')
+	if pps_cap == '' or pps_cap == None:
+		pps = None
+	else:
+		pps = float(pps_cap)
+		
+
+	escala_pontos_glasgow_cap = request.POST.get('escala_glasgow')
+	if escala_pontos_glasgow_cap == '' or escala_pontos_glasgow_cap == None:
+		escala_pontos_glasgow = None
+	else:
+		escala_pontos_glasgow = int(float(escala_pontos_glasgow_cap))
+		
+
+	bloqueador_neuromuscular = request.POST.getlist('desc_bloqueador_neuromuscular')
+	midazolam_dose = request.POST.get('midazolam_dose')
+	fentanil_dose = request.POST.get('fentanil_dose')
+	propofol_dose = request.POST.get('propofol_dose')
+	sedacao_continua = request.POST.getlist('desc_sedacao_continua')
+	rocuronio_dose = request.POST.get('rocuronio_dose')
+	pacuronio_dose = request.POST.get('pacuronio_dose')
+	cisatracurio_dose = request.POST.get('cisatracurio_dose')
+	rass = request.POST.get('rass')
+	
+	data_exames_laboratorio_cap = request.POST.get('data_exames_laboratorio')
+	data_exames_laboratorio_bd_cap = request.POST.get('data_exames_laboratorio_bd')
+
+	if data_exames_laboratorio_cap == '' or data_exames_laboratorio_cap == None:
+		if data_exames_laboratorio_bd_cap == '' or data_exames_laboratorio_bd_cap == None:
+			data_exames_laboratorio = None
+		else:
+			data_exames_laboratorio = datetime.strptime(data_exames_laboratorio_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_exames_laboratorio = data_exames_laboratorio_cap
+
+	leucocito = request.POST.get('leucocito')
+	linfocito = request.POST.get('linfocito')
+	hb = request.POST.get('hb')
+	ht = request.POST.get('ht')
+	pcr = request.POST.get('pcr')
+	lactato = request.POST.get('lactato')
+	dhl = request.POST.get('dhl')
+	ferritina = request.POST.get('ferritina')
+	troponina = request.POST.get('troponina')
+	cpk = request.POST.get('cpk')
+	d_dimero = request.POST.get('d_dimero')
+	ureia = request.POST.get('ureia')
+	creatinina = request.POST.get('creatinina')
+	ap = request.POST.get('ap')
+	tap = request.POST.get('tap')
+	inr = request.POST.get('inr')
+	tgo = request.POST.get('tgo')
+	tgp = request.POST.get('tgp')
+	exame_imagem = request.POST.getlist('exame_imagem')
+	laudo_tc_torax = request.POST.get('laudo_tc_torax')
+	laudo_rx_torax = request.POST.get('laudo_rx_torax')
+	is_sindrome_gripal = request.POST.get('sindrome_gripal')
+	news_fast_pb = request.POST.get('new_fast')
+	news_modificado = request.POST.get('new_modificado')
+	uti = request.POST.get('uti')
+	leito = request.POST.get('perfil')
+
+	parecer_medico = request.POST.get('parecer')
+	
+	prioridade_cap = request.POST.get('prioridade')
+	if prioridade_cap == '' or prioridade_cap == None:
+		prioridade = None
+	else:
+		prioridade = int(float(prioridade_cap))
+	
+
+	registro_last = RegistroCovid.objects.last()
+	print("ultimo sescovid:", registro_last.senha)
+	if registro_last:
+		senha_bd = registro_last.senha
+		senha = int(senha_bd) + 100
+	else:
+		senha_bd = 0
+		senha = int(senha_bd) + 100
+
+	codigo_sescovid = request.POST.get('num_protocolo')
+
+	justificativa = request.POST.get('justificativa')
+	#observacao = request.POST.get('observacoes_medicas')
+	
+	pareceristas = registro.pareceristas
+	
+	pareceristas_cap = request.POST.getlist('pareceristas')
+	
+	if pareceristas == '' or pareceristas == None:
+		pareceristas = pareceristas_cap
+	else:
+		pareceristas = pareceristas + pareceristas_cap
+
+	
+	data_regulacao = datetime.now()
+	#data_regulacao = data_regulacao_.strftime('%d/%m/%Y %H:%M')
+
+
+	data_obito_bd_cap = request.POST.get('data_obito_bd')
+	data_obito_cap = request.POST.get('data_obito')
+
+	if data_obito_cap == '' or data_obito_cap == None:
+		if data_obito_bd_cap == '' or data_obito_bd_cap == None:
+			data_obito = None
+		else:
+			data_obito = datetime.strptime(data_obito_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_obito = data_obito_cap
+
 
 	registro = RegistroCovid.objects.create(
 		responsavel_pelo_preenchimento = responsavel_pelo_preenchimento,
@@ -357,7 +733,110 @@ def registro_covid_set(request):
 		image_descricao_clinica = image_descricao_clinica,
 		image_laudo_tc = image_laudo_tc,
 		image_laudo_rx = image_laudo_rx,
-		observacao = observacao
+		observacao = observacao,
+		descricao_clinica = descricao_clinica,
+		sindrome_gripal = sindrome_gripal,
+		tempo_quadro_sintomatico = tempo_quadro_sintomatico,
+		exposicao_pessoa_infectada = exposicao_pessoa_infectada,
+		parentesco = parentesco,
+		comorbidades = comorbidades,
+		outras_comorbidades = outras_comorbidades,
+		outras_cardiopatias = outras_cardiopatias,
+		idade_gestacional = idade_gestacional,
+		comorbidades_obstetricas = comorbidades_obstetricas,
+		gesta_para = gesta_para,
+		medicamentos_uso_habitual = medicamentos_uso_habitual,
+		medicamento_outros = medicamento_outros,
+		spo2 = spo2,
+		fr_irpm = fr_irpm,
+		ventilacao_tipo = ventilacao_tipo,
+		o2_suporte = o2_suporte,
+		dose_cn = dose_cn,
+		dose_venturi = dose_venturi,
+		vmi = vmi,
+		vt = vt,
+		delta_pressure = delta_pressure,
+		pplato = pplato,
+		raw = raw,
+		cest = cest,
+		sao2 = sao2,
+		pao2 = pao2,
+		fio2 = fio2,
+		paco2 = paco2,
+		fc = fc,
+		temperatura_axilar = temperatura_axilar,
+		droga_vasoativa = droga_vasoativa,
+		qtd_nora = qtd_nora,
+		qtd_adrenalina = qtd_adrenalina,
+		qtd_vasopressina = qtd_vasopressina,
+		qtd_dobutamina = qtd_dobutamina,
+		arritmia = arritmia,
+		infeccao_bacteriana = infeccao_bacteriana,
+		foco = foco,
+		uso_antibioticoterapia = uso_antibioticoterapia,
+		pesquisa_teste_sars_cov_2 = pesquisa_teste_sars_cov_2,
+		igg = igg,
+		igm = igm,
+		data_igm_igg = data_igm_igg,
+		rt_pcr_sars_cov_2 = rt_pcr_sars_cov_2,
+		data_coleta = data_coleta,
+		em_uso_corticosteroide = em_uso_corticosteroide,
+		dose_corticosteroide = dose_corticosteroide,
+		data_inicio_corticosteroide = data_inicio_corticosteroide,
+		em_uso_hidroxicloroquina = em_uso_hidroxicloroquina,
+		data_inicio_hidroxicloroquina = data_inicio_hidroxicloroquina,
+		em_uso_oseltamivir = em_uso_oseltamivir,
+		data_inicio_oseltamivir = data_inicio_oseltamivir,
+		em_uso_heparina = em_uso_heparina,
+		data_inicio_heparina = data_inicio_heparina,
+		tipo_heparina = tipo_heparina,
+		dose_heparina = dose_heparina,
+		pps = pps,
+		escala_pontos_glasgow = escala_pontos_glasgow,
+		bloqueador_neuromuscular = bloqueador_neuromuscular,
+		midazolam_dose = midazolam_dose,
+		fentanil_dose = fentanil_dose,
+		propofol_dose = propofol_dose,
+		sedacao_continua = sedacao_continua,
+		rocuronio_dose = rocuronio_dose,
+		pacuronio_dose = pacuronio_dose,
+		cisatracurio_dose = cisatracurio_dose,
+		rass = rass,
+		data_exames_laboratorio = data_exames_laboratorio,
+		leucocito = leucocito,
+		linfocito = linfocito,
+		hb = hb,
+		ht = ht,
+		pcr = pcr,
+		lactato = lactato,
+		dhl = dhl,
+		ferritina = ferritina,
+		troponina = troponina,
+		cpk = cpk,
+		d_dimero = d_dimero,
+		ureia = ureia,
+		creatinina = creatinina,
+		ap = ap,
+		tap = tap,
+		inr = inr,
+		tgo = tgo,
+		tgp = tgp,
+		exame_imagem = exame_imagem,
+		laudo_tc_torax = laudo_tc_torax,
+		laudo_rx_torax = laudo_rx_torax,
+		is_sindrome_gripal = is_sindrome_gripal,
+		news_fast_pb = news_fast_pb,
+		news_modificado = news_modificado,
+		uti = uti,
+		leito = leito,
+		parecer_medico = parecer_medico,
+		prioridade = prioridade,
+		senha = senha,
+		codigo_sescovid = codigo_sescovid,
+		justificativa = justificativa,
+		pareceristas = pareceristas,
+		data_regulacao = data_regulacao,
+		data_obito = data_obito
 
 		)
 
@@ -390,6 +869,16 @@ def regulacao(request, id):
 	data_regulacao_template = data_regulacao.strftime('%d/%m/%Y %H:%M')
 
 	registro = RegistroCovid.objects.get(id=id)
+
+	if registro.senha:
+		senha_bd = registro.senha
+		senha_new = int(senha_bd) + 100
+	else:
+		senha_bd = 0
+		senha_new = int(senha_bd) + 100
+
+	codigo_sescovid = "SESCOVID" + str(senha_new)
+
 	pa = registro.pa
 
 	p = pa.split("x")
@@ -448,24 +937,28 @@ def regulacao(request, id):
 
 	if not registro.image_laudo_tc and not registro.image_laudo_rx:
 		return render(request, 'regulacao.html', {'registro' : registro, 
-			'pa_1':pa_1, 'pa_2':pa_2, 'data_regulacao_template':
-			data_regulacao_template,'status_list_descricao':
-			status_list_descricao, 'status_aguard_conf_vaga_registro':
-			status_aguard_conf_vaga_registro, 
+			'codigo_sescovid':codigo_sescovid, 'pa_1':pa_1, 'pa_2':pa_2, 
+			'data_regulacao_template':data_regulacao_template, 
+			'status_list_descricao':status_list_descricao, 
+			'status_aguard_conf_vaga_registro':
+			status_aguard_conf_vaga_registro,
 			'status_aguard_lista_espera_registro':
-			status_aguard_lista_espera_registro, 'status_regulado_registro':
-			status_regulado_registro, 'status_nao_regulado_registro':
-			status_nao_regulado_registro, 'municipio_estabelecimento_solicitante':
-			municipio_estabelecimento_solicitante, 'estabelecimento_solicitante':
-			estabelecimento_solicitante, 'estabelecimento_solicitante_outro':
-			estabelecimento_solicitante_outro, 'cidade':cidade, 
-			'estabelecimentos':estabelecimentos, 
+			status_aguard_lista_espera_registro, 
+			'status_regulado_registro':status_regulado_registro, 
+			'status_nao_regulado_registro':status_nao_regulado_registro, 
+			'municipio_estabelecimento_solicitante':
+			municipio_estabelecimento_solicitante, 
+			'estabelecimento_solicitante':estabelecimento_solicitante, 
+			'estabelecimento_solicitante_outro':
+			estabelecimento_solicitante_outro, 'cidade':cidade,
+			'estabelecimentos':estabelecimentos,
 			'municipio_estabelecimento_referencia':
 			municipio_estabelecimento_referencia, 'encoded':encoded})
 	elif not registro.image_laudo_rx:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
 
-		return render(request, 'regulacao.html', {'registro' : registro, 'pa_1':pa_1, 
+		return render(request, 'regulacao.html', {'registro' : registro, 
+		'codigo_sescovid':codigo_sescovid, 'pa_1':pa_1, 
 		'pa_2':pa_2, 'data_regulacao_template': data_regulacao_template,
 		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
 		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
@@ -481,7 +974,8 @@ def regulacao(request, id):
 	elif not registro.image_laudo_tc:
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
 
-		return render(request, 'regulacao.html', {'registro' : registro, 'pa_1':pa_1, 
+		return render(request, 'regulacao.html', {'registro' : registro, 
+		'codigo_sescovid':codigo_sescovid, 'pa_1':pa_1, 
 		'pa_2':pa_2, 'data_regulacao_template': data_regulacao_template,
 		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
 		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
@@ -497,8 +991,9 @@ def regulacao(request, id):
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
 
-		return render(request, 'regulacao.html', {'registro' : registro, 'pa_1':pa_1, 
-		'pa_2':pa_2, 'data_regulacao_template': data_regulacao_template,
+		return render(request, 'regulacao.html', {'registro' : registro,
+		'codigo_sescovid':codigo_sescovid, 'pa_1':pa_1, 'pa_2':pa_2, 
+		'data_regulacao_template': data_regulacao_template,
 		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
 		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
 		status_aguard_lista_espera_registro, 'status_regulado_registro':
@@ -558,10 +1053,10 @@ def regulacao_set(request, id):
 
 	descricao_clinica = request.POST.get('descricao_clinica')
 
-	image_descricao_clinica = request.FILES['file_descricao_clinica'].file.read()
+	#image_descricao_clinica = request.FILES['file_descricao_clinica'].file.read()
 
-	image_laudo_tc = request.FILES['file_tc_torax_regulacao'].file.read()
-	image_laudo_rx = request.FILES['file_rx_torax_regulacao'].file.read()
+	#image_laudo_tc = request.FILES['file_tc_torax_regulacao'].file.read()
+	#image_laudo_rx = request.FILES['file_rx_torax_regulacao'].file.read()
 	
 	sindrome_gripal = request.POST.getlist('s_gripal')
 	
@@ -931,11 +1426,20 @@ def regulacao_set(request, id):
 
 	last_status = descricao
 
-	codigo_sescovid_cap = request.POST.get('num_protocolo')
-	if codigo_sescovid_cap == '' or codigo_sescovid_cap == None:
-		codigo_sescovid = registro.codigo_sescovid
+	#senha_last = registro.senha.last()
+	#senha = senha_last
+
+	registro_last = RegistroCovid.objects.last()
+	print("ultimo sescovid:", registro_last.senha)
+	if registro_last:
+		senha_bd = registro_last.senha
+		senha = int(senha_bd) + 100
 	else:
-		codigo_sescovid = 'SESCOVID' + codigo_sescovid_cap
+		senha_bd = 0
+		senha = int(senha_bd) + 100
+
+	codigo_sescovid = request.POST.get('num_protocolo')
+
 	justificativa = request.POST.get('justificativa')
 	observacao = request.POST.get('observacoes_medicas')
 	
@@ -989,7 +1493,7 @@ def regulacao_set(request, id):
 	registro.conciencia = conciencia
 	registro.temperatura = temperatura
 	registro.descricao_clinica = descricao_clinica
-	registro.image_descricao_clinica = image_descricao_clinica
+	#registro.image_descricao_clinica = image_descricao_clinica
 	registro.sindrome_gripal = sindrome_gripal
 	registro.tempo_quadro_sintomatico = tempo_quadro_sintomatico
 	registro.exposicao_pessoa_infectada = exposicao_pessoa_infectada
@@ -1078,8 +1582,8 @@ def regulacao_set(request, id):
 	registro.tgo = tgo
 	registro.tgp = tgp
 	registro.exame_imagem = exame_imagem
-	registro.image_laudo_tc = image_laudo_tc
-	registro.image_laudo_rx = image_laudo_rx
+	#registro.image_laudo_tc = image_laudo_tc
+	#registro.image_laudo_rx = image_laudo_rx
 	registro.laudo_tc_torax = laudo_tc_torax
 	registro.laudo_rx_torax = laudo_rx_torax
 	registro.is_sindrome_gripal = is_sindrome_gripal
@@ -1091,6 +1595,7 @@ def regulacao_set(request, id):
 	registro.prioridade = prioridade
 	#registro.regulacao_paciente = regulacao_paciente
 	#registro.status_regulacao = status_regulacao
+	registro.senha = senha
 	registro.codigo_sescovid = codigo_sescovid
 	registro.justificativa = justificativa
 	registro.observacao = observacao
@@ -1460,20 +1965,21 @@ def status_registro(request, id):
 	status_registro_last = Status.objects.filter(registro_covid=registro.id).last()
 
 
-	for f in status_registro:
-		print(f,"data:",f.data_notificacao,"hora",f.hora_notificacao)
+	#for f in status_registro:
+	#	print(f,"data:",f.data_notificacao,"hora",f.hora_notificacao)
 
-	status_list_descricao = []
+	#status_list_descricao = []
 
-	for s in status_registro:
-		status_list_descricao.append(s.descricao)
+	#for s in status_registro:
+	#	status_list_descricao.append(s.descricao)
 
 
-	#status_aguard_conf_vaga_registro = Status.objects.filter(descricao='Aguardando confirmação de Vaga').last()
-	#status_obito_registro = Status.objects.filter(descricao='Obito').last()
-	#status_aguard_lista_espera_registro = Status.objects.filter(descricao='Aguardando em Lista de Espera').last()
-	#status_regulado_registro = Status.objects.filter(descricao='Regulado').last()
-	#status_nao_regulado_registro = Status.objects.filter(descricao='Não Regulado').last()
+	status_aguard_conf_vaga_registro = status_registro.filter(descricao='Aguardando confirmação de Vaga').last()
+	status_obito_registro = status_registro.filter(descricao='Obito').last()
+	status_aguard_lista_espera_registro = status_registro.filter(descricao='Aguardando em Lista de Espera').last()
+	status_regulado_registro = status_registro.filter(descricao='Regulado').last()
+	status_nao_regulado_registro = status_registro.filter(descricao='Não Preenche Critérios').last()
+	status_aguard_inf_registro = status_registro.filter(descricao='Aguardando Informações').last()
 
 	data_cancelamento = datetime.now()
 	formateDate = data_cancelamento.strftime("%d-%m-%Y")
@@ -1482,7 +1988,13 @@ def status_registro(request, id):
 	return render(request, 'status_registro.html', {'registro':registro, 
 		'status_registro':status_registro, 
 		'formateDate':formateDate, 'hora':hora, 'status_registro_last':
-		status_registro_last})
+		status_registro_last, 'status_regulado_registro':
+		status_regulado_registro, 'status_nao_regulado_registro':
+		status_nao_regulado_registro, 'status_aguard_lista_espera_registro':
+		status_aguard_lista_espera_registro, 'status_obito_registro':
+		status_obito_registro, 'status_aguard_conf_vaga_registro':
+		status_aguard_conf_vaga_registro, 'status_aguard_inf_registro':
+		status_aguard_inf_registro})
 
 
 @login_required
@@ -1562,4 +2074,24 @@ def image_tc_torax_alter_set(request, id):
 	image_laudo_tc = request.FILES['file_tc_torax'].file.read()
 	registro.image_laudo_tc = image_laudo_tc
 	registro.save()
+	return redirect('regulacao_detail', id=id)
+
+
+@login_required
+def regular_registro(request, id):
+	registro = RegistroCovid.objects.get(id=id)
+
+	return render(request, 'regular_registro.html', {'registro':registro})
+
+
+@login_required
+def regular_registro_set(request, id):
+	registro = RegistroCovid.objects.get(id=id)
+
+	if registro.senha != '' or registro.senha != None:
+		senha_bd = registro.senha
+	else:
+		senha_bd = 0
+
+
 	return redirect('regulacao_detail', id=id)

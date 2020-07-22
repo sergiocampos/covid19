@@ -61,4 +61,6 @@ urlpatterns = [
     path('image_rx_torax_alter/<id>/submit', views.image_rx_torax_alter_set),
     path('image_tc_torax_alter/<id>/', views.image_tc_torax_alter, name='image_tc_torax_alter'),
     path('image_tc_torax_alter/<id>/submit', views.image_tc_torax_alter_set),
+    path('regular_registro/<id>/', views.regular_registro, name='regular_registro'),
+    path('regular_registro/<id>/submit', views.regular_registro_set)
 ]

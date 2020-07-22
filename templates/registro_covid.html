@@ -35,7 +35,9 @@
 			padding: 5px 10px;
 		}
 
-		#escolher_estabelecimento_id {
+		#escolher_estabelecimento_id,
+		#sars_igg_id,
+		#sars_igm_id {
 			display: none;
 		}
   	</style>
@@ -708,6 +710,290 @@ dgCidadesEstados.prototype = {
 		}
 	}
 
+	function check_outro_medicamento_(){
+		if (document.getElementById("outros_medicamento_id").checked == true){
+			$("#descricao_outro_medicamento").prop("disabled", false);
+		}
+		else{
+			$("#descricao_outro_medicamento").prop("disabled", true);
+			$("#descricao_outro_medicamento").val("");
+		}
+		
+	}
+
+	function activeValorCn_(){
+	if (document.getElementById("check_cn_id").checked == true){
+		$("#dose_cn_id").prop("disabled", false);
+	}
+	else {
+		$("#dose_cn_id").val("");
+		$("#dose_cn_id").prop("disabled", true);
+	}
+}
+
+function activeValorVenturi_(){
+	if (document.getElementById("check_venturi_id").checked == true){
+		$("#venturi_id").prop("disabled", false);
+	}
+	else {
+		$("#venturi_id").val("");
+		$("#venturi_id").prop("disabled", true);
+	}
+}
+
+function activeDoseNora_(){
+	if (document.getElementById("check_nora_id").checked == true){
+		$("#dose_nora_id").prop("disabled", false);
+	}
+	else {
+		$("#dose_nora_id").val("");
+		$("#dose_nora_id").prop("disabled", true);
+	}
+}
+
+function activeDoseAdrenalina_(){
+	if (document.getElementById("check_adrenalina_id").checked == true){
+		$("#dose_adrenalina_id").prop("disabled", false);
+	}
+	else {
+		$("#dose_adrenalina_id").val("");
+		$("#dose_adrenalina_id").prop("disabled", true);
+	}
+}
+
+function activeDoseVaso_(){
+	if (document.getElementById("check_vasopressina_id").checked == true){
+		$("#dose_vasopressina_id").prop("disabled", false);
+	}
+	else {
+		$("#dose_vasopressina_id").val("");
+		$("#dose_vasopressina_id").prop("disabled", true);
+	}
+}
+
+function activeDoseDobutamina_(){
+	if (document.getElementById("check_dobutamina_id").checked == true){
+		$("#dose_dobutamina_id").prop("disabled", false);
+	}
+	else {
+		$("#dose_dobutamina_id").val("");
+		$("#dose_dobutamina_id").prop("disabled", true);
+	}
+}
+
+function desactiveFoco_(){
+			$("#foco_pulmonar").prop("disabled", false);
+			$("#foco_urinario").prop("disabled", false);
+			$("#foco_pele").prop("disabled", false);
+			$("#foco_abdominal").prop("disabled", false);
+			$("#foco_corrente_sanguinea").prop("disabled", false);
+		}
+
+function activeFoco_(){
+
+			$("#foco_pulmonar").prop("checked", false);
+			$("#foco_urinario").prop("checked", false);
+			$("#foco_pele").prop("checked", false);
+			$("#foco_abdominal").prop("checked", false);
+			$("#foco_corrente_sanguinea").prop("checked", false);
+
+			$("#foco_pulmonar").prop("disabled", true);
+			$("#foco_urinario").prop("disabled", true);
+			$("#foco_pele").prop("disabled", true);
+			$("#foco_abdominal").prop("disabled", true);
+			$("#foco_corrente_sanguinea").prop("disabled", true);
+		}
+
+	function active_IgGIgM_(){
+	$("#sars_igg_id").show();
+	$("#sars_igm_id").show();
+
+	//$("#sars_negativo_id").hide();
+	//$("#sars_nao_realizado_id").hide();
+
+	$("#check_sars_negativo").prop("checked", false);
+	$("#check_sars_nao_realizado").prop("checked", false);
+
+}
+
+function clearTestRapidoPositivo(){
+	$("#sars_igg_id").hide();
+	$("#sars_igm_id").hide();
+	$("#igg_id").val("");
+	$("#igm_id").val("");
+	$("#data_igg_igm_id").val("");
+}
+
+function activeDoseCorticosteroide_(){
+			$("#corticosteroide_id").prop("disabled", false);
+			$("#data_inicio_corticosteroide_id").prop("disabled", false);
+		}
+
+		function desactiveDoseCorticosteroide_(){
+			$("#corticosteroide_id").val("");
+			$("#data_inicio_corticosteroide_id").val("");
+			$("#corticosteroide_id").prop("disabled", true);
+			$("#data_inicio_corticosteroide_id").prop("disabled", true);
+
+			$("#lb_data_inicio_corticosteroide_id").hide();
+		}
+
+function activeDataInicioHC_(){
+			$("#data_inicio_hidroxicloroquina_id").prop("disabled", false);
+		}
+
+		function desactiveDataInicioHC_(){
+			$("#data_inicio_hidroxicloroquina_id").val("");
+			$("#data_inicio_hidroxicloroquina_id").prop("disabled", true);
+		}
+
+function dataInicioOseltamivir_(){
+			$("#data_inicio_oseltamivir_id").prop("disabled", false);
+		}
+
+		function desactiveDataInicioOseltamivir_(){
+			$("#data_inicio_oseltamivir_id").val("");
+			$("#data_inicio_oseltamivir_id").prop("disabled", true);
+		}
+
+function activeDateHeparina_(){
+			$("#date_inicio_heparina").prop("disabled", false);
+			$("#heparina_tipo").prop("disabled", false);
+			$("#heparina_dose").prop("disabled", false);
+		}
+
+		function desactiveDateHeparina_(){
+			$("#heparina_tipo").val("");
+			$("#heparina_dose").val("");
+			$("#date_inicio_heparina").val("");
+			$("#date_inicio_heparina").prop("disabled", true);
+			$("#heparina_tipo").prop("disabled", true);
+			$("#heparina_dose").prop("disabled", true);
+
+		}
+
+function activeValorGlasgow_(){
+			if (document.getElementById("check_escala_glasgow").checked == true){
+				$("#escala_glasgow_id").prop("disabled", false);
+			}
+			else {
+				$("#escala_glasgow_id").val("");
+				$("#escala_glasgow_id").prop("disabled", true);
+			}
+
+		}
+
+		function activeBloqueadores_(){
+			if (document.getElementById("check_bloqueador_neuromuscular_id").checked == true){
+				$("#check_midazolam").prop("disabled", false);
+				$("#check_fentanil_id").prop("disabled", false);
+				$("#check_propofol_id").prop("disabled", false);
+
+			}
+			else {
+				$("#dose_midazolam_id").val("");
+				$("#dose_fentanil_id").val("");
+				$("#check_midazolam").prop("disabled", true);
+				$("#dose_fentanil_id").prop("disabled", true);
+				$("#check_midazolam").prop("checked", false);
+				$("#dose_midazolam_id").prop("disabled", true);
+
+				$("#check_fentanil_id").prop("checked", false);
+				$("#check_fentanil_id").prop("disabled", true);
+
+				$("#dose_propofol_id").val("");
+				$("#dose_propofol_id").prop("disabled", true);
+				$("#check_propofol_id").prop("checked", false);
+				$("#check_propofol_id").prop("disabled", true);
+			}
+
+		}
+
+function activeSedacaoContinua_(){
+	if (document.getElementById("check_sedacao_continua_id").checked == true){
+		$("#check_rocuronio_id").prop("disabled", false);
+		$("#check_pancuronio_id").prop("disabled", false);
+		$("#check_cisatracurio_id").prop("disabled", false);
+		
+	}
+	else {
+		$("#check_rocuronio_id").prop("disabled", true);
+		$("#check_pancuronio_id").prop("disabled", true);
+		$("#check_cisatracurio_id").prop("disabled", true);
+		$("#check_rocuronio_id").prop("checked", false);
+		$("#check_pancuronio_id").prop("checked", false);
+		$("#check_cisatracurio_id").prop("checked", false);
+
+		$("#rocuronio_dose_id").val("");
+		$("#rocuronio_dose_id").prop("disabled", true);
+		$("#pacuronio_dose_id").val("");
+		$("#pacuronio_dose_id").prop("disabled", true);
+		$("#cisatracurio_dose_id").val("");
+		$("#cisatracurio_dose_id").prop("disabled", true);
+	}
+
+}
+
+function activeDoseRocuronio_(){
+	if (document.getElementById("check_rocuronio_id").checked == true){
+		$("#rocuronio_dose_id").prop("disabled", false);
+	}
+	else {
+		$("#rocuronio_dose_id").val("");
+		$("#rocuronio_dose_id").prop("disabled", true);
+	}
+}
+
+function activeDosePacuronio_(){
+	if (document.getElementById("check_pancuronio_id").checked == true){
+		$("#pacuronio_dose_id").prop("disabled", false);
+	}
+	else {
+		$("#pacuronio_dose_id").val("");
+		$("#pacuronio_dose_id").prop("disabled", true);
+	}
+}
+
+function activeDoseCisatracurio_(){
+	if (document.getElementById("check_cisatracurio_id").checked == true){
+		$("#cisatracurio_dose_id").prop("disabled", false);
+	}
+	else {
+		$("#cisatracurio_dose_id").val("");
+		$("#cisatracurio_dose_id").prop("disabled", true);
+	}
+}
+
+function activeDoseMidazolam_(){
+			if (document.getElementById("check_midazolam").checked == true){
+				$("#dose_midazolam_id").prop("disabled", false);
+			}
+			else {
+				$("#dose_midazolam_id").val("");
+				$("#dose_midazolam_id").prop("disabled", true);
+			}
+		}
+
+		function activeDoseFentanil_(){
+			if (document.getElementById("check_fentanil_id").checked == true){
+				$("#dose_fentanil_id").prop("disabled", false);
+			}
+			else {
+				$("#dose_fentanil_id").val("");
+				$("#dose_fentanil_id").prop("disabled", true);
+			}
+		}
+
+		function activeDosePropofol_(){
+			if (document.getElementById("check_propofol_id").checked == true){
+				$("#dose_propofol_id").prop("disabled", false);
+			}
+			else {
+				$("#dose_propofol_id").val("");
+				$("#dose_propofol_id").prop("disabled", true);
+			}
+		}
+
   </script>
 
   <script>
@@ -1346,6 +1632,7 @@ $(function() {
 				            <option value="Avó">Avó</option>
 				            <option value="Avô">Avô</option>
 				            <option value="Primo">Primo</option>
+				            <option value="Amigo">Amigo</option>
 				            
 				        </select>
 				    </div>
@@ -1575,7 +1862,7 @@ $(function() {
 
 					{% if registro.outras_cardiopatias == '' or registro.outras_cardiopatias == None %}
 					<div class="form-check-inline" style="width: 200px">
-						<input type="text" class="form-control form-control-sm" id="outras_cardiopatias" placeholder="" name="desc_outras_cardiopatias" value="">
+						<input type="text" class="form-control form-control-sm" id="outras_cardiopatias" placeholder="" name="desc_outras_cardiopatias" value="" disabled>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width: 200px">
@@ -1707,7 +1994,7 @@ $(function() {
 				    {%else%}
 				    <div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="outros_medicamento" name="medicamento_uso_habitual" value="Outros" onclick="check_outro_medicamento()">Outros
+				        <input type="checkbox" class="form-check-input" id="outros_medicamento_id" name="medicamento_uso_habitual" value="Outros" onclick="check_outro_medicamento_()">Outros
 				      </label>
 				    </div>
 					
@@ -1780,7 +2067,7 @@ $(function() {
 				{% if 'CN' in registro.o2_suporte %}
 				<div class="col-sm-4">
 					<label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_cn_id" name="o2_suporte" value="CN" onclick="activeValorCn()" checked>CN:
+				        <input type="checkbox" class="form-check-input" id="check_cn_id" name="o2_suporte" value="CN" onclick="activeValorCn_()" checked>CN:
 				      </label>
 
 				    <div class="form-check-inline">
@@ -1790,7 +2077,7 @@ $(function() {
 				{%else%}
 				<div class="col-sm-4">
 					<label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_cn_id" name="o2_suporte" value="CN" onclick="activeValorCn()">CN:
+				        <input type="checkbox" class="form-check-input" id="check_cn_id" name="o2_suporte" value="CN" onclick="activeValorCn_()">CN:
 				      </label>
 
 				    <div class="form-check-inline">
@@ -1801,7 +2088,7 @@ $(function() {
 				{% if 'Venturi' in registro.o2_suporte %}
 				<div class="col-sm-2">
 					<label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_venturi_id" name="o2_suporte" value="Venturi" onclick="activeValorVenturi()" checked>Venturi
+				        <input type="checkbox" class="form-check-input" id="check_venturi_id" name="o2_suporte" value="Venturi" onclick="activeValorVenturi_()" checked>Venturi
 				      </label>
 
 					<div class="form-check-inline">
@@ -1811,7 +2098,7 @@ $(function() {
 				{%else%}
 				<div class="col-sm-2">
 					<label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_venturi_id" name="o2_suporte" value="Venturi" onclick="activeValorVenturi()">Venturi
+				        <input type="checkbox" class="form-check-input" id="check_venturi_id" name="o2_suporte" value="Venturi" onclick="activeValorVenturi_()">Venturi
 				      </label>
 
 					<div class="form-check-inline">
@@ -1989,7 +2276,7 @@ $(function() {
 					{% if 'Noradrenalina' in registro.droga_vasoativa %}
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_nora_id" name="droga_vasoativa" value="Noradrenalina" onclick="activeDoseNora()" checked>Noradrenalina - Dose
+				        <input type="checkbox" class="form-check-input" id="check_nora_id" name="droga_vasoativa" value="Noradrenalina" onclick="activeDoseNora_()" checked>Noradrenalina - Dose
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -2000,7 +2287,7 @@ $(function() {
 	              	{%else%}
 	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_nora_id" name="droga_vasoativa" value="Noradrenalina" onclick="activeDoseNora()">Noradrenalina - Dose
+				        <input type="checkbox" class="form-check-input" id="check_nora_id" name="droga_vasoativa" value="Noradrenalina" onclick="activeDoseNora_()">Noradrenalina - Dose
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -2014,7 +2301,7 @@ $(function() {
 					{% if 'Adrenalina' in registro.droga_vasoativa %}
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_adrenalina_id" name="droga_vasoativa" value="Adrenalina" onclick="activeDoseAdrenalina()" checked>Adrenalina - Dose
+				        <input type="checkbox" class="form-check-input" id="check_adrenalina_id" name="droga_vasoativa" value="Adrenalina" onclick="activeDoseAdrenalina_()" checked>Adrenalina - Dose
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -2025,7 +2312,7 @@ $(function() {
 	              	{%else%}
 	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_adrenalina_id" name="droga_vasoativa" value="Adrenalina" onclick="activeDoseAdrenalina()">Adrenalina - Dose
+				        <input type="checkbox" class="form-check-input" id="check_adrenalina_id" name="droga_vasoativa" value="Adrenalina" onclick="activeDoseAdrenalina_()">Adrenalina - Dose
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -2045,7 +2332,7 @@ $(function() {
 					{% if 'Vasopressina' in registro.droga_vasoativa %}
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_vasopressina_id" name="droga_vasoativa" value="Vasopressina" onclick="activeDoseVaso()" checked>Vasopressina - Dose
+				        <input type="checkbox" class="form-check-input" id="check_vasopressina_id" name="droga_vasoativa" value="Vasopressina" onclick="activeDoseVaso_()" checked>Vasopressina - Dose
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -2056,7 +2343,7 @@ $(function() {
 	              	{%else%}
 	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_vasopressina_id" name="droga_vasoativa" value="Vasopressina" onclick="activeDoseVaso()">Vasopressina - Dose
+				        <input type="checkbox" class="form-check-input" id="check_vasopressina_id" name="droga_vasoativa" value="Vasopressina" onclick="activeDoseVaso_()">Vasopressina - Dose
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -2070,7 +2357,7 @@ $(function() {
 					{% if 'Dobutamina' in registro.droga_vasoativa %}
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_dobutamina_id" name="droga_vasoativa" value="Dobutamina" onclick="activeDoseDobutamina()" checked>Dobutamina - Dose
+				        <input type="checkbox" class="form-check-input" id="check_dobutamina_id" name="droga_vasoativa" value="Dobutamina" onclick="activeDoseDobutamina_()" checked>Dobutamina - Dose
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -2081,7 +2368,7 @@ $(function() {
 	              	{%else%}
 	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_dobutamina_id" name="droga_vasoativa" value="Dobutamina" onclick="activeDoseDobutamina()">Dobutamina - Dose
+				        <input type="checkbox" class="form-check-input" id="check_dobutamina_id" name="droga_vasoativa" value="Dobutamina" onclick="activeDoseDobutamina_()">Dobutamina - Dose
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -2166,13 +2453,13 @@ $(function() {
 					{% if registro.infeccao_bacteriana == 'Sim' %}
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="infeccao_bacteriana" value="Sim" onclick="desactiveFoco()" checked>Sim
+				        <input type="radio" class="form-check-input" id="" name="infeccao_bacteriana" value="Sim" onclick="desactiveFoco_()" checked>Sim
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="infeccao_bacteriana" value="Sim" onclick="desactiveFoco()">Sim
+				        <input type="radio" class="form-check-input" id="" name="infeccao_bacteriana" value="Sim" onclick="desactiveFoco_()">Sim
 				      </label>
 				    </div>
 				    {%endif%}
@@ -2181,13 +2468,13 @@ $(function() {
 					{% if registro.infeccao_bacteriana == 'Não' %}
 					<div class="form-check-inline" style="width:110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="infeccao_bacteriana" value="Não" onclick="activeFoco()" checked>Não
+				        <input type="radio" class="form-check-input" id="" name="infeccao_bacteriana" value="Não" onclick="activeFoco_()" checked>Não
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width:110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="infeccao_bacteriana" value="Não" onclick="activeFoco()">Não
+				        <input type="radio" class="form-check-input" id="" name="infeccao_bacteriana" value="Não" onclick="activeFoco_()">Não
 				      </label>
 				    </div>
 				    {%endif%}
@@ -2444,14 +2731,14 @@ $(function() {
 				<div class="col-sm-2" style="margin-left: -30px">
 				    <div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" onclick="active_IgGIgM()">Positivo
+				        <input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" onclick="active_IgGIgM_()">Positivo
 				      </label>
 				    </div>
 				</div>
 
 				<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
 					<div class="form-check-inline"><b>IgM:</b>
-						<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+						<select name="igm" id="igm_id" class="form-control form-control-sm" style="width: auto">
 							<option value="">selecione</option>
 							<option value="REAGENTE">REAGENTE</option>
 							<option value="NÃO REAGENTE">NÃO REAGENTE</option>
@@ -2461,21 +2748,21 @@ $(function() {
 
 				<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
 					<div class="form-check-inline"><b>IgG:</b>
-						<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
+						<select name="igg" id="igg_id" class="form-control form-control-sm" style="width: auto">
 				            <option value="">selecione</option>
 				            <option value="REAGENTE">REAGENTE</option>
 				            <option value="NÃO REAGENTE">NÃO REAGENTE</option>           
 				        </select>
 				    </div>
 				    <div class="form-check-inline" style=""><b>Data:</b>
-				    	<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
+				    	<input type="date" class="form-control form-control-sm" id="data_igg_igm_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
 				    </div>
 				</div>
 
 				<div class="col-sm-2" id="sars_negativo_id">
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo">Negativo
+				        <input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo" onclick="clearTestRapidoPositivo()">Negativo
 				      </label>
 				    </div>
 				   
@@ -2484,7 +2771,7 @@ $(function() {
 				<div class="col-sm-4" id="sars_nao_realizado_id">
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado">Não Realizado
+				        <input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado" onclick="clearTestRapidoPositivo()">Não Realizado
 				      </label>
 				    </div>
 				</div>
@@ -2567,13 +2854,13 @@ $(function() {
 					{% if registro.em_uso_corticosteroide == 'Sim' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="em_uso_corticosteroide" value="Sim" onclick="activeDoseCorticosteroide()" checked>Sim - Qual Dose:
+				        <input type="radio" class="form-check-input" id="" name="em_uso_corticosteroide" value="Sim" onclick="activeDoseCorticosteroide_()" checked>Sim - Qual Dose:
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="em_uso_corticosteroide" value="Sim" onclick="activeDoseCorticosteroide()">Sim - Qual Dose:
+				        <input type="radio" class="form-check-input" id="" name="em_uso_corticosteroide" value="Sim" onclick="activeDoseCorticosteroide_()">Sim - Qual Dose:
 				      </label>
 				    </div>
 				    {%endif%}
@@ -2582,7 +2869,7 @@ $(function() {
 				<div class="col-sm-2">
 					{% if registro.dose_corticosteroide == '' or registro.dose_corticosteroide == None %}
 					<div class="form-check-inline" style="width: 100px">
-						<input type="text" class="form-control form-control-sm" id="corticosteroide_id" placeholder="" name="dose_corticosteroide" value="">
+						<input type="text" class="form-control form-control-sm" id="corticosteroide_id" placeholder="" name="dose_corticosteroide" value="" disabled>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width: 100px">
@@ -2591,13 +2878,13 @@ $(function() {
 				    {%endif%}
 				</div>
 				<div class="col-sm-3" style="">
-					<div class="form-check-inline" style="">
+					<div class="form-check-inline" style="width: 100%">
 				      Data de Início:
 				      {% if registro.data_inicio_corticosteroide == '' or registro.data_inicio_corticosteroide == None %}
-				      <input type="date" class="form-control form-control-sm" id="data_inicio_corticosteroide_id" name="data_inicio_corticosteroide" value="" disabled style="width: 110px">
+				      <input type="date" class="form-control form-control-sm" id="data_inicio_corticosteroide_id" name="data_inicio_corticosteroide" value="" disabled style="width: 140px">
 
 				      {%else%}
-				      <input type="text" class="" id="data_inicio_corticosteroide_id" name="data_inicio_corticosteroide_bd" value="{{registro.data_inicio_corticosteroide}}" style="width: 110px">
+				      <input type="text" class="" id="data_inicio_corticosteroide_id" name="data_inicio_corticosteroide_bd" value="{{registro.data_inicio_corticosteroide}}" style="">
 				      {%endif%}
 				    </div>
 				</div>
@@ -2605,13 +2892,13 @@ $(function() {
 					{% if registro.em_uso_corticosteroide == 'Não' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="em_uso_corticosteroide" value="Não" onclick="desactiveDoseCorticosteroide()" checked>Não
+				        <input type="radio" class="form-check-input" id="" name="em_uso_corticosteroide" value="Não" onclick="desactiveDoseCorticosteroide_()" checked>Não
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="em_uso_corticosteroide" value="Não" onclick="desactiveDoseCorticosteroide()">Não
+				        <input type="radio" class="form-check-input" id="" name="em_uso_corticosteroide" value="Não" onclick="desactiveDoseCorticosteroide_()">Não
 				      </label>
 				    </div>
 				    {%endif%}
@@ -2627,13 +2914,13 @@ $(function() {
 					{% if registro.em_uso_hidroxicloroquina == 'Sim' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="em_uso_hidrocloroquina" value="Sim" onclick="activeDataInicioHC()" checked>Sim - Data de Início:
+				        <input type="radio" class="form-check-input" id="" name="em_uso_hidrocloroquina" value="Sim" onclick="activeDataInicioHC_()" checked>Sim - Data de Início:
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="em_uso_hidrocloroquina" value="Sim" onclick="activeDataInicioHC()">Sim - Data de Início:
+				        <input type="radio" class="form-check-input" id="" name="em_uso_hidrocloroquina" value="Sim" onclick="activeDataInicioHC_()">Sim - Data de Início:
 				      </label>
 				    </div>
 				    {%endif%}
@@ -2655,13 +2942,13 @@ $(function() {
 					{% if registro.em_uso_hidroxicloroquina == 'Não' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="em_uso_hidrocloroquina" value="Não" onclick="desactiveDataInicioHC()" checked>Não
+				        <input type="radio" class="form-check-input" id="" name="em_uso_hidrocloroquina" value="Não" onclick="desactiveDataInicioHC_()" checked>Não
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="em_uso_hidrocloroquina" value="Não" onclick="desactiveDataInicioHC()">Não
+				        <input type="radio" class="form-check-input" id="" name="em_uso_hidrocloroquina" value="Não" onclick="desactiveDataInicioHC_()">Não
 				      </label>
 				    </div>
 				    {%endif%}
@@ -2676,13 +2963,13 @@ $(function() {
 					{% if registro.em_uso_oseltamivir == 'Sim' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Sim" onclick="dataInicioOseltamivir()" checked>Sim - Data de Início:
+				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Sim" onclick="dataInicioOseltamivir_()" checked>Sim - Data de Início:
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Sim" onclick="dataInicioOseltamivir()">Sim - Data de Início:
+				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Sim" onclick="dataInicioOseltamivir_()">Sim - Data de Início:
 				      </label>
 				    </div>
 				    {%endif%}
@@ -2704,13 +2991,13 @@ $(function() {
 					{% if registro.em_uso_oseltamivir == 'Não' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Não" onclick="desactiveDataInicioOseltamivir()" checked>Não
+				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Não" onclick="desactiveDataInicioOseltamivir_()" checked>Não
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Não" onclick="desactiveDataInicioOseltamivir()">Não
+				        <input type="radio" class="form-check-input" id="" name="em_uso_oseltamivir" value="Não" onclick="desactiveDataInicioOseltamivir_()">Não
 				      </label>
 				    </div>
 				    {%endif%}
@@ -2726,13 +3013,13 @@ $(function() {
 					{% if registro.em_uso_heparina == 'Sim' %}
 					<div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="" style="font-size: ; margin-left:">
-				        <input type="radio" class="form-check-input" id="uso_heparina_sim" name="em_uso_heparina" onclick="activeDateHeparina()" value="Sim" checked>Sim - Data de Início:
+				        <input type="radio" class="form-check-input" id="uso_heparina_sim" name="em_uso_heparina" onclick="activeDateHeparina_()" value="Sim" checked>Sim - Data de Início:
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width: 110%">
 				      <label class="form-check-label" for="" style="font-size: ; margin-left:">
-				        <input type="radio" class="form-check-input" id="uso_heparina_sim" name="em_uso_heparina" onclick="activeDateHeparina()" value="Sim">Sim - Data de Início:
+				        <input type="radio" class="form-check-input" id="uso_heparina_sim" name="em_uso_heparina" onclick="activeDateHeparina_()" value="Sim">Sim - Data de Início:
 				      </label>
 				    </div>
 				    {%endif%}
@@ -2782,7 +3069,7 @@ $(function() {
 				<div class="col-sm-9">
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="radio" class="form-check-input" id="" name="em_uso_heparina" value="Não" onclick="desactiveDateHeparina()">Não
+				        <input type="radio" class="form-check-input" id="" name="em_uso_heparina" value="Não" onclick="desactiveDateHeparina_()">Não
 				      </label>
 				    </div>
 				</div>
@@ -2827,7 +3114,7 @@ $(function() {
 				<div class="col-sm-5" style="">
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_escala_glasgow" name="" value="" onclick="activeValorGlasgow()">Escala de Coma de Glasgow
+				        <input type="checkbox" class="form-check-input" id="check_escala_glasgow" name="" value="" onclick="activeValorGlasgow_()">Escala de Coma de Glasgow
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -2850,13 +3137,13 @@ $(function() {
 					{% if not registro.bloqueador_neuromuscular %}
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_bloqueador_neuromuscular_id" name="bloqueador_neuromuscular" value="Bloqueador Neuromuscular" onclick="activeBloqueadores()">Bloqueador Neuromuscular:
+				        <input type="checkbox" class="form-check-input" id="check_bloqueador_neuromuscular_id" name="bloqueador_neuromuscular" value="Bloqueador Neuromuscular" onclick="activeBloqueadores_()">Bloqueador Neuromuscular:
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_bloqueador_neuromuscular_id" name="bloqueador_neuromuscular" value="Bloqueador Neuromuscular" onclick="activeBloqueadores()" checked>Bloqueador Neuromuscular:
+				        <input type="checkbox" class="form-check-input" id="check_bloqueador_neuromuscular_id" name="bloqueador_neuromuscular" value="Bloqueador Neuromuscular" onclick="activeBloqueadores_()" checked>Bloqueador Neuromuscular:
 				      </label>
 				    </div>
 				    {%endif%}
@@ -2869,13 +3156,13 @@ $(function() {
 					{% if not registro.sedacao_continua %}
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_sedacao_continua_id" name="sedacao_continua" value="Sedação Continua" onclick="activeSedacaoContinua()">Sedação contínua
+				        <input type="checkbox" class="form-check-input" id="check_sedacao_continua_id" name="sedacao_continua" value="Sedação Continua" onclick="activeSedacaoContinua_()">Sedação contínua
 				      </label>
 				    </div>
 				    {%else%}
 				    <div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_sedacao_continua_id" name="sedacao_continua" value="Sedação Continua" onclick="activeSedacaoContinua()" checked>Sedação contínua
+				        <input type="checkbox" class="form-check-input" id="check_sedacao_continua_id" name="sedacao_continua" value="Sedação Continua" onclick="activeSedacaoContinua_()" checked>Sedação contínua
 				      </label>
 				    </div>
 				    {%endif%}
@@ -2891,7 +3178,7 @@ $(function() {
 					{%if 'Midazolam' in registro.bloqueador_neuromuscular %}
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_midazolam" name="desc_bloqueador_neuromuscular" value="Midazolam" onclick="activeDoseMidazolam()" checked>Midazolam - Dose:
+				        <input type="checkbox" class="form-check-input" id="check_midazolam" name="desc_bloqueador_neuromuscular" value="Midazolam" onclick="activeDoseMidazolam_()" checked>Midazolam - Dose:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -2900,7 +3187,7 @@ $(function() {
 	              	{%else%}
 	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_midazolam" name="desc_bloqueador_neuromuscular" value="Midazolam" disabled onclick="activeDoseMidazolam()">Midazolam - Dose:
+				        <input type="checkbox" class="form-check-input" id="check_midazolam" name="desc_bloqueador_neuromuscular" value="Midazolam" disabled onclick="activeDoseMidazolam_()">Midazolam - Dose:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -2915,7 +3202,7 @@ $(function() {
 					{% if 'Rocurônio' in registro.sedacao_continua %}
 					<div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_rocuronio_id" name="desc_sedacao_continua" value="Rocurônio" onclick="activeDoseRocuronio()" checked>Rocurônio – Dose:
+				        <input type="checkbox" class="form-check-input" id="check_rocuronio_id" name="desc_sedacao_continua" value="Rocurônio" onclick="activeDoseRocuronio_()" checked>Rocurônio – Dose:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="margin-left:">
@@ -2924,7 +3211,7 @@ $(function() {
 	              	{%else%}
 	              	<div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_rocuronio_id" name="desc_sedacao_continua" value="Rocurônio" disabled onclick="activeDoseRocuronio()">Rocurônio – Dose:
+				        <input type="checkbox" class="form-check-input" id="check_rocuronio_id" name="desc_sedacao_continua" value="Rocurônio" disabled onclick="activeDoseRocuronio_()">Rocurônio – Dose:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="margin-left:">
@@ -2942,7 +3229,7 @@ $(function() {
 					{% if 'Fentanil' in registro.bloqueador_neuromuscular %}
 					<div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_fentanil_id" name="desc_bloqueador_neuromuscular" value="Fentanil" checked onclick="activeDoseFentanil()">Fentanil - Dose:
+				        <input type="checkbox" class="form-check-input" id="check_fentanil_id" name="desc_bloqueador_neuromuscular" value="Fentanil" checked onclick="activeDoseFentanil_()">Fentanil - Dose:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="margin-left:">
@@ -2951,7 +3238,7 @@ $(function() {
 	              	{%else%}
 	              	<div class="form-check-inline">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_fentanil_id" name="desc_bloqueador_neuromuscular" value="Fentanil" disabled onclick="activeDoseFentanil()">Fentanil - Dose:
+				        <input type="checkbox" class="form-check-input" id="check_fentanil_id" name="desc_bloqueador_neuromuscular" value="Fentanil" disabled onclick="activeDoseFentanil_()">Fentanil - Dose:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="margin-left:">
@@ -2964,7 +3251,7 @@ $(function() {
 					{% if 'Pancurônio' in registro.sedacao_continua %}
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_pancuronio_id" name="desc_sedacao_continua" value="Pancurônio" checked onclick="activeDosePacuronio()">Pancurônio – Dose:
+				        <input type="checkbox" class="form-check-input" id="check_pancuronio_id" name="desc_sedacao_continua" value="Pancurônio" checked onclick="activeDosePacuronio_()">Pancurônio – Dose:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -2973,7 +3260,7 @@ $(function() {
 	              	{%else%}
 	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_pancuronio_id" name="desc_sedacao_continua" value="Pancurônio" disabled onclick="activeDosePacuronio()">Pancurônio – Dose:
+				        <input type="checkbox" class="form-check-input" id="check_pancuronio_id" name="desc_sedacao_continua" value="Pancurônio" disabled onclick="activeDosePacuronio_()">Pancurônio – Dose:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -2992,7 +3279,7 @@ $(function() {
 					{% if 'Propofol' in registro.bloqueador_neuromuscular %}
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_propofol_id" name="desc_bloqueador_neuromuscular" value="Propofol" checked onclick="activeDosePropofol()">Propofol - Dose:
+				        <input type="checkbox" class="form-check-input" id="check_propofol_id" name="desc_bloqueador_neuromuscular" value="Propofol" checked onclick="activeDosePropofol_()">Propofol - Dose:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -3001,7 +3288,7 @@ $(function() {
 	              	{%else%}
 	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_propofol_id" name="desc_bloqueador_neuromuscular" value="Propofol" disabled onclick="activeDosePropofol()">Propofol - Dose:
+				        <input type="checkbox" class="form-check-input" id="check_propofol_id" name="desc_bloqueador_neuromuscular" value="Propofol" disabled onclick="activeDosePropofol_()">Propofol - Dose:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="">
@@ -3016,7 +3303,7 @@ $(function() {
 					{% if 'Cisatracúrio' in registro.sedacao_continua %}
 					<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_cisatracurio_id" name="desc_sedacao_continua" value="Cisatracúrio" checked onclick="activeDoseCisatracurio()">Cisatracúrio – Dose:
+				        <input type="checkbox" class="form-check-input" id="check_cisatracurio_id" name="desc_sedacao_continua" value="Cisatracúrio" checked onclick="activeDoseCisatracurio_()">Cisatracúrio – Dose:
 				      </label>
 				    </div>
 				    <div class="form-check-inline" style="margin-left:">
@@ -3025,7 +3312,7 @@ $(function() {
 	              	{%else%}
 	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_cisatracurio_id" name="desc_sedacao_continua" value="Cisatracúrio" disabled onclick="activeDoseCisatracurio()">Cisatracúrio – Dose:
+				        <input type="checkbox" class="form-check-input" id="check_cisatracurio_id" name="desc_sedacao_continua" value="Cisatracúrio" disabled onclick="activeDoseCisatracurio_()">Cisatracúrio – Dose:
 				      </label>
 				    </div>
 				    <div class="form-check-inline" style="margin-left:">

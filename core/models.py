@@ -181,6 +181,8 @@ class RegistroCovid(models.Model):
 
 	prioridade = models.IntegerField(blank=True, null=True)
 
+	senha = models.IntegerField(blank=True, null=True)
+
 	codigo_sescovid = models.CharField(max_length=100, blank=True, default='', null=True)
 
 	justificativa = models.TextField(blank=True, default='', null=True)

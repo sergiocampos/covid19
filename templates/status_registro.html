@@ -157,26 +157,9 @@
 		    </div>
 		  </div>
 
-
-
-			{% for sr in status_registro %}
 			<div class="row">
 				<div class="col-sm-4"></div>
-				{% if 'Aguardando confirmação de Vaga' in sr.descricao %}
-				<div id="" class="col-sm-4" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b><i>Aguardando Confirmação de Vaga! - {{status_registro.data_notificacao}} - {{status_registro.hora_notificacao|time:"H:i"}}</i></b>
-				</div>
-				{%else%}
-				<div id="paciente_regulado_id" class="col-sm-4" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b><i>Aguardando Confirmação de Vaga!</i></b>
-				</div>
-				{%endif%}
-				<div class="col-sm-4"></div>
-			</div>
-			{%endfor%}
-			<div class="row">
-				<div class="col-sm-4"></div>
-				{% if 'Aguardando confirmação de Vaga' in status_list_descricao %}
+				{% if 'Aguardando confirmação de Vaga' in status_aguard_conf_vaga_registro.descricao %}
 				<div id="" class="col-sm-4" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
 					<b><i>Aguardando Confirmação de Vaga! - {{status_aguard_conf_vaga_registro.data_notificacao}} - {{status_aguard_conf_vaga_registro.hora_notificacao|time:"H:i"}}</i></b>
 				</div>
@@ -190,7 +173,7 @@
 
 			<div class="row">
 				<div class="col-sm-4"></div>
-				{% if 'Aguardando em Lista de Espera' in status_list_descricao %}
+				{% if 'Aguardando em Lista de Espera' in status_aguard_lista_espera_registro.descricao %}
 				<div id="" class="col-sm-4" style="background-color: #ffcc99; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
 					<b><i>Paciente em Lista de espera! - {{status_aguard_lista_espera_registro.data_notificacao}} - {{status_aguard_lista_espera_registro.hora_notificacao|time:"H:i"}}</i></b>
 				</div>
@@ -204,7 +187,7 @@
 
 			<div class="row">
 				<div class="col-sm-4"></div>
-				{% if 'Regulado' in status_list_descricao %}
+				{% if 'Regulado' in status_regulado_registro.descricao %}
 				<div id="" class="col-sm-4" style="background-color: #b3e6b3; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
 					<b><i>Paciente Regulado! - {{status_regulado_registro.data_notificacao}} - {{status_regulado_registro.hora_notificacao|time:"H:i"}}</i></b>
 				</div>
@@ -218,13 +201,39 @@
 
 			<div class="row">
 				<div class="col-sm-4"></div>
-				{% if 'Não Regulado' in status_list_descricao %}
+				{% if 'Não Preenche Critérios' in status_nao_regulado_registro.descricao %}
 				<div id="" class="col-sm-4" style="background-color: #c6c6c6; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b><i>Paciente Não Regulado! - {{status_nao_regulado_registro.data_notificacao}} - {{status_nao_regulado_registro.hora_notificacao|time:"H:i"}}</i></b>
+					<b><i>Não Preenche Critérios! - {{status_nao_regulado_registro.data_notificacao}} - {{status_nao_regulado_registro.hora_notificacao|time:"H:i"}}</i></b>
 				</div>
 				{%else%}
 				<div id="paciente_internado_regulacao_id" class="col-sm-4" style="background-color: #b3e6b3; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b><i>Paciente Não Regulado!</i></b>
+					<b><i>Não Preenche Critérios!</i></b>
+				</div>
+				{%endif%}
+				<div class="col-sm-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4"></div>
+				{% if 'Obito' in status_obito_registro.descricao %}
+				<div id="" class="col-sm-4" style="background-color: #ff8080; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b><i>Óbito! - {{status_obito_registro.data_notificacao}} - {{status_obito_registro.hora_notificacao|time:"H:i"}}</i></b>
+				</div>
+				{%else%}
+				<div id="paciente_internado_regulacao_id" class="col-sm-4" style="background-color: #ff8080; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b><i>Óbito!</i></b>
+				</div>
+				{%endif%}
+				<div class="col-sm-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4"></div>
+				{% if 'Aguardando Informações' in status_aguard_inf_registro.descricao %}
+				<div id="" class="col-sm-4" style="background-color: #ffb366; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b><i>Aguardando Informações! - {{status_aguard_inf_registro.data_notificacao}} - {{status_aguard_inf_registro.hora_notificacao|time:"H:i"}}</i></b>
+				</div>
+				{%else%}
+				<div id="paciente_internado_regulacao_id" class="col-sm-4" style="background-color: #8cb3d9; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b><i>Aguardando Informações!</i></b>
 				</div>
 				{%endif%}
 				<div class="col-sm-4"></div>
@@ -303,7 +312,7 @@
 		<div class="container-fluid" style="text-align: center;">
 			<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/covid_list/">Principal</a></button>
 			{% if registro.andamento_processo != '' %}
-			{%else%}<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/regulacao/{{registro.id}}/">Regular</a></button>
+			{%else%}<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/regular_registro/{{registro.id}}/">Regular</a></button>
 			{%endif%}
 			
 		</div>

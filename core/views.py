@@ -488,49 +488,49 @@ def registro_covid_set(request):
 	uso_antibioticoterapia = request.POST.get('uso_antibioticoterapia')
 	pesquisa_teste_sars_cov_2 = request.POST.get('pesquisa_sars_cov2')
 	igg_cap = request.POST.get('igg')
-	igg_bd = request.POST.get('igg_bd')
+	#igg_bd = request.POST.get('igg_bd')
 	if igg_cap == '' or igg_cap == None:
-		if igg_bd == '' or igg_bd == None:
-			igg = None
-		else:
-			igg = igg_bd
+		#if igg_bd == '' or igg_bd == None:
+		igg = None
+		#else:
+		#	igg = igg_bd
 	else:
 		igg = igg_cap
 
-	igm_do_bd = registro.igm
+	#igm_do_bd = registro.igm
 	igm_cap = request.POST.get('igm')
 
-	igm_bd_cap = request.POST.get('igm_bd')
+	#igm_bd_cap = request.POST.get('igm_bd')
 	if igm_cap == '' or igm_cap == None:
-		if igm_bd_cap == '' or igm_bd_cap == None:
-			igm = None
-		else:
-			igm = igm_bd_cap
+		#if igm_bd_cap == '' or igm_bd_cap == None:
+		igm = None
+		#else:
+		#	igm = igm_bd_cap
 	else:
 		igm = igm_cap
 
 	
 	data_igm_igg_cap = request.POST.get('data_igm_igg')
-	data_igm_igg_bd_cap = request.POST.get('data_igm_igg_bd')
+	#data_igm_igg_bd_cap = request.POST.get('data_igm_igg_bd')
 
 	if data_igm_igg_cap == '' or data_igm_igg_cap == None:
-		if data_igm_igg_bd_cap == '' or data_igm_igg_bd_cap == None:
-			data_igm_igg = None
-		else:
-			data_igm_igg = datetime.strptime(data_igm_igg_bd_cap, '%d/%m/%Y').date()
+		#if data_igm_igg_bd_cap == '' or data_igm_igg_bd_cap == None:
+		data_igm_igg = None
+		#else:
+		#	data_igm_igg = datetime.strptime(data_igm_igg_bd_cap, '%d/%m/%Y').date()
 	else:
 		data_igm_igg = data_igm_igg_cap
 
 
 	rt_pcr_sars_cov_2 = request.POST.get('pcr_sars_cov2')
 	
-	data_da_coleta_bd_cap = request.POST.get('data_da_coleta_bd')
+	#data_da_coleta_bd_cap = request.POST.get('data_da_coleta_bd')
 	data_coleta_cap = request.POST.get('data_da_coleta')
 	if data_coleta_cap == '' or data_coleta_cap == None:
-		if data_da_coleta_bd_cap == '' or data_da_coleta_bd_cap == None:
-			data_coleta = None
-		else:
-			data_coleta = datetime.strptime(data_da_coleta_bd_cap, '%d/%m/%Y').date()
+		#if data_da_coleta_bd_cap == '' or data_da_coleta_bd_cap == None:
+		data_coleta = None
+		#else:
+		#	data_coleta = datetime.strptime(data_da_coleta_bd_cap, '%d/%m/%Y').date()
 	else:
 		data_coleta = data_coleta_cap
 	
@@ -650,8 +650,8 @@ def registro_covid_set(request):
 	tgo = request.POST.get('tgo')
 	tgp = request.POST.get('tgp')
 	exame_imagem = request.POST.getlist('exame_imagem')
-	laudo_tc_torax = request.POST.get('laudo_tc_torax')
-	laudo_rx_torax = request.POST.get('laudo_rx_torax')
+	#laudo_tc_torax = request.POST.get('laudo_tc_torax')
+	#laudo_rx_torax = request.POST.get('laudo_rx_torax')
 	is_sindrome_gripal = request.POST.get('sindrome_gripal')
 	news_fast_pb = request.POST.get('new_fast')
 	news_modificado = request.POST.get('new_modificado')
@@ -667,44 +667,47 @@ def registro_covid_set(request):
 		prioridade = int(float(prioridade_cap))
 	
 
-	registro_last = RegistroCovid.objects.last()
-	print("ultimo sescovid:", registro_last.senha)
-	if registro_last:
-		senha_bd = registro_last.senha
-		senha = int(senha_bd) + 100
-	else:
-		senha_bd = 0
-		senha = int(senha_bd) + 100
+	#registro_last = RegistroCovid.objects.last()
+	#print("ultimo sescovid:", registro_last.senha)
+	#if last_registro:
+	#	senha_bd = last_registro.senha
+	#	if senha_bd:
+	#		senha = int(senha_bd) + 100
+	#	else:
+	#		senha = 100
+	#else:
+	#	senha_bd = 0
+	#	senha = int(senha_bd) + 100
 
-	codigo_sescovid = request.POST.get('num_protocolo')
+	#codigo_sescovid = request.POST.get('num_protocolo')
 
-	justificativa = request.POST.get('justificativa')
+	#justificativa = request.POST.get('justificativa')
 	#observacao = request.POST.get('observacoes_medicas')
 	
-	pareceristas = registro.pareceristas
+	#pareceristas = registro.pareceristas
 	
-	pareceristas_cap = request.POST.getlist('pareceristas')
+	#pareceristas_cap = request.POST.getlist('pareceristas')
 	
-	if pareceristas == '' or pareceristas == None:
-		pareceristas = pareceristas_cap
-	else:
-		pareceristas = pareceristas + pareceristas_cap
+	#if pareceristas == '' or pareceristas == None:
+	#	pareceristas = pareceristas_cap
+	#else:
+	#	pareceristas = pareceristas + pareceristas_cap
 
 	
-	data_regulacao = datetime.now()
+	#data_regulacao = datetime.now()
 	#data_regulacao = data_regulacao_.strftime('%d/%m/%Y %H:%M')
 
 
-	data_obito_bd_cap = request.POST.get('data_obito_bd')
-	data_obito_cap = request.POST.get('data_obito')
+	#data_obito_bd_cap = request.POST.get('data_obito_bd')
+	#data_obito_cap = request.POST.get('data_obito')
 
-	if data_obito_cap == '' or data_obito_cap == None:
-		if data_obito_bd_cap == '' or data_obito_bd_cap == None:
-			data_obito = None
-		else:
-			data_obito = datetime.strptime(data_obito_bd_cap, '%d/%m/%Y').date()
-	else:
-		data_obito = data_obito_cap
+	#if data_obito_cap == '' or data_obito_cap == None:
+	#	if data_obito_bd_cap == '' or data_obito_bd_cap == None:
+	#		data_obito = None
+	#	else:
+	#		data_obito = datetime.strptime(data_obito_bd_cap, '%d/%m/%Y').date()
+	#else:
+	#	data_obito = data_obito_cap
 
 
 	registro = RegistroCovid.objects.create(
@@ -822,8 +825,8 @@ def registro_covid_set(request):
 		tgo = tgo,
 		tgp = tgp,
 		exame_imagem = exame_imagem,
-		laudo_tc_torax = laudo_tc_torax,
-		laudo_rx_torax = laudo_rx_torax,
+		#laudo_tc_torax = laudo_tc_torax,
+		#laudo_rx_torax = laudo_rx_torax,
 		is_sindrome_gripal = is_sindrome_gripal,
 		news_fast_pb = news_fast_pb,
 		news_modificado = news_modificado,
@@ -831,12 +834,12 @@ def registro_covid_set(request):
 		leito = leito,
 		parecer_medico = parecer_medico,
 		prioridade = prioridade,
-		senha = senha,
-		codigo_sescovid = codigo_sescovid,
-		justificativa = justificativa,
-		pareceristas = pareceristas,
-		data_regulacao = data_regulacao,
-		data_obito = data_obito
+		#senha = senha,
+		#codigo_sescovid = codigo_sescovid,
+		#justificativa = justificativa,
+		#pareceristas = pareceristas,
+		#data_regulacao = data_regulacao,
+		#data_obito = data_obito
 
 		)
 
@@ -870,14 +873,25 @@ def regulacao(request, id):
 
 	registro = RegistroCovid.objects.get(id=id)
 
-	if registro.senha:
-		senha_bd = registro.senha
-		senha_new = int(senha_bd) + 100
+	registro_last = RegistroCovid.objects.all().last()
+	senha_last = registro_last.senha
+	if senha_last == '' or senha_last == None:
+		senha_new = 100
 	else:
-		senha_bd = 0
-		senha_new = int(senha_bd) + 100
+		senha_new = registro_last.senha
+
+	senha = senha_new
+	print("senha:", senha, ". Tipo:", type(senha))
+
+	#if registro.senha:
+	#	senha_bd = registro.senha
+	#	senha_new = int(senha_bd) + 100
+	#else:
+	#	senha_bd = 0
+	#	senha_new = int(senha_bd) + 100
 
 	codigo_sescovid = "SESCOVID" + str(senha_new)
+	print("codigo SES:", codigo_sescovid)
 
 	pa = registro.pa
 
@@ -937,7 +951,8 @@ def regulacao(request, id):
 
 	if not registro.image_laudo_tc and not registro.image_laudo_rx:
 		return render(request, 'regulacao.html', {'registro' : registro, 
-			'codigo_sescovid':codigo_sescovid, 'pa_1':pa_1, 'pa_2':pa_2, 
+			'codigo_sescovid':codigo_sescovid, 'senha':senha, 'pa_1':pa_1, 
+			'pa_2':pa_2, 
 			'data_regulacao_template':data_regulacao_template, 
 			'status_list_descricao':status_list_descricao, 
 			'status_aguard_conf_vaga_registro':
@@ -958,7 +973,7 @@ def regulacao(request, id):
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
 
 		return render(request, 'regulacao.html', {'registro' : registro, 
-		'codigo_sescovid':codigo_sescovid, 'pa_1':pa_1, 
+		'codigo_sescovid':codigo_sescovid, 'senha':senha, 'pa_1':pa_1, 
 		'pa_2':pa_2, 'data_regulacao_template': data_regulacao_template,
 		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
 		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
@@ -975,7 +990,7 @@ def regulacao(request, id):
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
 
 		return render(request, 'regulacao.html', {'registro' : registro, 
-		'codigo_sescovid':codigo_sescovid, 'pa_1':pa_1, 
+		'codigo_sescovid':codigo_sescovid, 'senha':senha, 'pa_1':pa_1, 
 		'pa_2':pa_2, 'data_regulacao_template': data_regulacao_template,
 		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
 		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
@@ -992,7 +1007,7 @@ def regulacao(request, id):
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
 
 		return render(request, 'regulacao.html', {'registro' : registro,
-		'codigo_sescovid':codigo_sescovid, 'pa_1':pa_1, 'pa_2':pa_2, 
+		'codigo_sescovid':codigo_sescovid, 'senha':senha, 'pa_1':pa_1, 'pa_2':pa_2, 
 		'data_regulacao_template': data_regulacao_template,
 		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
 		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
@@ -1429,16 +1444,19 @@ def regulacao_set(request, id):
 	#senha_last = registro.senha.last()
 	#senha = senha_last
 
-	registro_last = RegistroCovid.objects.last()
-	print("ultimo sescovid:", registro_last.senha)
-	if registro_last:
-		senha_bd = registro_last.senha
-		senha = int(senha_bd) + 100
+	
+	registro_last = RegistroCovid.objects.all().last()
+	senha_last = registro_last.senha
+	if senha_last == '' or senha_last == None:
+		senha_new = 100
 	else:
-		senha_bd = 0
-		senha = int(senha_bd) + 100
+		senha_new = registro_last.senha
 
-	codigo_sescovid = request.POST.get('num_protocolo')
+	senha = senha_new
+
+	codigo_sescovid = "SESCOVID" + str(senha_new)
+
+	#codigo_sescovid = request.POST.get('num_protocolo')
 
 	justificativa = request.POST.get('justificativa')
 	observacao = request.POST.get('observacoes_medicas')
@@ -1613,6 +1631,16 @@ def regulacao_set(request, id):
 def regulacao_detail(request, id):
 	registro = RegistroCovid.objects.get(id=id)
 
+	status_registro = Status.objects.filter(registro_covid=registro.id)
+	status_registro_last = Status.objects.filter(registro_covid=registro.id).last()
+
+	status_aguard_conf_vaga_registro = status_registro.filter(descricao='Aguardando confirmação de Vaga').last()
+	status_obito_registro = status_registro.filter(descricao='Obito').last()
+	status_aguard_lista_espera_registro = status_registro.filter(descricao='Aguardando em Lista de Espera').last()
+	status_regulado_registro = status_registro.filter(descricao='Regulado').last()
+	status_nao_regulado_registro = status_registro.filter(descricao='Não Preenche Critérios').last()
+	status_aguard_inf_registro = status_registro.filter(descricao='Aguardando Informações').last()
+
 	data_regulacao = registro.data_regulacao
 	data_regulacao_template = None
 	if data_regulacao:
@@ -1625,7 +1653,7 @@ def regulacao_detail(request, id):
 	p1 = p[0]
 	p2 = p[1]
 
-	status_registro = Status.objects.filter(registro_covid=registro.id)
+	#status_registro = Status.objects.filter(registro_covid=registro.id)
 
 	status_list_descricao_ = []
 
@@ -1646,7 +1674,13 @@ def regulacao_detail(request, id):
 	return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 		'p2':p2, 'data_regulacao_template':data_regulacao_template, 
 		'status_list_descricao':status_list_descricao, 'encoded':encoded, 
-		'img_tc':img_tc, 'img_rx':img_rx})
+		'img_tc':img_tc, 'img_rx':img_rx, 'status_aguard_conf_vaga_registro':
+		status_aguard_conf_vaga_registro, 'status_obito_registro':
+		status_obito_registro, 'status_aguard_lista_espera_registro':
+		status_aguard_lista_espera_registro, 'status_regulado_registro':
+		status_regulado_registro, 'status_nao_regulado_registro':
+		status_nao_regulado_registro, 'status_aguard_inf_registro':
+		status_aguard_inf_registro})
 
 @login_required
 def regulacao_edit(request, id):

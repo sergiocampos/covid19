@@ -54,7 +54,8 @@
                 // The size of the file. 
                 if (file >= 2048) { 
                 	alert( 
-                		"Arquivo muito grande, selecione imagem de até 2 megabytes"); 
+                		"Arquivo muito grande, selecione imagem de até 2 megabytes");
+                	$("#file_tc_torax_id").val("");
                 } else { 
                 	document.getElementById('size').innerHTML = '<b>'
                 	+ file + '</b> KB'; 
@@ -290,16 +291,11 @@ $(function() {
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">
-					<b>DESCRIÇÃO CLÍNICA (SIC, UNIDADE SOLICITANTE)</b>
-					{% if registro.descricao_clinica == '' or registro.descricao_clinica == None %}
-					<textarea class="form-control" rows="10" id="" name="descricao_clinica" value="" style="width: 100%"></textarea>
-					{%else%}
-					<textarea class="form-control" rows="15" id="" name="descricao_clinica" value="" style="width: 100%">{{registro.descricao_clinica}}</textarea>
-					{%endif%}
+					
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-3">Anexo da Descrição Clínica!</div>
+				<div class="col-sm-3">Anexo da TC de Tórax!</div>
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3"></div>
@@ -307,7 +303,7 @@ $(function() {
 
 			<div class="row">
 				<div class="col-sm-12">
-					<img src="data: encoded/png; base64, {{encoded}}" alt="" style="border: 2px solid #8c8c8c; border-radius: 5px">
+					<img src="data: img_tc/png; base64, {{img_tc}}" alt="" style="border: 2px solid #8c8c8c; border-radius: 5px">
 				</div>
 			</div>
 			<div class="row">
@@ -327,7 +323,7 @@ $(function() {
 
 
 			<div class="container-fluid" style="text-align: center;">
-				<button type="submit" class="btn btn-primary btn-sm" style="align-items: center;" id="">Salvar</button>  
+				<button type="submit" class="btn btn-primary btn-sm" style="align-items: center;" id="" autofocus="autofocus">Salvar</button>  
 			</div>
 		</div>
 	</form>

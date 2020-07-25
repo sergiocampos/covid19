@@ -2807,7 +2807,7 @@
 							<input type="number" min="0" max="200000" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="">
 							{%else%}
 
-							<input type="text" min="0" max="200000" class="form-control form-control-sm" id="" placeholder="" name="" value="{{registro.codigo_sescovid}}" disabled>
+							<input type="text" min="0" max="200000" class="form-control form-control-sm" id="" placeholder="" name="" value="SESCOVID{{senha}}" disabled>
 							{%endif%}
 						</div>
 					</div>
@@ -2816,7 +2816,7 @@
 				<div class="row" style="">
 					<div class="col-sm-4"></div>
 					<div class="col-sm-8" style="margin-top: 30px">
-						{% if 'Não Regulado' in status_list_descricao %}
+						{% if 'Não Preenche Critérios' in registro.last_status %}
 						<div class="form-check-inline" style="font-size: 83%">
 							<label class="form-check-label" for="">
 								<input type="radio" class="form-check-input" id="check_paciente_nao_regulado_id" name="status_paciente" value="Não Regulado" onclick="activeStatusNaoRegulado()" checked>PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
@@ -2837,7 +2837,7 @@
 				<div class="row">
 					<div class="col-sm-4"></div>
 					<div class="col-sm-4" style="background-color: ">
-						{% if 'Regulado' in status_regulado_registro.descricao %}
+						{% if 'Regulado' in registro.last_status %}
 						<div class="form-check-inline" style="font-size: 83%" id="div_paciente_regulado">
 							<label class="form-check-label" for="">
 								<input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="status_paciente" value="Regulado" onclick="activeStatusAguardVaga()" checked>PACIENTE REGULADO
@@ -2857,7 +2857,7 @@
 				<div class="row">
 					<div class="col-sm-4"></div>
 					<div class="col-sm-4">
-						{% if 'Aguardando em Lista de Espera' in status_list_descricao %}
+						{% if 'Aguardando em Lista de Espera' in registro.last_status %}
 						<div class="form-check-inline" style="font-size: 83%" id="div_paciente_aguard_lista">
 							<label class="form-check-label">
 								<input type="radio" class="form-check-input" id="check_em_lista_espera_id" name="status_paciente" value="Aguardando em Lista de Espera" onclick="activeListaEspera()" checked>AGUARDANDO EM LISTA DE ESPERA
@@ -2877,7 +2877,7 @@
 				<div class="row">
 					<div class="col-sm-4"></div>
 					<div class="col-sm-4">
-						{% if 'Aguardando confirmação de Vaga' in status_list_descricao %}
+						{% if 'Aguardando confirmação de Vaga' in registro.last_status %}
 						<div class="form-check-inline" style="font-size: 83%" id="div_paciente_aguard_vaga">
 							<label class="form-check-label" id="">
 								<input type="radio" class="form-check-input" id="check_a_c_vaga_id" name="status_paciente" value="Aguardando confirmação de Vaga" onclick="activeListaEspera()" checked>Aguardando confirmação de Vaga
@@ -2887,6 +2887,46 @@
 						<div class="form-check-inline" style="font-size: 83%">
 							<label class="form-check-label" id="">
 								<input type="radio" class="form-check-input" id="check_a_c_vaga_id" name="status_paciente" value="Aguardando confirmação de Vaga" onclick="activeListaEspera()">Aguardando confirmação de Vaga
+							</label>
+						</div>
+						{%endif%}
+					</div>
+					<div class="col-sm-4"></div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-4"></div>
+					<div class="col-sm-4">
+						{% if 'Obito' in registro.last_status %}
+						<div class="form-check-inline" style="font-size: 83%" id="">
+							<label class="form-check-label" id="">
+								<input type="radio" class="form-check-input" id="" onclick="activeListaEspera()" checked>Óbito
+							</label>
+						</div>
+						{%else%}
+						<div class="form-check-inline" style="font-size: 83%">
+							<label class="form-check-label" id="">
+								<input type="radio" class="form-check-input" id="" name="status_paciente" value="" onclick="activeListaEspera()">Óbito
+							</label>
+						</div>
+						{%endif%}
+					</div>
+					<div class="col-sm-4"></div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-4"></div>
+					<div class="col-sm-4">
+						{% if 'Aguardando Informações' in registro.last_status %}
+						<div class="form-check-inline" style="font-size: 83%" id="">
+							<label class="form-check-label" id="">
+								<input type="radio" class="form-check-input" id="" onclick="activeListaEspera()" checked>Aguardando Informações
+							</label>
+						</div>
+						{%else%}
+						<div class="form-check-inline" style="font-size: 83%">
+							<label class="form-check-label" id="">
+								<input type="radio" class="form-check-input" id="" name="status_paciente" value="" onclick="activeListaEspera()">Aguardando Informações
 							</label>
 						</div>
 						{%endif%}

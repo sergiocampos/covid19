@@ -123,8 +123,10 @@
 			<div class="col-sm-4"></div>
 			<div class="col-sm-4"><b class="">Status do paciente {{registro.nome_paciente}}:</b></div>
 			<div class="col-sm-4">
+				{% if user.first_name != 'enfermeiro' %}
 				<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Parecer Médico
 				</button>
+				{%endif%}
 				{% if registro.andamento_processo != '' %}
 				{%else%}
 				<button type="button" class="btn btn-warning btn-sm" onclick="exibirJustCanc()">Cancelar processo!</button>
@@ -212,19 +214,7 @@
 				{%endif%}
 				<div class="col-sm-4"></div>
 			</div>
-			<div class="row">
-				<div class="col-sm-4"></div>
-				{% if 'Obito' in status_obito_registro.descricao %}
-				<div id="" class="col-sm-4" style="background-color: #ff8080; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b><i>Óbito! - {{status_obito_registro.data_notificacao}} - {{status_obito_registro.hora_notificacao|time:"H:i"}}</i></b>
-				</div>
-				{%else%}
-				<div id="paciente_internado_regulacao_id" class="col-sm-4" style="background-color: #ff8080; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b><i>Óbito!</i></b>
-				</div>
-				{%endif%}
-				<div class="col-sm-4"></div>
-			</div>
+			
 			<div class="row">
 				<div class="col-sm-4"></div>
 				{% if 'Aguardando Informações' in status_aguard_inf_registro.descricao %}
@@ -234,6 +224,19 @@
 				{%else%}
 				<div id="paciente_internado_regulacao_id" class="col-sm-4" style="background-color: #8cb3d9; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
 					<b><i>Aguardando Informações!</i></b>
+				</div>
+				{%endif%}
+				<div class="col-sm-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4"></div>
+				{% if 'Obito' in status_obito_registro.descricao %}
+				<div id="" class="col-sm-4" style="background-color: #ff8080; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b><i>Óbito! - {{status_obito_registro.data_notificacao}} - {{status_obito_registro.hora_notificacao|time:"H:i"}}</i></b>
+				</div>
+				{%else%}
+				<div id="paciente_internado_regulacao_id" class="col-sm-4" style="background-color: #ff8080; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b><i>Óbito!</i></b>
 				</div>
 				{%endif%}
 				<div class="col-sm-4"></div>
@@ -312,7 +315,7 @@
 		<div class="container-fluid" style="text-align: center;">
 			<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/covid_list/">Principal</a></button>
 			{% if registro.andamento_processo != '' %}
-			{%else%}<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/regular_registro/{{registro.id}}/">Regular</a></button>
+			{%else%}<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/regular_registro/{{registro.id}}/">Histórico de Regulações</a></button>
 			{%endif%}
 			
 		</div>

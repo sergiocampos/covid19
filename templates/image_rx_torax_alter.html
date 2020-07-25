@@ -54,7 +54,8 @@
                 // The size of the file. 
                 if (file >= 2048) { 
                 	alert( 
-                		"Arquivo muito grande, selecione imagem de até 2 megabytes"); 
+                		"Arquivo muito grande, selecione imagem de até 2 megabytes");
+                	$("#file_rx_torax_id").val("");
                 } else { 
                 	document.getElementById('size').innerHTML = '<b>'
                 	+ file + '</b> KB'; 

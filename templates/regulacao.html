@@ -478,6 +478,8 @@ function activeStatusNaoRegulado(){
 	$("#paciente_nao_regulado_id").show();
 	$("#data_obito_id").val("");
 	$("#data_obito_id").prop("disabled", true);
+	$("#senha_id").val("");
+	$("#senha_id").hide();
 
 	//$("#check_paciente_regulado_id").prop("checked", false);
 	//$("#check_em_lista_espera_id").prop("checked", false);
@@ -509,6 +511,8 @@ function activeAguardInformacoes(){
 
 	$("#data_obito_id").val("");
 	$("#data_obito_id").prop("disabled", true);
+	$("#senha_id").val("");
+	$("#senha_id").hide();
 	
 }
 
@@ -522,6 +526,8 @@ function activeStatusObito(){
 		$("#data_obito_id").prop("disabled", true);
 		$("#data_obito_id").val("");
 	}
+	$("#senha_id").val("");
+	$("#senha_id").hide();
 	
 }
 
@@ -535,6 +541,8 @@ function activeListaEspera(){
 
 	$("#data_obito_id").val("");
 	$("#data_obito_id").prop("disabled", true);
+	$("#senha_id").val("");
+	$("#senha_id").hide();
 	
 }
 
@@ -3678,11 +3686,13 @@ function active_IgGIgM(){
 
 					<div class="row">
 						<div class="col-sm-12" style="text-align: center;">
+							{% if user.first_name != 'enfermeiro' %}
 							<b>Parecer Médico</b>
 							{% if registro.parecer_medico == '' or registro.parecer_medico == None %}
 							<textarea class="form-control" rows="15" id="" name="parecer" value="" style="width: 100%"></textarea>
 							{%else%}
 							<textarea class="form-control" rows="15" id="" name="parecer" value="" style="width: 100%">{{registro.parecer_medico}}</textarea>
+							{%endif%}
 							{%endif%}
 
 						</div>

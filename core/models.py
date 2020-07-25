@@ -224,3 +224,14 @@ class Status(models.Model):
 
 	def __str__(self):
 		return str(self.descricao)
+
+class Regulacao(models.Model):
+	estabelecimento_referencia_covid = models.CharField(max_length=200, blank=True, default='', null=True)
+	nome_paciente = models.CharField(max_length=200, blank=True, default='', null=True)
+	data_notificacao = models.DateField(auto_now_add=True)
+	hora_notificacao = models.TimeField(auto_now_add=True)
+	senha = models.IntegerField(blank=True, null=True)
+	registro_covid = models.ForeignKey(RegistroCovid, on_delete=models.CASCADE, null=True)
+
+	def __str__(self):
+		return str(self.estabelecimento_referencia_covid)

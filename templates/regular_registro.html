@@ -121,13 +121,11 @@
 
 	<div class="row">
 		<div class="col-sm-4"></div>
-		<div class="col-sm-4"><b class="">Regulação do paciente</b> {{registro.nome_paciente}}</div>
-		<div class="col-sm-4">
+		<div class="col-sm-6"><b class="">Histórico de Regulação do paciente</b> {{registro.nome_paciente}}</div>
+		<div class="col-sm-2">
+			{% if user.first_name != 'enfermeiro' %}
 			<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Parecer Médico
 			</button>
-			{% if registro.andamento_processo != '' %}
-			{%else%}
-			<button type="button" class="btn btn-warning btn-sm" onclick="exibirJustCanc()">Cancelar processo!</button>
 			{%endif%}
 		</div>
 	</div><br />
@@ -156,6 +154,28 @@
 			</div>
 		</div>
 	</div>
+
+	<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th style="background-color: #f2f2f2">Estabelecimento Referência Covid</th>
+        <th style="background-color: #f2f2f2">Senha</th>
+        <th style="background-color: #f2f2f2">Data</th>
+        <th style="background-color: #f2f2f2">Hora</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in regulacoes_registro %}
+      <tr>
+      	<td>{{r.estabelecimento_referencia_covid}}</td>
+      	<td>SESCOVID{{r.senha}}</td>
+      	<td>{{r.data_notificacao}}</td>
+      	<td>{{r.hora_notificacao|time:'H:i'}}</td>
+      </tr>
+      {% endfor %}
+      
+    </tbody>
+  </table>
 
 
 
@@ -310,6 +330,20 @@
 			<br />
 
 		</div>
+
+		<div style="background-color: #e6e6e6; text-align: center;">
+
+	<br />
+	<button type="button" class="btn btn-primary btn-sm" style="align-items: center;" onclick="saveTopdf()">Salvar como PDF</button>
+	<br /><br>
+
+</div>
+
+<script>
+	function saveTopdf(){
+		window.print();
+	}
+</script>
 
 
 <!--

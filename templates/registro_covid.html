@@ -622,7 +622,8 @@ dgCidadesEstados.prototype = {
                 // The size of the file. 
                 if (file >= 2048) { 
                     alert( 
-                      "Arquivo muito grande, selecione imagem de até 2 megabytes"); 
+                      "Arquivo muito grande, selecione imagem de até 2 megabytes");
+                      fi.value = ""; 
                 } else { 
                     document.getElementById('size').innerHTML = '<b>'
                     + file + '</b> KB'; 
@@ -1058,6 +1059,19 @@ $(function() {
         
         error: function() {
             alert('Formato de Imagem não permitido');
+            $("#laudo_tc_torax_id").val("");
+        }
+    });
+
+});
+
+$(function() {
+    $('#file_descricao_clinica_id').checkFileType({
+        allowedExtensions: ['jpg', 'jpeg', 'png'],
+        
+        error: function() {
+            alert('Formato de Imagem não permitido');
+            $("#file_descricao_clinica_id").val("");
         }
     });
 
@@ -1100,6 +1114,7 @@ $(function() {
         
         error: function() {
             alert('Formato de Imagem não permitido');
+            $("#laudo_rx_torax_id").val("");
         }
     });
 
@@ -1416,10 +1431,23 @@ $(function() {
 			<div class="row">
 				<div class="col-sm-8">
 					<div class="custom-file mb-3">
-						<input type="file" class="custom-file-input" id="file_descricao_clinica_id" name="file_descricao_clinica" onchange="Filevalidation()" required>
+						<input type="file" class="custom-file-input" id="file_descricao_clinica_id" name="file_descricao_clinica" onchange="Filevalidation()">
 						<label class="custom-file-label" for="customFile">Selecione...</label>
 					</div>
 				</div>
+				<script>
+					var upload_des = document.getElementById("file_descricao_clinica_id");
+					upload_des.addEventListener("change", function(e) {
+					    var size = upload_des.files[0].size;
+					    if(size < 2097152) { //2MB         
+					      //alert('Permitido'); //Abaixo do permitido
+					    } else {           
+					      alert('Não permitido: Imagem acima do permitido: 2MB'); //Acima do limite
+					      upload_des.value = ""; //Limpa o campo          
+					    }
+					    e.preventDefault();
+					});			
+				</script>
 				<div class="col-sm-4">
 					<p id="size"></p>
 				</div>
@@ -2246,14 +2274,7 @@ $(function() {
 				</div>
 			</div><br>
 			<div class="row">
-				<div class="col-sm-3">
-					PA:
-				    <div class="form-check-inline">
-				        <input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" style="width: 60px" value="{{pa_1}}">
-				        <label for="">x</label>
-				        <input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" style="width: 60px" value="{{pa_2}}">
-				    </div><label for="" style="">mmHg</label>
-				</div>
+				<div class="col-sm-3"></div>
 				<div class="col-sm-3">
 					FC:
 				    <div class="form-check-inline" style="width:">
@@ -3075,16 +3096,7 @@ $(function() {
 				</div>
 			</div>
 			<hr>
-			<div class="row">
-				<div class="col-sm-1">
-					<b>Idade</b>
-				</div>
-				<div class="col-sm-2">
-					<div class="form-check-inline" style="">
-	              		<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="" style="width: 100px" value="{{registro.idade_paciente}}">
-	              	</div>
-				</div>
-			</div><hr>
+			
 			<div class="row">
 				<div class="col-sm-12">
 					<b>Pacientes com idade ≥ 65 anos, aplicar Escala de Performance Paliativa</b>
@@ -3520,29 +3532,44 @@ $(function() {
 					
 	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_tc_torax_id" name="exame_imagem" value="TC Tórax" onclick="activeLaudoTc_()" required>TC Tórax; Laudo:
+				        <input type="checkbox" class="form-check-input" id="check_tc_torax_id" name="exame_imagem" value="TC Tórax" onclick="activeLaudoTc_()">TC Tórax; Laudo:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="width: 80%">
 						<div class="custom-file mb-3">
-							<input type="file" class="form-control-file border" id="laudo_tc_torax_id" name="file_tc_torax" disabled onchange="validationImgTc()" required>
+							<input type="file" class="form-control-file border" id="laudo_tc_torax_id" name="file_tc_torax" disabled onchange="">
 							
 						</div>
 	              	</div>
 
 				</div>
 			</div><br>
+			
+			<script>
+				var upload_tc = document.getElementById("laudo_tc_torax_id");
+				upload_tc.addEventListener("change", function(e) {
+				    var size = upload_tc.files[0].size;
+				    if(size < 2097152) { //2MB         
+				      //alert('Permitido'); //Abaixo do permitido
+				    } else {           
+				      alert('Não permitido: Imagem acima do permitido: 2MB'); //Acima do limite
+				      upload_tc.value = ""; //Limpa o campo          
+				    }
+				    e.preventDefault();
+				});			
+			</script>
+			
 			<div class="row">
 				<div class="col-sm-12">
 		
 	              	<div class="form-check-inline" style="width:">
 				      <label class="form-check-label" for="">
-				        <input type="checkbox" class="form-check-input" id="check_rx_torax_id" name="exame_imagem" value="RX Tórax" onclick="activeLaudoRx_()" required>RX Tórax; Laudo:
+				        <input type="checkbox" class="form-check-input" id="check_rx_torax_id" name="exame_imagem" value="RX Tórax" onclick="activeLaudoRx_()">RX Tórax; Laudo:
 				      </label>
 				    </div>
 					<div class="form-check-inline" style="width: 80%">
 						<div class="custom-file mb-3">
-							<input type="file" class="form-control-file border" id="laudo_rx_torax_id" name="file_rx_torax" disabled onchange="validationImgRx()" required>
+							<input type="file" class="form-control-file border" id="laudo_rx_torax_id" name="file_rx_torax" disabled onchange="">
 							
 						</div>
 	              	</div>
@@ -3550,6 +3577,22 @@ $(function() {
 				</div>
 				
 			</div><hr>
+
+			<script>
+				var upload = document.getElementById("laudo_rx_torax_id");
+				upload.addEventListener("change", function(e) {
+				    var size = upload.files[0].size;
+				    if(size < 2097152) { //2MB         
+				      //alert('Permitido'); //Abaixo do permitido
+				    } else {           
+				      alert('Não permitido: Imagem acima do permitido: 2MB'); //Acima do limite
+				      upload.value = ""; //Limpa o campo          
+				    }
+				    e.preventDefault();
+				});			
+			</script>
+
+
 			<div class="row">
 				<div class="col-sm-12">
 					<label for="comment"style="float: left;">Observação:</label>

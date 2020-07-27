@@ -887,11 +887,11 @@ function active_IgGIgM(){
 				Estabelecimento Solicitante:
 				{% if registro.estabelecimento_solicitante == '' or registro.estabelecimento_solicitante == None %}
 				<div class="form-check-inline" style="width: 70%">
-					<input type="text" class="form-control form-control-sm" value="{{registro.estabelecimento_solicitante_outro}}">
+					<input type="text" class="form-control form-control-sm" name="estabelecimento_solicitante_outro" value="{{registro.estabelecimento_solicitante_outro}}">
 				</div>
 				{%else%}
 				<div class="form-check-inline" style="width: 70%">
-					<input type="text" class="form-control form-control-sm" value="{{registro.estabelecimento_solicitante}}">
+					<input type="text" class="form-control form-control-sm" name="estabelecimento_solicitante" value="{{registro.estabelecimento_solicitante}}">
 				</div>
 				{%endif%}
 			</div>
@@ -3361,13 +3361,13 @@ function active_IgGIgM(){
 							{% if registro.news_modificado == 'zero ponto' %}
 							<div class="form-check-inline" style="width: 110%">
 								<label class="form-check-label" for="">
-									<input type="radio" class="form-check-input" id="" name="new_modificado" value="zero ponto" checked>0 ponto
+									<input type="radio" class="form-check-input" id="" name="new_modificado" value="VERDE" checked>0 ponto(Verde)
 								</label>
 							</div>
 							{%else%}
 							<div class="form-check-inline" style="width: 110%">
 								<label class="form-check-label" for="">
-									<input type="radio" class="form-check-input" id="" name="new_modificado" value="zero ponto">0 ponto
+									<input type="radio" class="form-check-input" id="" name="new_modificado" value="VERDE">0 ponto(Verde)
 								</label>
 							</div>
 							{%endif%}
@@ -3740,7 +3740,7 @@ function active_IgGIgM(){
 						<div class="col-sm-1"></div>
 						<div class="col-sm-5" style="margin-top: 30px">
 							<div class="form-check-inline" style="font-size: 83%; width: 100%" id="senha_id">
-								<input type="text" min="0" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="{{codigo_sescovid}}" disabled>
+								<input type="text" min="0" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="{{codigo_sescovid}}">
 							</div>
 						</div>
 					</div>
@@ -3816,7 +3816,7 @@ function active_IgGIgM(){
 							{% if 'Regulado' in status_list_descricao %}
 							<div class="form-check-inline" style="font-size: 83%" id="div_paciente_regulado">
 								<label class="form-check-label" for="">
-									<input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="status_paciente" value="Regulado" onclick="activeStatusAguardVaga()" checked>PACIENTE REGULADO
+									<input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="status_paciente" value="Regulado" onclick="activeStatusAguardVaga()">PACIENTE REGULADO
 								</label>
 							</div>
 							{%else%}

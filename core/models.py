@@ -190,12 +190,11 @@ class RegistroCovid(models.Model):
 	observacao = models.TextField(blank=True, default='', null=True)
 
 	pareceristas  = ArrayField(models.CharField(max_length=100), blank=True, null=True)
-	data_regulacao = models.DateTimeField(blank=True, null=True, default=None)
+	data_regulacao = models.DateTimeField(blank=True, null=True)
 
 	andamento_processo = models.CharField(max_length=100, blank=True, default='', null=True)
 	justificativa_cancelamento = models.TextField(blank=True, default='', null=True)
-	data_cancelamento = models.DateField(auto_now_add=True, null=True)
-	hora_cancelamento = models.TimeField(auto_now_add=True, null=True)
+	data_cancelamento = models.DateTimeField(blank=True, null=True)
 
 	last_status = models.CharField(max_length=200, blank=True, default='', null=True)
 

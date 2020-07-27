@@ -289,18 +289,9 @@ $(function() {
 
 	<form enctype="multipart/form-data" action="submit" method="POST">{% csrf_token %}
 		<div class="container">
+			
 			<div class="row">
-				<div class="col-sm-12">
-					<b>DESCRIÇÃO CLÍNICA (SIC, UNIDADE SOLICITANTE)</b>
-					{% if registro.descricao_clinica == '' or registro.descricao_clinica == None %}
-					<textarea class="form-control" rows="10" id="" name="descricao_clinica" value="" style="width: 100%"></textarea>
-					{%else%}
-					<textarea class="form-control" rows="15" id="" name="descricao_clinica" value="" style="width: 100%">{{registro.descricao_clinica}}</textarea>
-					{%endif%}
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-3">Anexo da Descrição Clínica!</div>
+				<div class="col-sm-3">Anexo do Raio X!</div>
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3"></div>
 				<div class="col-sm-3"></div>
@@ -308,7 +299,7 @@ $(function() {
 
 			<div class="row">
 				<div class="col-sm-12">
-					<img src="data: encoded/png; base64, {{encoded}}" alt="" style="border: 2px solid #8c8c8c; border-radius: 5px">
+					<img src="data: img_rx/png; base64, {{img_rx}}" alt="" style="border: 2px solid #8c8c8c; border-radius: 5px">
 				</div>
 			</div>
 			<div class="row">

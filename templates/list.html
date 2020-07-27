@@ -105,17 +105,17 @@
    {% for o in regs %}
    <tr>
     {% if o.andamento_processo == 'Cancelado' %}
-    <td style="color: #ff0000">
+    <td style="color: #ff0000; font-size: 90%">
 
         {{o.data_notificacao|date:'d/m/Y'}} - {{o.hora_notificacao|time:'H:i'}}
     </td>
     {%elif o.last_status == 'Obito' %}
-    <td style="color: #cc6699">
+    <td style="color: #cc6699; font-size: 90%">
 
         {{o.data_notificacao|date:'d/m/Y'}} - {{o.hora_notificacao|time:'H:i'}}
     </td>
     {%else%}
-    <td>
+    <td style="font-size: 90%">
 
         {{o.data_notificacao|date:'d/m/Y'}} - {{o.hora_notificacao|time:'H:i'}}
     </td>
@@ -124,7 +124,7 @@
     {% if o.andamento_processo == 'Cancelado' %}
     <td style="color: #ff0000">
        {% if o.estabelecimento_solicitante == '' or o.estabelecimento_solicitante == None %}
-       {{o.estabelecimento_outro}}
+       {{o.estabelecimento_solicitante_outro}}
        {%else%}
        {{o.estabelecimento_solicitante}}
        {%endif%}
@@ -132,7 +132,7 @@
    {% elif o.last_status == 'Obito' %}
    <td style="color: #cc6699">
     {% if o.estabelecimento_solicitante == '' or o.estabelecimento_solicitante == None %}
-    {{o.estabelecimento_outro}}
+    {{o.estabelecimento_solicitante_outro}}
     {%else%}
     {{o.estabelecimento_solicitante}}
     {%endif%}
@@ -140,7 +140,10 @@
 {%else%}
 <td>
    {% if o.estabelecimento_solicitante == '' or o.estabelecimento_solicitante == None %}
-   {{o.estabelecimento_outro}}
+   {% if o.estabelecimento_solicitante_outro == '' or o.estabelecimento_solicitante_outro == None %}
+   {%else%}
+   {{o.estabelecimento_solicitante_outro}}
+   {%endif%}
    {%else%}
    {{o.estabelecimento_solicitante}}
    {%endif%}
@@ -185,7 +188,6 @@
    {%endif%}
    
    <a href="/regulacao_detail/{{o.id}}/" style="color: #ff0000">Ver</a>
-   {
 
 </td>
 {% elif o.last_status == 'Obito' %}

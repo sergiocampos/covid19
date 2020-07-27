@@ -112,13 +112,15 @@ def change_password(request):
 
 @login_required
 def covid_list(request):
-	registros = RegistroCovid.objects.all()
+	registros = RegistroCovid.objects.all().order_by('data_notificacao').reverse()
 
-	paginator = Paginator(registros, 10)
-	page = request.GET.get('page')
-	regs = paginator.get_page(page)
-
-	return render(request, 'list.html', {'regs':regs})
+	if registros:
+		paginator = Paginator(registros, 10)
+		page = request.GET.get('page')
+		regs = paginator.get_page(page)
+		return render(request, 'list.html', {'regs':regs})
+	else:
+		return render(request, 'list.html')
 
 
 @login_required
@@ -325,10 +327,25 @@ def registro_covid_set(request):
 
 	codigo_registro_completo = last_codigo_registro_total_str + last_codigo_registro_mensal_str
 
-	image_descricao_clinica = request.FILES.get('file_descricao_clinica')
+	image_descricao_clinica_cap = request.FILES.get('file_descricao_clinica')
+	if image_descricao_clinica_cap == '' or image_descricao_clinica_cap == None:
+		image_descricao_clinica = None
+	else:
+		image_descricao_clinica = image_descricao_clinica_cap.file.read()
 
-	image_laudo_tc = request.FILES.get('file_tc_torax')
-	image_laudo_rx = request.FILES.get('file_rx_torax')
+
+	image_laudo_tc_cap = request.FILES.get('file_tc_torax')
+	if image_laudo_tc_cap == '' or image_laudo_tc_cap == None:
+		image_laudo_tc = None
+	else:
+		image_laudo_tc = image_laudo_tc_cap.file.read()
+	
+	image_laudo_rx_cap = request.FILES.get('file_rx_torax')
+	if image_laudo_rx_cap == '' or image_laudo_rx_cap == None:
+		image_laudo_rx = None
+	else:
+		image_laudo_rx = image_laudo_rx_cap.file.read()
+
 
 	descricao_clinica = request.POST.get('descricao_clinica')
 	
@@ -882,6 +899,7 @@ def regulacao(request, id):
 	#Ultima regulacao do paciente:
 	regulacao_last = Regulacao.objects.all().last()
 	senha_last = regulacao_last.senha
+	print("ultima senha:", senha_last)
 
 	if senha_last == '' or senha_last == None:
 		senha_new = 100
@@ -945,7 +963,7 @@ def regulacao(request, id):
 	cidade = request.POST.get('municipio_referencia')
 
 
-	estabelecimentos = Cnes.objects.filter(MUNICIPIO = municipio_estabelecimento_referencia)
+	estabelecimentos = Cnes.objects.filter(MUNICIPIO = municipio_estabelecimento_referencia).order_by('NO_FANTASIA')
 
 	encoded_ = None
 	if registro.image_descricao_clinica:
@@ -1062,6 +1080,13 @@ def regulacao_set(request, id):
 	municipio_estabelecimento_solicitante = registro.municipio_estabelecimento_solicitante
 	estabelecimento_solicitante = registro.estabelecimento_solicitante
 	estabelecimento_solicitante_outro = registro.estabelecimento_solicitante_outro
+	
+	if estabelecimento_solicitante == '' or estabelecimento_solicitante == None:
+		estabelecimento_solicitante = request.POST.get('estabelecimento_solicitante')
+	
+	if estabelecimento_solicitante_outro == '' or estabelecimento_solicitante_outro == None:
+		estabelecimento_solicitante_outro = request.POST.get('estabelecimento_solicitante_outro')
+
 	municipio_estabelecimento_referencia = request.POST.get('municipio_estabelecimento_referencia')
 	estabelecimento_referencia = request.POST.get('estabelecimento_referencia')
 	estabelecimento_referencia_outro = request.POST.get('estabelecimento_referencia_outro')
@@ -1434,6 +1459,10 @@ def regulacao_set(request, id):
 		prioridade = int(float(prioridade_cap))
 
 
+	codigo_sescovid = request.POST.get('num_protocolo')
+
+	print(codigo_sescovid)
+
 	descricao = request.POST.get('status_paciente')
 	registro_covid = registro
 
@@ -1453,7 +1482,7 @@ def regulacao_set(request, id):
 	senha = 0
 	if last_status == 'Regulado':
 		#Regulações do paciente
-		regulacoes_registro = Regulacao.objects.filter(registro_covid_id=registro.id)
+		#regulacoes_registro = Regulacao.objects.filter(registro_covid_id=registro.id)
 		#Ultima regulacao do paciente:
 		regulacao_last = Regulacao.objects.all().last()
 		senha_last = regulacao_last.senha
@@ -1466,13 +1495,12 @@ def regulacao_set(request, id):
 		senha_ = int(senha_new)
 		senha = senha_
 
-
-	regulacao = Regulacao.objects.create(
-		estabelecimento_referencia_covid = estabelecimento_referencia_covid,
-		nome_paciente = nome_paciente,
-		senha = senha,
-		registro_covid = registro_covid
-		)
+		regulacao = Regulacao.objects.create(
+			estabelecimento_referencia_covid = estabelecimento_referencia_covid,
+			nome_paciente = nome_paciente,
+			senha = senha,
+			registro_covid = registro_covid
+			)
 
 
 	justificativa = request.POST.get('justificativa')
@@ -1631,7 +1659,7 @@ def regulacao_set(request, id):
 	#registro.regulacao_paciente = regulacao_paciente
 	#registro.status_regulacao = status_regulacao
 	#registro.senha = senha
-	#registro.codigo_sescovid = codigo_sescovid
+	registro.codigo_sescovid = codigo_sescovid
 	registro.justificativa = justificativa
 	registro.observacao = observacao
 	registro.pareceristas = pareceristas
@@ -1767,7 +1795,7 @@ def regulacao_detail(request, id):
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'img_rx':img_rx})
-	if not registro.image_descricao_clinica and not registro.image_laudo_rx:
+	elif not registro.image_descricao_clinica and not registro.image_laudo_rx:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
 		if regulacao_registro_last:
 			senha = regulacao_registro_last.senha
@@ -1847,6 +1875,34 @@ def regulacao_detail(request, id):
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'img_rx':img_rx, 'encoded':encoded})
 
+	elif not registro.image_descricao_clinica and (registro.image_laudo_rx or registro.image_laudo_tc):
+		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
+		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
+		if regulacao_registro_last:
+			senha = regulacao_registro_last.senha
+			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
+			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
+			'status_list_descricao':status_list_descricao, 
+			'status_aguard_conf_vaga_registro':
+			status_aguard_conf_vaga_registro, 'status_obito_registro':
+			status_obito_registro, 'status_aguard_lista_espera_registro':
+			status_aguard_lista_espera_registro, 'status_regulado_registro':
+			status_regulado_registro, 'status_nao_regulado_registro':
+			status_nao_regulado_registro, 'status_aguard_inf_registro':
+			status_aguard_inf_registro, 'senha':senha, 'img_tc':img_tc, 'img_rx':
+			img_rx})
+		else:
+			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
+			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
+			'status_list_descricao':status_list_descricao, 
+			'status_aguard_conf_vaga_registro':
+			status_aguard_conf_vaga_registro, 'status_obito_registro':
+			status_obito_registro, 'status_aguard_lista_espera_registro':
+			status_aguard_lista_espera_registro, 'status_regulado_registro':
+			status_regulado_registro, 'status_nao_regulado_registro':
+			status_nao_regulado_registro, 'status_aguard_inf_registro':
+			status_aguard_inf_registro, 'img_tc':img_tc, 'img_rx':
+			img_rx})
 
 	else:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
@@ -2045,7 +2101,6 @@ def gerar_relatorios_set(request):
 	data_inicio = request.POST.get('data_inicio')
 	data_fim = request.POST.get('data_fim')
 
-	print("data final:",data_fim)
 
 	values = RegistroCovid.objects.filter(data_notificacao__range=[data_inicio, data_fim])
 	#values = RegistroCovid.objects.all()
@@ -2128,6 +2183,8 @@ def gerar_relatorios_set(request):
 		nivel_atencao = ""
 		if v.news_fast_pb != None:
 			nivel_atencao = v.news_fast_pb
+		elif v.news_modificado != None:
+			nivel_atencao = v.news_modificado
 		#nivel_atencao_ = nivel_atencao
 
 		if v.pesquisa_teste_sars_cov_2 != None:
@@ -2148,35 +2205,51 @@ def gerar_relatorios_set(request):
 		
 
 
-		if v.data_regulacao:
-			data_ = v.data_regulacao.strftime("%d-%m-%Y")
+		if v.idade_paciente != None or v.idade_paciente != '':
+			idade = v.idade_paciente
+
+		if v.estabelecimento_solicitante != None or v.estabelecimento_solicitante != '':
+			estabelecimento_solicitante = v.estabelecimento_solicitante
+
+		if v.data_regulacao != '' or v.data_regulacao != None:
+			data_regulacao = v.data_regulacao.strftime("%d-%m-%Y")
 		else:
-			data_ = None
+			data_regulacao = None
 
-		regulacao = ""
-		for s in status:
-			if v.id == s.registro_covid_id and s.descricao != None:
-				v.regulacao_status = s.descricao
+		if v.comorbidades != '' or v.comorbidades != None:
+			comorbidades = v.comorbidades
 
-			if v.regulacao_status != None:
-				regulacao = v.regulacao_status
+		if v.municipio_estabelecimento_referencia != None or v.municipio_estabelecimento_referencia != '':
+			municipio_estabelecimento_referencia = v.municipio_estabelecimento_referencia
+
+		if v.codigo_sescovid != '' or v.codigo_sescovid != None:
+			codigo_sescovid = v.codigo_sescovid
+
+
+		#regulacao = ""
+		#for s in status:
+		#	if v.id == s.registro_covid_id and s.descricao != None:
+		#		v.regulacao_status = s.descricao
+
+		#	if v.regulacao_status != None:
+		#		regulacao = v.regulacao_status
 				#print(v.regulacao_status)
 
 
 		row = [
-			v.codigo_sescovid,
+			codigo_sescovid,
 			v.codigo_registro_completo,
 			v.nome_paciente,
-			v.idade_paciente,
+			idade,
 			sexo,
-			regulacao,
+			v.last_status,
 			v.municipio_estabelecimento_solicitante,
-			v.estabelecimento_solicitante,
+			estabelecimento_solicitante,
 			estabelecimento_referencia_covid,
-			v.municipio_estabelecimento_referencia,
+			municipio_estabelecimento_referencia,
 			perfil,
-			data_,
-			v.comorbidades,
+			data_regulacao,
+			comorbidades,
 			nivel_atencao,
 			testes_covid,
 			result_exames_,
@@ -2249,8 +2322,13 @@ def status_registro_set(request, id):
 	if justificativa_cancelamento != '':
 		andamento_processo = "Cancelado"
 
+	data_cancelamento = datetime.now()
+	#hora_cancelamento = request.POST.get('')
+
 	registro.andamento_processo = andamento_processo
 	registro.justificativa_cancelamento = justificativa_cancelamento
+	registro.data_cancelamento = data_cancelamento
+	#registro.hora_cancelamento = hora_cancelamento
 	registro.save()
 
 	return redirect('status_registro', id=id)

@@ -2799,15 +2799,15 @@
 				<div class="row">
 					<div class="col-sm-3"></div>
 					<div class="col-sm-3"></div>
-					<div class="col-sm-3"></div>
-					<div class="col-sm-3" style="margin-top: 30px">
-						<div class="form-check-inline" style="font-size: 83%; width: 150px">
+					<div class="col-sm-2"></div>
+					<div class="col-sm-4" style="margin-top: 30px">
+						<div class="form-check-inline" style="font-size: 83%; width: 100%">
 							{% if registro.codigo_sescovid == '' or registro.codigo_sescovid == None %}
 							SESCOVID
 							<input type="number" min="0" max="200000" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="">
 							{%else%}
 
-							<input type="text" min="0" max="200000" class="form-control form-control-sm" id="" placeholder="" name="" value="SESCOVID{{senha}}" disabled>
+							<input type="text" class="form-control form-control-sm" id="" placeholder="" name="" value="SESCOVID{{senha}}" disabled>
 							{%endif%}
 						</div>
 					</div>

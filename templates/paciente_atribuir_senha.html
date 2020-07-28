@@ -17,7 +17,6 @@
 
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
 	<script>
 
@@ -804,7 +803,7 @@ function active_IgGIgM(){
 						<p>GOVERNO DO ESTADO DA PARAÍBA</p>
 						<p>SECRETARIA DE ESTADO DA SAÚDE</p>
 						<p></p>
-						<p><h7><b>Registro de Casos - Perfil - {{user.first_name}} - {{user}}</b></h7></p>
+						<p><h7><b>Registro de Casos - Perfil - {{user}}</b></h7></p>
 					</div>
 				</div>
 				<div class="col-sm-4" style="background-color:;">
@@ -930,24 +929,21 @@ function active_IgGIgM(){
 		<div class="row">
 			<div class="col-sm-5">
 				<b>Município do Estabelecimento de Referência:</b>
-				{% if registro.municipio_estabelecimento_referencia != '' or registro.municipio_estabelecimento_referencia != None %}
-				<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{municipio_estabelecimento_referencia}}" />
-				{% else %}
-				<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{municipio_estabelecimento_referencia}}" />
-				{%endif%}
+				
+				<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{registro.municipio_estabelecimento_referencia}}" />
+				
 
 			</div>
 			<div class="col-sm-2">
-				<button type="button" class="" style="align-items: center; border-radius: 5px; border: 2px solid #c2c2d6" id=""><a class="" href="/regulacao_search_estabelecimento/{{registro.id}}/">Alterar Cidade?</a></button>					
+									
 			</div>
 
 			<div class="col-sm-5" id="">
 				Escolha estabelecimento de Referência:
 				<select autofocus="autofocus" class="form-control form-control-sm" name="estabelecimento_referencia" id="estabelecimento_id">
-					<option value="">...nenhum</option>
-					{% for e in estabelecimentos %}
-					<option value="{{e.NO_FANTASIA}}">{{e.NO_FANTASIA}}</option>
-					{%endfor%}						
+					
+					<option value="{{registro.estabelecimento_referencia}}">{{registro.estabelecimento_referencia}}</option>
+										
 				</select>
 			</div>
 
@@ -2166,7 +2162,6 @@ function active_IgGIgM(){
 				<div class="form-check-inline"><b>IgM:</b>
 					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
 						<option value="{{registro.igm}}" selected>{{registro.igm}}</option>
-						<option value=""></option>
 						<option value="REAGENTE">REAGENTE</option>
 						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
 					</select>
@@ -2176,7 +2171,6 @@ function active_IgGIgM(){
 			<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
 				<div class="form-check-inline"><b>IgM:</b>
 					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
-						<option value=""></option>
 						<option value="REAGENTE">REAGENTE</option>
 						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
 					</select>
@@ -2188,20 +2182,18 @@ function active_IgGIgM(){
 				<div class="form-check-inline"><b>IgG:</b>
 					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
 						<option value="{{registro.igg}}" selected>{{registro.igg}}</option>
-						<option value=""></option>
 						<option value="REAGENTE">REAGENTE</option>
 						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
 					</select>
 				</div>
 				<div class="form-check-inline" style=""><b>Data:</b>
-					<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg_bd" value="{{registro.data_igm_igg}}" style="width: 140px" required onkeypress="$(this).mask('00/00/0000')">						
+					<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg_bd" value="{{registro.data_igm_igg}}" style="width: 140px">						
 				</div>
 			</div>
 			{%else%}
 			<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
 				<div class="form-check-inline"><b>IgG:</b>
 					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
-						<option value=""></option>
 						<option value="REAGENTE">REAGENTE</option>
 						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
 					</select>
@@ -2225,7 +2217,6 @@ function active_IgGIgM(){
 			<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
 				<div class="form-check-inline"><b>IgM:</b>
 					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
-						<option value=""></option>
 						<option value="REAGENTE">REAGENTE</option>
 						<option value="NÃO REAGENTE">NÃO REAGENTE</option>
 					</select>
@@ -2235,7 +2226,6 @@ function active_IgGIgM(){
 			<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
 				<div class="form-check-inline"><b>IgG:</b>
 					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
-						<option value=""></option>
 						<option value="REAGENTE">REAGENTE</option>
 						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
 					</select>
@@ -2274,7 +2264,6 @@ function active_IgGIgM(){
 				<div class="form-check-inline"><b>IgM:</b>
 					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
 						<option value="">selecione</option>
-						<option value=""></option>
 						<option value="REAGENTE">REAGENTE</option>
 						<option value="NÃO REAGENTE">NÃO REAGENTE</option>
 					</select>
@@ -2285,7 +2274,6 @@ function active_IgGIgM(){
 				<div class="form-check-inline"><b>IgG:</b>
 					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
 						<option value="">selecione</option>
-						<option value=""></option>
 						<option value="REAGENTE">REAGENTE</option>
 						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
 					</select>
@@ -2324,7 +2312,6 @@ function active_IgGIgM(){
 				<div class="form-check-inline"><b>IgM:</b>
 					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
 						<option value="">selecione</option>
-						<option value=""></option>
 						<option value="REAGENTE">REAGENTE</option>
 						<option value="NÃO REAGENTE">NÃO REAGENTE</option>
 					</select>
@@ -2335,7 +2322,6 @@ function active_IgGIgM(){
 				<div class="form-check-inline"><b>IgG:</b>
 					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
 						<option value="">selecione</option>
-						<option value=""></option>
 						<option value="REAGENTE">REAGENTE</option>
 						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
 					</select>
@@ -3745,7 +3731,8 @@ function active_IgGIgM(){
 				<br>
 				{%endif%}
 				<div class="container" style="border: 2px solid #cccccc; border-radius: 10px">
-					
+					{% if user.first_name == 'videofonista' %}
+					{%else%}
 					<div class="row">
 						<div class="col-sm-3"></div>
 						<div class="col-sm-3">
@@ -3920,10 +3907,10 @@ function active_IgGIgM(){
 							<div class="invalid-feedback"></div>
 						</div>
 					</div><hr>
-					
+					{%endif%}	
 
 					<div class="row">
-						{% if user.first_name == 'videofonista' or user.first_name == 'enfermeiro' %}
+						{% if user.first_name == 'videofonista' %}
 						{%else%}
 						<div class="col-sm-6">
 							Pareceristas - CRM:

@@ -18,6 +18,7 @@ from openpyxl import Workbook
 from core.forms import UserForm, UserProfileInfoForm
 from django.db.models import Max
 import base64
+from datetime import timedelta
 
 # Create your views here.
 def index(request):
@@ -896,20 +897,22 @@ def regulacao(request, id):
 	#Regulações do paciente
 	regulacoes_registro = Regulacao.objects.filter(registro_covid_id=registro.id)
 
-	#Ultima regulacao do paciente:
+	#ultima regulacao
 	regulacao_last = Regulacao.objects.all().last()
-	senha_last = regulacao_last.senha
-	print("ultima senha:", senha_last)
-
-	if senha_last == '' or senha_last == None:
-		senha_new = 100
-	else:
+	#Ultima regulacao do paciente:
+	regulacao_paciente_last = regulacoes_registro.last()
+	
+	if regulacao_last:
+		senha_last = regulacao_last.senha
 		senha_new = senha_last + 100
+	else:
+		senha_new = 100
+
 
 	senha = senha_new
 
 	codigo_sescovid = "SESCOVID" + str(senha_new)
-	print("Novo codigo SES:", codigo_sescovid)
+	
 
 	pa = registro.pa
 
@@ -1461,7 +1464,6 @@ def regulacao_set(request, id):
 
 	codigo_sescovid = request.POST.get('num_protocolo')
 
-	print(codigo_sescovid)
 
 	descricao = request.POST.get('status_paciente')
 	registro_covid = registro
@@ -1485,15 +1487,14 @@ def regulacao_set(request, id):
 		#regulacoes_registro = Regulacao.objects.filter(registro_covid_id=registro.id)
 		#Ultima regulacao do paciente:
 		regulacao_last = Regulacao.objects.all().last()
-		senha_last = regulacao_last.senha
-
-		if senha_last == '' or senha_last == None:
-			senha_new = 100
-		else:
+		if regulacao_last:
+			senha_last = regulacao_last.senha
 			senha_new = senha_last + 100
+		else:
+			senha_new = 100
+			
 
-		senha_ = int(senha_new)
-		senha = senha_
+		senha = int(senha_new)
 
 		regulacao = Regulacao.objects.create(
 			estabelecimento_referencia_covid = estabelecimento_referencia_covid,
@@ -1692,8 +1693,14 @@ def regulacao_detail(request, id):
 
 	data_regulacao = registro.data_regulacao
 	data_regulacao_template = None
+	hora = None
+	minuto = None
 	if data_regulacao:
-		data_regulacao_template = data_regulacao.strftime('%d/%m/%Y %H:%M')
+		data_regulacao_template = data_regulacao.strftime('%d/%m/%Y')
+		hora_ = data_regulacao.hour
+		hora = hora_ - 3
+		minuto = data_regulacao.minute
+
 
 	responsavel_pelo_preenchimento = request.user
 
@@ -1731,7 +1738,7 @@ def regulacao_detail(request, id):
 			status_aguard_lista_espera_registro, 'status_regulado_registro':
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
-			status_aguard_inf_registro})
+			status_aguard_inf_registro, 'hora':hora, 'minuto':minuto})
 		else:
 			senha = regulacao_registro_last.senha
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
@@ -1743,7 +1750,7 @@ def regulacao_detail(request, id):
 			status_aguard_lista_espera_registro, 'status_regulado_registro':
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
-			status_aguard_inf_registro, 'senha':senha})
+			status_aguard_inf_registro, 'senha':senha, 'hora':hora, 'minuto':minuto})
 			
 
 	elif not registro.image_laudo_tc and not registro.image_laudo_rx:
@@ -1759,7 +1766,7 @@ def regulacao_detail(request, id):
 				'status_regulado_registro':status_regulado_registro, 
 				'status_nao_regulado_registro':status_nao_regulado_registro, 
 				'status_aguard_inf_registro':status_aguard_inf_registro, 
-				'senha':senha})
+				'senha':senha, 'hora':hora, 'minuto':minuto})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 				'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1769,7 +1776,7 @@ def regulacao_detail(request, id):
 				'status_aguard_lista_espera_registro':status_aguard_lista_espera_registro, 
 				'status_regulado_registro':status_regulado_registro, 
 				'status_nao_regulado_registro':status_nao_regulado_registro, 
-				'status_aguard_inf_registro':status_aguard_inf_registro})
+				'status_aguard_inf_registro':status_aguard_inf_registro, 'hora':hora, 'minuto':minuto})
 	elif not registro.image_descricao_clinica and not registro.image_laudo_tc:
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
 		if regulacao_registro_last:
@@ -1783,7 +1790,7 @@ def regulacao_detail(request, id):
 			status_aguard_lista_espera_registro, 'status_regulado_registro':
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
-			status_aguard_inf_registro, 'senha':senha, 'img_rx':img_rx})
+			status_aguard_inf_registro, 'senha':senha, 'img_rx':img_rx, 'hora':hora, 'minuto':minuto})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1794,7 +1801,7 @@ def regulacao_detail(request, id):
 			status_aguard_lista_espera_registro, 'status_regulado_registro':
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
-			status_aguard_inf_registro, 'img_rx':img_rx})
+			status_aguard_inf_registro, 'img_rx':img_rx, 'hora':hora, 'minuto':minuto})
 	elif not registro.image_descricao_clinica and not registro.image_laudo_rx:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
 		if regulacao_registro_last:
@@ -1808,7 +1815,7 @@ def regulacao_detail(request, id):
 			status_aguard_lista_espera_registro, 'status_regulado_registro':
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
-			status_aguard_inf_registro, 'senha':senha, 'img_tc':img_tc})
+			status_aguard_inf_registro, 'senha':senha, 'img_tc':img_tc, 'hora':hora, 'minuto':minuto})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1819,7 +1826,7 @@ def regulacao_detail(request, id):
 			status_aguard_lista_espera_registro, 'status_regulado_registro':
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
-			status_aguard_inf_registro, 'img_tc':img_tc})
+			status_aguard_inf_registro, 'img_tc':img_tc, 'hora':hora, 'minuto':minuto})
 	elif not registro.image_laudo_rx:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
 		encoded = base64.b64encode(registro.image_descricao_clinica).decode('ascii')
@@ -1835,7 +1842,7 @@ def regulacao_detail(request, id):
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'senha':senha, 'img_tc':img_tc,
-			 'encoded':encoded})
+			 'encoded':encoded, 'hora':hora, 'minuto':minuto})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1846,7 +1853,7 @@ def regulacao_detail(request, id):
 			status_aguard_lista_espera_registro, 'status_regulado_registro':
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
-			status_aguard_inf_registro, 'img_tc':img_tc, 'encoded':encoded})
+			status_aguard_inf_registro, 'img_tc':img_tc, 'encoded':encoded, 'hora':hora, 'minuto':minuto})
 	elif not registro.image_laudo_tc:
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
 		encoded = base64.b64encode(registro.image_descricao_clinica).decode('ascii')
@@ -1862,7 +1869,7 @@ def regulacao_detail(request, id):
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'senha':senha, 'img_rx':img_rx,
-			 'encoded':encoded})
+			 'encoded':encoded, 'hora':hora, 'minuto':minuto})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1873,7 +1880,7 @@ def regulacao_detail(request, id):
 			status_aguard_lista_espera_registro, 'status_regulado_registro':
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
-			status_aguard_inf_registro, 'img_rx':img_rx, 'encoded':encoded})
+			status_aguard_inf_registro, 'img_rx':img_rx, 'encoded':encoded, 'hora':hora, 'minuto':minuto})
 
 	elif not registro.image_descricao_clinica and (registro.image_laudo_rx or registro.image_laudo_tc):
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
@@ -1890,7 +1897,7 @@ def regulacao_detail(request, id):
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'senha':senha, 'img_tc':img_tc, 'img_rx':
-			img_rx})
+			img_rx, 'hora':hora, 'minuto':minuto})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1902,7 +1909,7 @@ def regulacao_detail(request, id):
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'img_tc':img_tc, 'img_rx':
-			img_rx})
+			img_rx, 'hora':hora, 'minuto':minuto})
 
 	else:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
@@ -1920,7 +1927,7 @@ def regulacao_detail(request, id):
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'senha':senha, 'img_tc':img_tc, 'img_rx':
-			img_rx, 'encoded':encoded})
+			img_rx, 'encoded':encoded, 'hora':hora, 'minuto':minuto})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1932,7 +1939,7 @@ def regulacao_detail(request, id):
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'img_tc':img_tc, 'img_rx':
-			img_rx, 'encoded':encoded})
+			img_rx, 'encoded':encoded, 'hora':hora, 'minuto':minuto})
 
 
 
@@ -2211,7 +2218,7 @@ def gerar_relatorios_set(request):
 		if v.estabelecimento_solicitante != None or v.estabelecimento_solicitante != '':
 			estabelecimento_solicitante = v.estabelecimento_solicitante
 
-		if v.data_regulacao != '' or v.data_regulacao != None:
+		if v.data_regulacao:
 			data_regulacao = v.data_regulacao.strftime("%d-%m-%Y")
 		else:
 			data_regulacao = None
@@ -2224,6 +2231,9 @@ def gerar_relatorios_set(request):
 
 		if v.codigo_sescovid != '' or v.codigo_sescovid != None:
 			codigo_sescovid = v.codigo_sescovid
+
+		if v.last_status != None:
+			last_status = v.last_status
 
 
 		#regulacao = ""
@@ -2242,7 +2252,7 @@ def gerar_relatorios_set(request):
 			v.nome_paciente,
 			idade,
 			sexo,
-			v.last_status,
+			last_status,
 			v.municipio_estabelecimento_solicitante,
 			estabelecimento_solicitante,
 			estabelecimento_referencia_covid,
@@ -2301,7 +2311,21 @@ def status_registro(request, id):
 	formateDate = data_cancelamento.strftime("%d-%m-%Y")
 	hora = data_cancelamento.strftime("%H:%M")
 
-	return render(request, 'status_registro.html', {'registro':registro, 
+	hora_canc = 0
+	minuto_canc = 0
+
+	if registro.data_cancelamento:
+		hora_canc_ = registro.data_cancelamento.hour
+		minuto_canc = registro.data_cancelamento.minute
+		hora_canc = hora_canc_ - 3
+
+
+	data_cancelamento_bd = registro.data_cancelamento
+	if data_cancelamento_bd:
+		data_cancelamento_bd_template = data_cancelamento_bd.strftime("%d-%m-%Y")
+		#hora_cancelamento_bd = data_cancelamento_bd.strftime("%H:%M")
+		#hora_cancelamento_bd_template = hora_cancelamento_bd - timedelta(hours=3)
+		return render(request, 'status_registro.html', {'registro':registro, 
 		'status_registro':status_registro, 
 		'formateDate':formateDate, 'hora':hora, 'status_registro_last':
 		status_registro_last, 'status_regulado_registro':
@@ -2310,7 +2334,21 @@ def status_registro(request, id):
 		status_aguard_lista_espera_registro, 'status_obito_registro':
 		status_obito_registro, 'status_aguard_conf_vaga_registro':
 		status_aguard_conf_vaga_registro, 'status_aguard_inf_registro':
-		status_aguard_inf_registro})
+		status_aguard_inf_registro, 'data_cancelamento_bd_template':
+		data_cancelamento_bd_template, 'hora_canc':hora_canc, 'minuto_canc':
+		minuto_canc})
+	else:
+		return render(request, 'status_registro.html', {'registro':registro, 
+		'status_registro':status_registro, 
+		'formateDate':formateDate, 'hora':hora, 'status_registro_last':
+		status_registro_last, 'status_regulado_registro':
+		status_regulado_registro, 'status_nao_regulado_registro':
+		status_nao_regulado_registro, 'status_aguard_lista_espera_registro':
+		status_aguard_lista_espera_registro, 'status_obito_registro':
+		status_obito_registro, 'status_aguard_conf_vaga_registro':
+		status_aguard_conf_vaga_registro, 'status_aguard_inf_registro':
+		status_aguard_inf_registro, 'hora_canc':hora_canc, 'minuto_canc':
+		minuto_canc})
 
 
 @login_required
@@ -2414,7 +2452,19 @@ def regular_registro(request, id):
 
 	regulacoes_registro = Regulacao.objects.filter(registro_covid_id=registro.id)
 
-	return render(request, 'regular_registro.html', {'registro':registro, 
+	data_cancelamento = registro.data_cancelamento
+	hora = None
+	minuto = None
+	if data_cancelamento:
+		data_cancelamento_template = data_cancelamento.strftime('%d/%m/%Y')
+		hora_ = data_cancelamento.hour
+		minuto = data_cancelamento.minute
+		hora = hora_ - 3
+		return render(request, 'regular_registro.html', {'registro':registro, 
+		'regulacoes_registro':regulacoes_registro, 'hora':hora, 'minuto':minuto, 
+		'data_cancelamento_template':data_cancelamento_template})
+	else:
+		return render(request, 'regular_registro.html', {'registro':registro, 
 		'regulacoes_registro':regulacoes_registro})
 
 
@@ -2427,5 +2477,783 @@ def regular_registro_set(request, id):
 	else:
 		senha_bd = 0
 
+
+	return redirect('regulacao_detail', id=id)
+
+
+@login_required
+def paciente_atribuir_senha(request, id):
+	data_regulacao = datetime.now()
+	data_regulacao_template = data_regulacao.strftime('%d/%m/%Y %H:%M')
+
+	registro = RegistroCovid.objects.get(id=id)
+
+	regulacoes_registro = Regulacao.objects.filter(registro_covid_id=registro.id)
+
+	#Ultima regulacao
+	regulacao_last = Regulacao.objects.all().last()
+	#Ultima regulacao do paciente:
+	regulacao_paciente_last = regulacoes_registro.last()
+	if regulacao_last:
+		senha_last = regulacao_last.senha
+		senha_new = senha_last + 100
+	else:
+		senha_new = 100
+
+
+	senha = senha_new
+
+	codigo_sescovid = "SESCOVID" + str(senha_new)
+
+	pa = registro.pa
+
+	p = pa.split("x")
+	pa_1 = p[0]
+	pa_2 = p[1]
+
+	status_registro = Status.objects.filter(registro_covid=registro.id)
+
+	status_list_descricao_ = []
+
+	for s in status_registro:
+		status_list_descricao_.append(s.descricao)
+
+
+
+	status_list_descricao = []
+	if len(status_list_descricao_) != 0:
+		status_list_descricao = status_list_descricao_.pop()
+	else:
+		status_list_descricao
+	status_aguard_conf_vaga_registro = Status.objects.filter(descricao='Aguardando confirmação de Vaga').last()
+	#status_obito_registro = Status.objects.filter(descricao='Obito').last()
+	status_aguard_lista_espera_registro = Status.objects.filter(descricao='Aguardando em Lista de Espera').last()
+	status_regulado_registro = Status.objects.filter(descricao='Regulado').last()
+	
+	#status_nao_regulado_registro = []
+	status_nao_regulado_registro = Status.objects.filter(descricao='Não Regulado').last()
+	#status_nao_regulado = status_nao_regulado_registro.last()
+
+
+	municipio_estabelecimento_referencia = request.POST.get('municipio_estabelecimento_referencia')
+	#request.session['nome_solicitante'] = nome_solicitante
+	#request.session['idade_paciente'] = idade_paciente
+	#request.session['nome_paciente'] = nome_paciente
+	#request.session['sexo_paciente'] = sexo_paciente
+	municipio_estabelecimento_solicitante = request.POST.get('municipio_estabelecimento_solicitante')
+	estabelecimento_solicitante = request.POST.get('estabelecimento_solicitante')
+	estabelecimento_solicitante_outro = request.POST.get('estabelecimento_solicitante_outro')
+	#request.session['recurso_que_precisa'] = recurso_que_precisa
+	#request.session['cidade_origem'] = cidade_origem
+	#request.session['telefone_retorno'] = telefone_retorno
+	#request.session['frequencia_respiratoria'] = frequencia_respiratoria
+	#request.session['saturacao_paciente'] = saturacao_paciente
+	#request.session['frequencia_cardiaca'] = frequencia_cardiaca
+	#request.session['conciencia'] = conciencia
+	#request.session['temperatura'] = temperatura
+	#request.session['observacao'] = observacao
+	#request.session['pa_1'] = pa_1
+	#request.session['pa_2'] = pa_2
+	cidade = request.POST.get('municipio_referencia')
+
+
+	estabelecimentos = Cnes.objects.filter(MUNICIPIO = municipio_estabelecimento_referencia).order_by('NO_FANTASIA')
+
+	encoded_ = None
+	if registro.image_descricao_clinica:
+		encoded_ = base64.b64encode(registro.image_descricao_clinica).decode('ascii')
+
+	encoded = encoded_
+
+	if not registro.image_laudo_tc and not registro.image_laudo_rx:
+		return render(request, 'paciente_atribuir_senha.html', {'registro' : registro, 
+			'codigo_sescovid':codigo_sescovid, 'senha':senha, 'pa_1':pa_1, 
+			'pa_2':pa_2, 
+			'data_regulacao_template':data_regulacao_template, 
+			'status_list_descricao':status_list_descricao, 
+			'status_aguard_conf_vaga_registro':
+			status_aguard_conf_vaga_registro,
+			'status_aguard_lista_espera_registro':
+			status_aguard_lista_espera_registro, 
+			'status_regulado_registro':status_regulado_registro, 
+			'status_nao_regulado_registro':status_nao_regulado_registro, 
+			'municipio_estabelecimento_solicitante':
+			municipio_estabelecimento_solicitante, 
+			'estabelecimento_solicitante':estabelecimento_solicitante, 
+			'estabelecimento_solicitante_outro':
+			estabelecimento_solicitante_outro, 'cidade':cidade,
+			'estabelecimentos':estabelecimentos,
+			'municipio_estabelecimento_referencia':
+			municipio_estabelecimento_referencia, 'encoded':encoded})
+	elif not registro.image_laudo_tc and not registro.image_laudo_rx and not registro.image_descricao_clinica:
+		return render(request, 'paciente_atribuir_senha.html', {'registro' : registro, 
+			'codigo_sescovid':codigo_sescovid, 'senha':senha, 'pa_1':pa_1, 
+			'pa_2':pa_2, 'data_regulacao_template':data_regulacao_template, 
+			'status_list_descricao':status_list_descricao, 
+			'status_aguard_conf_vaga_registro':
+			status_aguard_conf_vaga_registro,
+			'status_aguard_lista_espera_registro':
+			status_aguard_lista_espera_registro, 
+			'status_regulado_registro':status_regulado_registro, 
+			'status_nao_regulado_registro':status_nao_regulado_registro, 
+			'municipio_estabelecimento_solicitante':
+			municipio_estabelecimento_solicitante, 
+			'estabelecimento_solicitante':estabelecimento_solicitante, 
+			'estabelecimento_solicitante_outro':
+			estabelecimento_solicitante_outro, 'cidade':cidade,
+			'estabelecimentos':estabelecimentos,
+			'municipio_estabelecimento_referencia':
+			municipio_estabelecimento_referencia})
+
+	elif not registro.image_laudo_rx:
+		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
+
+		return render(request, 'paciente_atribuir_senha.html', {'registro' : registro, 
+		'codigo_sescovid':codigo_sescovid, 'senha':senha, 'pa_1':pa_1, 
+		'pa_2':pa_2, 'data_regulacao_template': data_regulacao_template,
+		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
+		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
+		status_aguard_lista_espera_registro, 'status_regulado_registro':
+		status_regulado_registro, 'status_nao_regulado_registro':
+		status_nao_regulado_registro, 'municipio_estabelecimento_solicitante':
+		municipio_estabelecimento_solicitante, 'estabelecimento_solicitante':
+		estabelecimento_solicitante, 'estabelecimento_solicitante_outro':
+		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
+		estabelecimentos, 'municipio_estabelecimento_referencia':
+		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_tc':
+		img_tc})
+	elif not registro.image_laudo_tc:
+		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
+
+		return render(request, 'paciente_atribuir_senha.html', {'registro' : registro, 
+		'codigo_sescovid':codigo_sescovid, 'senha':senha, 'pa_1':pa_1, 
+		'pa_2':pa_2, 'data_regulacao_template': data_regulacao_template,
+		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
+		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
+		status_aguard_lista_espera_registro, 'status_regulado_registro':
+		status_regulado_registro, 'status_nao_regulado_registro':
+		status_nao_regulado_registro, 'municipio_estabelecimento_solicitante':
+		municipio_estabelecimento_solicitante, 'estabelecimento_solicitante':
+		estabelecimento_solicitante, 'estabelecimento_solicitante_outro':
+		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
+		estabelecimentos, 'municipio_estabelecimento_referencia':
+		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_rx':img_rx})
+	else:
+		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
+		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
+
+		return render(request, 'paciente_atribuir_senha.html', {'registro' : registro,
+		'codigo_sescovid':codigo_sescovid, 'senha':senha, 'pa_1':pa_1, 'pa_2':pa_2, 
+		'data_regulacao_template': data_regulacao_template,
+		'status_list_descricao':status_list_descricao, 'status_aguard_conf_vaga_registro':
+		status_aguard_conf_vaga_registro, 'status_aguard_lista_espera_registro':
+		status_aguard_lista_espera_registro, 'status_regulado_registro':
+		status_regulado_registro, 'status_nao_regulado_registro':
+		status_nao_regulado_registro, 'municipio_estabelecimento_solicitante':
+		municipio_estabelecimento_solicitante, 'estabelecimento_solicitante':
+		estabelecimento_solicitante, 'estabelecimento_solicitante_outro':
+		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
+		estabelecimentos, 'municipio_estabelecimento_referencia':
+		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_tc':
+		img_tc, 'img_rx':img_rx})
+
+
+@login_required
+def paciente_atribuir_senha_set(request, id):
+	registro = RegistroCovid.objects.get(id=id)
+
+	responsavel_pelo_preenchimento = request.user
+	
+	
+	nome_solicitante = request.POST.get('nome_solicitante')
+	municipio_estabelecimento_solicitante = registro.municipio_estabelecimento_solicitante
+	estabelecimento_solicitante = registro.estabelecimento_solicitante
+	estabelecimento_solicitante_outro = registro.estabelecimento_solicitante_outro
+	
+	if estabelecimento_solicitante == '' or estabelecimento_solicitante == None:
+		estabelecimento_solicitante = request.POST.get('estabelecimento_solicitante')
+	
+	if estabelecimento_solicitante_outro == '' or estabelecimento_solicitante_outro == None:
+		estabelecimento_solicitante_outro = request.POST.get('estabelecimento_solicitante_outro')
+
+	municipio_estabelecimento_referencia = request.POST.get('municipio_estabelecimento_referencia')
+	estabelecimento_referencia = request.POST.get('estabelecimento_referencia')
+	estabelecimento_referencia_outro = request.POST.get('estabelecimento_referencia_outro')
+	nome_paciente = request.POST.get('nome_paciente')
+	
+	idade_paciente_cap = request.POST.get('idade_paciente')
+	if idade_paciente_cap == '' or idade_paciente_cap == None:
+		idade_paciente = None
+	else:
+		idade_paciente = int(float(idade_paciente_cap))
+
+	sexo_paciente = request.POST.get('sexo_paciente')
+	recurso_que_precisa = registro.recurso_que_precisa
+	estado_origem = registro.estado_origem
+	cidade_origem = registro.cidade_origem
+	telefone_retorno = registro.telefone_retorno
+	frequencia_respiratoria = registro.frequencia_respiratoria
+	saturacao_paciente = registro.saturacao_paciente
+	ar_o2 = registro.ar_o2
+	frequencia_cardiaca = registro.frequencia_cardiaca
+	
+	pa_part1 = request.POST.get('pa_part1')
+	pa_part2 = request.POST.get('pa_part2')
+	pa = pa_part1 + "x" + pa_part2
+	
+	conciencia = registro.conciencia
+	temperatura = registro.temperatura
+
+	descricao_clinica = request.POST.get('descricao_clinica')
+
+	#image_descricao_clinica = request.FILES['file_descricao_clinica'].file.read()
+
+	#image_laudo_tc = request.FILES['file_tc_torax_regulacao'].file.read()
+	#image_laudo_rx = request.FILES['file_rx_torax_regulacao'].file.read()
+	
+	sindrome_gripal = request.POST.getlist('s_gripal')
+	
+	tempo_quadro_sintomatico_cap = request.POST.get('tempo_inicio_sintomas')
+	if tempo_quadro_sintomatico_cap == '' or tempo_quadro_sintomatico_cap == None:
+		tempo_quadro_sintomatico = None
+	else:
+		tempo_quadro_sintomatico = int(float(tempo_quadro_sintomatico_cap))
+
+	exposicao_pessoa_infectada = request.POST.get('exposicao_epidemiologica_sim')
+	parentesco = request.POST.get('grau_parentesco')
+	comorbidades = request.POST.getlist('comorbidades')
+	outras_comorbidades = request.POST.get('descricao_outras_comorbidades')
+	outras_cardiopatias = request.POST.get('desc_outras_cardiopatias')
+	idade_gestacional = request.POST.get('idade_gestacao')
+	comorbidades_obstetricas = request.POST.get('comorbidade_obstetrica')
+	gesta_para = request.POST.get('gestacao_para')
+	medicamentos_uso_habitual = request.POST.getlist('medicamento_uso_habitual')
+	medicamento_outros = request.POST.get('descricao_outros_medicamento')
+	
+	spo2_cap = request.POST.get('spo2')
+	if spo2_cap == '' or spo2_cap == None:
+		spo2 = None
+	else:
+		spo2 = int(float(spo2_cap))
+		
+
+	fr_irpm_cap = request.POST.get('fr_irpm')
+	if fr_irpm_cap == '' or fr_irpm_cap == None:
+		fr_irpm = None
+	else:
+		fr_irpm = int(float(fr_irpm_cap))
+		
+
+	ventilacao_tipo = request.POST.get('ventilacao')
+	o2_suporte = request.POST.getlist('o2_suporte')
+	
+	dose_cn_cap = request.POST.get('dose_cn')
+	if dose_cn_cap == '' or dose_cn_cap == None:
+		dose_cn = None
+	else:
+		dose_cn = float(dose_cn_cap)
+
+	dose_venturi_cap = request.POST.get('dose_venturi')
+	if dose_venturi_cap == '' or dose_venturi_cap == None:
+		dose_venturi = None
+	else:
+		dose_venturi = float(dose_venturi_cap)
+	
+
+	vmi = request.POST.getlist('vmi')
+	
+	vt_cap = request.POST.get('vt')
+	if vt_cap == '' or vt_cap == None:
+		vt = None
+	else:
+		vt = float(vt_cap)
+		
+
+	delta_pressure_cap = request.POST.get('delta_pressure')
+	if delta_pressure_cap == '' or delta_pressure_cap == None:
+		delta_pressure = None
+	else:
+		delta_pressure = float(delta_pressure_cap)
+		
+
+	pplato_cap = request.POST.get('pplato')
+	if pplato_cap == '' or pplato_cap == None:
+		pplato = None
+	else:
+		pplato = float(pplato_cap)
+		
+
+	raw_cap = request.POST.get('raw')
+	if raw_cap == '' or raw_cap == None:
+		raw = None
+	else:
+		raw = float(raw_cap)
+		
+
+	cest_cap = request.POST.get('cest')
+	if cest_cap == '' or cest_cap == None :
+		cest = None
+	else:
+		cest = float(cest_cap)
+		
+
+	sao2_cap = request.POST.get('sao2')
+	if sao2_cap == '' or sao2_cap == None:
+		sao2 = None
+	else:
+		sao2 = float(sao2_cap)
+
+	pao2_cap = request.POST.get('pao2')
+	if pao2_cap == '' or pao2_cap == None:
+		pao2 = None
+	else:
+		pao2 = float(pao2_cap)
+
+	fio2_cap = request.POST.get('fio2')
+	if fio2_cap == '' or fio2_cap == None:
+		fio2 = None
+	else:
+		fio2 = float(fio2_cap)
+
+	paco2_cap = request.POST.get('paco2')
+	if paco2_cap == '' or paco2_cap == None:
+		paco2 = None
+	else:
+		paco2 = float(paco2_cap)
+	
+	fc_cap = request.POST.get('fc')
+	if fc_cap == '' or fc_cap == None:
+		fc = None
+	else:
+		fc = int(float(fc_cap))
+		
+
+	temperatura_axilar_cap = request.POST.get('temp_auxiliar')
+	if temperatura_axilar_cap == '' or temperatura_axilar_cap == None :
+		temperatura_axilar = None
+	else:
+		temperatura_axilar = float(temperatura_axilar_cap)
+		
+
+	droga_vasoativa = request.POST.getlist('droga_vasoativa')
+	
+	qtd_nora_cap = request.POST.get('qtd_nora')
+	if qtd_nora_cap == '' or qtd_nora_cap == None:
+		qtd_nora = None
+	else:
+		qtd_nora = float(qtd_nora_cap)
+
+	qtd_adrenalina_cap = request.POST.get('qtd_adrenalina')
+	if qtd_adrenalina_cap == '' or qtd_adrenalina_cap == None:
+		qtd_adrenalina = None
+	else:
+		qtd_adrenalina = float(qtd_adrenalina_cap)
+
+	qtd_vasopressina_cap = request.POST.get('qtd_vasopressina')
+	if qtd_vasopressina_cap == '' or qtd_vasopressina_cap == None:
+		qtd_vasopressina = None
+	else:
+		qtd_vasopressina = float(qtd_vasopressina_cap)
+
+	qtd_dobutamina_cap = request.POST.get('qtd_dobutamina')
+	if qtd_dobutamina_cap == '' or qtd_dobutamina_cap == None:
+		qtd_dobutamina = None
+	else:
+		qtd_dobutamina = float(qtd_dobutamina_cap)
+
+	arritmia = request.POST.getlist('arritmia')
+	infeccao_bacteriana = request.POST.get('infeccao_bacteriana')
+	foco = request.POST.getlist('foco')
+	uso_antibioticoterapia = request.POST.get('uso_antibioticoterapia')
+	pesquisa_teste_sars_cov_2 = request.POST.get('pesquisa_sars_cov2')
+	igg_cap = request.POST.get('igg')
+	igg_bd = request.POST.get('igg_bd')
+	if igg_cap == '' or igg_cap == None:
+		if igg_bd == '' or igg_bd == None:
+			igg = None
+		else:
+			igg = igg_bd
+	else:
+		igg = igg_cap
+
+	igm_do_bd = registro.igm
+	igm_cap = request.POST.get('igm')
+
+	igm_bd_cap = request.POST.get('igm_bd')
+	if igm_cap == '' or igm_cap == None:
+		if igm_bd_cap == '' or igm_bd_cap == None:
+			igm = None
+		else:
+			igm = igm_bd_cap
+	else:
+		igm = igm_cap
+
+	
+	data_igm_igg_cap = request.POST.get('data_igm_igg')
+	data_igm_igg_bd_cap = request.POST.get('data_igm_igg_bd')
+
+	if data_igm_igg_cap == '' or data_igm_igg_cap == None:
+		if data_igm_igg_bd_cap == '' or data_igm_igg_bd_cap == None:
+			data_igm_igg = None
+		else:
+			data_igm_igg = datetime.strptime(data_igm_igg_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_igm_igg = data_igm_igg_cap
+
+
+	rt_pcr_sars_cov_2 = request.POST.get('pcr_sars_cov2')
+	
+	data_da_coleta_bd_cap = request.POST.get('data_da_coleta_bd')
+	data_coleta_cap = request.POST.get('data_da_coleta')
+	if data_coleta_cap == '' or data_coleta_cap == None:
+		if data_da_coleta_bd_cap == '' or data_da_coleta_bd_cap == None:
+			data_coleta = None
+		else:
+			data_coleta = datetime.strptime(data_da_coleta_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_coleta = data_coleta_cap
+	
+	em_uso_corticosteroide = request.POST.get('em_uso_corticosteroide')
+	dose_corticosteroide = request.POST.get('dose_corticosteroide')
+	
+	data_inicio_corticosteroide_bd_cap = request.POST.get('data_inicio_corticosteroide_bd')
+	data_inicio_corticosteroide_cap = request.POST.get('data_inicio_corticosteroide')
+	if data_inicio_corticosteroide_cap == '' or data_inicio_corticosteroide_cap == None:
+		if data_inicio_corticosteroide_bd_cap == '' or data_inicio_corticosteroide_bd_cap == None:
+			data_inicio_corticosteroide = None
+		else:
+			data_inicio_corticosteroide = datetime.strptime(data_inicio_corticosteroide_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_inicio_corticosteroide = data_inicio_corticosteroide_cap
+	
+
+	em_uso_hidroxicloroquina = request.POST.get('em_uso_hidrocloroquina')
+	
+	data_inicio_hidroxicloroquina_cap = request.POST.get('data_inicio_hidroxicloroquina')
+	data_inicio_hidroxicloroquina_bd_cap = request.POST.get('data_inicio_hidroxicloroquina_bd')
+
+
+	if data_inicio_hidroxicloroquina_cap == '' or data_inicio_hidroxicloroquina_cap == None:
+		if data_inicio_hidroxicloroquina_bd_cap == '' or data_inicio_hidroxicloroquina_bd_cap == None:
+			data_inicio_hidroxicloroquina = None	
+		else:
+			data_inicio_hidroxicloroquina = datetime.strptime(data_inicio_hidroxicloroquina_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_inicio_hidroxicloroquina = data_inicio_hidroxicloroquina_cap
+
+
+	
+
+	em_uso_oseltamivir = request.POST.get('em_uso_oseltamivir')
+	
+	data_inicio_oseltamivir_cap = request.POST.get('data_inicio_oseltamivir')
+	data_inicio_oseltamivir_bd_cap = request.POST.get('data_inicio_oseltamivir_bd')
+
+
+	if data_inicio_oseltamivir_cap == '' or data_inicio_oseltamivir_cap == None:
+		if data_inicio_oseltamivir_bd_cap == '' or data_inicio_oseltamivir_bd_cap == None:
+			data_inicio_oseltamivir = None
+		else:
+			data_inicio_oseltamivir = datetime.strptime(data_inicio_oseltamivir_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_inicio_oseltamivir = data_inicio_oseltamivir_cap
+
+
+
+	em_uso_heparina = request.POST.get('em_uso_heparina')
+
+	data_inicio_heparina_bd_cap = request.POST.get('data_inicio_heparina_bd')
+	data_inicio_heparina_cap = request.POST.get('data_inicio_heparina')
+
+	if data_inicio_heparina_cap == '' or data_inicio_heparina_cap == None:
+		if data_inicio_heparina_bd_cap == '' or data_inicio_heparina_bd_cap == None:
+			data_inicio_heparina = None
+		else:
+			data_inicio_heparina = datetime.strptime(data_inicio_heparina_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_inicio_heparina = data_inicio_heparina_cap
+		
+
+	tipo_heparina = request.POST.get('tipo_heparina')
+	dose_heparina = request.POST.get('dose_heparina')
+	
+	pps_cap = request.POST.get('pps_paciente')
+	if pps_cap == '' or pps_cap == None:
+		pps = None
+	else:
+		pps = float(pps_cap)
+		
+
+	escala_pontos_glasgow_cap = request.POST.get('escala_glasgow')
+	if escala_pontos_glasgow_cap == '' or escala_pontos_glasgow_cap == None:
+		escala_pontos_glasgow = None
+	else:
+		escala_pontos_glasgow = int(float(escala_pontos_glasgow_cap))
+		
+
+	bloqueador_neuromuscular = request.POST.getlist('desc_bloqueador_neuromuscular')
+	midazolam_dose = request.POST.get('midazolam_dose')
+	fentanil_dose = request.POST.get('fentanil_dose')
+	propofol_dose = request.POST.get('propofol_dose')
+	sedacao_continua = request.POST.getlist('desc_sedacao_continua')
+	rocuronio_dose = request.POST.get('rocuronio_dose')
+	pacuronio_dose = request.POST.get('pacuronio_dose')
+	cisatracurio_dose = request.POST.get('cisatracurio_dose')
+	rass = request.POST.get('rass')
+	
+	data_exames_laboratorio_cap = request.POST.get('data_exames_laboratorio')
+	data_exames_laboratorio_bd_cap = request.POST.get('data_exames_laboratorio_bd')
+
+	if data_exames_laboratorio_cap == '' or data_exames_laboratorio_cap == None:
+		if data_exames_laboratorio_bd_cap == '' or data_exames_laboratorio_bd_cap == None:
+			data_exames_laboratorio = None
+		else:
+			data_exames_laboratorio = datetime.strptime(data_exames_laboratorio_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_exames_laboratorio = data_exames_laboratorio_cap
+
+	leucocito = request.POST.get('leucocito')
+	linfocito = request.POST.get('linfocito')
+	hb = request.POST.get('hb')
+	ht = request.POST.get('ht')
+	pcr = request.POST.get('pcr')
+	lactato = request.POST.get('lactato')
+	dhl = request.POST.get('dhl')
+	ferritina = request.POST.get('ferritina')
+	troponina = request.POST.get('troponina')
+	cpk = request.POST.get('cpk')
+	d_dimero = request.POST.get('d_dimero')
+	ureia = request.POST.get('ureia')
+	creatinina = request.POST.get('creatinina')
+	ap = request.POST.get('ap')
+	tap = request.POST.get('tap')
+	inr = request.POST.get('inr')
+	tgo = request.POST.get('tgo')
+	tgp = request.POST.get('tgp')
+	exame_imagem = request.POST.getlist('exame_imagem')
+	laudo_tc_torax = request.POST.get('laudo_tc_torax')
+	laudo_rx_torax = request.POST.get('laudo_rx_torax')
+	is_sindrome_gripal = request.POST.get('sindrome_gripal')
+	news_fast_pb = request.POST.get('new_fast')
+	news_modificado = request.POST.get('new_modificado')
+	uti = request.POST.get('uti')
+	leito = request.POST.get('perfil')
+
+	parecer_medico = request.POST.get('parecer')
+	
+	prioridade_cap = request.POST.get('prioridade')
+	if prioridade_cap == '' or prioridade_cap == None:
+		prioridade = None
+	else:
+		prioridade = int(float(prioridade_cap))
+
+
+	codigo_sescovid = request.POST.get('num_protocolo')
+
+
+	descricao = request.POST.get('status_paciente')
+	registro_covid = registro
+
+	status = Status.objects.create(
+		descricao=descricao,
+		registro_covid=registro_covid
+		)
+
+	last_status = descricao
+
+	if estabelecimento_referencia == '' or estabelecimento_referencia == None:
+		estabelecimento_referencia_covid = estabelecimento_referencia_outro
+	else:
+		estabelecimento_referencia_covid = estabelecimento_referencia
+
+
+	senha = 0
+	if last_status == 'Regulado':
+		#Regulações do paciente
+		#regulacoes_registro = Regulacao.objects.filter(registro_covid_id=registro.id)
+		#Ultima regulacao do paciente:
+		regulacao_last = Regulacao.objects.all().last()
+		if regulacao_last:
+			senha_last = regulacao_last.senha
+			senha_new = senha_last + 100
+		else:
+			senha_new = 100
+			
+
+		senha = int(senha_new)
+
+		regulacao = Regulacao.objects.create(
+			estabelecimento_referencia_covid = estabelecimento_referencia_covid,
+			nome_paciente = nome_paciente,
+			senha = senha,
+			registro_covid = registro_covid
+			)
+
+
+	justificativa = request.POST.get('justificativa')
+	observacao = request.POST.get('observacoes_medicas')
+	
+	pareceristas = registro.pareceristas
+	
+	pareceristas_cap = request.POST.getlist('pareceristas')
+	
+	if pareceristas == '' or pareceristas == None:
+		pareceristas = pareceristas_cap
+	else:
+		pareceristas = pareceristas + pareceristas_cap
+
+	
+	data_regulacao = datetime.now()
+	#data_regulacao = data_regulacao_.strftime('%d/%m/%Y %H:%M')
+
+
+	data_obito_bd_cap = request.POST.get('data_obito_bd')
+	data_obito_cap = request.POST.get('data_obito')
+
+	if data_obito_cap == '' or data_obito_cap == None:
+		if data_obito_bd_cap == '' or data_obito_bd_cap == None:
+			data_obito = None
+		else:
+			data_obito = datetime.strptime(data_obito_bd_cap, '%d/%m/%Y').date()
+	else:
+		data_obito = data_obito_cap
+
+	
+	registro.responsavel_pelo_preenchimento = responsavel_pelo_preenchimento
+	#registro.codigo_registro = codigo_registro
+	registro.nome_solicitante = nome_solicitante
+	#registro.municipio_estabelecimento_solicitante = municipio_estabelecimento_solicitante
+	#registro.estabelecimento_solicitante = estabelecimento_solicitante
+	#registro.estabelecimento_solicitante_outro = estabelecimento_solicitante_outro
+	#registro.municipio_estabelecimento_referencia = municipio_estabelecimento_referencia
+	#registro.estabelecimento_referencia = estabelecimento_referencia
+	#registro.estabelecimento_referencia_outro = estabelecimento_referencia_outro
+	registro.nome_paciente = nome_paciente
+	registro.idade_paciente = idade_paciente
+	registro.sexo_paciente = sexo_paciente
+	registro.recurso_que_precisa = recurso_que_precisa
+	registro.estado_origem = estado_origem
+	registro.cidade_origem = cidade_origem
+	registro.telefone_retorno = telefone_retorno
+	registro.frequencia_respiratoria = frequencia_respiratoria
+	registro.saturacao_paciente = saturacao_paciente
+	registro.ar_o2 = ar_o2
+	registro.frequencia_cardiaca = frequencia_cardiaca
+	registro.pa = pa
+	registro.conciencia = conciencia
+	registro.temperatura = temperatura
+	registro.descricao_clinica = descricao_clinica
+	#registro.image_descricao_clinica = image_descricao_clinica
+	registro.sindrome_gripal = sindrome_gripal
+	registro.tempo_quadro_sintomatico = tempo_quadro_sintomatico
+	registro.exposicao_pessoa_infectada = exposicao_pessoa_infectada
+	registro.parentesco = parentesco
+	registro.comorbidades = comorbidades
+	registro.outras_comorbidades = outras_comorbidades
+	registro.outras_cardiopatias = outras_cardiopatias
+	registro.idade_gestacional = idade_gestacional
+	registro.comorbidades_obstetricas = comorbidades_obstetricas
+	registro.gesta_para = gesta_para
+	registro.medicamentos_uso_habitual = medicamentos_uso_habitual
+	registro.medicamento_outros = medicamento_outros
+	registro.spo2 = spo2
+	registro.fr_irpm = fr_irpm
+	registro.ventilacao_tipo = ventilacao_tipo
+	registro.o2_suporte = o2_suporte
+	registro.dose_cn = dose_cn
+	registro.dose_venturi = dose_venturi
+	registro.vmi = vmi
+	registro.vt = vt
+	registro.delta_pressure = delta_pressure
+	registro.pplato = pplato
+	registro.raw = raw
+	registro.cest = cest
+	registro.sao2 = sao2
+	registro.pao2 = pao2
+	registro.fio2 = fio2
+	registro.paco2 = paco2
+	registro.pa = pa
+	registro.fc = fc
+	registro.temperatura_axilar = temperatura_axilar
+	registro.droga_vasoativa = droga_vasoativa
+	registro.qtd_nora = qtd_nora
+	registro.qtd_adrenalina = qtd_adrenalina
+	registro.qtd_vasopressina = qtd_vasopressina
+	registro.qtd_dobutamina = qtd_dobutamina
+	registro.arritmia = arritmia
+	registro.infeccao_bacteriana = infeccao_bacteriana
+	registro.foco = foco
+	registro.uso_antibioticoterapia = uso_antibioticoterapia
+	registro.pesquisa_teste_sars_cov_2 = pesquisa_teste_sars_cov_2
+	registro.igg = igg
+	registro.igm = igm
+	registro.data_igm_igg = data_igm_igg
+	registro.rt_pcr_sars_cov_2 = rt_pcr_sars_cov_2
+	registro.data_coleta = data_coleta
+	registro.em_uso_corticosteroide = em_uso_corticosteroide
+	registro.dose_corticosteroide = dose_corticosteroide
+	registro.data_inicio_corticosteroide = data_inicio_corticosteroide
+	registro.em_uso_hidroxicloroquina = em_uso_hidroxicloroquina
+	registro.data_inicio_hidroxicloroquina = data_inicio_hidroxicloroquina
+	registro.em_uso_oseltamivir = em_uso_oseltamivir
+	registro.data_inicio_oseltamivir = data_inicio_oseltamivir
+	registro.em_uso_heparina = em_uso_heparina
+	registro.data_inicio_heparina = data_inicio_heparina
+	registro.tipo_heparina = tipo_heparina
+	registro.dose_heparina = dose_heparina
+	registro.pps = pps
+	registro.escala_pontos_glasgow = escala_pontos_glasgow
+	registro.bloqueador_neuromuscular = bloqueador_neuromuscular
+	registro.midazolam_dose = midazolam_dose
+	registro.fentanil_dose = fentanil_dose
+	registro.propofol_dose = propofol_dose
+	registro.sedacao_continua = sedacao_continua
+	registro.rocuronio_dose = rocuronio_dose
+	registro.pacuronio_dose = pacuronio_dose
+	registro.cisatracurio_dose = cisatracurio_dose
+	registro.rass = rass
+	registro.data_exames_laboratorio = data_exames_laboratorio
+	registro.leucocito = leucocito
+	registro.linfocito = linfocito
+	registro.hb = hb
+	registro.ht = ht
+	registro.pcr = pcr
+	registro.lactato = lactato
+	registro.dhl = dhl
+	registro.ferritina = ferritina
+	registro.troponina = troponina
+	registro.cpk = cpk
+	registro.d_dimero = d_dimero
+	registro.ureia = ureia
+	registro.creatinina = creatinina
+	registro.ap = ap
+	registro.tap = tap
+	registro.inr = inr
+	registro.tgo = tgo
+	registro.tgp = tgp
+	registro.exame_imagem = exame_imagem
+	#registro.image_laudo_tc = image_laudo_tc
+	#registro.image_laudo_rx = image_laudo_rx
+	registro.laudo_tc_torax = laudo_tc_torax
+	registro.laudo_rx_torax = laudo_rx_torax
+	registro.is_sindrome_gripal = is_sindrome_gripal
+	registro.news_fast_pb = news_fast_pb
+	registro.news_modificado = news_modificado
+	registro.uti = uti
+	registro.leito = leito
+	registro.parecer_medico = parecer_medico
+	registro.prioridade = prioridade
+	#registro.regulacao_paciente = regulacao_paciente
+	#registro.status_regulacao = status_regulacao
+	#registro.senha = senha
+	registro.codigo_sescovid = codigo_sescovid
+	registro.justificativa = justificativa
+	registro.observacao = observacao
+	registro.pareceristas = pareceristas
+	registro.data_regulacao = data_regulacao
+	registro.last_status = last_status
+	registro.data_obito = data_obito
+
+	registro.save()
 
 	return redirect('regulacao_detail', id=id)

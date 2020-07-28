@@ -275,7 +275,7 @@
 				<br />
 
 				<div class="form-check-inline" style=""><b>Data:</b>
-					<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="" value="{{registro.data_cancelamento}} - {{registro.hora_cancelamento|time:'H:i'}}" style="width: 140px" disabled>						
+					<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="" value="{{data_cancelamento_template}} - {{hora}}:{{minuto}}" style="width: 140px" disabled>						
 				</div><br />
 
 				<div class="invalid-feedback"></div>
@@ -323,7 +323,7 @@
 			<div class="container-fluid" style="text-align: center;">
 				<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/covid_list/">Principal</a></button>
 				{% if registro.andamento_processo != '' %}
-				{%else%}<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/regulacao/{{registro.id}}/">Alterar Estabelecimento?</a></button>
+				{%else%}<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/regulacao/{{registro.id}}/">Editar Paciente</a></button>
 				{%endif%}
 
 			</div>

@@ -48,7 +48,10 @@
         <a class="nav-link" href="/search_register/">Localizar</a>
     </li>
     <li class="nav-item">
+      {% if user.first_name == 'videofonista' or user.first_name == 'medico' or user.first_name == 'enfermeiro' %}
+      {% else %}
         <a class="nav-link" href="/gerar_relatorios/">Relatórios</a>
+      {%endif%}
     </li>
     <li>
      <a class="nav-link" href="/change_password/">Alterar senha</a>

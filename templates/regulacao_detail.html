@@ -2765,11 +2765,14 @@
 
 				<div class="row">
 					<div class="col-sm-12" style="text-align: center;">
+						{% if user.first_name == 'enfermeiro' %}
+						{%else%}
 						<b>Parecer Médico</b>
 						{% if registro.parecer_medico == '' or registro.parecer_medico == None %}
 						<textarea class="form-control" rows="15" id="" name="parecer" value="" style="width: 100%"></textarea>
 						{%else%}
 						<textarea class="form-control" rows="15" id="" name="parecer" value="" style="width: 100%">{{registro.parecer_medico}}</textarea>
+						{%endif%}
 						{%endif%}
 
 					</div>
@@ -2999,7 +3002,7 @@
 						</div>
 						{%else%}
 						<div class="form-check-inline">
-							<input type="text" class="form-control form-control-sm" id="" placeholder="" name="data_regulacao_bd" value="{{data_regulacao_template}} {{hora}}:{{minuto}}">
+							<input type="text" class="form-control form-control-sm" id="" placeholder="" name="data_regulacao_bd" value="{{registro.data_regulacao}}">
 						</div>
 						{%endif%}
 

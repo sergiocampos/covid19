@@ -1629,7 +1629,6 @@ def regulacao_set(request, id):
 	registro.pao2 = pao2
 	registro.fio2 = fio2
 	registro.paco2 = paco2
-	registro.pa = pa
 	registro.fc = fc
 	registro.temperatura_axilar = temperatura_axilar
 	registro.droga_vasoativa = droga_vasoativa
@@ -1781,7 +1780,8 @@ def regulacao_detail(request, id):
 			status_aguard_lista_espera_registro, 'status_regulado_registro':
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
-			status_aguard_inf_registro, 'hora':hora, 'minuto':minuto})
+			status_aguard_inf_registro, 'hora':hora, 'minuto':minuto, 
+			'regulacao_registro_last':regulacao_registro_last})
 		else:
 			senha = regulacao_registro_last.senha
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
@@ -1793,7 +1793,9 @@ def regulacao_detail(request, id):
 			status_aguard_lista_espera_registro, 'status_regulado_registro':
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
-			status_aguard_inf_registro, 'senha':senha, 'hora':hora, 'minuto':minuto})
+			status_aguard_inf_registro, 'senha':senha, 'hora':hora, 
+			'minuto':minuto, 
+			'regulacao_registro_last':regulacao_registro_last})
 			
 
 	elif not registro.image_laudo_tc and not registro.image_laudo_rx:
@@ -1809,7 +1811,8 @@ def regulacao_detail(request, id):
 				'status_regulado_registro':status_regulado_registro, 
 				'status_nao_regulado_registro':status_nao_regulado_registro, 
 				'status_aguard_inf_registro':status_aguard_inf_registro, 
-				'senha':senha, 'hora':hora, 'minuto':minuto})
+				'senha':senha, 'hora':hora, 'minuto':minuto, 
+			'regulacao_registro_last':regulacao_registro_last})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 				'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1819,7 +1822,9 @@ def regulacao_detail(request, id):
 				'status_aguard_lista_espera_registro':status_aguard_lista_espera_registro, 
 				'status_regulado_registro':status_regulado_registro, 
 				'status_nao_regulado_registro':status_nao_regulado_registro, 
-				'status_aguard_inf_registro':status_aguard_inf_registro, 'hora':hora, 'minuto':minuto})
+				'status_aguard_inf_registro':status_aguard_inf_registro, 
+				'hora':hora, 'minuto':minuto, 
+			'regulacao_registro_last':regulacao_registro_last})
 	elif not registro.image_descricao_clinica and not registro.image_laudo_tc:
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
 		if regulacao_registro_last:
@@ -1833,7 +1838,9 @@ def regulacao_detail(request, id):
 			status_aguard_lista_espera_registro, 'status_regulado_registro':
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
-			status_aguard_inf_registro, 'senha':senha, 'img_rx':img_rx, 'hora':hora, 'minuto':minuto})
+			status_aguard_inf_registro, 'senha':senha, 'img_rx':img_rx, 
+			'hora':hora, 'minuto':minuto, 
+			'regulacao_registro_last':regulacao_registro_last})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1844,7 +1851,9 @@ def regulacao_detail(request, id):
 			status_aguard_lista_espera_registro, 'status_regulado_registro':
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
-			status_aguard_inf_registro, 'img_rx':img_rx, 'hora':hora, 'minuto':minuto})
+			status_aguard_inf_registro, 'img_rx':img_rx, 'hora':hora, 
+			'minuto':minuto, 
+			'regulacao_registro_last':regulacao_registro_last})
 	elif not registro.image_descricao_clinica and not registro.image_laudo_rx:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
 		if regulacao_registro_last:
@@ -1858,7 +1867,9 @@ def regulacao_detail(request, id):
 			status_aguard_lista_espera_registro, 'status_regulado_registro':
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
-			status_aguard_inf_registro, 'senha':senha, 'img_tc':img_tc, 'hora':hora, 'minuto':minuto})
+			status_aguard_inf_registro, 'senha':senha, 'img_tc':img_tc, 
+			'hora':hora, 'minuto':minuto, 
+			'regulacao_registro_last':regulacao_registro_last})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1869,7 +1880,9 @@ def regulacao_detail(request, id):
 			status_aguard_lista_espera_registro, 'status_regulado_registro':
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
-			status_aguard_inf_registro, 'img_tc':img_tc, 'hora':hora, 'minuto':minuto})
+			status_aguard_inf_registro, 'img_tc':img_tc, 'hora':hora, 
+			'minuto':minuto, 
+			'regulacao_registro_last':regulacao_registro_last})
 	elif not registro.image_laudo_rx:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
 		encoded = base64.b64encode(registro.image_descricao_clinica).decode('ascii')
@@ -1885,7 +1898,8 @@ def regulacao_detail(request, id):
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'senha':senha, 'img_tc':img_tc,
-			 'encoded':encoded, 'hora':hora, 'minuto':minuto})
+			 'encoded':encoded, 'hora':hora, 'minuto':minuto, 
+			'regulacao_registro_last':regulacao_registro_last})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1896,7 +1910,9 @@ def regulacao_detail(request, id):
 			status_aguard_lista_espera_registro, 'status_regulado_registro':
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
-			status_aguard_inf_registro, 'img_tc':img_tc, 'encoded':encoded, 'hora':hora, 'minuto':minuto})
+			status_aguard_inf_registro, 'img_tc':img_tc, 'encoded':encoded, 
+			'hora':hora, 'minuto':minuto, 
+			'regulacao_registro_last':regulacao_registro_last})
 	elif not registro.image_laudo_tc:
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
 		encoded = base64.b64encode(registro.image_descricao_clinica).decode('ascii')
@@ -1912,7 +1928,8 @@ def regulacao_detail(request, id):
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'senha':senha, 'img_rx':img_rx,
-			 'encoded':encoded, 'hora':hora, 'minuto':minuto})
+			 'encoded':encoded, 'hora':hora, 'minuto':minuto, 
+			'regulacao_registro_last':regulacao_registro_last})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1923,7 +1940,9 @@ def regulacao_detail(request, id):
 			status_aguard_lista_espera_registro, 'status_regulado_registro':
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
-			status_aguard_inf_registro, 'img_rx':img_rx, 'encoded':encoded, 'hora':hora, 'minuto':minuto})
+			status_aguard_inf_registro, 'img_rx':img_rx, 'encoded':encoded, 
+			'hora':hora, 'minuto':minuto, 
+			'regulacao_registro_last':regulacao_registro_last})
 
 	elif not registro.image_descricao_clinica and (registro.image_laudo_rx or registro.image_laudo_tc):
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
@@ -1940,7 +1959,8 @@ def regulacao_detail(request, id):
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'senha':senha, 'img_tc':img_tc, 'img_rx':
-			img_rx, 'hora':hora, 'minuto':minuto})
+			img_rx, 'hora':hora, 'minuto':minuto, 
+			'regulacao_registro_last':regulacao_registro_last})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1952,7 +1972,8 @@ def regulacao_detail(request, id):
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'img_tc':img_tc, 'img_rx':
-			img_rx, 'hora':hora, 'minuto':minuto})
+			img_rx, 'hora':hora, 'minuto':minuto, 
+			'regulacao_registro_last':regulacao_registro_last})
 
 	else:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
@@ -1970,7 +1991,8 @@ def regulacao_detail(request, id):
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'senha':senha, 'img_tc':img_tc, 'img_rx':
-			img_rx, 'encoded':encoded, 'hora':hora, 'minuto':minuto})
+			img_rx, 'encoded':encoded, 'hora':hora, 'minuto':minuto, 
+			'regulacao_registro_last':regulacao_registro_last})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1982,7 +2004,8 @@ def regulacao_detail(request, id):
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'img_tc':img_tc, 'img_rx':
-			img_rx, 'encoded':encoded, 'hora':hora, 'minuto':minuto})
+			img_rx, 'encoded':encoded, 'hora':hora, 'minuto':minuto, 
+			'regulacao_registro_last':regulacao_registro_last})
 
 
 

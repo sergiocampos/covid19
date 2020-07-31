@@ -3721,12 +3721,12 @@ function active_IgGIgM(){
 
 			</div>
 			<div class="col-sm-2">
-					<button type="button" class="" style="align-items: center; border-radius: 5px; border: 2px solid #c2c2d6" id=""><a class="" href="/regulacao_search_estabelecimento/{{registro.id}}/">Alterar Cidade?</a></button>					
+					<button type="button" class="" style="align-items: center; border-radius: 5px; border: 2px solid #c2c2d6" id=""><a class="" href="/regulacao_search_estabelecimento/{{registro.id}}/">Escolher Cidade?</a></button>					
 				</div>
 
 			<div class="col-sm-5" id="">
 				Escolha estabelecimento de Referência:
-				<select autofocus="autofocus" class="form-control form-control-sm" name="estabelecimento_referencia" id="estabelecimento_id">
+				<select class="form-control form-control-sm" name="estabelecimento_referencia" id="estabelecimento_id">
 					<option value="">...nenhum</option>
 						{% for e in estabelecimentos %}
 						<option value="{{e.NO_FANTASIA}}">{{e.NO_FANTASIA}}</option>
@@ -3771,13 +3771,13 @@ function active_IgGIgM(){
 							{% if 'Não Regulado' in status_list_descricao %}
 							<div class="form-check-inline" style="font-size: 83%">
 								<label class="form-check-label" for="">
-									<input type="radio" class="form-check-input" id="check_paciente_nao_regulado_id" name="status_paciente" value="Não Preenche Critérios" onclick="activeStatusNaoRegulado()" checked>PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
+									<input type="radio" autofocus="autofocus" class="form-check-input" id="check_paciente_nao_regulado_id" name="status_paciente" value="Não Preenche Critérios" onclick="activeStatusNaoRegulado()" checked>PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
 								</label>
 							</div>
 							{%else%}
 							<div class="form-check-inline" style="font-size: 83%">
 								<label class="form-check-label" for="">
-									<input type="radio" class="form-check-input" id="check_paciente_nao_regulado_id" name="status_paciente" value="Não Preenche Critérios" onclick="activeStatusNaoRegulado()">PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
+									<input type="radio" autofocus="autofocus" class="form-check-input" id="check_paciente_nao_regulado_id" name="status_paciente" value="Não Preenche Critérios" onclick="activeStatusNaoRegulado()">PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
 								</label>
 							</div>
 							{%endif%}

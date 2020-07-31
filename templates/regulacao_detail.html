@@ -194,10 +194,10 @@
 								</div>
 
 								<div class="form-check-inline">
-									<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" size="2" style="width: 100px" value="{{pa_1}}">
+									<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" size="2" style="width: 100px" value="{{p1}}">
 									<div class="invalid-feedback"></div>
 									<label for="">X</label>
-									<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" size="2" style="width: 100px" value="{{pa_2}}">
+									<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" size="2" style="width: 100px" value="{{p2}}">
 									<div class="invalid-feedback"></div>
 
 								</div>
@@ -2892,25 +2892,29 @@
 			</div>
 			<hr>
 			<div class="row">
-				<div class="col-sm-5">
+				<div class="col-sm-3">
+					<!--
 					<b>Município do Estabelecimento de Referência:</b>
-					<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{registro.municipio_estabelecimento_referencia}}" />
+					<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="" />
+				-->
 					
 				</div>
-				<div class="col-sm-2">
 
-				</div>
+
 				
-				<div class="col-sm-5" id="">
+				
+				<div class="col-sm-7" id="">
 					<b>Estabelecimento de Referência:</b>
 					<select autofocus="autofocus" class="form-control form-control-sm" name="estabelecimento_referencia" id="estabelecimento_id">
-						{% if registro.estabelecimento_referencia == '' or registro.estabelecimento_referencia == None %}
-						<option value="{{registro.estabelecimento_referencia_outro}}">{{registro.estabelecimento_referencia_outro}}</option>
+						{% if regulacao_registro_last.estabelecimento_referencia_covid == '' or regulacao_registro_last.estabelecimento_referencia_covid == None %}
+						<option value=""></option>
 						{% else %}
-						<option value="{{registro.estabelecimento_referencia}}">{{registro.estabelecimento_referencia}}</option>
+						<option value="{{regulacao_registro_last.estabelecimento_referencia_covid}}">{{regulacao_registro_last.estabelecimento_referencia_covid}}</option>
 						{%endif%}						
 					</select>
 				</div>
+
+				<div class="col-sm-2"></div>
 				
 			</div>
 			<br>

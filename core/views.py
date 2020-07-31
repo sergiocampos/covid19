@@ -214,7 +214,7 @@ def registro_covid_set(request):
 
 	last_registro = RegistroCovid.objects.all().last()
 	if not last_registro:
-		last_codigo_registro_total = 0
+		last_codigo_registro_total = 5000
 		last_codigo_registro_mensal = 0
 	else:
 		last_codigo_registro_total = last_registro.codigo_registro_total
@@ -285,6 +285,8 @@ def registro_covid_set(request):
 	estado_origem = request.POST.get('estado_paciente')
 	cidade_origem = request.POST.get('cidade_paciente')
 	telefone_retorno = request.POST.get('telefone_retorno')
+
+	data_admissao = request.POST.get('data_admissao')
 
 	frequencia_respiratoria_cap = request.POST.get('frequencia_respiratoria')
 	if frequencia_respiratoria_cap != '':
@@ -744,6 +746,7 @@ def registro_covid_set(request):
 		estado_origem = estado_origem,
 		cidade_origem = cidade_origem,
 		telefone_retorno = telefone_retorno,
+		data_admissao = data_admissao,
 		frequencia_respiratoria = frequencia_respiratoria,
 		saturacao_paciente = saturacao_paciente,
 		ar_o2 = ar_o2,
@@ -881,7 +884,7 @@ def regulacao_search_estabelecimento(request, id):
 def regulacao_search_estabelecimento_set(request, id):
 	municipio_estabelecimento_referencia = request.session['municipio_estabelecimento_referencia']
 
-	return redirect('regulacao', id=id)
+	return redirect('paciente_atribuir_senha', id=id)
 
 
 @login_required
@@ -904,9 +907,9 @@ def regulacao(request, id):
 	
 	if regulacao_last:
 		senha_last = regulacao_last.senha
-		senha_new = senha_last + 100
+		senha_new = senha_last + 1
 	else:
-		senha_new = 100
+		senha_new = 500000
 
 
 	senha = senha_new
@@ -1106,17 +1109,56 @@ def regulacao_set(request, id):
 	estado_origem = registro.estado_origem
 	cidade_origem = registro.cidade_origem
 	telefone_retorno = registro.telefone_retorno
-	frequencia_respiratoria = registro.frequencia_respiratoria
-	saturacao_paciente = registro.saturacao_paciente
-	ar_o2 = registro.ar_o2
-	frequencia_cardiaca = registro.frequencia_cardiaca
+	
+	data_admissao_cap = request.POST.get('data_admissao')
+
+	if data_admissao_cap != '' or data_admissao_cap != None:
+		data_admissao = datetime.strptime(data_admissao_cap, '%d/%m/%Y').date()
+		#data_admissao = data_admissao_cap
+
+
+	frequencia_respiratoria_cap = request.POST.get('frequencia_respiratoria')
+	if frequencia_respiratoria_cap != '' or frequencia_respiratoria_cap != None:
+		frequencia_respiratoria = int(frequencia_respiratoria_cap)
+	else:
+		frequencia_respiratoria = registro.frequencia_respiratoria
+	
+	saturacao_paciente_cap = request.POST.get('saturacao_paciente')
+	if saturacao_paciente_cap != '':
+		saturacao_paciente = int(saturacao_paciente_cap)
+	else:
+		saturacao_paciente = registro.saturacao_paciente
+
+
+	frequencia_cardiaca_cap = request.POST.get('f_cardiaca_paciente')
+	if frequencia_cardiaca_cap != '':
+		frequencia_cardiaca = int(frequencia_cardiaca_cap)
+	else:
+		frequencia_cardiaca = registro.frequencia_cardiaca
+
+	
+	ar_o2_cap = request.POST.get('ar_o2')
+	if ar_o2_cap != '' or ar_o2_cap != None:
+		ar_o2 = ar_o2_cap
+	else:
+		ar_o2 = registro.ar_o2
+	
 	
 	pa_part1 = request.POST.get('pa_part1')
 	pa_part2 = request.POST.get('pa_part2')
 	pa = pa_part1 + "x" + pa_part2
 	
-	conciencia = registro.conciencia
-	temperatura = registro.temperatura
+	conciencia_cap = request.POST.get('consciencia_paciente')
+	if conciencia_cap != '' or conciencia_cap != None:
+		conciencia = conciencia_cap
+	else:
+		conciencia = registro.conciencia
+
+	temperatura_cap = request.POST.get('temperatura_paciente')
+	if temperatura_cap != '' or temperatura_cap != None:
+		temperatura = float(temperatura_cap)
+	else:
+		temperatura = registro.temperatura
 
 	descricao_clinica = request.POST.get('descricao_clinica')
 
@@ -1489,9 +1531,9 @@ def regulacao_set(request, id):
 		regulacao_last = Regulacao.objects.all().last()
 		if regulacao_last:
 			senha_last = regulacao_last.senha
-			senha_new = senha_last + 100
+			senha_new = senha_last + 1
 		else:
-			senha_new = 100
+			senha_new = 500000
 			
 
 		senha = int(senha_new)
@@ -1549,6 +1591,7 @@ def regulacao_set(request, id):
 	registro.estado_origem = estado_origem
 	registro.cidade_origem = cidade_origem
 	registro.telefone_retorno = telefone_retorno
+	registro.data_admissao = data_admissao
 	registro.frequencia_respiratoria = frequencia_respiratoria
 	registro.saturacao_paciente = saturacao_paciente
 	registro.ar_o2 = ar_o2
@@ -2325,30 +2368,63 @@ def status_registro(request, id):
 		data_cancelamento_bd_template = data_cancelamento_bd.strftime("%d-%m-%Y")
 		#hora_cancelamento_bd = data_cancelamento_bd.strftime("%H:%M")
 		#hora_cancelamento_bd_template = hora_cancelamento_bd - timedelta(hours=3)
-		return render(request, 'status_registro.html', {'registro':registro, 
-		'status_registro':status_registro, 
-		'formateDate':formateDate, 'hora':hora, 'status_registro_last':
-		status_registro_last, 'status_regulado_registro':
-		status_regulado_registro, 'status_nao_regulado_registro':
-		status_nao_regulado_registro, 'status_aguard_lista_espera_registro':
-		status_aguard_lista_espera_registro, 'status_obito_registro':
-		status_obito_registro, 'status_aguard_conf_vaga_registro':
-		status_aguard_conf_vaga_registro, 'status_aguard_inf_registro':
-		status_aguard_inf_registro, 'data_cancelamento_bd_template':
-		data_cancelamento_bd_template, 'hora_canc':hora_canc, 'minuto_canc':
-		minuto_canc})
+		if len(str(minuto_canc)) < 2:
+			pref = 0
+			return render(request, 'status_registro.html', {'registro':registro, 
+				'status_registro':status_registro, 
+				'formateDate':formateDate, 'hora':hora, 'status_registro_last':
+				status_registro_last, 'status_regulado_registro':
+				status_regulado_registro, 'status_nao_regulado_registro':
+				status_nao_regulado_registro, 
+				'status_aguard_lista_espera_registro':
+				status_aguard_lista_espera_registro, 
+				'status_obito_registro':status_obito_registro, 
+				'status_aguard_conf_vaga_registro':
+				status_aguard_conf_vaga_registro, 'status_aguard_inf_registro':
+				status_aguard_inf_registro, 'data_cancelamento_bd_template':
+				data_cancelamento_bd_template, 'hora_canc':hora_canc, 
+				'minuto_canc':minuto_canc, 'pref':pref})
+		else:
+			return render(request, 'status_registro.html', {'registro':registro, 
+				'status_registro':status_registro, 
+				'formateDate':formateDate, 'hora':hora, 'status_registro_last':
+				status_registro_last, 'status_regulado_registro':
+				status_regulado_registro, 'status_nao_regulado_registro':
+				status_nao_regulado_registro, 
+				'status_aguard_lista_espera_registro':
+				status_aguard_lista_espera_registro, 
+				'status_obito_registro':status_obito_registro, 
+				'status_aguard_conf_vaga_registro':
+				status_aguard_conf_vaga_registro, 'status_aguard_inf_registro':
+				status_aguard_inf_registro, 'data_cancelamento_bd_template':
+				data_cancelamento_bd_template, 'hora_canc':hora_canc, 
+				'minuto_canc':minuto_canc})
 	else:
-		return render(request, 'status_registro.html', {'registro':registro, 
-		'status_registro':status_registro, 
-		'formateDate':formateDate, 'hora':hora, 'status_registro_last':
-		status_registro_last, 'status_regulado_registro':
-		status_regulado_registro, 'status_nao_regulado_registro':
-		status_nao_regulado_registro, 'status_aguard_lista_espera_registro':
-		status_aguard_lista_espera_registro, 'status_obito_registro':
-		status_obito_registro, 'status_aguard_conf_vaga_registro':
-		status_aguard_conf_vaga_registro, 'status_aguard_inf_registro':
-		status_aguard_inf_registro, 'hora_canc':hora_canc, 'minuto_canc':
-		minuto_canc})
+		if len(str(minuto_canc)) < 2:
+			pref = 0
+			return render(request, 'status_registro.html', {'registro':registro,
+			'status_registro':status_registro, 'formateDate':formateDate, 
+			'hora':hora, 'status_registro_last':status_registro_last, 
+			'status_regulado_registro':status_regulado_registro, 
+			'status_nao_regulado_registro':status_nao_regulado_registro, 
+			'status_aguard_lista_espera_registro':
+			status_aguard_lista_espera_registro, 'status_obito_registro':
+			status_obito_registro, 'status_aguard_conf_vaga_registro':
+			status_aguard_conf_vaga_registro, 'status_aguard_inf_registro':
+			status_aguard_inf_registro, 'hora_canc':hora_canc, 'minuto_canc':
+			minuto_canc, 'pref':pref})
+		else:
+			return render(request, 'status_registro.html', {'registro':registro,
+			'status_registro':status_registro, 'formateDate':formateDate, 
+			'hora':hora, 'status_registro_last':status_registro_last, 
+			'status_regulado_registro':status_regulado_registro, 
+			'status_nao_regulado_registro':status_nao_regulado_registro, 
+			'status_aguard_lista_espera_registro':
+			status_aguard_lista_espera_registro, 'status_obito_registro':
+			status_obito_registro, 'status_aguard_conf_vaga_registro':
+			status_aguard_conf_vaga_registro, 'status_aguard_inf_registro':
+			status_aguard_inf_registro, 'hora_canc':hora_canc, 'minuto_canc':
+			minuto_canc})
 
 
 @login_required
@@ -2452,6 +2528,19 @@ def regular_registro(request, id):
 
 	regulacoes_registro = Regulacao.objects.filter(registro_covid_id=registro.id)
 
+	regulacao_registro_last = regulacoes_registro.last()
+
+	status_registro = Status.objects.filter(registro_covid=registro.id)
+	status_registro_last = Status.objects.filter(registro_covid=registro.id).last()
+
+	status_aguard_conf_vaga_registro = status_registro.filter(descricao='Aguardando confirmação de Vaga').last()
+	status_obito_registro = status_registro.filter(descricao='Obito').last()
+	status_aguard_lista_espera_registro = status_registro.filter(descricao='Aguardando em Lista de Espera').last()
+	status_regulado_registro = status_registro.filter(descricao='Regulado').last()
+	status_nao_regulado_registro = status_registro.filter(descricao='Não Preenche Critérios').last()
+	status_aguard_inf_registro = status_registro.filter(descricao='Aguardando Informações').last()
+
+
 	data_cancelamento = registro.data_cancelamento
 	hora = None
 	minuto = None
@@ -2462,10 +2551,24 @@ def regular_registro(request, id):
 		hora = hora_ - 3
 		return render(request, 'regular_registro.html', {'registro':registro, 
 		'regulacoes_registro':regulacoes_registro, 'hora':hora, 'minuto':minuto, 
-		'data_cancelamento_template':data_cancelamento_template})
+		'data_cancelamento_template':data_cancelamento_template, 
+		'status_aguard_conf_vaga_registro':status_aguard_conf_vaga_registro, 
+		'status_obito_registro':status_obito_registro, 
+		'status_aguard_lista_espera_registro':status_aguard_lista_espera_registro,
+		'status_regulado_registro':status_regulado_registro, 
+		'status_nao_regulado_registro':status_nao_regulado_registro, 
+		'status_aguard_inf_registro':status_aguard_inf_registro, 
+		'status_registro_last':status_registro_last})
 	else:
 		return render(request, 'regular_registro.html', {'registro':registro, 
-		'regulacoes_registro':regulacoes_registro})
+		'regulacoes_registro':regulacoes_registro, 
+		'status_aguard_conf_vaga_registro':status_aguard_conf_vaga_registro, 
+		'status_obito_registro':status_obito_registro, 
+		'status_aguard_lista_espera_registro':status_aguard_lista_espera_registro,
+		'status_regulado_registro':status_regulado_registro, 
+		'status_nao_regulado_registro':status_nao_regulado_registro, 
+		'status_aguard_inf_registro':status_aguard_inf_registro, 
+		'status_registro_last':status_registro_last})
 
 
 @login_required
@@ -2496,9 +2599,9 @@ def paciente_atribuir_senha(request, id):
 	regulacao_paciente_last = regulacoes_registro.last()
 	if regulacao_last:
 		senha_last = regulacao_last.senha
-		senha_new = senha_last + 100
+		senha_new = senha_last + 1
 	else:
-		senha_new = 100
+		senha_new = 500000
 
 
 	senha = senha_new
@@ -3075,9 +3178,9 @@ def paciente_atribuir_senha_set(request, id):
 		regulacao_last = Regulacao.objects.all().last()
 		if regulacao_last:
 			senha_last = regulacao_last.senha
-			senha_new = senha_last + 100
+			senha_new = senha_last + 1
 		else:
-			senha_new = 100
+			senha_new = senha + 500000
 			
 
 		senha = int(senha_new)
@@ -3125,9 +3228,9 @@ def paciente_atribuir_senha_set(request, id):
 	#registro.municipio_estabelecimento_solicitante = municipio_estabelecimento_solicitante
 	#registro.estabelecimento_solicitante = estabelecimento_solicitante
 	#registro.estabelecimento_solicitante_outro = estabelecimento_solicitante_outro
-	#registro.municipio_estabelecimento_referencia = municipio_estabelecimento_referencia
-	#registro.estabelecimento_referencia = estabelecimento_referencia
-	#registro.estabelecimento_referencia_outro = estabelecimento_referencia_outro
+	registro.municipio_estabelecimento_referencia = municipio_estabelecimento_referencia
+	registro.estabelecimento_referencia = estabelecimento_referencia
+	registro.estabelecimento_referencia_outro = estabelecimento_referencia_outro
 	registro.nome_paciente = nome_paciente
 	registro.idade_paciente = idade_paciente
 	registro.sexo_paciente = sexo_paciente

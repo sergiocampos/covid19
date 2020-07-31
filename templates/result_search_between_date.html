@@ -16,6 +16,48 @@
 
 	<script language="JavaScript" type="text/javascript" src="/static/js/cidades-estados-1.4-utf8.js"></script>
 
+	<style> 
+        table.scrolldown { 
+            width: 100%; 
+              
+            /* border-collapse: collapse; */ 
+            border-spacing: 0;
+        } 
+          
+        /* To display the block as level element */ 
+        table.scrolldown tbody, table.scrolldown thead { 
+            display: block; 
+        }  
+          
+        thead tr th { 
+            height: 40px;  
+            line-height: 40px; 
+        } 
+          
+        table.scrolldown tbody { 
+              
+            /* Set the height of table body */ 
+            height: 50px;  
+              
+            /* Set vertical scroll */ 
+            overflow-y: auto; 
+              
+            /* Hide the horizontal scroll */ 
+            overflow-x: hidden;  
+        } 
+          
+        tbody {  
+            
+        } 
+          
+        tbody td, thead th { 
+            width : ;
+        } 
+        td, th { 
+            text-align:center; 
+        } 
+    </style>
+
 </head>
 <body>
 
@@ -34,13 +76,13 @@
 		      <a class="nav-link" href="/covid_list/">Principal</a>
 		    </li>
 		    <li class="nav-item">
-		      <a class="nav-link" href="/registro_covid/">Registrar Caso</a>
+		      <a class="nav-link" href="/search_estabelecimento/">Registrar Caso</a>
 		    </li>
 		    <li class="nav-item">
 		      <a class="nav-link" href="#"></a>
 		    </li>
 		    <li class="nav-item">
-		      <a class="nav-link" href="/search_register/">Localizar</a>
+		      <a class="nav-link active" href="/search_register/">Localizar</a>
 		    </li>
 		    <li>
 		    	<a class="nav-link" href="/accounts/logout">Sair</a>
@@ -61,7 +103,7 @@
 	      				<p>GOVERNO DO ESTADO DA PARAÍBA</p>
 	      				<p>SECRETARIA DE ESTADO DA SAÚDE</p>
 	      				<p></p>
-	      				<p><h7><b>Registro de Casos - Perfil VideoFonista - Usuário: <i>{{user}}</i></b></h7></p>
+	      				<p><h7><b>Registro de Casos - Perfil - {{user.first_name}} - Usuário: <i>{{user}}</i></b></h7></p>
 	      			</div>
 	      		</div>
 	      		<div class="col-sm-4" style="background-color:;">
@@ -76,69 +118,134 @@
 
 		<div class="row">
 			<div class="col-sm-5"></div>
-			<div class="col-sm-3">Resultados</div>
+			<div class="col-sm-3">Notificações</div>
 			<div class="col-sm-4"></div>
 		</div>            
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Data da notificação</th>
-        <th>Estabelecimento Solicitante</th>
-        <th>Paciente</th>
-        <th>Idade</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-    	{% for o in values %}
-      <tr>
-        <td>{{o.data_notificacao|date:'d/m/Y'}} - {{o.hora_notificacao|time:'H:i'}}</td>
-        <td>
-        	{% if o.estabelecimento_solicitante == '' or o.estabelecimento_solicitante == None %}
-        	<a href="#">{{o.estabelecimento_outro}}</a>
-        	{%else%}
-        	<a href="#">{{o.estabelecimento_solicitante}}</a>
-        	{%endif%}
-        </td>
-        <td>{{o.nome_paciente}}</td>
-        <td>
-        	{% if o.idade_paciente == '' or o.idade_paciente == None %}
-        	{%else%}
-        	{{o.idade_paciente}}
-        	{%endif%}
-        </td>
-        <td style="font-size: 87%">
-        	<!--<a href="/regulacao_edit/{{o.id}}">Editar</a>-->
-        	
-        	<a href="/regulacao/{{o.id}}/">Regular</a>
-        	<a href="/regulacao_detail/{{o.id}}/">Ver</a>
-        	
-        </td>
-      </tr>
-      	{% endfor %}
-      
-    </tbody>
-  </table>
+  
 
-  	<div class="row">
-  		<div class="col-sm-4">
-  			<a href="/search_between_date/" class="btn btn-info btn-sm">Voltar</a>
+
+
+  <div class="container mt-3">
+		
+	  	
+	  	<div class="row">
+	  		<div class="col-sm-4"><h2>Encontre um Registro</h2></div>
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<a href="/search_between_date/" class="btn btn-info btn-sm">Localizar entre datas</a>
+			</div>
+			
 		</div>
-		<div class="col-sm-4"></div>
-		<div class="col-sm-4"></div>
+	  	 
+		  <input class="form-control" id="myInput" type="text" placeholder="Digite qualquer letra, palavra..">
+	  	<br>
+	  	
+	  	<div style="overflow-y: scroll">
+	  		
+	  	</div>
+	  	<table class="table table-bordered" style="width: 100%">
+	    <thead style="display: block; width: 100%; background-color: #f2f2f2">
+	      <tr style="">
+	        <th style="width: 170px; font-size: 85%">Data de notificação</th>
+	        <th style="width: 295px; font-size: 85%">Estabelecimento Solicitante</th>
+	        <th style="width: 250px; font-size: 85%">Paciente</th>
+	        <th style="width: 120px; font-size: 85%">Senha</th>
+	        <th style="width: 150px; font-size: 85%">Status</th>
+	        <th style="width: 60px; font-size: 85%">Idade</th>
+	        <th style="width: 100px; font-size: 85%">Ações</th>
+	      </tr>
+	    </thead>
+	    <tbody id="myTable" style="display: block; overflow-y: auto; overflow-x: hidden; height: 200px; width: 100%">
+	    	{% for o in values %}
+	      <tr>
+	        <td style="width: 170px; font-size: 70%">{{o.data_notificacao|date:'d/m/Y'}} - {{o.hora_notificacao|time:'H:i'}}</td>
+	        <td style="width: 300px; font-size: 70%">
+	        	{% if o.estabelecimento_solicitante == '' or o.estabelecimento_solicitante == None %}
+	        	{{o.estabelecimento_outro}}
+	        	{%else%}
+	        	{{o.estabelecimento_solicitante}}
+	        	{%endif%}
+        	</td>
+	        <td style="width: 250px"><a href="/status_registro/{{o.id}}/">{{o.nome_paciente}}</a></td>
+	        <td style="width: 80px; font-size: 70%">{{o.codigo_sescovid}}</td>
+	        <td style="width: 150px; font-size: 70%">{{o.last_status}}</td>
+	        <td style="width: 67px; font-size: 70%">
+	        	{% if o.idade_paciente == '' or o.idade_paciente == None %}
+	        	{%else%}
+	        	{{o.idade_paciente}}
+	        	{%endif%}
+	        </td>
+	        <td style="font-size: 87%; width: 80px">
+	        	<!--<a href="/regulacao_edit/{{o.id}}">Editar</a>-->
+	        	
+	        	<a href="/regulacao/{{o.id}}/">Editar</a>
+	        	<a href="/regulacao_detail/{{o.id}}/">Ver</a>
+        	</td>
+	      </tr>
+	      
+	      {% endfor %}
+	    </tbody>
+	  	</table>
+
+	  	<div class="row">
+			<div class="col-sm-4">
+				<a href="/search_between_date/" class="btn btn-info btn-sm">Voltar</a>
+			</div>
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4"></div>
+		</div>
+	  	<!--
+	  	<div class="pagination">
+		  <span class="step-links" style="margin: auto">
+		    {% if regs.has_previous %}
+		      <a href="?page={{regs.previous_page_number}}">Anterior</a>
+		    {% endif %}
+		    
+		    <span class="current">
+		        {{regs.number}} de {{regs.paginator.num_pages}}
+		    </span>
+		    {% if regs.has_next %}
+		      <a href="?page={{regs.next_page_number}}">Próximo</a>
+		    {% endif %}
+		    
+		  </span>  
+		    
+		</div>
+	-->
+
+		
+  
 	</div>
+
+
 
   <div style="height: 50px"></div>
 	
 
 		
 	</div><br />
+	
 
 	<div style="background-color: #e6e6e6;">
 		
 			<br /><br />
 		
 	</div>
-	
+	<script>
+
+		$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#myTable tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+		});
+	</script>	
 </body>
 </html>
+
+
+
+
+

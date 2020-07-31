@@ -141,7 +141,100 @@
 					</div>
 				</div>
 
-			</div>			
+			</div>
+			<hr>
+			<div class="jumbotron" id="admissao">
+					<div class="row" style="background-color: ; margin-top: -40px; margin-bottom: 40px">
+						<div class="col-sm-4"><b><h3>Admissão</h3></b></div>
+						<div class="col-sm-4">
+							<div class="form-check-inline">
+							Data:
+							{% if registro.data_admissao %}
+							<input type="text" class="form-control form-control-sm" id="" placeholder="" name="data_admissao" value="{{registro.data_admissao}}" style="width:">
+							{%else%}
+							<input type="date" class="form-control form-control-sm" id="" placeholder="" name="data_admissao" value="{{registro.data_admissao}}" style="width:">
+							{%endif%}
+							</div>
+						</div>
+						<div class="col-sm-4"></div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-4" style="">
+							Frequência Respiratória:
+							<div class="form-check-inline">
+								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="frequencia_respiratoria" value="{{registro.frequencia_respiratoria}}" style="margin-left: ;width: 80px">
+							</div><label for="" style="">irpm</label>    				
+						</div>
+						<div class="col-sm-3" style="">
+							Saturação:
+							<div class="form-check-inline">
+								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="saturacao_paciente" style="width: 55px" value="{{registro.saturacao_paciente}}">
+							</div><label for="" style="margin-left: -10px">%</label>
+						</div>
+						<div class="col-sm-3" style="">
+							Ar/O²
+							<div class="form-check-inline" style="width: 150px">
+								<input type="text" class="form-control form-control-sm" id="" placeholder="" name="ar_o2" value="{{registro.ar_o2}}">
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-4">
+							Frequência Cardíaca:
+							<div class="form-check-inline">
+								<input type="number" class="form-control form-control-sm" id="" placeholder="" name="f_cardiaca_paciente" style="width: 70px" value="{{registro.frequencia_cardiaca}}" min="0" max="500">
+							</div><label for="" style="margin-left: -10px">bpm</label>
+						</div>
+						<div class="col-sm-4">
+
+							<div class="form-check-inline">
+								<label for="" class="form-check-label"><b>PA:</b>
+								</div>
+
+								<div class="form-check-inline">
+									<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" size="2" style="width: 100px" value="{{pa_1}}">
+									<div class="invalid-feedback"></div>
+									<label for="">X</label>
+									<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" size="2" style="width: 100px" value="{{pa_2}}">
+									<div class="invalid-feedback"></div>
+
+								</div>
+								<div class="form-check-inline">
+									<label for="">mmHg</label>
+								</div>
+
+							</div>
+
+							<div class="col-sm-4">
+								Consciencia:
+								<div class="form-check-inline">
+									{% if registro.conciencia == '' or registro.conciencia == None %}
+									<input type="text" class="form-control form-control-sm" id="" placeholder="" name="consciencia_paciente" value="">
+									{%else%}
+									<input type="text" class="form-control form-control-sm" id="" placeholder="" name="consciencia_paciente" value="{{registro.conciencia}}">
+									{%endif%}
+								</div>
+
+							</div>
+
+						</div><hr>
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-check-inline">
+									<label for="" class="form-check-label">Temperatura:</label>
+								</div>
+								<div class="form-check-inline">
+									<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" max="100" name="temperatura_paciente" size="5" value="{{registro.temperatura}}">
+									<div class="invalid-feedback"></div>
+
+									<label for="">°C</label>					
+								</div>
+							</div>
+						</div>
+					</div>
+			
 		</div>
 		<hr>
 		<div class="container" style="">
@@ -190,29 +283,7 @@
 				</div>
 			</div>
 			<br>
-			<div class="row">
-				<div class="col-sm-5">
-					<b>Município do Estabelecimento de Referência:</b>
-					<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{registro.municipio_estabelecimento_referencia}}" />
-					
-				</div>
-				<div class="col-sm-2">
-
-				</div>
-				
-				<div class="col-sm-5" id="">
-					<b>Estabelecimento de Referência:</b>
-					<select autofocus="autofocus" class="form-control form-control-sm" name="estabelecimento_referencia" id="estabelecimento_id">
-						{% if registro.estabelecimento_referencia == '' or registro.estabelecimento_referencia == None %}
-						<option value="{{registro.estabelecimento_referencia_outro}}">{{registro.estabelecimento_referencia_outro}}</option>
-						{% else %}
-						<option value="{{registro.estabelecimento_referencia}}">{{registro.estabelecimento_referencia}}</option>
-						{%endif%}						
-					</select>
-				</div>
-				
-			</div>
-			<br>
+			
 			
 			<hr>
 			<div class="row">
@@ -2700,7 +2771,7 @@
 
 				</div><br>
 				<div class="row">
-					<div class="col-sm-3"></div>
+					<div class="col-sm-2"></div>
 					<div class="col-sm-2">
 						{% if registro.leito == 'ENFERMARIA' %}
 						<div class="form-check-inline" style="width: 110%">
@@ -2731,7 +2802,22 @@
 						</div>
 						{%endif%}
 					</div>
-					<div class="col-sm-3">
+					<div class="col-sm-2">
+						{% if registro.leito == 'UTI NEONATAL' %}
+						<div class="form-check-inline" style="width: 110%">
+							<label class="form-check-label" for="">
+								<input type="radio" class="form-check-input" id="" name="perfil" value="UTI NEONATAL" checked>UTI NEONATAL
+							</label>
+						</div>
+						{%else%}
+						<div class="form-check-inline" style="width: 110%">
+							<label class="form-check-label" for="">
+								<input type="radio" class="form-check-input" id="" name="perfil" value="UTI NEONATAL">UTI NEONATAL
+							</label>
+						</div>
+						{%endif%}
+					</div>
+					<div class="col-sm-2">
 						{% if registro.leito == 'UTI PEDIÁTRICA' %}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
@@ -2803,6 +2889,29 @@
 					</div>
 				</div>
 				<div class="col-sm-2"></div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-sm-5">
+					<b>Município do Estabelecimento de Referência:</b>
+					<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{registro.municipio_estabelecimento_referencia}}" />
+					
+				</div>
+				<div class="col-sm-2">
+
+				</div>
+				
+				<div class="col-sm-5" id="">
+					<b>Estabelecimento de Referência:</b>
+					<select autofocus="autofocus" class="form-control form-control-sm" name="estabelecimento_referencia" id="estabelecimento_id">
+						{% if registro.estabelecimento_referencia == '' or registro.estabelecimento_referencia == None %}
+						<option value="{{registro.estabelecimento_referencia_outro}}">{{registro.estabelecimento_referencia_outro}}</option>
+						{% else %}
+						<option value="{{registro.estabelecimento_referencia}}">{{registro.estabelecimento_referencia}}</option>
+						{%endif%}						
+					</select>
+				</div>
+				
 			</div>
 			<br>
 			<div class="container" style="border: 2px solid #cccccc; border-radius: 10px">

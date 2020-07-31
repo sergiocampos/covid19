@@ -11,7 +11,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-	<title>Status de Registro - Casos COVID19</title>
+	<title>Histórico do Registro - Casos COVID19</title>
 	<link rel="stylesheet" href="">
 
 	<script language="JavaScript" type="text/javascript" src="/static/js/cidades-estados-1.4-utf8.js"></script>
@@ -146,7 +146,12 @@
 
 				<!-- Modal body -->
 				<div class="modal-body">
-					<textarea name="" id="" cols="50" rows="10">{{registro.parecer_medico}}</textarea>
+					<textarea name="" id="" cols="50" rows="10">
+						{% if registro.parecer_medico == '' or registro.parecer_medico == None %}
+						{%else%}
+						{{registro.parecer_medico}}
+						{%endif%}
+					</textarea>
 				</div>
 
 				<!-- Modal footer -->

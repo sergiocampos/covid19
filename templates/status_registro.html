@@ -111,13 +111,7 @@
 		<div class="row">
 			<div class="col-sm-5"></div>
 			<div class="col-sm-5"></div>
-			<div class="col-sm-2">
-				{% if user.is_staff %}
-				<!--
-				<button type="button" class="btn btn-outline-danger btn-sm" style="align-items: center;" id="btn_inicio"><a class="" href="/remove_registro_covid/{{registro.id}}/">Escluir Registro</a></button>
-			-->
-				{%endif%}
-			</div>
+			<div class="col-sm-2"></div>
 		</div>
 		<hr />
 		<br />
@@ -275,7 +269,7 @@
 							<br />
 
 							<div class="form-check-inline" style=""><b>Data:</b>
-					    	<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="" value="{{data_cancelamento_bd_template}} {{hora_canc}}:{{minuto_canc}}" style="width: 140px" disabled>						
+					    	<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="" value="{{data_cancelamento_bd_template}} {{hora_canc}}:{{pref}}{{minuto_canc}}" style="width: 140px" disabled>						
 					   		</div><br />
 							
 							<div class="invalid-feedback"></div>
@@ -334,6 +328,21 @@
 		<br />
 		
 	</div>
+
+	<div class="container mt-3">
+		<div class="container-fluid" style="text-align: center;">
+			{% if user.first_name == 'videofonista' or user.first_name == 'enfermeiro' or user.first_name == 'medico' %}
+				{%else%}
+				
+				<button type="button" class="btn btn-outline-danger btn-sm" style="align-items: center;" id="btn_inicio"><a class="" href="/remove_registro_covid/{{registro.id}}/">Excluir Registro</a></button>
+			
+				{%endif%}
+			
+		</div>
+		<br />
+		
+	</div>
+	
 
 
 <!--

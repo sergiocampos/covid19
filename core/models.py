@@ -41,6 +41,7 @@ class RegistroCovid(models.Model):
 	estado_origem = models.CharField(max_length=100, blank=True, default='', null=True)
 	cidade_origem = models.CharField(max_length=100, blank=True, default='', null=True)
 	telefone_retorno = models.CharField(max_length=100, blank=True, default='', null=True)
+	data_admissao = models.DateField(blank=True, null=True, default=None)
 	frequencia_respiratoria = models.IntegerField(blank=True, null=True)
 	saturacao_paciente = models.IntegerField(blank=True, null=True)
 	ar_o2 = models.CharField(max_length=100, blank=True, default='', null=True)

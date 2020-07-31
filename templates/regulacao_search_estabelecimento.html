@@ -653,7 +653,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 		  </ul>
 		</nav><hr>
 
-		<form enctype="multipart/form-data" method="POST" action="{% url 'regulacao' registro.id %}?municipio_estabelecimento_referencia={{municipio_estabelecimento_referencia}}">{% csrf_token %}
+		<form enctype="multipart/form-data" method="POST" action="{% url 'paciente_atribuir_senha' registro.id %}?municipio_estabelecimento_referencia={{municipio_estabelecimento_referencia}}">{% csrf_token %}
 
 		<div class="container">
 

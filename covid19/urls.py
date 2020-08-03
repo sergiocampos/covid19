@@ -64,5 +64,6 @@ urlpatterns = [
     path('regular_registro/<id>/', views.regular_registro, name='regular_registro'),
     path('regular_registro/<id>/submit', views.regular_registro_set),
     path('paciente_atribuir_senha/<id>/', views.paciente_atribuir_senha, name='paciente_atribuir_senha'),
-    path('paciente_atribuir_senha/<id>/submit', views.paciente_atribuir_senha_set)
+    path('paciente_atribuir_senha/<id>/submit', views.paciente_atribuir_senha_set),
+    path('template_censo/', views.template_censo, name='template_censo')
 ]

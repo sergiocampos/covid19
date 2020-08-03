@@ -47,6 +47,7 @@ class RegistroCovid(models.Model):
 	ar_o2 = models.CharField(max_length=100, blank=True, default='', null=True)
 	frequencia_cardiaca = models.IntegerField(blank=True, null=True)
 	pa = models.CharField(max_length=100, default='', null=True)
+	pa_admissao = models.CharField(max_length=100, default='', null=True)
 	conciencia = models.CharField(max_length=100, blank=True, default='', null=True)
 	temperatura = models.FloatField(blank=True, null=True)
 
@@ -76,6 +77,7 @@ class RegistroCovid(models.Model):
 	o2_suporte = ArrayField(models.CharField(max_length=100), blank=True, null=True)
 	dose_cn = models.FloatField(blank=True, null=True)
 	dose_venturi = models.FloatField(blank=True, null=True)
+	mascara_com_reservatorio = models.CharField(max_length=100, blank=True, default='', null=True)
 
 	vmi = ArrayField(models.CharField(max_length=100), blank=True, null=True)
 

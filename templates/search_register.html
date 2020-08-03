@@ -168,7 +168,12 @@
         	</td>
 	        <td style="width: 250px"><a href="/status_registro/{{o.id}}/">{{o.nome_paciente}}</a></td>
 	        <td style="width: 80px; font-size: 70%">{{o.codigo_sescovid}}</td>
-	        <td style="width: 150px; font-size: 70%">{{o.last_status}}</td>
+	        <td style="width: 150px; font-size: 70%">
+	        {% if o.last_status == '' or o.last_status == None %}
+	        {% else %}
+	        {{o.last_status}}
+	        {%endif%}
+	    	</td>
 	        <td style="width: 67px; font-size: 70%">
 	        	{% if o.idade_paciente == '' or o.idade_paciente == None %}
 	        	{%else%}

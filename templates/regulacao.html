@@ -20,6 +20,10 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
 	<script>
+		function cleanIggIgm(){
+			$("#igm_none_id").val("");
+			$("#igg_none_id").val("");
+		}
 
 		function activeOutrasComorbidades(){
 			if (document.getElementById('outras_comorbidades').checked == true) {
@@ -567,6 +571,7 @@ function desactiveParentesco(){
 function activeParentesco(){
 	$("#grau_parentesco_id").prop("disabled", false);
 }
+
 
 </script>
 
@@ -1895,9 +1900,9 @@ function activeParentesco(){
 			<div class="col-sm-3">
 				PA:
 				<div class="form-check-inline">
-					<input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" style="width: 60px" value="{{pa_1}}">
+					<input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" style="width: 60px" value="{{pad_1}}">
 					<label for="">x</label>
-					<input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" style="width: 60px" value="{{pa_2}}">
+					<input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" style="width: 60px" value="{{pad_2}}">
 				</div><label for="" style="">mmHg</label>
 			</div>
 			<div class="col-sm-3">
@@ -2231,7 +2236,28 @@ function activeParentesco(){
 				</div>
 
 			</div>
-			{% if registro.igm != '' or registro.igm != None %}
+			{%else%}
+			<div class="col-sm-2" style="margin-left: -30px">
+
+				<div class="form-check-inline" style="width:">
+					<label class="form-check-label" for="">
+						<input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo">Positivo
+					</label>
+				</div>
+
+			</div>
+			{%endif%}
+			{% if registro.igm == '' or registro.igm == None %}
+			<div class="col-sm-1" id="igm_none_id" style="margin-left: -90px">
+				<div class="form-check-inline"><b>IgM:</b>
+					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+						<option value=""></option>
+						<option value="REAGENTE">REAGENTE</option>
+						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+					</select>
+				</div>
+			</div>
+			{%else%}
 			<div class="col-sm-1" id="" style="margin-left: -90px">
 				<div class="form-check-inline"><b>IgM:</b>
 					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
@@ -2241,19 +2267,23 @@ function activeParentesco(){
 						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
 					</select>
 				</div>
-			</div>
-			{%else%}
-			<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
-				<div class="form-check-inline"><b>IgM:</b>
-					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+			</div>			
+			{%endif%}
+			{% if registro.igg == '' or registro.igg == None %}
+			<div class="col-sm-5" id="igg_none_id" style="margin-left: 100px">
+				<div class="form-check-inline"><b>IgG:</b>
+					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
 						<option value=""></option>
 						<option value="REAGENTE">REAGENTE</option>
 						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
 					</select>
 				</div>
+				<div class="form-check-inline" style=""><b>Data:</b>
+					<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
+				</div>
 			</div>
-			{%endif%}
-			{% if registro.igg != '' or registro.igg != None %}
+
+			{%else%}
 			<div class="col-sm-5" id="" style="margin-left: 100px">
 				<div class="form-check-inline"><b>IgG:</b>
 					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
@@ -2267,172 +2297,54 @@ function activeParentesco(){
 					<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg_bd" value="{{registro.data_igm_igg}}" style="width: 140px" required onkeypress="$(this).mask('00/00/0000')">						
 				</div>
 			</div>
+			{%endif%}
+		</div>
+		<div class="row">
+			<div class="col-sm-4"></div>
+			{% if registro.pesquisa_teste_sars_cov_2 == 'Negativo' %}
+			
+			<div class="col-sm-2" id="sars_negativo_id" style="margin-left: -30px">
+				<div class="form-check-inline" style="width:">
+					<label class="form-check-label" for="">
+						<input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo" checked onclick="cleanIggIgm()">Negativo
+					</label>
+				</div>
+
+			</div>
 			{%else%}
-			<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
-				<div class="form-check-inline"><b>IgG:</b>
-					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
-						<option value=""></option>
-						<option value="REAGENTE">REAGENTE</option>
-						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
-					</select>
+			<div class="col-sm-2" id="sars_negativo_id" style="margin-left: -30px">
+				<div class="form-check-inline" style="width:">
+					<label class="form-check-label" for="">
+						<input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo" onclick="cleanIggIgm()">Negativo
+					</label>
 				</div>
-				<div class="form-check-inline" style=""><b>Data:</b>
-					<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
-				</div>
+
 			</div>
 			{%endif%}
-
-
-			{%elif registro.pesquisa_teste_sars_cov_2 == 'Negativo' %}
-			<div class="col-sm-2" style="margin-left: -30px">
+			<div class="col-sm-6"></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4"></div>
+			{% if registro.pesquisa_teste_sars_cov_2 == 'Não Realizado' %}
+			<div class="col-sm-4" id="sars_nao_realizado_id" style="margin-left: -30px">
 				<div class="form-check-inline" style="width:">
 					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" onclick="active_IgGIgM()">Positivo
-					</label>
-				</div>
-			</div>
-
-			<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
-				<div class="form-check-inline"><b>IgM:</b>
-					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
-						<option value=""></option>
-						<option value="REAGENTE">REAGENTE</option>
-						<option value="NÃO REAGENTE">NÃO REAGENTE</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
-				<div class="form-check-inline"><b>IgG:</b>
-					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
-						<option value=""></option>
-						<option value="REAGENTE">REAGENTE</option>
-						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
-					</select>
-				</div>
-				<div class="form-check-inline" style=""><b>Data:</b>
-					<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
-				</div>
-			</div>
-
-			<div class="col-sm-2" id="sars_negativo_id">
-				<div class="form-check-inline" style="width:">
-					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo" checked>Negativo
-					</label>
-				</div>
-
-			</div>
-
-			<div class="col-sm-4" id="sars_nao_realizado_id">
-				<div class="form-check-inline" style="width:">
-					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado">Não Realizado
-					</label>
-				</div>
-			</div>
-			{%elif registro.pesquisa_teste_sars_cov_2 == 'Não Realizado' %}
-			<div class="col-sm-2" style="margin-left: -30px">
-				<div class="form-check-inline" style="width:">
-					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" onclick="active_IgGIgM()">Positivo
-					</label>
-				</div>
-			</div>
-
-			<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
-				<div class="form-check-inline"><b>IgM:</b>
-					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
-						<option value="">selecione</option>
-						<option value=""></option>
-						<option value="REAGENTE">REAGENTE</option>
-						<option value="NÃO REAGENTE">NÃO REAGENTE</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
-				<div class="form-check-inline"><b>IgG:</b>
-					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
-						<option value="">selecione</option>
-						<option value=""></option>
-						<option value="REAGENTE">REAGENTE</option>
-						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
-					</select>
-				</div>
-				<div class="form-check-inline" style=""><b>Data:</b>
-					<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
-				</div>
-			</div>
-
-			<div class="col-sm-2" id="sars_negativo_id">
-				<div class="form-check-inline" style="width:">
-					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo">Negativo
-					</label>
-				</div>
-
-			</div>
-
-			<div class="col-sm-4" id="sars_nao_realizado_id">
-				<div class="form-check-inline" style="width:">
-					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado" checked>Não Realizado
+						<input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado" checked onclick="cleanIggIgm()">Não Realizado
 					</label>
 				</div>
 			</div>
 			{%else%}
-			<div class="col-sm-2" style="margin-left: -30px">
+			<div class="col-sm-4" id="sars_nao_realizado_id" style="margin-left: -30px">
 				<div class="form-check-inline" style="width:">
 					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" onclick="active_IgGIgM()">Positivo
-					</label>
-				</div>
-			</div>
-
-			<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
-				<div class="form-check-inline"><b>IgM:</b>
-					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
-						<option value="">selecione</option>
-						<option value=""></option>
-						<option value="REAGENTE">REAGENTE</option>
-						<option value="NÃO REAGENTE">NÃO REAGENTE</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
-				<div class="form-check-inline"><b>IgG:</b>
-					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
-						<option value="">selecione</option>
-						<option value=""></option>
-						<option value="REAGENTE">REAGENTE</option>
-						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
-					</select>
-				</div>
-				<div class="form-check-inline" style=""><b>Data:</b>
-					<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
-				</div>
-			</div>
-
-			<div class="col-sm-2" id="sars_negativo_id">
-				<div class="form-check-inline" style="width:">
-					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo">Negativo
-					</label>
-				</div>
-
-			</div>
-
-			<div class="col-sm-4" id="sars_nao_realizado_id">
-				<div class="form-check-inline" style="width:">
-					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado">Não Realizado
+						<input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado" onclick="cleanIggIgm()">Não Realizado
 					</label>
 				</div>
 			</div>
 			{%endif%}
 		</div>
+
+
 		<hr>
 
 		<div class="row">

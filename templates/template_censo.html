@@ -1,0 +1,189 @@
+{% load static %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+
+  <style>
+
+.singleinfos {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+.container-fluid {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+.singleinfos .singleinfostabs {
+    margin-bottom: 20px;
+  width: 100%;
+}
+.singleinfos .singleinfostabs > ul {
+     overflow-x: auto;
+   overflow-y:hidden;
+   flex-wrap: nowrap;
+    margin-bottom: 14px;
+}
+.singleinfos .singleinfostabs > ul > li {
+    background: white;
+    background: #869daf;
+    border-radius: 3px;
+    padding: 12px 0;
+
+    margin-left: 10px;
+    margin-right: 0;
+    margin-bottom: 20px;
+}
+.singleinfos .singleinfostabs .nav-pills > li > a {
+    font-size: 13px;
+    border-radius: 4px;
+    padding: 4px 10px;
+    text-align: center;
+    background: transparent;
+    color: white !important;
+  white-space: nowrap !important;
+}
+</style>
+
+</head>
+<body>
+<div class="jumbotron">
+      <h1 style="margin-left: 50px">SES COVID - Registro - Casos COVID19</h1>
+      <p></p>
+    </div>
+    <nav class="navbar navbar-inverse">
+      <ul class="nav navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/covid_list/">Principal</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/search_estabelecimento/">Registrar Caso</a>
+        </li>
+        <!--
+        <li class="nav-item">
+          <a class="nav-link" href="/registro_covid/">Registrar Caso</a>
+        </li>
+      -->
+      <li class="nav-item">
+        <a class="nav-link" href="#"></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/search_register/">Localizar</a>
+      </li>
+      <li class="nav-item">
+        {% if user.first_name == 'videofonista' or user.first_name == 'medico' or user.first_name == 'enfermeiro' %}
+        {% else %}
+        <a class="nav-link" href="/gerar_relatorios/">Relatórios</a>
+        {%endif%}
+      </li>
+      <li>
+       <a class="nav-link" href="/template_censo/">Censo Hospitalar</a>
+     </li>
+     <li>
+       <a class="nav-link" href="/change_password/">Alterar senha</a>
+     </li>
+     <li>
+       <a class="nav-link" href="/accounts/logout">Sair</a>
+     </li>
+   </ul>
+ </nav><br>
+  <div class="container" style="border: 2px solid #cccccc; border-radius: 10px">
+
+ <div class="container-fluid" style="margin-top: 50px">
+   <div class="row">
+    <div class="col-sm-4" style="background-color:;">
+     <div style="position: relative; left: 0; top: 20%; width: 100%; text-align: center;">
+      <img src="https://docs.google.com/uc?id=1g14C98IyGkVYPNNkoLk20rGYVikptzcC" alt="" style=" background-color: ;width: 70%">
+    </div>
+  </div>
+
+  <div class="col-sm-4" style="">
+    <div class="col" style="text-align: center;">
+     <p>GOVERNO DO ESTADO DA PARAÍBA</p>
+     <p>SECRETARIA DE ESTADO DA SAÚDE</p>
+     <p></p>
+     <p><h7><b>Registro de Casos - Perfil {{user.first_name}} - Usuário: <i>{{user}}</i></b></h7></p>
+   </div>
+ </div>
+ <div class="col-sm-4" style="background-color:;">
+  <div style="position: relative; left: 0; top: 30%; width: 100%; text-align: center;">
+   <img src="https://docs.google.com/uc?id=11gNpuLZuHBRHHiSFZxcSp5CGlJla1PEw" alt="" style="background-color: ;width: 70%">
+ </div>
+</div>
+</div>
+<br>
+</div>
+<hr />    
+<div class="singleinfostabs">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+  </ul>
+</div>
+
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>HOME</h3>
+      <p>Sérgio Campos,....Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Menu 1</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Menu 3</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+  </div>
+
+<div style="height: 50px"></div>
+
+</div><br />
+
+
+<div style="background-color: #e6e6e6;">
+
+ <br /><br />
+
+</div>
+
+</body>
+</html>

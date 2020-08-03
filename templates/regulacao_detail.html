@@ -2907,7 +2907,7 @@
 					<b>Estabelecimento de Referência:</b>
 					<select autofocus="autofocus" class="form-control form-control-sm" name="estabelecimento_referencia" id="estabelecimento_id">
 						{% if regulacao_registro_last.estabelecimento_referencia_covid == '' or regulacao_registro_last.estabelecimento_referencia_covid == None %}
-						<option value=""></option>
+						<option value="{{registro.estabelecimento_referencia}}">{{registro.estabelecimento_referencia}}</option>
 						{% else %}
 						<option value="{{regulacao_registro_last.estabelecimento_referencia_covid}}">{{regulacao_registro_last.estabelecimento_referencia_covid}}</option>
 						{%endif%}						
@@ -3096,7 +3096,7 @@
 						<div class="form-check-inline" style="border: 2px solid #b3cccc; padding: 10px; border-radius: 10px; margin-top: 20px">
 
 							<ul>
-								{% for r in registro.pareceristas %}
+								{% for r in pareceristas %}
 								<li>
 									{{r}}
 								</li>

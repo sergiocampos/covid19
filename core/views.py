@@ -286,7 +286,12 @@ def registro_covid_set(request):
 	cidade_origem = request.POST.get('cidade_paciente')
 	telefone_retorno = request.POST.get('telefone_retorno')
 
-	data_admissao = request.POST.get('data_admissao')
+	data_admissao_cap = request.POST.get('data_admissao')
+	if data_admissao_cap == '' or data_admissao_cap == None:
+		data_admissao = None
+	else:
+		data_admissao = data_admissao_cap
+
 
 	frequencia_respiratoria_cap = request.POST.get('frequencia_respiratoria')
 	if frequencia_respiratoria_cap != '':
@@ -311,7 +316,13 @@ def registro_covid_set(request):
 	pa_part1 = request.POST.get('pa_part1')
 	pa_part2 = request.POST.get('pa_part2')
 
-	pa = pa_part1 +"x"+ pa_part2
+	pa_admissao = pa_part1 +"x"+ pa_part2
+
+	pa_part1_ = request.POST.get('pa_part1_')
+	pa_part2_ = request.POST.get('pa_part2_')
+
+	pa = pa_part1_ +"x"+ pa_part2_
+
 	conciencia = request.POST.get('consciencia_paciente')
 	
 	temperatura_cap = request.POST.get('temperatura_paciente')
@@ -399,6 +410,13 @@ def registro_covid_set(request):
 		dose_venturi = None
 	else:
 		dose_venturi = float(dose_venturi_cap)
+
+	mascara_com_reservatorio_cap = request.POST.get('valor_mascara')
+	if mascara_com_reservatorio_cap == '' or mascara_com_reservatorio_cap == None:
+		mascara_com_reservatorio = None
+	else:
+		mascara_com_reservatorio = mascara_com_reservatorio_cap
+
 	
 
 	vmi = request.POST.getlist('vmi')
@@ -687,49 +705,6 @@ def registro_covid_set(request):
 		prioridade = int(float(prioridade_cap))
 	
 
-	#registro_last = RegistroCovid.objects.last()
-	#print("ultimo sescovid:", registro_last.senha)
-	#if last_registro:
-	#	senha_bd = last_registro.senha
-	#	if senha_bd:
-	#		senha = int(senha_bd) + 100
-	#	else:
-	#		senha = 100
-	#else:
-	#	senha_bd = 0
-	#	senha = int(senha_bd) + 100
-
-	#codigo_sescovid = request.POST.get('num_protocolo')
-
-	#justificativa = request.POST.get('justificativa')
-	#observacao = request.POST.get('observacoes_medicas')
-	
-	#pareceristas = registro.pareceristas
-	
-	#pareceristas_cap = request.POST.getlist('pareceristas')
-	
-	#if pareceristas == '' or pareceristas == None:
-	#	pareceristas = pareceristas_cap
-	#else:
-	#	pareceristas = pareceristas + pareceristas_cap
-
-	
-	#data_regulacao = datetime.now()
-	#data_regulacao = data_regulacao_.strftime('%d/%m/%Y %H:%M')
-
-
-	#data_obito_bd_cap = request.POST.get('data_obito_bd')
-	#data_obito_cap = request.POST.get('data_obito')
-
-	#if data_obito_cap == '' or data_obito_cap == None:
-	#	if data_obito_bd_cap == '' or data_obito_bd_cap == None:
-	#		data_obito = None
-	#	else:
-	#		data_obito = datetime.strptime(data_obito_bd_cap, '%d/%m/%Y').date()
-	#else:
-	#	data_obito = data_obito_cap
-
-
 	registro = RegistroCovid.objects.create(
 		responsavel_pelo_preenchimento = responsavel_pelo_preenchimento,
 		codigo_registro_total = codigo_registro_total,
@@ -751,6 +726,7 @@ def registro_covid_set(request):
 		saturacao_paciente = saturacao_paciente,
 		ar_o2 = ar_o2,
 		frequencia_cardiaca = frequencia_cardiaca,
+		pa_admissao = pa_admissao,
 		pa = pa,
 		conciencia = conciencia,
 		temperatura = temperatura,
@@ -923,6 +899,12 @@ def regulacao(request, id):
 	pa_1 = p[0]
 	pa_2 = p[1]
 
+
+	pa_admissao = registro.pa_admissao
+	p = pa.split("x")
+	pad_1 = p[0]
+	pad_2 = p[1]
+
 	status_registro = Status.objects.filter(registro_covid=registro.id)
 
 	status_list_descricao_ = []
@@ -980,7 +962,7 @@ def regulacao(request, id):
 	if not registro.image_laudo_tc and not registro.image_laudo_rx:
 		return render(request, 'regulacao.html', {'registro' : registro, 
 			'codigo_sescovid':codigo_sescovid, 'senha':senha, 'pa_1':pa_1, 
-			'pa_2':pa_2, 
+			'pa_2':pa_2, 'pad_1':pad_1, 'pad_2':pad_2,
 			'data_regulacao_template':data_regulacao_template, 
 			'status_list_descricao':status_list_descricao, 
 			'status_aguard_conf_vaga_registro':
@@ -1015,7 +997,7 @@ def regulacao(request, id):
 			estabelecimento_solicitante_outro, 'cidade':cidade,
 			'estabelecimentos':estabelecimentos,
 			'municipio_estabelecimento_referencia':
-			municipio_estabelecimento_referencia})
+			municipio_estabelecimento_referencia, 'pad_1':pad_1, 'pad_2':pad_2})
 
 	elif not registro.image_laudo_rx:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
@@ -1033,7 +1015,7 @@ def regulacao(request, id):
 		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
 		estabelecimentos, 'municipio_estabelecimento_referencia':
 		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_tc':
-		img_tc})
+		img_tc, 'pad_1':pad_1, 'pad_2':pad_2})
 	elif not registro.image_laudo_tc:
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
 
@@ -1049,7 +1031,8 @@ def regulacao(request, id):
 		estabelecimento_solicitante, 'estabelecimento_solicitante_outro':
 		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
 		estabelecimentos, 'municipio_estabelecimento_referencia':
-		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_rx':img_rx})
+		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_rx':img_rx,
+		 'pad_1':pad_1, 'pad_2':pad_2})
 	else:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
@@ -1067,7 +1050,7 @@ def regulacao(request, id):
 		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
 		estabelecimentos, 'municipio_estabelecimento_referencia':
 		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_tc':
-		img_tc, 'img_rx':img_rx})
+		img_tc, 'img_rx':img_rx, 'pad_1':pad_1, 'pad_2':pad_2})
 
 
 
@@ -1118,10 +1101,11 @@ def regulacao_set(request, id):
 
 
 	frequencia_respiratoria_cap = request.POST.get('frequencia_respiratoria')
-	if frequencia_respiratoria_cap != '' or frequencia_respiratoria_cap != None:
-		frequencia_respiratoria = int(frequencia_respiratoria_cap)
-	else:
+	if frequencia_respiratoria_cap == '' or frequencia_respiratoria_cap == None:
 		frequencia_respiratoria = registro.frequencia_respiratoria
+	else:
+		frequencia_respiratoria = int(frequencia_respiratoria_cap)
+		
 	
 	saturacao_paciente_cap = request.POST.get('saturacao_paciente')
 	if saturacao_paciente_cap != '':
@@ -1147,6 +1131,10 @@ def regulacao_set(request, id):
 	pa_part1 = request.POST.get('pa_part1')
 	pa_part2 = request.POST.get('pa_part2')
 	pa = pa_part1 + "x" + pa_part2
+
+	pad_part1 = request.POST.get('pa_part1')
+	pad_part2 = request.POST.get('pa_part2')
+	pa_admissao = pad_part1 + "x" + pad_part2
 	
 	conciencia_cap = request.POST.get('consciencia_paciente')
 	if conciencia_cap != '' or conciencia_cap != None:
@@ -1155,10 +1143,11 @@ def regulacao_set(request, id):
 		conciencia = registro.conciencia
 
 	temperatura_cap = request.POST.get('temperatura_paciente')
-	if temperatura_cap != '' or temperatura_cap != None:
-		temperatura = float(temperatura_cap)
-	else:
+	if temperatura_cap == '' or temperatura_cap == None:
 		temperatura = registro.temperatura
+	else:
+		temperatura = float(temperatura_cap)
+		
 
 	descricao_clinica = request.POST.get('descricao_clinica')
 
@@ -1504,9 +1493,6 @@ def regulacao_set(request, id):
 		prioridade = int(float(prioridade_cap))
 
 
-	codigo_sescovid = request.POST.get('num_protocolo')
-
-
 	descricao = request.POST.get('status_paciente')
 	registro_covid = registro
 
@@ -1523,11 +1509,13 @@ def regulacao_set(request, id):
 		estabelecimento_referencia_covid = estabelecimento_referencia
 
 
+	codigo_sescovid = ""
 	senha = 0
 	if last_status == 'Regulado':
 		#Regulações do paciente
 		#regulacoes_registro = Regulacao.objects.filter(registro_covid_id=registro.id)
 		#Ultima regulacao do paciente:
+		codigo_sescovid = request.POST.get('num_protocolo')
 		regulacao_last = Regulacao.objects.all().last()
 		if regulacao_last:
 			senha_last = regulacao_last.senha
@@ -1597,6 +1585,7 @@ def regulacao_set(request, id):
 	registro.ar_o2 = ar_o2
 	registro.frequencia_cardiaca = frequencia_cardiaca
 	registro.pa = pa
+	registro.pa_admissao = pa_admissao
 	registro.conciencia = conciencia
 	registro.temperatura = temperatura
 	registro.descricao_clinica = descricao_clinica
@@ -1719,6 +1708,9 @@ def regulacao_set(request, id):
 def regulacao_detail(request, id):
 	registro = RegistroCovid.objects.get(id=id)
 
+	pareceristas_bd = registro.pareceristas
+	pareceristas = list(set(pareceristas_bd))
+
 	regulacoes_registro = Regulacao.objects.filter(registro_covid_id=registro.id)
 	regulacao_registro_last = regulacoes_registro.last()
 	
@@ -1781,7 +1773,8 @@ def regulacao_detail(request, id):
 			status_regulado_registro, 'status_nao_regulado_registro':
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'hora':hora, 'minuto':minuto, 
-			'regulacao_registro_last':regulacao_registro_last})
+			'regulacao_registro_last':regulacao_registro_last, 'pareceristas':
+			pareceristas})
 		else:
 			senha = regulacao_registro_last.senha
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
@@ -1795,7 +1788,8 @@ def regulacao_detail(request, id):
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'senha':senha, 'hora':hora, 
 			'minuto':minuto, 
-			'regulacao_registro_last':regulacao_registro_last})
+			'regulacao_registro_last':regulacao_registro_last, 'pareceristas':
+			pareceristas})
 			
 
 	elif not registro.image_laudo_tc and not registro.image_laudo_rx:
@@ -1812,7 +1806,8 @@ def regulacao_detail(request, id):
 				'status_nao_regulado_registro':status_nao_regulado_registro, 
 				'status_aguard_inf_registro':status_aguard_inf_registro, 
 				'senha':senha, 'hora':hora, 'minuto':minuto, 
-			'regulacao_registro_last':regulacao_registro_last})
+			'regulacao_registro_last':regulacao_registro_last, 'pareceristas':
+			pareceristas})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 				'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1824,7 +1819,8 @@ def regulacao_detail(request, id):
 				'status_nao_regulado_registro':status_nao_regulado_registro, 
 				'status_aguard_inf_registro':status_aguard_inf_registro, 
 				'hora':hora, 'minuto':minuto, 
-			'regulacao_registro_last':regulacao_registro_last})
+			'regulacao_registro_last':regulacao_registro_last, 'pareceristas':
+			pareceristas})
 	elif not registro.image_descricao_clinica and not registro.image_laudo_tc:
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
 		if regulacao_registro_last:
@@ -1840,7 +1836,8 @@ def regulacao_detail(request, id):
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'senha':senha, 'img_rx':img_rx, 
 			'hora':hora, 'minuto':minuto, 
-			'regulacao_registro_last':regulacao_registro_last})
+			'regulacao_registro_last':regulacao_registro_last, 'pareceristas':
+			pareceristas})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1853,7 +1850,8 @@ def regulacao_detail(request, id):
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'img_rx':img_rx, 'hora':hora, 
 			'minuto':minuto, 
-			'regulacao_registro_last':regulacao_registro_last})
+			'regulacao_registro_last':regulacao_registro_last, 'pareceristas':
+			pareceristas})
 	elif not registro.image_descricao_clinica and not registro.image_laudo_rx:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
 		if regulacao_registro_last:
@@ -1869,7 +1867,8 @@ def regulacao_detail(request, id):
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'senha':senha, 'img_tc':img_tc, 
 			'hora':hora, 'minuto':minuto, 
-			'regulacao_registro_last':regulacao_registro_last})
+			'regulacao_registro_last':regulacao_registro_last, 'pareceristas':
+			pareceristas})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1882,7 +1881,8 @@ def regulacao_detail(request, id):
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'img_tc':img_tc, 'hora':hora, 
 			'minuto':minuto, 
-			'regulacao_registro_last':regulacao_registro_last})
+			'regulacao_registro_last':regulacao_registro_last, 'pareceristas':
+			pareceristas})
 	elif not registro.image_laudo_rx:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
 		encoded = base64.b64encode(registro.image_descricao_clinica).decode('ascii')
@@ -1899,7 +1899,8 @@ def regulacao_detail(request, id):
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'senha':senha, 'img_tc':img_tc,
 			 'encoded':encoded, 'hora':hora, 'minuto':minuto, 
-			'regulacao_registro_last':regulacao_registro_last})
+			'regulacao_registro_last':regulacao_registro_last, 'pareceristas':
+			pareceristas})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1912,7 +1913,8 @@ def regulacao_detail(request, id):
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'img_tc':img_tc, 'encoded':encoded, 
 			'hora':hora, 'minuto':minuto, 
-			'regulacao_registro_last':regulacao_registro_last})
+			'regulacao_registro_last':regulacao_registro_last, 'pareceristas':
+			pareceristas})
 	elif not registro.image_laudo_tc:
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
 		encoded = base64.b64encode(registro.image_descricao_clinica).decode('ascii')
@@ -1929,7 +1931,8 @@ def regulacao_detail(request, id):
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'senha':senha, 'img_rx':img_rx,
 			 'encoded':encoded, 'hora':hora, 'minuto':minuto, 
-			'regulacao_registro_last':regulacao_registro_last})
+			'regulacao_registro_last':regulacao_registro_last, 'pareceristas':
+			pareceristas})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1942,7 +1945,8 @@ def regulacao_detail(request, id):
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'img_rx':img_rx, 'encoded':encoded, 
 			'hora':hora, 'minuto':minuto, 
-			'regulacao_registro_last':regulacao_registro_last})
+			'regulacao_registro_last':regulacao_registro_last, 'pareceristas':
+			pareceristas})
 
 	elif not registro.image_descricao_clinica and (registro.image_laudo_rx or registro.image_laudo_tc):
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
@@ -1960,7 +1964,8 @@ def regulacao_detail(request, id):
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'senha':senha, 'img_tc':img_tc, 'img_rx':
 			img_rx, 'hora':hora, 'minuto':minuto, 
-			'regulacao_registro_last':regulacao_registro_last})
+			'regulacao_registro_last':regulacao_registro_last, 'pareceristas':
+			pareceristas})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -1973,7 +1978,8 @@ def regulacao_detail(request, id):
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'img_tc':img_tc, 'img_rx':
 			img_rx, 'hora':hora, 'minuto':minuto, 
-			'regulacao_registro_last':regulacao_registro_last})
+			'regulacao_registro_last':regulacao_registro_last, 'pareceristas':
+			pareceristas})
 
 	else:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
@@ -1992,7 +1998,8 @@ def regulacao_detail(request, id):
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'senha':senha, 'img_tc':img_tc, 'img_rx':
 			img_rx, 'encoded':encoded, 'hora':hora, 'minuto':minuto, 
-			'regulacao_registro_last':regulacao_registro_last})
+			'regulacao_registro_last':regulacao_registro_last, 'pareceristas':
+			pareceristas})
 		else:
 			return render(request, 'regulacao_detail.html', {'registro':registro, 'p1':p1, 
 			'p2':p2, 'data_regulacao_template':data_regulacao_template, 
@@ -2005,7 +2012,8 @@ def regulacao_detail(request, id):
 			status_nao_regulado_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'img_tc':img_tc, 'img_rx':
 			img_rx, 'encoded':encoded, 'hora':hora, 'minuto':minuto, 
-			'regulacao_registro_last':regulacao_registro_last})
+			'regulacao_registro_last':regulacao_registro_last, 'pareceristas':
+			pareceristas})
 
 
 
@@ -3174,9 +3182,6 @@ def paciente_atribuir_senha_set(request, id):
 		prioridade = int(float(prioridade_cap))
 
 
-	codigo_sescovid = request.POST.get('num_protocolo')
-
-
 	descricao = request.POST.get('status_paciente')
 	registro_covid = registro
 
@@ -3198,6 +3203,7 @@ def paciente_atribuir_senha_set(request, id):
 		#Regulações do paciente
 		#regulacoes_registro = Regulacao.objects.filter(registro_covid_id=registro.id)
 		#Ultima regulacao do paciente:
+		codigo_sescovid = request.POST.get('num_protocolo')
 		regulacao_last = Regulacao.objects.all().last()
 		if regulacao_last:
 			senha_last = regulacao_last.senha
@@ -3383,3 +3389,10 @@ def paciente_atribuir_senha_set(request, id):
 	registro.save()
 
 	return redirect('regulacao_detail', id=id)
+
+
+@login_required
+def template_censo(request):
+	n = RegistroCovid.objects.all()
+
+	return render(request, 'template_censo.html', {'n':n})

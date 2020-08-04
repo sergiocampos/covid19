@@ -1411,10 +1411,10 @@ function activeDosePropofol_(){
 								</div>
 
 								<div class="form-check-inline">
-									<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" size="2" style="width: 100px">
+									<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" size="2" style="width: 90px">
 									<div class="invalid-feedback"></div>
 									<label for="">X</label>
-									<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" size="2" style="width: 100px">
+									<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" size="2" style="width: 90px">
 									<div class="invalid-feedback"></div>
 
 								</div>
@@ -2189,7 +2189,7 @@ function activeDosePropofol_(){
 					</div>
 					<div class="form-check-inline">
 						<input type="text" min="0" class="form-control form-control-sm" id="mascara_id" placeholder="" name="valor_mascara" style="width: 60px" value="" disabled>
-					</div><label for="" style="margin-left: -10px">l/mim</label>
+					</div><label for="" style="margin-left: -10px">l/min</label>
 					
 				</div>
 				{%endif%}
@@ -3652,6 +3652,38 @@ function activeDosePropofol_(){
 					<div class="invalid-feedback">Descreva História do paciente</div>
 				</div>
 			</div><hr>
+			<div class="row">
+					<div class="col-sm-5"></div>
+					<div class="col-sm-4" style="background-color: ">
+						
+						<div class="form-check-inline" style="" id="">
+							<label class="form-check-label" for="">
+								<b>Status do Paciente:</b>
+							</label>
+						</div>
+					
+					</div>
+					<div class="col-sm-3"></div>
+			</div>
+			<div class="row">
+					<div class="col-sm-5"></div>
+					<div class="col-sm-4" style="background-color: ">
+						
+						<div class="form-check-inline" style="font-size: 83%" id="">
+							<label class="form-check-label" for="">
+								<input type="radio" class="form-check-input" id="" name="status_paciente" value="Parecer Médico">PARECER MÉDICO
+							</label>
+						</div>
+						
+						<div class="form-check-inline" style="font-size: 83%">
+							<label class="form-check-label" for="">
+								<input type="radio" class="form-check-input" id="" name="status_paciente" value="Aguardando Informações">AGUARDANDO INFORMAÇÕES
+							</label>
+						</div>
+					
+					</div>
+					<div class="col-sm-3"></div>
+			</div><hr />
 
 
 		</div>

@@ -177,7 +177,7 @@ class RegistroCovid(models.Model):
 	is_sindrome_gripal = models.CharField(max_length=100, blank=True, default='', null=True)
 	news_fast_pb = models.CharField(max_length=100, blank=True, default='', null=True)
 	news_modificado = models.CharField(max_length=100, blank=True, default='', null=True)
-	uti = models.CharField(max_length=200, blank=True, default='', null=True)
+	uti = ArrayField(models.CharField(max_length=200), blank=True, null=True)
 	leito = models.CharField(max_length=100, blank=True, default='', null=True)
 
 	parecer_medico = models.TextField(blank=True, default='', null=True)

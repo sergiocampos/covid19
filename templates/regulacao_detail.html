@@ -194,10 +194,10 @@
 								</div>
 
 								<div class="form-check-inline">
-									<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" size="2" style="width: 100px" value="{{p1}}">
+									<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" size="2" style="width: 100px" value="{{pad_1}}">
 									<div class="invalid-feedback"></div>
 									<label for="">X</label>
-									<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" size="2" style="width: 100px" value="{{p2}}">
+									<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" size="2" style="width: 100px" value="{{pad_2}}">
 									<div class="invalid-feedback"></div>
 
 								</div>
@@ -998,6 +998,9 @@
 							<input type="checkbox" class="form-check-input" id="" name="o2_suporte" value="Máscara com reservatório" checked>Máscara com reservatório
 						</label>
 					</div>
+					<div class="form-check-inline">
+						<input type="text" class="form-control form-control-sm" id="mascara__id" placeholder="" name="valor_mascara" style="width: 80px" value="{{registro.mascara_com_reservatorio}}">
+					</div>
 
 					
 				</div>
@@ -1008,6 +1011,9 @@
 							<input type="checkbox" class="form-check-input" id="" name="o2_suporte" value="Máscara com reservatório">Máscara com reservatório
 						</label>
 					</div>
+					<div class="form-check-inline">
+						<input type="text" class="form-control form-control-sm" id="mascara___id" placeholder="" name="valor_mascara" style="width: 60px" value="" disabled>
+					</div><label for="" style="margin-left: -10px">l/min</label>
 
 					
 				</div>
@@ -1469,7 +1475,7 @@
 				</div>
 				<div class="col-sm-1" id="" style="margin-left: -90px">
 					<div class="form-check-inline"><b>IgM:</b>
-						<select name="igm" id="" class="form-control form-control-sm" style="width: 110px">
+						<select name="igm" id="" class="form-control form-control-sm" style="width: 150px">
 							{% if registro.igm == '' or registro.igm == None %}
 							<option value="" selected></option>
 							{%else%}
@@ -1482,7 +1488,7 @@
 
 				<div class="col-sm-5" id="" style="margin-left: 100px">
 					<div class="form-check-inline"><b>IgG:</b>
-						<select name="igg" id="" class="form-control form-control-sm" style="width: 110px">
+						<select name="igg" id="" class="form-control form-control-sm" style="width: 150px">
 							{% if registro.igg == '' or registro.igg == None %}
 							<option value=""></option>
 							{%else%}
@@ -1498,6 +1504,13 @@
 					</div>
 				</div>
 				{%else%}
+				<div class="col-sm-2" style="margin-left: -30px">
+					<div class="form-check-inline" style="width:">
+						<label class="form-check-label" for="">
+							<input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo">Positivo
+						</label>
+					</div>
+				</div>
 				<div class="col-sm-2">
 					{% if registro.pesquisa_teste_sars_cov_2 == 'Negativo'  %}
 					<div class="form-check-inline" style="width:">
@@ -2129,31 +2142,31 @@
 				<div class="col-sm-3">
 					Leucócitos:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="leucocito" value="{{registro.leucocito}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="leucocito" value="{{registro.leucocito}}">
 					</div>
 				</div>
 				<div class="col-sm-3">
 					Linfócitos:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="linfocito" value="{{registro.linfocito}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="linfocito" value="{{registro.linfocito}}">
 					</div>
 				</div>
 				<div class="col-sm-2">
 					HB:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" step="0.1" min="0" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="hb" value="{{registro.hb}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="hb" value="{{registro.hb}}">
 					</div>
 				</div>
 				<div class="col-sm-2">
 					HT:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" step="0.1" min="0" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ht" value="{{registro.ht}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="ht" value="{{registro.ht}}">
 					</div>
 				</div>
 				<div class="col-sm-2">
 					PCR:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="pcr" value="{{registro.pcr}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="pcr" value="{{registro.pcr}}">
 					</div>
 				</div>
 				
@@ -2162,25 +2175,25 @@
 				<div class="col-sm-3">
 					Lactato:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="lactato" value="{{registro.lactato}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="lactato" value="{{registro.lactato}}">
 					</div>
 				</div>
 				<div class="col-sm-3">
 					DHL:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="dhl" value="{{registro.dhl}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="dhl" value="{{registro.dhl}}">
 					</div>
 				</div>
 				<div class="col-sm-3">
 					Ferritina:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ferritina" value="{{registro.ferritina}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="ferritina" value="{{registro.ferritina}}">
 					</div>
 				</div>
 				<div class="col-sm-3">
 					Troponina:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="troponina" value="{{registro.troponina}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="troponina" value="{{registro.troponina}}">
 					</div>
 				</div>
 			</div><br>
@@ -2188,25 +2201,25 @@
 				<div class="col-sm-3">
 					CPK:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="cpk" value="{{registro.cpk}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="cpk" value="{{registro.cpk}}">
 					</div>
 				</div>
 				<div class="col-sm-3">
 					D-dímero:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="d_dimero" value="{{registro.d_dimero}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="d_dimero" value="{{registro.d_dimero}}">
 					</div>
 				</div>
 				<div class="col-sm-3">
 					Uréia:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ureia" value="{{registro.ureia}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="ureia" value="{{registro.ureia}}">
 					</div>
 				</div>
 				<div class="col-sm-3">
 					Creatinina:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" step="0.1" min="0.00" class="form-control form-control-sm" id="" placeholder="" name="creatinina" value="{{registro.creatinina}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="creatinina" value="{{registro.creatinina}}">
 					</div>
 				</div>
 			</div><br>
@@ -2214,31 +2227,31 @@
 				<div class="col-sm-2">
 					AP:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="ap" value="{{registro.ap}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="ap" value="{{registro.ap}}">
 					</div>
 				</div>
 				<div class="col-sm-3">
 					TAP:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="tap" value="{{registro.tap}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="tap" value="{{registro.tap}}">
 					</div>
 				</div>
 				<div class="col-sm-2">
 					INR:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="inr" value="{{registro.inr}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="inr" value="{{registro.inr}}">
 					</div>
 				</div>
 				<div class="col-sm-3">
 					TGO:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="tgo" value="{{registro.tgo}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="tgo" value="{{registro.tgo}}">
 					</div>
 				</div>
 				<div class="col-sm-2">
 					TGP:
 					<div class="form-check-inline" style="width: 100px">
-						<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="" placeholder="" name="tgp" value="{{registro.tgp}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="tgp" value="{{registro.tgp}}">
 					</div>
 				</div>
 			</div><hr>
@@ -2645,16 +2658,16 @@
 				<div class="row">
 					<div class="col-sm-3"></div>
 					<div class="col-sm-6">
-						{% if registro.uti == 'Insuficiência respiratória aguda com necessidade de ventilação mecânica' %}
+						{% if 'Insuficiência respiratória aguda com necessidade de ventilação mecânica' in registro.uti %}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="Insuficiência respiratória aguda com necessidade de ventilação mecânica" checked>Insuficiência respiratória aguda com necessidade de ventilação mecânica.
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Insuficiência respiratória aguda com necessidade de ventilação mecânica" checked>Insuficiência respiratória aguda com necessidade de ventilação mecânica.
 							</label>
 						</div>
 						{%else%}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="Insuficiência respiratória aguda com necessidade de ventilação mecânica">Insuficiência respiratória aguda com necessidade de ventilação mecânica.
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Insuficiência respiratória aguda com necessidade de ventilação mecânica">Insuficiência respiratória aguda com necessidade de ventilação mecânica.
 							</label>
 						</div>
 						{%endif%}
@@ -2664,16 +2677,16 @@
 				<div class="row">
 					<div class="col-sm-3"></div>
 					<div class="col-sm-6">
-						{% if registro.uti == 'Sepse/Choque séptico e infecção pulmonar pelo COVID-19' %}
+						{% if 'Sepse/Choque séptico e infecção pulmonar pelo COVID-19' in registro.uti%}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="Sepse/Choque séptico e infecção pulmonar pelo COVID-19" checked>Sepse/Choque séptico e infecção pulmonar pelo COVID-19.
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Sepse/Choque séptico e infecção pulmonar pelo COVID-19" checked>Sepse/Choque séptico e infecção pulmonar pelo COVID-19.
 							</label>
 						</div>
 						{%else%}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="Sepse/Choque séptico e infecção pulmonar pelo COVID-19">Sepse/Choque séptico e infecção pulmonar pelo COVID-19.
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Sepse/Choque séptico e infecção pulmonar pelo COVID-19">Sepse/Choque séptico e infecção pulmonar pelo COVID-19.
 							</label>
 						</div>
 						{%endif%}
@@ -2686,16 +2699,16 @@
 				<div class="row">
 					<div class="col-sm-3"></div>
 					<div class="col-sm-8">
-						{% if registro.uti == 'Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica' %}
+						{% if 'Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica' in registro.uti %}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica" checked>Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica" checked>Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
 							</label>
 						</div>
 						{%else%}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica">Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica">Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
 							</label>
 						</div>
 						{%endif%}
@@ -2707,16 +2720,16 @@
 				<div class="row">
 					<div class="col-sm-3"></div>
 					<div class="col-sm-6">
-						{% if registro.uti == 'news modificado' %}
+						{% if 'news modificado' in registro.uti %}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="news modificado" checked> NEWS modificado ≥ 7 pontos
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="news modificado" checked> NEWS modificado ≥ 7 pontos
 							</label>
 						</div>
 						{%else%}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="news modificado"> NEWS modificado ≥ 7 pontos
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="news modificado"> NEWS modificado ≥ 7 pontos
 							</label>
 						</div>
 						{%endif%}
@@ -2729,16 +2742,16 @@
 				<div class="row">
 					<div class="col-sm-3"></div>
 					<div class="col-sm-6">
-						{% if registro.uti == 'news fast' %}
+						{% if 'news fast' in registro.uti %}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="news fast" checked> NEWS-FAST ≥ 3 pontos
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="news fast" checked> NEWS-FAST ≥ 3 pontos
 							</label>
 						</div>
 						{%else%}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="news fast"> NEWS-FAST ≥ 3 pontos
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="news fast"> NEWS-FAST ≥ 3 pontos
 							</label>
 						</div>
 						{%endif%}
@@ -2751,16 +2764,16 @@
 				<div class="row">
 					<div class="col-sm-3"></div>
 					<div class="col-sm-6">
-						{% if registro.uti == 'disfunção organica, alem do pulmonar' %}
+						{% if 'disfunção organica, alem do pulmonar' in registro.uti %}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar" checked> Disfunção orgânica, além do pulmonar
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar" checked> Disfunção orgânica, além do pulmonar
 							</label>
 						</div>
 						{%else%}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar"> Disfunção orgânica, além do pulmonar
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar"> Disfunção orgânica, além do pulmonar
 							</label>
 						</div>
 						{%endif%}
@@ -2905,7 +2918,7 @@
 				
 				<div class="col-sm-7" id="">
 					<b>Estabelecimento de Referência:</b>
-					<select autofocus="autofocus" class="form-control form-control-sm" name="estabelecimento_referencia" id="estabelecimento_id">
+					<select class="form-control form-control-sm" name="estabelecimento_referencia" id="estabelecimento_id">
 						{% if regulacao_registro_last.estabelecimento_referencia_covid == '' or regulacao_registro_last.estabelecimento_referencia_covid == None %}
 						<option value="{{registro.estabelecimento_referencia}}">{{registro.estabelecimento_referencia}}</option>
 						{% else %}

@@ -242,6 +242,9 @@
    {% if 'Aguardando Informações' in o.last_status %}
    <b style="color: #ffb366">{{o.last_status}}<br/></b>
    {%endif%}
+   {% if 'Parecer Médico' in o.last_status %}
+   <b style="color: #e68a00">{{o.last_status}}<br/></b>
+   {%endif%}
 
 </td>
 {%endif%}

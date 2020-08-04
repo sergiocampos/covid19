@@ -572,6 +572,26 @@ function activeParentesco(){
 	$("#grau_parentesco_id").prop("disabled", false);
 }
 
+function activeValorMascara_(){
+	if (document.getElementById("check_mascara_id_").checked == false){
+		$("#mascara__id").val("");
+		$("#mascara__id").prop("disabled", true);
+	}
+	if (document.getElementById("check_mascara_id_").checked == true){
+		$("#mascara__id").prop("disabled", false);
+	}
+}
+function activeValorMascara__(){
+	if (document.getElementById("check_mascara_id__").checked == false){
+		$("#mascara___id").val("");
+		$("#mascara___id").prop("disabled", true);
+	}
+	if (document.getElementById("check_mascara_id_").checked == true){
+		$("#mascara___id").prop("disabled", false);
+	}
+}
+   
+
 
 </script>
 
@@ -946,10 +966,10 @@ function activeParentesco(){
 								</div>
 
 								<div class="form-check-inline">
-									<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="" size="2" style="width: 100px" value="{{pa_1}}">
+									<input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="pa_admissao1" size="2" style="width: 100px" value="{{pad_1}}">
 									<div class="invalid-feedback"></div>
 									<label for="">X</label>
-									<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="" size="2" style="width: 100px" value="{{pa_2}}">
+									<input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="pa_admissao2" size="2" style="width: 100px" value="{{pad_2}}">
 									<div class="invalid-feedback"></div>
 
 								</div>
@@ -978,7 +998,7 @@ function activeParentesco(){
 									<label for="" class="form-check-label">Temperatura:</label>
 								</div>
 								<div class="form-check-inline">
-									<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" max="100" name="temperatura_paciente" size="5" value="{{registro.temperatura}}">
+									<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" name="temperatura_paciente" size="5" value="{{registro.temperatura}}">
 									<div class="invalid-feedback"></div>
 
 									<label for="">°C</label>					
@@ -1762,22 +1782,27 @@ function activeParentesco(){
 			<div class="col-sm-4">
 				<div class="form-check-inline">
 					<label class="form-check-label" for="">
-						<input type="checkbox" class="form-check-input" id="" name="o2_suporte" value="Máscara com reservatório" checked>Máscara com reservatório
+						<input type="checkbox" class="form-check-input" id="check_mascara_id_" name="o2_suporte" value="Máscara com reservatório" checked onclick="activeValorMascara_()">Máscara com reservatório
 					</label>
 				</div>
+				<div class="form-check-inline">
+						<input type="text" class="form-control form-control-sm" id="mascara__id" placeholder="" name="valor_mascara" style="width: 80px" value="{{registro.mascara_com_reservatorio}}">
+					</div><label for="" style="margin-left: -10px">l/min</label>
 
 
 			</div>
 			{%else%}
 			<div class="col-sm-4">
-				<div class="form-check-inline">
-					<label class="form-check-label" for="">
-						<input type="checkbox" class="form-check-input" id="" name="o2_suporte" value="Máscara com reservatório">Máscara com reservatório
-					</label>
+					<div class="form-check-inline">
+						<label class="form-check-label" for="">
+							<input type="checkbox" class="form-check-input" id="check_mascara_id__" name="o2_suporte" value="Máscara com reservatório" onclick="activeValorMascara__()">Máscara com reservatório
+						</label>
+					</div>
+					<div class="form-check-inline">
+						<input type="text" class="form-control form-control-sm" id="mascara___id" placeholder="" name="valor_mascara" style="width: 60px" value="" disabled>
+					</div><label for="" style="margin-left: -10px">l/min</label>
+					
 				</div>
-
-
-			</div>
 			{%endif%}
 		</div><br>
 		<div class="row">
@@ -1900,9 +1925,9 @@ function activeParentesco(){
 			<div class="col-sm-3">
 				PA:
 				<div class="form-check-inline">
-					<input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" style="width: 60px" value="{{pad_1}}">
+					<input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part1" style="width: 60px" value="{{pa_1}}">
 					<label for="">x</label>
-					<input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" style="width: 60px" value="{{pad_2}}">
+					<input type="text" class="form-control form-control-sm" id="" placeholder="" name="pa_part2" style="width: 60px" value="{{pa_2}}">
 				</div><label for="" style="">mmHg</label>
 			</div>
 			<div class="col-sm-3">
@@ -2966,31 +2991,31 @@ function activeParentesco(){
 			<div class="col-sm-3">
 				Leucócitos:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="leucocitos_id" placeholder="" name="leucocito" value="{{registro.leucocito}}">
+					<input type="text" class="form-control form-control-sm" id="leucocitos_id" placeholder="" name="leucocito" value="{{registro.leucocito}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				Linfócitos:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="linfonodos_id" placeholder="" name="linfocito" value="{{registro.linfocito}}">
+					<input type="text" class="form-control form-control-sm" min="0" max="1000000" id="linfonodos_id" placeholder="" name="linfocito" value="{{registro.linfocito}}">
 				</div>
 			</div>
 			<div class="col-sm-2">
 				HB:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" step="0.1" min="0" class="form-control form-control-sm" min="0" max="1000000" id="hb_id" placeholder="" name="hb" value="{{registro.hb}}">
+					<input type="text" step="0.1" min="0" class="form-control form-control-sm" min="0" max="1000000" id="hb_id" placeholder="" name="hb" value="{{registro.hb}}">
 				</div>
 			</div>
 			<div class="col-sm-2">
 				HT:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" step="0.1" min="0" class="form-control form-control-sm" min="0" max="1000000" id="ht_id" placeholder="" name="ht" value="{{registro.ht}}">
+					<input type="text" step="0.1" min="0" class="form-control form-control-sm" min="0" max="1000000" id="ht_id" placeholder="" name="ht" value="{{registro.ht}}">
 				</div>
 			</div>
 			<div class="col-sm-2">
 				PCR:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="pcr_id" placeholder="" name="pcr" value="{{registro.pcr}}">
+					<input type="text" class="form-control form-control-sm" min="0" max="1000000" id="pcr_id" placeholder="" name="pcr" value="{{registro.pcr}}">
 				</div>
 			</div>
 
@@ -2999,25 +3024,25 @@ function activeParentesco(){
 			<div class="col-sm-3">
 				Lactato:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="lactato_id" placeholder="" name="lactato" value="{{registro.lactato}}">
+					<input type="text" class="form-control form-control-sm" min="0" max="1000000" id="lactato_id" placeholder="" name="lactato" value="{{registro.lactato}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				DHL:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="dhl_id" placeholder="" name="dhl" value="{{registro.dhl}}">
+					<input type="text" class="form-control form-control-sm" min="0" max="1000000" id="dhl_id" placeholder="" name="dhl" value="{{registro.dhl}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				Ferritina:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="ferritina_id" placeholder="" name="ferritina" value="{{registro.ferritina}}">
+					<input type="text" class="form-control form-control-sm" min="0" max="1000000" id="ferritina_id" placeholder="" name="ferritina" value="{{registro.ferritina}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				Troponina:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="troponina_id" placeholder="" name="troponina" value="{{registro.troponina}}">
+					<input type="text" class="form-control form-control-sm" min="0" max="1000000" id="troponina_id" placeholder="" name="troponina" value="{{registro.troponina}}">
 				</div>
 			</div>
 		</div><br>
@@ -3025,25 +3050,25 @@ function activeParentesco(){
 			<div class="col-sm-3">
 				CPK:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="cpk_id" placeholder="" name="cpk" value="{{registro.cpk}}">
+					<input type="text" class="form-control form-control-sm" min="0" max="1000000" id="cpk_id" placeholder="" name="cpk" value="{{registro.cpk}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				D-dímero:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="d_dimero_id" placeholder="" name="d_dimero" value="{{registro.d_dimero}}">
+					<input type="text" class="form-control form-control-sm" min="0" max="1000000" id="d_dimero_id" placeholder="" name="d_dimero" value="{{registro.d_dimero}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				Uréia:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="ureia_id" placeholder="" name="ureia" value="{{registro.ureia}}">
+					<input type="text" class="form-control form-control-sm" min="0" max="1000000" id="ureia_id" placeholder="" name="ureia" value="{{registro.ureia}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				Creatinina:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" step="0.1" min="0.00" class="form-control form-control-sm" id="creatinina_id" placeholder="" name="creatinina" value="{{registro.creatinina}}">
+					<input type="text" step="0.1" min="0.00" class="form-control form-control-sm" id="creatinina_id" placeholder="" name="creatinina" value="{{registro.creatinina}}">
 				</div>
 			</div>
 		</div><br>
@@ -3051,31 +3076,31 @@ function activeParentesco(){
 			<div class="col-sm-2">
 				AP:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="ap_id" placeholder="" name="ap" value="{{registro.ap}}">
+					<input type="text" class="form-control form-control-sm" min="0" max="1000000" id="ap_id" placeholder="" name="ap" value="{{registro.ap}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				TAP:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="tap_id" placeholder="" name="tap" value="{{registro.tap}}">
+					<input type="text" class="form-control form-control-sm" min="0" max="1000000" id="tap_id" placeholder="" name="tap" value="{{registro.tap}}">
 				</div>
 			</div>
 			<div class="col-sm-2">
 				INR:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="inr_id" placeholder="" name="inr" value="{{registro.inr}}">
+					<input type="text" class="form-control form-control-sm" min="0" max="1000000" id="inr_id" placeholder="" name="inr" value="{{registro.inr}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				TGO:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="tgo_id" placeholder="" name="tgo" value="{{registro.tgo}}">
+					<input type="text" class="form-control form-control-sm" min="0" max="1000000" id="tgo_id" placeholder="" name="tgo" value="{{registro.tgo}}">
 				</div>
 			</div>
 			<div class="col-sm-2">
 				TGP:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="tgp_id" placeholder="" name="tgp" value="{{registro.tgp}}">
+					<input type="text" class="form-control form-control-sm" min="0" max="1000000" id="tgp_id" placeholder="" name="tgp" value="{{registro.tgp}}">
 				</div>
 			</div>
 		</div><hr>
@@ -3491,16 +3516,16 @@ function activeParentesco(){
 				<div class="row">
 					<div class="col-sm-3"></div>
 					<div class="col-sm-6">
-						{% if registro.uti == 'Insuficiência respiratória aguda com necessidade de ventilação mecânica' %}
+						{% if 'Insuficiência respiratória aguda com necessidade de ventilação mecânica' in registro.uti %}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="Insuficiência respiratória aguda com necessidade de ventilação mecânica" checked>Insuficiência respiratória aguda com necessidade de ventilação mecânica.
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Insuficiência respiratória aguda com necessidade de ventilação mecânica" checked>Insuficiência respiratória aguda com necessidade de ventilação mecânica.
 							</label>
 						</div>
 						{%else%}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="Insuficiência respiratória aguda com necessidade de ventilação mecânica">Insuficiência respiratória aguda com necessidade de ventilação mecânica.
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Insuficiência respiratória aguda com necessidade de ventilação mecânica">Insuficiência respiratória aguda com necessidade de ventilação mecânica.
 							</label>
 						</div>
 						{%endif%}
@@ -3510,16 +3535,16 @@ function activeParentesco(){
 				<div class="row">
 					<div class="col-sm-3"></div>
 					<div class="col-sm-6">
-						{% if registro.uti == 'Sepse/Choque séptico e infecção pulmonar pelo COVID-19' %}
+						{% if 'Sepse/Choque séptico e infecção pulmonar pelo COVID-19' in registro.uti %}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="Sepse/Choque séptico e infecção pulmonar pelo COVID-19" checked>Sepse/Choque séptico e infecção pulmonar pelo COVID-19.
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Sepse/Choque séptico e infecção pulmonar pelo COVID-19" checked>Sepse/Choque séptico e infecção pulmonar pelo COVID-19.
 							</label>
 						</div>
 						{%else%}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="Sepse/Choque séptico e infecção pulmonar pelo COVID-19">Sepse/Choque séptico e infecção pulmonar pelo COVID-19.
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Sepse/Choque séptico e infecção pulmonar pelo COVID-19">Sepse/Choque séptico e infecção pulmonar pelo COVID-19.
 							</label>
 						</div>
 						{%endif%}
@@ -3532,16 +3557,16 @@ function activeParentesco(){
 				<div class="row">
 					<div class="col-sm-3"></div>
 					<div class="col-sm-8">
-						{% if registro.uti == 'Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica' %}
+						{% if 'Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica' in registro.uti %}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica" checked>Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica" checked>Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
 							</label>
 						</div>
 						{%else%}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica">Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica">Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
 							</label>
 						</div>
 						{%endif%}
@@ -3553,16 +3578,16 @@ function activeParentesco(){
 				<div class="row">
 					<div class="col-sm-3"></div>
 					<div class="col-sm-6">
-						{% if registro.uti == 'news modificado' %}
+						{% if 'news modificado' in registro.uti %}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="news modificado" checked> NEWS modificado ≥ 7 pontos
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="news modificado" checked> NEWS modificado ≥ 7 pontos
 							</label>
 						</div>
 						{%else%}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="news modificado"> NEWS modificado ≥ 7 pontos
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="news modificado"> NEWS modificado ≥ 7 pontos
 							</label>
 						</div>
 						{%endif%}
@@ -3575,16 +3600,16 @@ function activeParentesco(){
 				<div class="row">
 					<div class="col-sm-3"></div>
 					<div class="col-sm-6">
-						{% if registro.uti == 'news fast' %}
+						{% if 'news fast' in registro.uti %}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="news fast" checked> NEWS-FAST ≥ 3 pontos
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="news fast" checked> NEWS-FAST ≥ 3 pontos
 							</label>
 						</div>
 						{%else%}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="news fast"> NEWS-FAST ≥ 3 pontos
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="news fast"> NEWS-FAST ≥ 3 pontos
 							</label>
 						</div>
 						{%endif%}
@@ -3597,16 +3622,16 @@ function activeParentesco(){
 				<div class="row">
 					<div class="col-sm-3"></div>
 					<div class="col-sm-6">
-						{% if registro.uti == 'disfunção organica, alem do pulmonar' %}
+						{% if 'disfunção organica, alem do pulmonar' in registro.uti %}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar" checked> Disfunção orgânica, além do pulmonar
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar" checked> Disfunção orgânica, além do pulmonar
 							</label>
 						</div>
 						{%else%}
 						<div class="form-check-inline" style="width: 110%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar"> Disfunção orgânica, além do pulmonar
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar"> Disfunção orgânica, além do pulmonar
 							</label>
 						</div>
 						{%endif%}
@@ -4023,7 +4048,7 @@ function activeParentesco(){
 						<div class="form-check-inline" style="border: 2px solid #b3cccc; padding: 10px; border-radius: 10px; margin-top: 20px">
 
 							<ul>
-								{% for r in registro.pareceristas %}
+								{% for r in pareceristas %}
 								<li>
 									{{r}}
 								</li>

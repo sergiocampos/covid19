@@ -740,6 +740,17 @@ function active_IgGIgM(){
 	}
 </style>
 
+<style>
+	#admissao {
+		background: #f2f2f2;
+		animation: mymove 4s infinite;
+		}
+		@keyframes mymove {
+			from {background-color: #f2f2f2;}
+			to {background-color: #ffeecc;}
+		}
+</style>
+
 </head>
 <body>
 
@@ -926,6 +937,100 @@ function active_IgGIgM(){
 			</div>
 		</div>
 		<hr>
+
+		<div class="jumbotron" id="admissao">
+					<div class="row" style="background-color: ; margin-top: -40px; margin-bottom: 40px">
+						<div class="col-sm-4"><b><h3>Admissão</h3></b></div>
+						<div class="col-sm-4">
+							<div class="form-check-inline">
+							Data:
+							{% if registro.data_admissao %}
+							<input type="text" class="form-control form-control-sm" id="" placeholder="" name="data_admissao" value="{{registro.data_admissao}}" style="width:">
+							{%else%}
+							<input type="date" class="form-control form-control-sm" id="" placeholder="" name="data_admissao" value="{{registro.data_admissao}}" style="width:">
+							{%endif%}
+							</div>
+						</div>
+						<div class="col-sm-4"></div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-4" style="">
+							Frequência Respiratória:
+							<div class="form-check-inline">
+								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="frequencia_respiratoria" value="{{registro.frequencia_respiratoria}}" style="margin-left: ;width: 80px">
+							</div><label for="" style="">irpm</label>    				
+						</div>
+						<div class="col-sm-3" style="">
+							Saturação:
+							<div class="form-check-inline">
+								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="saturacao_paciente" style="width: 55px" value="{{registro.saturacao_paciente}}">
+							</div><label for="" style="margin-left: -10px">%</label>
+						</div>
+						<div class="col-sm-4" style="">
+							Ar/O²
+							<div class="form-check-inline" style="">
+								<input type="text" class="form-control form-control-sm" id="" placeholder="" name="ar_o2" value="{{registro.ar_o2}}">
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-sm-4">
+							Frequência Cardíaca:
+							<div class="form-check-inline">
+								<input type="number" class="form-control form-control-sm" id="" placeholder="" name="f_cardiaca_paciente" style="width: 70px" value="{registro.frequencia_cardiaca}}" min="0" max="500">
+							</div><label for="" style="margin-left: -10px">bpm</label>
+						</div>
+						<div class="col-sm-4">
+
+							<div class="form-check-inline">
+								<label for="" class="form-check-label"><b>PA:</b>
+								</div>
+
+								<div class="form-check-inline">
+									<input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="pa_admissao1" size="2" style="width: 90px" value="{{pad_1}}">
+									<div class="invalid-feedback"></div>
+									<label for="">X</label>
+									<input type="number" min="0" class="form-control form-control-sm" id="" placeholder="" name="pa_admissao2" size="2" style="width: 90px" value="{{pad_2}}">
+									<div class="invalid-feedback"></div>
+
+								</div>
+								<div class="form-check-inline">
+									<label for="">mmHg</label>
+								</div>
+
+							</div>
+
+							<div class="col-sm-4">
+								Consciencia:
+								<div class="form-check-inline">
+									{% if registro.conciencia == '' or registro.conciencia == None %}
+									<input type="text" class="form-control form-control-sm" id="" placeholder="" name="consciencia_paciente" value="">
+									{%else%}
+									<input type="text" class="form-control form-control-sm" id="" placeholder="" name="consciencia_paciente" value="{{registro.conciencia}}">
+									{%endif%}
+								</div>
+
+							</div>
+
+						</div><hr>
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-check-inline">
+									<label for="" class="form-check-label">Temperatura:</label>
+								</div>
+								<div class="form-check-inline">
+									<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" name="temperatura_paciente" size="5" value="{{registro.temperatura}}">
+									<div class="invalid-feedback"></div>
+
+									<label for="">°C</label>					
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<hr>
 		
 		<div class="row">
 			<div class="col-sm-12">
@@ -2937,31 +3042,31 @@ function active_IgGIgM(){
 			<div class="col-sm-3">
 				Leucócitos:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="leucocitos_id" placeholder="" name="leucocito" value="{{registro.leucocito}}">
+					<input type="text" class="form-control form-control-sm" id="leucocitos_id" placeholder="" name="leucocito" value="{{registro.leucocito}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				Linfócitos:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="linfonodos_id" placeholder="" name="linfocito" value="{{registro.linfocito}}">
+					<input type="text" class="form-control form-control-sm" id="linfonodos_id" placeholder="" name="linfocito" value="{{registro.linfocito}}">
 				</div>
 			</div>
 			<div class="col-sm-2">
 				HB:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" step="0.1" min="0" class="form-control form-control-sm" min="0" max="1000000" id="hb_id" placeholder="" name="hb" value="{{registro.hb}}">
+					<input type="text" class="form-control form-control-sm" id="hb_id" placeholder="" name="hb" value="{{registro.hb}}">
 				</div>
 			</div>
 			<div class="col-sm-2">
 				HT:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" step="0.1" min="0" class="form-control form-control-sm" min="0" max="1000000" id="ht_id" placeholder="" name="ht" value="{{registro.ht}}">
+					<input type="text" class="form-control form-control-sm" id="ht_id" placeholder="" name="ht" value="{{registro.ht}}">
 				</div>
 			</div>
 			<div class="col-sm-2">
 				PCR:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="pcr_id" placeholder="" name="pcr" value="{{registro.pcr}}">
+					<input type="text" class="form-control form-control-sm" id="pcr_id" placeholder="" name="pcr" value="{{registro.pcr}}">
 				</div>
 			</div>
 
@@ -2970,25 +3075,25 @@ function active_IgGIgM(){
 			<div class="col-sm-3">
 				Lactato:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="lactato_id" placeholder="" name="lactato" value="{{registro.lactato}}">
+					<input type="text" class="form-control form-control-sm" id="lactato_id" placeholder="" name="lactato" value="{{registro.lactato}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				DHL:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="dhl_id" placeholder="" name="dhl" value="{{registro.dhl}}">
+					<input type="text" class="form-control form-control-sm" id="dhl_id" placeholder="" name="dhl" value="{{registro.dhl}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				Ferritina:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="ferritina_id" placeholder="" name="ferritina" value="{{registro.ferritina}}">
+					<input type="text" class="form-control form-control-sm" id="ferritina_id" placeholder="" name="ferritina" value="{{registro.ferritina}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				Troponina:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="troponina_id" placeholder="" name="troponina" value="{{registro.troponina}}">
+					<input type="text" class="form-control form-control-sm" id="troponina_id" placeholder="" name="troponina" value="{{registro.troponina}}">
 				</div>
 			</div>
 		</div><br>
@@ -2996,25 +3101,25 @@ function active_IgGIgM(){
 			<div class="col-sm-3">
 				CPK:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="cpk_id" placeholder="" name="cpk" value="{{registro.cpk}}">
+					<input type="text" class="form-control form-control-sm" id="cpk_id" placeholder="" name="cpk" value="{{registro.cpk}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				D-dímero:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="d_dimero_id" placeholder="" name="d_dimero" value="{{registro.d_dimero}}">
+					<input type="text" class="form-control form-control-sm" id="d_dimero_id" placeholder="" name="d_dimero" value="{{registro.d_dimero}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				Uréia:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="ureia_id" placeholder="" name="ureia" value="{{registro.ureia}}">
+					<input type="text" class="form-control form-control-sm" id="ureia_id" placeholder="" name="ureia" value="{{registro.ureia}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				Creatinina:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" step="0.1" min="0.00" class="form-control form-control-sm" id="creatinina_id" placeholder="" name="creatinina" value="{{registro.creatinina}}">
+					<input type="text" class="form-control form-control-sm" id="creatinina_id" placeholder="" name="creatinina" value="{{registro.creatinina}}">
 				</div>
 			</div>
 		</div><br>
@@ -3022,31 +3127,31 @@ function active_IgGIgM(){
 			<div class="col-sm-2">
 				AP:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="ap_id" placeholder="" name="ap" value="{{registro.ap}}">
+					<input type="text" class="form-control form-control-sm" id="ap_id" placeholder="" name="ap" value="{{registro.ap}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				TAP:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="tap_id" placeholder="" name="tap" value="{{registro.tap}}">
+					<input type="text" class="form-control form-control-sm" id="tap_id" placeholder="" name="tap" value="{{registro.tap}}">
 				</div>
 			</div>
 			<div class="col-sm-2">
 				INR:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="inr_id" placeholder="" name="inr" value="{{registro.inr}}">
+					<input type="text" class="form-control form-control-sm" id="inr_id" placeholder="" name="inr" value="{{registro.inr}}">
 				</div>
 			</div>
 			<div class="col-sm-3">
 				TGO:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="tgo_id" placeholder="" name="tgo" value="{{registro.tgo}}">
+					<input type="text" class="form-control form-control-sm" id="tgo_id" placeholder="" name="tgo" value="{{registro.tgo}}">
 				</div>
 			</div>
 			<div class="col-sm-2">
 				TGP:
 				<div class="form-check-inline" style="width: 100px">
-					<input type="number" class="form-control form-control-sm" min="0" max="1000000" id="tgp_id" placeholder="" name="tgp" value="{{registro.tgp}}">
+					<input type="text" class="form-control form-control-sm" id="tgp_id" placeholder="" name="tgp" value="{{registro.tgp}}">
 				</div>
 			</div>
 		</div><hr>
@@ -3466,13 +3571,13 @@ function active_IgGIgM(){
 							{% if registro.uti == 'Insuficiência respiratória aguda com necessidade de ventilação mecânica' %}
 							<div class="form-check-inline" style="width: 110%">
 								<label class="form-check-label" for="">
-									<input type="radio" class="form-check-input" id="" name="uti" value="Insuficiência respiratória aguda com necessidade de ventilação mecânica" checked>Insuficiência respiratória aguda com necessidade de ventilação mecânica.
+									<input type="checkbox" class="form-check-input" id="" name="uti" value="Insuficiência respiratória aguda com necessidade de ventilação mecânica" checked>Insuficiência respiratória aguda com necessidade de ventilação mecânica.
 								</label>
 							</div>
 							{%else%}
 							<div class="form-check-inline" style="width: 110%">
 								<label class="form-check-label" for="">
-									<input type="radio" class="form-check-input" id="" name="uti" value="Insuficiência respiratória aguda com necessidade de ventilação mecânica">Insuficiência respiratória aguda com necessidade de ventilação mecânica.
+									<input type="checkbox" class="form-check-input" id="" name="uti" value="Insuficiência respiratória aguda com necessidade de ventilação mecânica">Insuficiência respiratória aguda com necessidade de ventilação mecânica.
 								</label>
 							</div>
 							{%endif%}
@@ -3485,13 +3590,13 @@ function active_IgGIgM(){
 							{% if registro.uti == 'Sepse/Choque séptico e infecção pulmonar pelo COVID-19' %}
 							<div class="form-check-inline" style="width: 110%">
 								<label class="form-check-label" for="">
-									<input type="radio" class="form-check-input" id="" name="uti" value="Sepse/Choque séptico e infecção pulmonar pelo COVID-19" checked>Sepse/Choque séptico e infecção pulmonar pelo COVID-19.
+									<input type="checkbox" class="form-check-input" id="" name="uti" value="Sepse/Choque séptico e infecção pulmonar pelo COVID-19" checked>Sepse/Choque séptico e infecção pulmonar pelo COVID-19.
 								</label>
 							</div>
 							{%else%}
 							<div class="form-check-inline" style="width: 110%">
 								<label class="form-check-label" for="">
-									<input type="radio" class="form-check-input" id="" name="uti" value="Sepse/Choque séptico e infecção pulmonar pelo COVID-19">Sepse/Choque séptico e infecção pulmonar pelo COVID-19.
+									<input type="checkbox" class="form-check-input" id="" name="uti" value="Sepse/Choque séptico e infecção pulmonar pelo COVID-19">Sepse/Choque séptico e infecção pulmonar pelo COVID-19.
 								</label>
 							</div>
 							{%endif%}
@@ -3507,13 +3612,13 @@ function active_IgGIgM(){
 							{% if registro.uti == 'Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica' %}
 							<div class="form-check-inline" style="width: 110%">
 								<label class="form-check-label" for="">
-									<input type="radio" class="form-check-input" id="" name="uti" value="Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica" checked>Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
+									<input type="checkbox" class="form-check-input" id="" name="uti" value="Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica" checked>Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
 								</label>
 							</div>
 							{%else%}
 							<div class="form-check-inline" style="width: 110%">
 								<label class="form-check-label" for="">
-									<input type="radio" class="form-check-input" id="" name="uti" value="Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica">Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
+									<input type="checkbox" class="form-check-input" id="" name="uti" value="Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica">Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
 								</label>
 							</div>
 							{%endif%}
@@ -3528,13 +3633,13 @@ function active_IgGIgM(){
 							{% if registro.uti == 'news modificado' %}
 							<div class="form-check-inline" style="width: 110%">
 								<label class="form-check-label" for="">
-									<input type="radio" class="form-check-input" id="" name="uti" value="news modificado" checked> NEWS modificado ≥ 7 pontos
+									<input type="checkbox" class="form-check-input" id="" name="uti" value="news modificado" checked> NEWS modificado ≥ 7 pontos
 								</label>
 							</div>
 							{%else%}
 							<div class="form-check-inline" style="width: 110%">
 								<label class="form-check-label" for="">
-									<input type="radio" class="form-check-input" id="" name="uti" value="news modificado"> NEWS modificado ≥ 7 pontos
+									<input type="checkbox" class="form-check-input" id="" name="uti" value="news modificado"> NEWS modificado ≥ 7 pontos
 								</label>
 							</div>
 							{%endif%}
@@ -3550,13 +3655,13 @@ function active_IgGIgM(){
 							{% if registro.uti == 'news fast' %}
 							<div class="form-check-inline" style="width: 110%">
 								<label class="form-check-label" for="">
-									<input type="radio" class="form-check-input" id="" name="uti" value="news fast" checked> NEWS-FAST ≥ 3 pontos
+									<input type="checkbox" class="form-check-input" id="" name="uti" value="news fast" checked> NEWS-FAST ≥ 3 pontos
 								</label>
 							</div>
 							{%else%}
 							<div class="form-check-inline" style="width: 110%">
 								<label class="form-check-label" for="">
-									<input type="radio" class="form-check-input" id="" name="uti" value="news fast"> NEWS-FAST ≥ 3 pontos
+									<input type="checkbox" class="form-check-input" id="" name="uti" value="news fast"> NEWS-FAST ≥ 3 pontos
 								</label>
 							</div>
 							{%endif%}
@@ -3572,13 +3677,13 @@ function active_IgGIgM(){
 							{% if registro.uti == 'disfunção organica, alem do pulmonar' %}
 							<div class="form-check-inline" style="width: 110%">
 								<label class="form-check-label" for="">
-									<input type="radio" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar" checked> Disfunção orgânica, além do pulmonar
+									<input type="checkbox" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar" checked> Disfunção orgânica, além do pulmonar
 								</label>
 							</div>
 							{%else%}
 							<div class="form-check-inline" style="width: 110%">
 								<label class="form-check-label" for="">
-									<input type="radio" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar"> Disfunção orgânica, além do pulmonar
+									<input type="checkbox" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar"> Disfunção orgânica, além do pulmonar
 								</label>
 							</div>
 							{%endif%}
@@ -3988,7 +4093,7 @@ function active_IgGIgM(){
 							<div class="form-check-inline" style="border: 2px solid #b3cccc; padding: 10px; border-radius: 10px; margin-top: 20px">
 
 								<ul>
-									{% for r in registro.pareceristas %}
+									{% for r in pareceristas %}
 									<li>
 										{{r}}
 									</li>

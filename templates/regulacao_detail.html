@@ -668,7 +668,7 @@
 					{% if 'Uso de imunobiológicos' in registro.comorbidades %}
 					<div class="form-check-inline" style="width: 140%">
 						<label class="form-check-label">
-							<input type="checkbox" class="form-check-input" name="comorbidades" value="Uso de imunobiológicos" id="">Uso de imunobiológicos;
+							<input type="checkbox" class="form-check-input" name="comorbidades" value="Uso de imunobiológicos" id="" checked>Uso de imunobiológicos;
 						</label>
 					</div>
 					{%else%}
@@ -1000,7 +1000,7 @@
 					</div>
 					<div class="form-check-inline">
 						<input type="text" class="form-control form-control-sm" id="mascara__id" placeholder="" name="valor_mascara" style="width: 80px" value="{{registro.mascara_com_reservatorio}}">
-					</div>
+					</div><label for="" style="margin-left: -10px">l/min</label>
 
 					
 				</div>
@@ -2938,13 +2938,10 @@
 					<div class="col-sm-2"></div>
 					<div class="col-sm-4" style="margin-top: 30px">
 						<div class="form-check-inline" style="font-size: 83%; width: 100%">
-							{% if registro.codigo_sescovid == '' or registro.codigo_sescovid == None %}
-							SESCOVID
-							<input type="number" min="0" max="200000" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="">
-							{%else%}
+							
 
 							<input type="text" class="form-control form-control-sm" id="" placeholder="" name="" value="SESCOVID{{senha}}" disabled>
-							{%endif%}
+							
 						</div>
 					</div>
 					
@@ -3037,6 +3034,7 @@
 						<div class="form-check-inline" style="font-size: 83%" id="">
 							<label class="form-check-label" id="">
 								<input type="radio" class="form-check-input" id="" onclick="activeListaEspera()" checked>Óbito
+								<input type="text" required disabled id="data_obito_id" name="" value="{{registro.data_obito}}">
 							</label>
 						</div>
 						{%else%}
@@ -3063,6 +3061,25 @@
 						<div class="form-check-inline" style="font-size: 83%">
 							<label class="form-check-label" id="">
 								<input type="radio" class="form-check-input" id="" name="status_paciente" value="" onclick="activeListaEspera()">Aguardando Informações
+							</label>
+						</div>
+						{%endif%}
+					</div>
+					<div class="col-sm-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4"></div>
+					<div class="col-sm-4">
+						{% if 'Parecer Médico' in registro.last_status %}
+						<div class="form-check-inline" style="font-size: 83%" id="div_paciente_aguard_vaga">
+							<label class="form-check-label" id="">
+								<input type="radio" class="form-check-input" id="check_parecer_medico_id" name="status_paciente" value="Parecer Médico" onclick="activeListaEspera()" checked>Parecer Médico
+							</label>
+						</div>
+						{%else%}
+						<div class="form-check-inline" style="font-size: 83%">
+							<label class="form-check-label" id="">
+								<input type="radio" class="form-check-input" id="check_parecer_medico_id" name="status_paciente" value="Parecer Médico" onclick="activeListaEspera()">Parecer Médico
 							</label>
 						</div>
 						{%endif%}

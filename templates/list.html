@@ -262,7 +262,7 @@
    {% endif %}
 
    <span class="current">
-       {{regs.number}} de {{regs.paginator.num_pages}}
+       {{regs.number}} {% if regs %}de{%else%}{%endif%} {{regs.paginator.num_pages}}
    </span>
    {% if regs.has_next %}
    <a href="?page={{regs.next_page_number}}">Próximo</a>

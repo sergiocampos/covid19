@@ -755,6 +755,7 @@ def registro_covid_set(request):
 		o2_suporte = o2_suporte,
 		dose_cn = dose_cn,
 		dose_venturi = dose_venturi,
+		mascara_com_reservatorio = mascara_com_reservatorio,
 		vmi = vmi,
 		vt = vt,
 		delta_pressure = delta_pressure,
@@ -899,6 +900,11 @@ def regulacao(request, id):
 	senha = senha_new
 
 	codigo_sescovid = "SESCOVID" + str(senha_new)
+
+	senha_paciente = 0
+	if regulacao_paciente_last:
+		senha_paciente = regulacao_paciente_last.senha
+
 	
 
 	pa = registro.pa
@@ -986,7 +992,8 @@ def regulacao(request, id):
 			estabelecimento_solicitante_outro, 'cidade':cidade,
 			'estabelecimentos':estabelecimentos,
 			'municipio_estabelecimento_referencia':
-			municipio_estabelecimento_referencia, 'encoded':encoded})
+			municipio_estabelecimento_referencia, 'encoded':encoded, 
+			'senha_paciente':senha_paciente})
 	elif not registro.image_laudo_tc and not registro.image_laudo_rx and not registro.image_descricao_clinica:
 		return render(request, 'regulacao.html', {'registro' : registro, 
 			'codigo_sescovid':codigo_sescovid, 'senha':senha, 'pa_1':pa_1, 
@@ -1006,7 +1013,7 @@ def regulacao(request, id):
 			'estabelecimentos':estabelecimentos,
 			'municipio_estabelecimento_referencia':
 			municipio_estabelecimento_referencia, 'pad_1':pad_1, 'pad_2':pad_2, 
-			'pareceristas':pareceristas,})
+			'pareceristas':pareceristas, 'senha_paciente':senha_paciente})
 
 	elif not registro.image_laudo_rx:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
@@ -1024,7 +1031,8 @@ def regulacao(request, id):
 		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
 		estabelecimentos, 'municipio_estabelecimento_referencia':
 		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_tc':
-		img_tc, 'pad_1':pad_1, 'pad_2':pad_2, 'pareceristas':pareceristas,})
+		img_tc, 'pad_1':pad_1, 'pad_2':pad_2, 'pareceristas':pareceristas
+		, 'senha_paciente':senha_paciente})
 	elif not registro.image_laudo_tc:
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
 
@@ -1041,7 +1049,8 @@ def regulacao(request, id):
 		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
 		estabelecimentos, 'municipio_estabelecimento_referencia':
 		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_rx':img_rx,
-		 'pad_1':pad_1, 'pad_2':pad_2, 'pareceristas':pareceristas,})
+		 'pad_1':pad_1, 'pad_2':pad_2, 'pareceristas':pareceristas, 
+		 'senha_paciente':senha_paciente})
 	else:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
@@ -1060,7 +1069,7 @@ def regulacao(request, id):
 		estabelecimentos, 'municipio_estabelecimento_referencia':
 		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_tc':
 		img_tc, 'img_rx':img_rx, 'pad_1':pad_1, 'pad_2':pad_2, 
-		'pareceristas':pareceristas,})
+		'pareceristas':pareceristas, 'senha_paciente':senha_paciente})
 
 
 
@@ -1213,6 +1222,12 @@ def regulacao_set(request, id):
 		dose_venturi = None
 	else:
 		dose_venturi = float(dose_venturi_cap)
+
+	mascara_com_reservatorio_cap = request.POST.get('valor_mascara')
+	if mascara_com_reservatorio_cap == '' or mascara_com_reservatorio_cap == None:
+		mascara_com_reservatorio = None
+	else:
+		mascara_com_reservatorio = mascara_com_reservatorio_cap
 	
 
 	vmi = request.POST.getlist('vmi')
@@ -1618,6 +1633,7 @@ def regulacao_set(request, id):
 	registro.o2_suporte = o2_suporte
 	registro.dose_cn = dose_cn
 	registro.dose_venturi = dose_venturi
+	registro.mascara_com_reservatorio = mascara_com_reservatorio
 	registro.vmi = vmi
 	registro.vt = vt
 	registro.delta_pressure = delta_pressure
@@ -3193,7 +3209,7 @@ def paciente_atribuir_senha_set(request, id):
 	is_sindrome_gripal = request.POST.get('sindrome_gripal')
 	news_fast_pb = request.POST.get('new_fast')
 	news_modificado = request.POST.get('new_modificado')
-	uti = request.POST.get('uti')
+	uti = request.POST.getlist('uti')
 	leito = request.POST.get('perfil')
 
 	parecer_medico = request.POST.get('parecer')
@@ -3221,6 +3237,7 @@ def paciente_atribuir_senha_set(request, id):
 		estabelecimento_referencia_covid = estabelecimento_referencia
 
 
+	codigo_sescovid = ""
 	senha = 0
 	if last_status == 'Regulado':
 		#Regulações do paciente

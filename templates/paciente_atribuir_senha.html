@@ -560,6 +560,7 @@ function active_IgGIgM(){
 
 </script>
 
+
 <script>
 	Filevalidation = () => { 
 		const fi = document.getElementById('file_descricao_clinica_id'); 
@@ -2229,194 +2230,65 @@ function active_IgGIgM(){
 				</div>
 
 			</div>
-			{% if registro.igm != '' or registro.igm != None %}
+			{%else%}
+			<div class="col-sm-2" style="margin-left: -30px">
+
+				<div class="form-check-inline" style="width:">
+					<label class="form-check-label" for="">
+						<input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo">Positivo
+					</label>
+				</div>
+
+			</div>
+			{%endif%}
+			{% if registro.igm == '' or registro.igm == None %}
+			<div class="col-sm-1" id="igm_none_id" style="margin-left: -90px">
+				<div class="form-check-inline"><b>IgM:</b>
+					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+						<option value=""></option>
+						<option value="REAGENTE">REAGENTE</option>
+						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+					</select>
+				</div>
+			</div>
+			{%else%}
 			<div class="col-sm-1" id="" style="margin-left: -90px">
 				<div class="form-check-inline"><b>IgM:</b>
 					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
 						<option value="{{registro.igm}}" selected>{{registro.igm}}</option>
+						<option value=""></option>
 						<option value="REAGENTE">REAGENTE</option>
 						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
 					</select>
 				</div>
-			</div>
-			{%else%}
-			<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
-				<div class="form-check-inline"><b>IgM:</b>
-					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
-						<option value="REAGENTE">REAGENTE</option>
-						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
-					</select>
-				</div>
-			</div>
+			</div>			
 			{%endif%}
-			{% if registro.igg != '' or registro.igg != None %}
+			{% if registro.igg == '' or registro.igg == None %}
+			<div class="col-sm-5" id="igg_none_id" style="margin-left: 100px">
+				<div class="form-check-inline"><b>IgG:</b>
+					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
+						<option value=""></option>
+						<option value="REAGENTE">REAGENTE</option>
+						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
+					</select>
+				</div>
+				<div class="form-check-inline" style=""><b>Data:</b>
+					<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
+				</div>
+			</div>
+
+			{%else%}
 			<div class="col-sm-5" id="" style="margin-left: 100px">
 				<div class="form-check-inline"><b>IgG:</b>
 					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
 						<option value="{{registro.igg}}" selected>{{registro.igg}}</option>
+						<option value=""></option>
 						<option value="REAGENTE">REAGENTE</option>
 						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
 					</select>
 				</div>
 				<div class="form-check-inline" style=""><b>Data:</b>
-					<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg_bd" value="{{registro.data_igm_igg}}" style="width: 140px">						
-				</div>
-			</div>
-			{%else%}
-			<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
-				<div class="form-check-inline"><b>IgG:</b>
-					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
-						<option value="REAGENTE">REAGENTE</option>
-						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
-					</select>
-				</div>
-				<div class="form-check-inline" style=""><b>Data:</b>
-					<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
-				</div>
-			</div>
-			{%endif%}
-
-
-			{%elif registro.pesquisa_teste_sars_cov_2 == 'Negativo' %}
-			<div class="col-sm-2" style="margin-left: -30px">
-				<div class="form-check-inline" style="width:">
-					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" onclick="active_IgGIgM()">Positivo
-					</label>
-				</div>
-			</div>
-
-			<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
-				<div class="form-check-inline"><b>IgM:</b>
-					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
-						<option value="REAGENTE">REAGENTE</option>
-						<option value="NÃO REAGENTE">NÃO REAGENTE</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
-				<div class="form-check-inline"><b>IgG:</b>
-					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
-						<option value="REAGENTE">REAGENTE</option>
-						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
-					</select>
-				</div>
-				<div class="form-check-inline" style=""><b>Data:</b>
-					<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
-				</div>
-			</div>
-
-			<div class="col-sm-2" id="sars_negativo_id">
-				<div class="form-check-inline" style="width:">
-					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo" checked>Negativo
-					</label>
-				</div>
-
-			</div>
-
-			<div class="col-sm-4" id="sars_nao_realizado_id">
-				<div class="form-check-inline" style="width:">
-					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado">Não Realizado
-					</label>
-				</div>
-			</div>
-			{%elif registro.pesquisa_teste_sars_cov_2 == 'Não Realizado' %}
-			<div class="col-sm-2" style="margin-left: -30px">
-				<div class="form-check-inline" style="width:">
-					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" onclick="active_IgGIgM()">Positivo
-					</label>
-				</div>
-			</div>
-
-			<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
-				<div class="form-check-inline"><b>IgM:</b>
-					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
-						<option value="">selecione</option>
-						<option value="REAGENTE">REAGENTE</option>
-						<option value="NÃO REAGENTE">NÃO REAGENTE</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
-				<div class="form-check-inline"><b>IgG:</b>
-					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
-						<option value="">selecione</option>
-						<option value="REAGENTE">REAGENTE</option>
-						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
-					</select>
-				</div>
-				<div class="form-check-inline" style=""><b>Data:</b>
-					<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
-				</div>
-			</div>
-
-			<div class="col-sm-2" id="sars_negativo_id">
-				<div class="form-check-inline" style="width:">
-					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo">Negativo
-					</label>
-				</div>
-
-			</div>
-
-			<div class="col-sm-4" id="sars_nao_realizado_id">
-				<div class="form-check-inline" style="width:">
-					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado" checked>Não Realizado
-					</label>
-				</div>
-			</div>
-			{%else%}
-			<div class="col-sm-2" style="margin-left: -30px">
-				<div class="form-check-inline" style="width:">
-					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" onclick="active_IgGIgM()">Positivo
-					</label>
-				</div>
-			</div>
-
-			<div class="col-sm-1" id="sars_igg_id" style="margin-left: -90px">
-				<div class="form-check-inline"><b>IgM:</b>
-					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
-						<option value="">selecione</option>
-						<option value="REAGENTE">REAGENTE</option>
-						<option value="NÃO REAGENTE">NÃO REAGENTE</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="col-sm-5" id="sars_igm_id" style="margin-left: 100px">
-				<div class="form-check-inline"><b>IgG:</b>
-					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
-						<option value="">selecione</option>
-						<option value="REAGENTE">REAGENTE</option>
-						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
-					</select>
-				</div>
-				<div class="form-check-inline" style=""><b>Data:</b>
-					<input type="date" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg" value="" style="width: 140px">						
-				</div>
-			</div>
-
-			<div class="col-sm-2" id="sars_negativo_id">
-				<div class="form-check-inline" style="width:">
-					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="check_sars_negativo" name="pesquisa_sars_cov2" value="Negativo">Negativo
-					</label>
-				</div>
-
-			</div>
-
-			<div class="col-sm-4" id="sars_nao_realizado_id">
-				<div class="form-check-inline" style="width:">
-					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="check_sars_nao_realizado" name="pesquisa_sars_cov2" value="Não Realizado">Não Realizado
-					</label>
+					<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="data_igm_igg_bd" value="{{registro.data_igm_igg}}" style="width: 140px" required onkeypress="$(this).mask('00/00/0000')">						
 				</div>
 			</div>
 			{%endif%}
@@ -3566,133 +3438,134 @@ function active_IgGIgM(){
 						<div class="col-sm-3"></div>
 					</div>
 					<div class="row">
-						<div class="col-sm-3"></div>
-						<div class="col-sm-6">
-							{% if registro.uti == 'Insuficiência respiratória aguda com necessidade de ventilação mecânica' %}
-							<div class="form-check-inline" style="width: 110%">
-								<label class="form-check-label" for="">
-									<input type="checkbox" class="form-check-input" id="" name="uti" value="Insuficiência respiratória aguda com necessidade de ventilação mecânica" checked>Insuficiência respiratória aguda com necessidade de ventilação mecânica.
-								</label>
-							</div>
-							{%else%}
-							<div class="form-check-inline" style="width: 110%">
-								<label class="form-check-label" for="">
-									<input type="checkbox" class="form-check-input" id="" name="uti" value="Insuficiência respiratória aguda com necessidade de ventilação mecânica">Insuficiência respiratória aguda com necessidade de ventilação mecânica.
-								</label>
-							</div>
-							{%endif%}
+					<div class="col-sm-3"></div>
+					<div class="col-sm-6">
+						{% if 'Insuficiência respiratória aguda com necessidade de ventilação mecânica' in registro.uti %}
+						<div class="form-check-inline" style="width: 110%">
+							<label class="form-check-label" for="">
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Insuficiência respiratória aguda com necessidade de ventilação mecânica" checked>Insuficiência respiratória aguda com necessidade de ventilação mecânica.
+							</label>
 						</div>
-						<div class="col-sm-3"></div>
+						{%else%}
+						<div class="form-check-inline" style="width: 110%">
+							<label class="form-check-label" for="">
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Insuficiência respiratória aguda com necessidade de ventilação mecânica">Insuficiência respiratória aguda com necessidade de ventilação mecânica.
+							</label>
+						</div>
+						{%endif%}
 					</div>
-					<div class="row">
-						<div class="col-sm-3"></div>
-						<div class="col-sm-6">
-							{% if registro.uti == 'Sepse/Choque séptico e infecção pulmonar pelo COVID-19' %}
-							<div class="form-check-inline" style="width: 110%">
-								<label class="form-check-label" for="">
-									<input type="checkbox" class="form-check-input" id="" name="uti" value="Sepse/Choque séptico e infecção pulmonar pelo COVID-19" checked>Sepse/Choque séptico e infecção pulmonar pelo COVID-19.
-								</label>
-							</div>
-							{%else%}
-							<div class="form-check-inline" style="width: 110%">
-								<label class="form-check-label" for="">
-									<input type="checkbox" class="form-check-input" id="" name="uti" value="Sepse/Choque séptico e infecção pulmonar pelo COVID-19">Sepse/Choque séptico e infecção pulmonar pelo COVID-19.
-								</label>
-							</div>
-							{%endif%}
+					<div class="col-sm-3"></div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-6">
+						{% if 'Sepse/Choque séptico e infecção pulmonar pelo COVID-19' in registro.uti %}
+						<div class="form-check-inline" style="width: 110%">
+							<label class="form-check-label" for="">
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Sepse/Choque séptico e infecção pulmonar pelo COVID-19" checked>Sepse/Choque séptico e infecção pulmonar pelo COVID-19.
+							</label>
 						</div>
-						<div class="col-sm-3">
-
+						{%else%}
+						<div class="form-check-inline" style="width: 110%">
+							<label class="form-check-label" for="">
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Sepse/Choque séptico e infecção pulmonar pelo COVID-19">Sepse/Choque séptico e infecção pulmonar pelo COVID-19.
+							</label>
 						</div>
+						{%endif%}
+					</div>
+					<div class="col-sm-3">
 
 					</div>
-					<div class="row">
-						<div class="col-sm-3"></div>
-						<div class="col-sm-8">
-							{% if registro.uti == 'Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica' %}
-							<div class="form-check-inline" style="width: 110%">
-								<label class="form-check-label" for="">
-									<input type="checkbox" class="form-check-input" id="" name="uti" value="Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica" checked>Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
-								</label>
-							</div>
-							{%else%}
-							<div class="form-check-inline" style="width: 110%">
-								<label class="form-check-label" for="">
-									<input type="checkbox" class="form-check-input" id="" name="uti" value="Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica">Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
-								</label>
-							</div>
-							{%endif%}
-						</div>
-						<div class="col-sm-1">
 
+				</div>
+				<div class="row">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-8">
+						{% if 'Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica' in registro.uti %}
+						<div class="form-check-inline" style="width: 110%">
+							<label class="form-check-label" for="">
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica" checked>Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
+							</label>
 						</div>
+						{%else%}
+						<div class="form-check-inline" style="width: 110%">
+							<label class="form-check-label" for="">
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica">Instabilidade hemodinâmica ou hipotensão arterial ou sinais de má perfusão orgânica.
+							</label>
+						</div>
+						{%endif%}
 					</div>
-					<div class="row">
-						<div class="col-sm-3"></div>
-						<div class="col-sm-6">
-							{% if registro.uti == 'news modificado' %}
-							<div class="form-check-inline" style="width: 110%">
-								<label class="form-check-label" for="">
-									<input type="checkbox" class="form-check-input" id="" name="uti" value="news modificado" checked> NEWS modificado ≥ 7 pontos
-								</label>
-							</div>
-							{%else%}
-							<div class="form-check-inline" style="width: 110%">
-								<label class="form-check-label" for="">
-									<input type="checkbox" class="form-check-input" id="" name="uti" value="news modificado"> NEWS modificado ≥ 7 pontos
-								</label>
-							</div>
-							{%endif%}
-						</div>
-						<div class="col-sm-3">
-
-						</div>
+					<div class="col-sm-1">
 
 					</div>
-					<div class="row">
-						<div class="col-sm-3"></div>
-						<div class="col-sm-6">
-							{% if registro.uti == 'news fast' %}
-							<div class="form-check-inline" style="width: 110%">
-								<label class="form-check-label" for="">
-									<input type="checkbox" class="form-check-input" id="" name="uti" value="news fast" checked> NEWS-FAST ≥ 3 pontos
-								</label>
-							</div>
-							{%else%}
-							<div class="form-check-inline" style="width: 110%">
-								<label class="form-check-label" for="">
-									<input type="checkbox" class="form-check-input" id="" name="uti" value="news fast"> NEWS-FAST ≥ 3 pontos
-								</label>
-							</div>
-							{%endif%}
+				</div>
+				<div class="row">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-6">
+						{% if 'news modificado' in registro.uti %}
+						<div class="form-check-inline" style="width: 110%">
+							<label class="form-check-label" for="">
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="news modificado" checked> NEWS modificado ≥ 7 pontos
+							</label>
 						</div>
-						<div class="col-sm-3">
-
+						{%else%}
+						<div class="form-check-inline" style="width: 110%">
+							<label class="form-check-label" for="">
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="news modificado"> NEWS modificado ≥ 7 pontos
+							</label>
 						</div>
+						{%endif%}
+					</div>
+					<div class="col-sm-3">
 
 					</div>
-					<div class="row">
-						<div class="col-sm-3"></div>
-						<div class="col-sm-6">
-							{% if registro.uti == 'disfunção organica, alem do pulmonar' %}
-							<div class="form-check-inline" style="width: 110%">
-								<label class="form-check-label" for="">
-									<input type="checkbox" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar" checked> Disfunção orgânica, além do pulmonar
-								</label>
-							</div>
-							{%else%}
-							<div class="form-check-inline" style="width: 110%">
-								<label class="form-check-label" for="">
-									<input type="checkbox" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar"> Disfunção orgânica, além do pulmonar
-								</label>
-							</div>
-							{%endif%}
-						</div>
-						<div class="col-sm-3">
 
+				</div>
+				<div class="row">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-6">
+						{% if 'news fast' in registro.uti %}
+						<div class="form-check-inline" style="width: 110%">
+							<label class="form-check-label" for="">
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="news fast" checked> NEWS-FAST ≥ 3 pontos
+							</label>
 						</div>
+						{%else%}
+						<div class="form-check-inline" style="width: 110%">
+							<label class="form-check-label" for="">
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="news fast"> NEWS-FAST ≥ 3 pontos
+							</label>
+						</div>
+						{%endif%}
+					</div>
+					<div class="col-sm-3">
 
-					</div><br>
+					</div>
+
+				</div>
+				<div class="row">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-6">
+						{% if 'disfunção organica, alem do pulmonar' in registro.uti %}
+						<div class="form-check-inline" style="width: 110%">
+							<label class="form-check-label" for="">
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar" checked> Disfunção orgânica, além do pulmonar
+							</label>
+						</div>
+						{%else%}
+						<div class="form-check-inline" style="width: 110%">
+							<label class="form-check-label" for="">
+								<input type="checkbox" class="form-check-input" id="" name="uti" value="disfunção organica, alem do pulmonar"> Disfunção orgânica, além do pulmonar
+							</label>
+						</div>
+						{%endif%}
+					</div>
+					<div class="col-sm-3">
+
+					</div>
+
+				</div>
+					<br>
 					<div class="row">
 						<div class="col-sm-2"></div>
 						<div class="col-sm-2">
@@ -3821,12 +3694,12 @@ function active_IgGIgM(){
 			<div class="col-sm-5">
 				<b>Município do Estabelecimento de Referência:</b>
 				
-				<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{municipio_estabelecimento_referencia}}" />
+				<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{municipio_estabelecimento_referencia}}" / disabled>
 				
 
 			</div>
 			<div class="col-sm-2">
-					<button type="button" class="" style="align-items: center; border-radius: 5px; border: 2px solid #c2c2d6" id=""><a class="" href="/regulacao_search_estabelecimento/{{registro.id}}/">Escolher Cidade?</a></button>					
+					<button type="button" class="" style="align-items: center; border-radius: 5px; border: 2px solid #c2c2d6" id=""><a class="" href="/regulacao_search_estabelecimento/{{registro.id}}/">Escolher Cidade</a></button>					
 				</div>
 
 			<div class="col-sm-5" id="">
@@ -3873,7 +3746,7 @@ function active_IgGIgM(){
 					<div class="row" style="">
 						<div class="col-sm-4"></div>
 						<div class="col-sm-8" style="margin-top: 30px">
-							{% if 'Não Regulado' in status_list_descricao %}
+							{% if 'Não Preenche Critérios' in status_list_descricao %}
 							<div class="form-check-inline" style="font-size: 83%">
 								<label class="form-check-label" for="">
 									<input type="radio" autofocus="autofocus" class="form-check-input" id="check_paciente_nao_regulado_id" name="status_paciente" value="Não Preenche Critérios" onclick="activeStatusNaoRegulado()" checked>PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
@@ -4131,6 +4004,17 @@ function active_IgGIgM(){
 		<br /><br />
 		
 	</div>
+
+	<!-- Scrip abaixo bloqueia envio formulário com ENTER -->
+	<script>
+		$(document).ready(function () {
+	   $('input').keypress(function (e) {
+	        var code = null;
+	        code = (e.keyCode ? e.keyCode : e.which);                
+	        return (code == 13) ? false : true;
+	   });
+	});
+	</script>
 	
 </body>
 </html>

@@ -3711,5 +3711,16 @@ function activeDosePropofol_(){
 
 </div>
 
+<!-- Scrip abaixo bloqueia envio formulário com ENTER -->
+	<script>
+		$(document).ready(function () {
+	   $('input').keypress(function (e) {
+	        var code = null;
+	        code = (e.keyCode ? e.keyCode : e.which);                
+	        return (code == 13) ? false : true;
+	   });
+	});
+	</script>
+
 </body>
 </html>

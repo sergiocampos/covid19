@@ -19,8 +19,30 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
+
 	<script>
+		function activeInputIgmIgg(){
+			$("#igg_bd_id").prop("disabled", false);
+			$("#igm_bd_id").prop("disabled", false);
+			$("#igg__id").prop("disabled", false);
+			$("#igm__id").prop("disabled", false);
+			$("#data_exames_lab_id").prop("disabled", false);
+		}
 		function cleanIggIgm(){
+			$("#igg_bd_id").val("");
+			$("#igm_bd_id").val("");
+			$("#igg__id").val("");
+			$("#igm__id").val("");
+			$("#data_exames_lab_id").val("");
+
+			$("#igg_bd_id").prop("disabled", true);
+			$("#igm_bd_id").prop("disabled", true);
+			$("#igg__id").prop("disabled", true);
+			$("#igm__id").prop("disabled", true);
+			$("#data_exames_lab_id").prop("disabled", true);
+
+
+
 			$("#igm_none_id").val("");
 			$("#igg_none_id").val("");
 		}
@@ -586,7 +608,7 @@ function activeValorMascara__(){
 		$("#mascara___id").val("");
 		$("#mascara___id").prop("disabled", true);
 	}
-	if (document.getElementById("check_mascara_id_").checked == true){
+	if (document.getElementById("check_mascara_id__").checked == true){
 		$("#mascara___id").prop("disabled", false);
 	}
 }
@@ -1455,7 +1477,7 @@ function activeValorMascara__(){
 				{% if 'Uso de imunobiológicos' in registro.comorbidades %}
 				<div class="form-check-inline" style="width: 140%">
 					<label class="form-check-label">
-						<input type="checkbox" class="form-check-input" name="comorbidades" value="Uso de imunobiológicos" id="">Uso de imunobiológicos;
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Uso de imunobiológicos" id="" checked>Uso de imunobiológicos;
 					</label>
 				</div>
 				{%else%}
@@ -2256,7 +2278,7 @@ function activeValorMascara__(){
 
 				<div class="form-check-inline" style="width:">
 					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" checked>Positivo
+						<input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" checked onclick="activeInputIgmIgg()">Positivo
 					</label>
 				</div>
 
@@ -2266,7 +2288,7 @@ function activeValorMascara__(){
 
 				<div class="form-check-inline" style="width:">
 					<label class="form-check-label" for="">
-						<input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo">Positivo
+						<input type="radio" class="form-check-input" id="" name="pesquisa_sars_cov2" value="Positivo" onclick="activeInputIgmIgg()">Positivo
 					</label>
 				</div>
 
@@ -2275,7 +2297,7 @@ function activeValorMascara__(){
 			{% if registro.igm == '' or registro.igm == None %}
 			<div class="col-sm-1" id="igm_none_id" style="margin-left: -90px">
 				<div class="form-check-inline"><b>IgM:</b>
-					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+					<select name="igm" id="igm__id" class="form-control form-control-sm" style="width: auto">
 						<option value=""></option>
 						<option value="REAGENTE">REAGENTE</option>
 						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
@@ -2285,7 +2307,7 @@ function activeValorMascara__(){
 			{%else%}
 			<div class="col-sm-1" id="" style="margin-left: -90px">
 				<div class="form-check-inline"><b>IgM:</b>
-					<select name="igm" id="" class="form-control form-control-sm" style="width: auto">
+					<select name="igm" id="igm_bd_id" class="form-control form-control-sm" style="width: auto">
 						<option value="{{registro.igm}}" selected>{{registro.igm}}</option>
 						<option value=""></option>
 						<option value="REAGENTE">REAGENTE</option>
@@ -2297,7 +2319,7 @@ function activeValorMascara__(){
 			{% if registro.igg == '' or registro.igg == None %}
 			<div class="col-sm-5" id="igg_none_id" style="margin-left: 100px">
 				<div class="form-check-inline"><b>IgG:</b>
-					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
+					<select name="igg" id="igg__id" class="form-control form-control-sm" style="width: auto">
 						<option value=""></option>
 						<option value="REAGENTE">REAGENTE</option>
 						<option value="NÃO REAGENTE">NÃO REAGENTE</option>           
@@ -2311,7 +2333,7 @@ function activeValorMascara__(){
 			{%else%}
 			<div class="col-sm-5" id="" style="margin-left: 100px">
 				<div class="form-check-inline"><b>IgG:</b>
-					<select name="igg" id="" class="form-control form-control-sm" style="width: auto">
+					<select name="igg" id="igg_bd_id" class="form-control form-control-sm" style="width: auto">
 						<option value="{{registro.igg}}" selected>{{registro.igg}}</option>
 						<option value=""></option>
 						<option value="REAGENTE">REAGENTE</option>
@@ -2470,18 +2492,18 @@ function activeValorMascara__(){
 				</div>
 				{%endif%}
 			</div>
-			<div class="col-sm-3" style="">
+			<div class="col-sm-4" style="">
 				<div class="form-check-inline" style="">
 					Data de Início:
 					{% if registro.data_inicio_corticosteroide == '' or registro.data_inicio_corticosteroide == None %}
-					<input type="date" class="form-control form-control-sm" id="data_inicio_corticosteroide_id" name="data_inicio_corticosteroide" value="" disabled style="width: 110px">
+					<input type="date" class="form-control form-control-sm" id="data_inicio_corticosteroide_id" name="data_inicio_corticosteroide" value="" style="width: 140px">
 
 					{%else%}
 					<input type="text" class="" id="data_inicio_corticosteroide_id" name="data_inicio_corticosteroide_bd" value="{{registro.data_inicio_corticosteroide}}" style="width: 110px">
 					{%endif%}
 				</div>
 			</div>
-			<div class="col-sm-1">
+			<div class="col-sm-1" style="">
 				{% if registro.em_uso_corticosteroide == 'Não' %}
 				<div class="form-check-inline" style="width: 110%">
 					<label class="form-check-label" for="">
@@ -2489,7 +2511,7 @@ function activeValorMascara__(){
 					</label>
 				</div>
 				{%else%}
-				<div class="form-check-inline" style="width: 110%">
+				<div class="form-check-inline" style="">
 					<label class="form-check-label" for="">
 						<input type="radio" class="form-check-input" id="" name="em_uso_corticosteroide" value="Não" onclick="desactiveDoseCorticosteroide()">Não
 					</label>
@@ -3785,7 +3807,7 @@ function activeValorMascara__(){
 
 				</div>
 				<div class="col-sm-2">
-					<button type="button" class="" style="align-items: center; border-radius: 5px; border: 2px solid #c2c2d6" id=""><a class="" href="/regulacao_search_estabelecimento/{{registro.id}}/">Alterar Cidade?</a></button>					
+					<button type="button" class="" style="align-items: center; border-radius: 5px; border: 2px solid #c2c2d6" id=""><a class="" href="/regulacao_search_estabelecimento/{{registro.id}}/">Escolher Cidade</a></button>					
 				</div>
 
 				<div class="col-sm-5" id="">
@@ -3820,15 +3842,15 @@ function activeValorMascara__(){
 					</div>
 					<div class="col-sm-1"></div>
 					<div class="col-sm-5" style="margin-top: 30px">
-						<div class="form-check-inline" style="font-size: 83%; width: 100%" id="senha_id">
-							<input type="text" min="0" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="{{codigo_sescovid}}">
+						<div class="form-check-inline" style="font-size: 83%; width: 100%" id="">SESCOVID
+							<input type="number" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="{{senha_paciente}}" disabled>
 						</div>
 					</div>
 				</div>
 				<div class="row" style="">
 					<div class="col-sm-4"></div>
 					<div class="col-sm-8" style="margin-top: 30px">
-						{% if 'Não Regulado' in status_list_descricao %}
+						{% if 'Não Preenche Critérios' in status_list_descricao %}
 						<div class="form-check-inline" style="font-size: 83%">
 							<label class="form-check-label" for="">
 								<input type="radio" class="form-check-input" id="check_paciente_nao_regulado_id" name="status_paciente" value="Não Preenche Critérios" onclick="activeStatusNaoRegulado()" checked>PACIENTE NÃO PREENCHE CRITÉRIOS PARA REGULAÇÃO
@@ -3894,6 +3916,7 @@ function activeValorMascara__(){
 				<div class="row">
 					<div class="col-sm-4"></div>
 					<div class="col-sm-4" style="background-color: ">
+						{% if senha_paciente == 0 %}
 						{% if 'Regulado' in status_list_descricao %}
 						<div class="form-check-inline" style="font-size: 83%" id="div_paciente_regulado">
 							<label class="form-check-label" for="">
@@ -3904,6 +3927,13 @@ function activeValorMascara__(){
 						<div class="form-check-inline" style="font-size: 83%">
 							<label class="form-check-label" for="">
 								<input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="status_paciente" value="Regulado" onclick="activeStatusAguardVaga()">PACIENTE REGULADO
+							</label>
+						</div>
+						{%endif%}
+						{%else%}
+						<div class="form-check-inline" style="font-size: 83%">
+							<label class="form-check-label" for="">
+								<input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="status_paciente" value="Regulado" onclick="activeStatusAguardVaga()" disabled>PACIENTE REGULADO
 							</label>
 						</div>
 						{%endif%}
@@ -3944,6 +3974,26 @@ function activeValorMascara__(){
 						<div class="form-check-inline" style="font-size: 83%">
 							<label class="form-check-label" id="">
 								<input type="radio" class="form-check-input" id="check_a_c_vaga_id" name="status_paciente" value="Aguardando confirmação de Vaga" onclick="activeListaEspera()">Aguardando confirmação de Vaga
+							</label>
+						</div>
+						{%endif%}
+					</div>
+					<div class="col-sm-4"></div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-4"></div>
+					<div class="col-sm-4">
+						{% if 'Parecer Médico' in status_list_descricao %}
+						<div class="form-check-inline" style="font-size: 83%" id="div_paciente_aguard_vaga">
+							<label class="form-check-label" id="">
+								<input type="radio" class="form-check-input" id="check_parecer_medico_id" name="status_paciente" value="Parecer Médico" onclick="activeListaEspera()" checked>Parecer Médico
+							</label>
+						</div>
+						{%else%}
+						<div class="form-check-inline" style="font-size: 83%">
+							<label class="form-check-label" id="">
+								<input type="radio" class="form-check-input" id="check_parecer_medico_id" name="status_paciente" value="Parecer Médico" onclick="activeListaEspera()">Parecer Médico
 							</label>
 						</div>
 						{%endif%}
@@ -4086,6 +4136,16 @@ function activeValorMascara__(){
 	<br /><br />
 
 </div>
+<!-- Scrip abaixo bloqueia envio formulário com ENTER -->
+	<script>
+		$(document).ready(function () {
+	   $('input').keypress(function (e) {
+	        var code = null;
+	        code = (e.keyCode ? e.keyCode : e.which);                
+	        return (code == 13) ? false : true;
+	   });
+	});
+	</script>
 
 </body>
 </html>

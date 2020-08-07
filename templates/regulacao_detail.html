@@ -459,7 +459,7 @@
 				<div class="col-sm-12">
 					Tempo de início de quadro sintomático:
 					<div class="form-check-inline">
-						<input type="number" class="form-control form-control-sm" id="" placeholder="" name="tempo_inicio_sintomas" value="{{registro.tempo_quadro_sintomatico}}" min="1" max="200">
+						<input type="number" class="form-control form-control-sm" id="" placeholder="" name="tempo_inicio_sintomas" value="{{registro.tempo_quadro_sintomatico}}">
 					</div>
 					dias.
 				</div>
@@ -486,7 +486,7 @@
 					</div>
 					<div class="form-check-inline">
 						<label class="form-check-label">
-							<input type="radio" class="form-check-input" name="exposicao_epidemiologica_sim" value="Não">Não
+							<input type="radio" class="form-check-input" name="exposicao_epidemiologica_sim" value="Não" checked>Não
 						</label>
 					</div>
 					{%else%}
@@ -508,15 +508,11 @@
 					Grau de parentesco:
 					<div class="form-check-inline">
 						<select name="grau_parentesco" id="" class="form-control form-control-sm" style="width: auto">
+							{% if registro.parentesco == '' or registro.parentesco == None %}
+							<option value=""></option>
+							{% else %}
 							<option value="{{registro.parentesco}}" selected>{{registro.parentesco}}</option>
-							<option value="Mãe">Mãe</option>
-							<option value="Pai">Pai</option>
-							<option value="Irmão">Irmão(a)</option>
-							<option value="Tio">Tio(a)</option>
-							<option value="Cunhado">Cunhado</option>
-							<option value="Avó">Avó</option>
-							<option value="Avô">Avô</option>
-							<option value="Primo">Primo</option>
+							{%endif%}
 
 						</select>
 					</div>
@@ -1876,6 +1872,7 @@
 
 			<div class="row">
 				<div class="col-sm-5" style="">
+					{% if registro.escala_pontos_glasgow == '' or registro.escala_pontos_glasgow == None %}
 					<div class="form-check-inline" style="width:">
 						<label class="form-check-label" for="">
 							<input type="checkbox" class="form-check-input" id="check_escala_glasgow" name="" value="" onclick="activeValorGlasgow()">Escala de Coma de Glasgow
@@ -1886,6 +1883,18 @@
 						<div class="invalid-feedback"></div>
 						<label for="">pontos</label>
 					</div>
+					{%else%}
+					<div class="form-check-inline" style="width:">
+						<label class="form-check-label" for="">
+							<input type="checkbox" class="form-check-input" id="check_escala_glasgow" name="" value="" onclick="activeValorGlasgow()" checked>Escala de Coma de Glasgow
+						</label>
+					</div>
+					<div class="form-check-inline" style="">
+						<input type="number" size="2" class="form-control form-control-sm" id="escala_glasgow_id" step="" min="0" max="100" name="escala_glasgow" style="width: 100px" disabled value="{{registro.escala_pontos_glasgow}}">
+						<div class="invalid-feedback"></div>
+						<label for="">pontos</label>
+					</div>
+					{%endif%}
 				</div>
 				<div class="col-sm-3" style="">
 					

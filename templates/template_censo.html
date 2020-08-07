@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <title>Censo Hospitalar</title>
   
 
   <style>
@@ -115,7 +116,7 @@
      <p>GOVERNO DO ESTADO DA PARAÍBA</p>
      <p>SECRETARIA DE ESTADO DA SAÚDE</p>
      <p></p>
-     <p><h7><b>Registro de Casos - Perfil {{user.first_name}} - Usuário: <i>{{user}}</i></b></h7></p>
+     <p><h7><b>Censo Hospitalar - Perfil {{user.first_name}} - Usuário: <i>{{user}}</i></b></h7></p>
    </div>
  </div>
  <div class="col-sm-4" style="background-color:;">
@@ -130,48 +131,1365 @@
 <div class="singleinfostabs">
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+    {% for r in n %}
+    <li><a data-toggle="tab" href="/teste/{{r.id}}/">{{r.id}}</a></li>
+    {% endfor %}
+    
   </ul>
 </div>
 
 
-  <div class="tab-content">
+  <div class="tab-content" style="background-color: ">
     <div id="home" class="tab-pane fade in active">
-      <h3>HOME</h3>
-      <p>Sérgio Campos,....Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <h3></h3>
+      <p></p>
     </div>
-    <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    {% for r in n %}
+    <div id="{{r.id}}" class="tab-pane fade">
+      <h3>{{r.data_notificacao}}</h3>
+      <p>{{r.descricao}}.</p>
     </div>
-    <div id="menu2" class="tab-pane fade">
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-    </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-    </div>
+    {% endfor %}
+
+    <form enctype="multipart/form-data" action="submit" method="POST">
+      <div class="row" style="background-color: ;">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"><b><h4>PLANTÃO DIURNO</h4></b></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"><b><h4>DATA:</h4></b></div>
+        <div class="col-sm-2"></div>
+      </div>
+      <hr>
+
+      <div class="row">
+      
+        <div class="col-sm-4" style="margin-left: 20px"><b>UNIDADES HOSPITALARES</b></div>
+        <div class="col-sm-3" style="margin-left: -20px"><b>IMPLANTAÇÃO - REAL</b></div>
+        <div class="col-sm-3"><b>DISPONIBILIDADE</b></div>
+        <div class="col-sm-2"><b>ENVIADAS</b></div>
+      </div>
+      <div class="row" style="background-color:">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px"><b>UTI´s Implantadas</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:"><b>Leitos em Enfermarias implantados</b></div>
+        <div class="col-sm-1" style="font-size: 80%"><b>UTI´s</b></div>
+        <div class="col-sm-1" style="font-size: 80%"><b>Enfermaria</b></div>
+        <div class="col-sm-1" style="font-size: 80%"><b>UTI´s</b></div>
+        <div class="col-sm-1" style="font-size: 80%"><b>Enfermaria</b></div>
+      </div>
+     
+      <div class="row">
+        <div class="col-sm-12" style="background-color: ; height: 10px"></div>
+      </div>
+      
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #ffe6cc">
+        <div class="col-sm-5"></div>
+        <div class="col-sm-4"><h4><b>1ª MACRO</b></h4></div>
+        <div class="col-sm-3"></div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>Municipais</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="30" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="70" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Valentina (SMS - JPA)</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="10" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="30" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Santa Isabel (SMS - JPA)</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="30" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="10" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Prontovida (SMS -JPA)</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="5" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="20" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <br>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>Estaduais</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="30" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="70" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Clementino Fraga</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="15" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="16" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Metropolitano</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="20" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="31" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Solidário - anexo ao Metropolitano</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Santa Paula</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Maternidade Frei Damião</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="6" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="16/12" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <br>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>Federal</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="7" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="11" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Univ. Lauro Wanderley </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="10" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="10" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <br>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>TOTAL DA 1ª MACRO</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="7" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="11" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <br>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #ffe6cc">
+        <div class="col-sm-5"></div>
+        <div class="col-sm-4"><h4><b>2ª MACRO</b></h4></div>
+        <div class="col-sm-3"></div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>Municipais</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="26" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="130" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Pedro I (SMS - CG)</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="30" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="66" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital da Criança e do Adolescente (SMS -CG)</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="10" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="64" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4" style="font-size: 90%">Hospital de Campanha (SMS - CG) - Anexo do Pedro I</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Isea</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="6" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="6" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <br>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>Estaduais</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital de Trauma D. Luiz Gonzaga</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital das Clínicas </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <br>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>TOTAL DA 2ª MACRO</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <br>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #ffe6cc">
+        <div class="col-sm-5"></div>
+        <div class="col-sm-4"><h4><b>3ª MACRO</b></h4></div>
+        <div class="col-sm-3"></div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>Estaduais</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="29" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="51" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Infantil Noaldo Leite - Patos</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="6" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="7" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Regional Jandhuy Carneiro - Patos</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="10" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="12" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Regional de Cajazeiras</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="6" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="8" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Regional Dep. Rui Carneiro - Pombal</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="4" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="12" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Regional de Wenceslau Lopes - Piancó</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="8" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="15" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <br>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>TOTAL DA 3ª MACRO</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+
+    </form>
+    <hr>
+    
+    <!-- Form para plantão noturno -->
+
+    <form enctype="multipart/form-data" action="submit" method="POST">
+      <div class="row" style="background-color: ;">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"><b><h4>PLANTÃO NOTURNO</h4></b></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"><b><h4>DATA:</h4></b></div>
+        <div class="col-sm-2"></div>
+      </div>
+      <hr>
+
+      <div class="row">
+      
+        <div class="col-sm-4" style="margin-left: 20px"><b>UNIDADES HOSPITALARES</b></div>
+        <div class="col-sm-3" style="margin-left: -20px"><b>IMPLANTAÇÃO - REAL</b></div>
+        <div class="col-sm-3"><b>DISPONIBILIDADE</b></div>
+        <div class="col-sm-2"><b>ENVIADAS</b></div>
+      </div>
+      <div class="row" style="background-color:">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px"><b>UTI´s Implantadas</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:"><b>Leitos em Enfermarias implantados</b></div>
+        <div class="col-sm-1" style="font-size: 80%"><b>UTI´s</b></div>
+        <div class="col-sm-1" style="font-size: 80%"><b>Enfermaria</b></div>
+        <div class="col-sm-1" style="font-size: 80%"><b>UTI´s</b></div>
+        <div class="col-sm-1" style="font-size: 80%"><b>Enfermaria</b></div>
+      </div>
+     
+      <div class="row">
+        <div class="col-sm-12" style="background-color: ; height: 10px"></div>
+      </div>
+      
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #ffe6cc">
+        <div class="col-sm-5"></div>
+        <div class="col-sm-4"><h4><b>1ª MACRO</b></h4></div>
+        <div class="col-sm-3"></div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>Municipais</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="30" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="70" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Valentina (SMS - JPA)</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="10" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="30" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Santa Isabel (SMS - JPA)</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="30" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="10" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Prontovida (SMS -JPA)</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="5" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="20" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <br>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>Estaduais</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="30" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="70" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Clementino Fraga</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="15" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="16" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Metropolitano</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="20" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="31" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Solidário - anexo ao Metropolitano</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Santa Paula</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Maternidade Frei Damião</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="6" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="16/12" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <br>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>Federal</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="7" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="11" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Univ. Lauro Wanderley </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="10" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="10" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <br>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>TOTAL DA 1ª MACRO</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="7" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="11" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <br>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #ffe6cc">
+        <div class="col-sm-5"></div>
+        <div class="col-sm-4"><h4><b>2ª MACRO</b></h4></div>
+        <div class="col-sm-3"></div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>Municipais</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="26" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="130" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Pedro I (SMS - CG)</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="30" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="66" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital da Criança e do Adolescente (SMS -CG)</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="10" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="64" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4" style="font-size: 90%">Hospital de Campanha (SMS - CG) - Anexo do Pedro I</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Isea</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="6" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="6" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <br>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>Estaduais</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital de Trauma D. Luiz Gonzaga</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital das Clínicas </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <br>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>TOTAL DA 2ª MACRO</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <br>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #ffe6cc">
+        <div class="col-sm-5"></div>
+        <div class="col-sm-4"><h4><b>3ª MACRO</b></h4></div>
+        <div class="col-sm-3"></div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>Estaduais</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="29" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="51" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Infantil Noaldo Leite - Patos</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="6" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="7" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Regional Jandhuy Carneiro - Patos</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="10" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="12" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Regional de Cajazeiras</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="6" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="8" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Regional Dep. Rui Carneiro - Pombal</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="4" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="12" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
+        <div class="col-sm-4">Hospital Regional de Wenceslau Lopes - Piancó</div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="8" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="15" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+      <br>
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
+        <div class="col-sm-4"><b>TOTAL DA 3ª MACRO</b></div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-2" style="font-size: 80%; margin-left:">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+        <div class="col-sm-1" style="font-size: 80%">
+          <input type="text" name="" value="" style="width: 80%; text-align: center">
+        </div>
+      </div>
+
+    </form>
+    <!-- Fim Form para plantão noturno -->
+    
+    
   </div>
 
 <div style="height: 50px"></div>

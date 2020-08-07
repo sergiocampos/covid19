@@ -2727,6 +2727,7 @@ function activeValorMascara__(){
 
 		<div class="row">
 			<div class="col-sm-5" style="">
+				{% if registro.escala_pontos_glasgow == '' or registro.escala_pontos_glasgow == None %}
 				<div class="form-check-inline" style="width:">
 					<label class="form-check-label" for="">
 						<input type="checkbox" class="form-check-input" id="check_escala_glasgow" name="" value="" onclick="activeValorGlasgow()">Escala de Coma de Glasgow
@@ -2737,6 +2738,18 @@ function activeValorMascara__(){
 					<div class="invalid-feedback"></div>
 					<label for="">pontos</label>
 				</div>
+				{%else%}
+				<div class="form-check-inline" style="width:">
+					<label class="form-check-label" for="">
+						<input type="checkbox" class="form-check-input" id="check_escala_glasgow" name="" value="" onclick="activeValorGlasgow()" checked>Escala de Coma de Glasgow
+					</label>
+				</div>
+				<div class="form-check-inline" style="">
+					<input type="number" size="2" class="form-control form-control-sm" id="escala_glasgow_id" step="" min="0" max="100" name="escala_glasgow" style="width: 100px" value="{{registro.escala_pontos_glasgow}}">
+					<div class="invalid-feedback"></div>
+					<label for="">pontos</label>
+				</div>
+				{%endif%}
 			</div>
 			<div class="col-sm-3" style="">
 

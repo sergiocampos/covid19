@@ -3433,6 +3433,6 @@ def paciente_atribuir_senha_set(request, id):
 
 @login_required
 def template_censo(request):
-	n = RegistroCovid.objects.all()
+	n = Status.objects.all()
 
 	return render(request, 'template_censo.html', {'n':n})

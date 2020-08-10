@@ -56,6 +56,163 @@
 }
 </style>
 
+<script>
+  $(document).ready(function(){
+    var valentina = parseInt($('#qtdHospValentImplantadas').val()) || 0;
+    var santaIsabel = parseInt($('#qtdHospSantIsabelImplantadas').val()) || 0;
+    var prontovida = parseInt($('#qtdHospProntovidaImplantadas').val()) || 0;
+
+    var totalMunicipalImplantadasDX = valentina + santaIsabel + prontovida;
+
+    $('#totalMunicipalImplantadas').val(totalMunicipalImplantadasDX);
+
+    var clementino = parseInt($('#totalClementinoImplantadas').val()) || 0;
+    var metropolitano = parseInt($('#totalMetropolitanoImplantadas').val()) || 0;
+    var solidario = parseInt($('#totalHospSolidarioImplantadas').val()) || 0;
+    var santapaula = parseInt($('#totalSantaPaulaImplantadas').val()) || 0;
+    var freidamiao = parseInt($('#totalFreiDamiaoImplantadas').val()) || 0;
+
+    var totalEstadualImplantadasDX = clementino + metropolitano + solidario + santapaula + freidamiao;
+
+    $('#totalEstadualImplantadas').val(totalEstadualImplantadasDX);
+
+    var hu = parseInt($('#totalLauroWanderley').val()) || 0;
+
+    var totalFederalImplantadosDX = hu;
+
+    $('#totalFederalImplantadas').val(totalFederalImplantadosDX);
+
+  });
+</script>
+
+<script>
+
+  $(document).ready(function() {
+  $("#qtdHospValentImplantadas,#qtdHospSantIsabelImplantadas,#qtdHospProntovidaImplantadas").on('keyup', function() {
+
+    var valentina = parseInt($('#qtdHospValentImplantadas').val()) || 0;
+    var santaIsabel = parseInt($('#qtdHospSantIsabelImplantadas').val()) || 0;
+    var prontovida = parseInt($('#qtdHospProntovidaImplantadas').val()) || 0;
+
+    var totalMunicipalImplantadasDX = valentina + santaIsabel + prontovida;
+
+    $('#totalMunicipalImplantadas').val(totalMunicipalImplantadasDX);
+  });
+
+  $("#totalClementinoImplantadas,#totalMetropolitanoImplantadas,#totalHospSolidarioImplantadas,#totalSantaPaulaImplantadas,#totalFreiDamiaoImplantadas").on('keyup', function() {
+
+    var clementino = parseInt($('#totalClementinoImplantadas').val()) || 0;
+    var metropolitano = parseInt($('#totalMetropolitanoImplantadas').val()) || 0;
+    var solidario = parseInt($('#totalHospSolidarioImplantadas').val()) || 0;
+    var santapaula = parseInt($('#totalSantaPaulaImplantadas').val()) || 0;
+    var freidamiao = parseInt($('#totalFreiDamiaoImplantadas').val()) || 0;
+
+    var totalEstadualImplantadasDX = clementino + metropolitano + solidario + santapaula + freidamiao;
+
+    $('#totalEstadualImplantadas').val(totalEstadualImplantadasDX);
+  });
+
+  $("#totalLauroWanderley").on('keyup', function() {
+
+    var hu = parseInt($('#totalLauroWanderley').val()) || 0;
+
+    var totalFederalImplantadosDX = hu;
+
+    $('#totalFederalImplantadas').val(totalFederalImplantadosDX);
+  });
+
+  $("#totalLauroWanderley,#totalClementinoImplantadas,#totalMetropolitanoImplantadas,#totalHospSolidarioImplantadas,#totalSantaPaulaImplantadas,#totalFreiDamiaoImplantadas,#qtdHospValentImplantadas,#qtdHospSantIsabelImplantadas,#qtdHospProntovidaImplantadas").on('keyup', function() {
+
+    var hu = parseInt($('#totalLauroWanderley').val()) || 0;
+
+    var clementino = parseInt($('#totalClementinoImplantadas').val()) || 0;
+    var metropolitano = parseInt($('#totalMetropolitanoImplantadas').val()) || 0;
+    var solidario = parseInt($('#totalHospSolidarioImplantadas').val()) || 0;
+    var santapaula = parseInt($('#totalSantaPaulaImplantadas').val()) || 0;
+    var freidamiao = parseInt($('#totalFreiDamiaoImplantadas').val()) || 0;
+
+    var valentina = parseInt($('#qtdHospValentImplantadas').val()) || 0;
+    var santaIsabel = parseInt($('#qtdHospSantIsabelImplantadas').val()) || 0;
+    var prontovida = parseInt($('#qtdHospProntovidaImplantadas').val()) || 0;
+
+    var totalImplantadosDX = hu + clementino + metropolitano + solidario + santapaula + freidamiao + valentina + santaIsabel + prontovida;
+
+    $('#totalImplantadas').val(totalImplantadosDX);
+  });
+
+});
+</script>
+
+<script>
+  $(document).ready(function() {
+    var valentina_l = parseInt($('#qtdHospValentLeitosImplantados').val()) || 0;
+    var santaIsabel_l = parseInt($('#qtdHospSantIsabelLeitosImplantadas').val()) || 0;
+    var prontovida_l = parseInt($('#qtdHospProntovidaLeitosImplantados').val()) || 0;
+
+    var totalMunicipalLeitosImplantadasDX = valentina_l + santaIsabel_l + prontovida_l;
+
+    $('#totalMunicipalLeitosImplantadas').val(totalMunicipalLeitosImplantadasDX);
+
+  });
+
+
+  $(document).ready(function() {
+  $("#qtdHospValentLeitosImplantados,#qtdHospSantIsabelLeitosImplantadas,#qtdHospProntovidaLeitosImplantados").on('keyup', function() {
+
+
+    var valentina_l = parseInt($('#qtdHospValentLeitosImplantados').val()) || 0;
+    var santaIsabel_l = parseInt($('#qtdHospSantIsabelLeitosImplantadas').val()) || 0;
+    var prontovida_l = parseInt($('#qtdHospProntovidaLeitosImplantados').val()) || 0;
+
+    var totalMunicipalLeitosImplantadasDX = valentina_l + santaIsabel_l + prontovida_l;
+
+    $('#totalMunicipalLeitosImplantadas').val(totalMunicipalLeitosImplantadasDX);
+  });
+
+  $("#totalClementinoImplantadas,#totalMetropolitanoImplantadas,#totalHospSolidarioImplantadas,#totalSantaPaulaImplantadas,#totalFreiDamiaoImplantadas").on('keyup', function() {
+
+    var clementino = parseInt($('#totalClementinoImplantadas').val()) || 0;
+    var metropolitano = parseInt($('#totalMetropolitanoImplantadas').val()) || 0;
+    var solidario = parseInt($('#totalHospSolidarioImplantadas').val()) || 0;
+    var santapaula = parseInt($('#totalSantaPaulaImplantadas').val()) || 0;
+    var freidamiao = parseInt($('#totalFreiDamiaoImplantadas').val()) || 0;
+
+    var totalEstadualImplantadasDX = clementino + metropolitano + solidario + santapaula + freidamiao;
+
+    $('#totalEstadualImplantadas').val(totalEstadualImplantadasDX);
+  });
+
+  $("#totalLauroWanderley").on('keyup', function() {
+
+    var hu = parseInt($('#totalLauroWanderley').val()) || 0;
+
+    var totalFederalImplantadosDX = hu;
+
+    $('#totalFederalImplantadas').val(totalFederalImplantadosDX);
+  });
+
+  $("#totalLauroWanderley,#totalClementinoImplantadas,#totalMetropolitanoImplantadas,#totalHospSolidarioImplantadas,#totalSantaPaulaImplantadas,#totalFreiDamiaoImplantadas,#qtdHospValentImplantadas,#qtdHospSantIsabelImplantadas,#qtdHospProntovidaImplantadas").on('keyup', function() {
+
+    var hu = parseInt($('#totalLauroWanderley').val()) || 0;
+
+    var clementino = parseInt($('#totalClementinoImplantadas').val()) || 0;
+    var metropolitano = parseInt($('#totalMetropolitanoImplantadas').val()) || 0;
+    var solidario = parseInt($('#totalHospSolidarioImplantadas').val()) || 0;
+    var santapaula = parseInt($('#totalSantaPaulaImplantadas').val()) || 0;
+    var freidamiao = parseInt($('#totalFreiDamiaoImplantadas').val()) || 0;
+
+    var valentina = parseInt($('#qtdHospValentImplantadas').val()) || 0;
+    var santaIsabel = parseInt($('#qtdHospSantIsabelImplantadas').val()) || 0;
+    var prontovida = parseInt($('#qtdHospProntovidaImplantadas').val()) || 0;
+
+    var totalImplantadosDX = hu + clementino + metropolitano + solidario + santapaula + freidamiao + valentina + santaIsabel + prontovida;
+
+    $('#totalImplantadas').val(totalImplantadosDX);
+  });
+
+});
+</script>
+
 </head>
 <body>
 <div class="jumbotron">
@@ -165,11 +322,11 @@
       <div class="row">
       
         <div class="col-sm-4" style="margin-left: 20px"><b>UNIDADES HOSPITALARES</b></div>
-        <div class="col-sm-3" style="margin-left: -20px"><b>IMPLANTAÇÃO - REAL</b></div>
-        <div class="col-sm-3"><b>DISPONIBILIDADE</b></div>
-        <div class="col-sm-2"><b>ENVIADAS</b></div>
+        <div class="col-sm-3" style="margin-left: -50px"><b>IMPLANTAÇÃO - REAL</b></div>
+        <div class="col-sm-3" style="margin-left: 80px"><b>DISPONIBILIDADE</b></div>
+        <div class="col-sm-2" style="margin-left: -70px"><b>ENVIADAS</b></div>
       </div>
-      <div class="row" style="background-color:">
+      <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
         <div class="col-sm-4"></div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px"><b>UTI´s Implantadas</b></div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:"><b>Leitos em Enfermarias implantados</b></div>
@@ -191,10 +348,10 @@
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
         <div class="col-sm-4"><b>Municipais</b></div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="30" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="totalMunicipalImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="70" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalMunicipalLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
           <input type="text" name="" value="" style="width: 80%; text-align: center;">
@@ -212,10 +369,10 @@
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Hospital Valentina (SMS - JPA)</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="10" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="10" style="width: 80%; text-align: center;" id="qtdHospValentImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="30" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="30" style="width: 80%; text-align: center" id="qtdHospValentLeitosImplantados">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
           <input type="text" name="" value="" style="width: 80%; text-align: center;">
@@ -233,10 +390,10 @@
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Hospital Santa Isabel (SMS - JPA)</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="30" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="30" style="width: 80%; text-align: center;" id="qtdHospSantIsabelImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="10" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="10" style="width: 80%; text-align: center;" id="qtdHospSantIsabelLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
           <input type="text" name="" value="" style="width: 80%; text-align: center;">
@@ -254,10 +411,10 @@
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Prontovida (SMS -JPA)</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="5" style="width: 80%; text-align: center">
+          <input type="text" name="" value="5" style="width: 80%; text-align: center" id="qtdHospProntovidaImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="20" style="width: 80%; text-align: center">
+          <input type="text" name="" value="20" style="width: 80%; text-align: center" id="qtdHospProntovidaLeitosImplantados">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
           <input type="text" name="" value="" style="width: 80%; text-align: center">
@@ -276,7 +433,7 @@
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
         <div class="col-sm-4"><b>Estaduais</b></div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="30" style="width: 80%; text-align: center">
+          <input type="text" name="" style="width: 80%; text-align: center" id="totalEstadualImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
           <input type="text" name="" value="70" style="width: 80%; text-align: center">
@@ -297,7 +454,7 @@
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Hospital Clementino Fraga</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="15" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="15" style="width: 80%; text-align: center" id="totalClementinoImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
           <input type="text" name="" value="16" style="width: 80%; text-align: center;">
@@ -318,7 +475,7 @@
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Hospital Metropolitano</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="20" style="width: 80%; text-align: center">
+          <input type="text" name="" value="20" style="width: 80%; text-align: center" id="totalMetropolitanoImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
           <input type="text" name="" value="31" style="width: 80%; text-align: center">
@@ -339,7 +496,7 @@
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Hospital Solidário - anexo ao Metropolitano</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center" id="totalHospSolidarioImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
           <input type="text" name="" value="-" style="width: 80%; text-align: center">
@@ -360,7 +517,7 @@
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Hospital Santa Paula</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center" id="totalSantaPaulaImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
           <input type="text" name="" value="-" style="width: 80%; text-align: center">
@@ -381,7 +538,7 @@
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Maternidade Frei Damião</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="6" style="width: 80%; text-align: center">
+          <input type="text" name="" value="6" style="width: 80%; text-align: center" id="totalFreiDamiaoImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
           <input type="text" name="" value="16/12" style="width: 80%; text-align: center">
@@ -403,7 +560,7 @@
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
         <div class="col-sm-4"><b>Federal</b></div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="7" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalFederalImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
           <input type="text" name="" value="11" style="width: 80%; text-align: center">
@@ -424,7 +581,7 @@
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Hospital Univ. Lauro Wanderley </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="10" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="10" style="width: 80%; text-align: center" id="totalLauroWanderley">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
           <input type="text" name="" value="10" style="width: 80%; text-align: center;">
@@ -446,7 +603,7 @@
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
         <div class="col-sm-4"><b>TOTAL DA 1ª MACRO</b></div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="7" style="width: 80%; text-align: center">
+          <input type="text" name="" value="22" style="width: 80%; text-align: center" id="totalImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
           <input type="text" name="" value="11" style="width: 80%; text-align: center">
@@ -824,8 +981,8 @@
     <form enctype="multipart/form-data" action="submit" method="POST">
       <div class="row" style="background-color: ;">
         <div class="col-sm-2"></div>
-        <div class="col-sm-2"><b><h4>PLANTÃO NOTURNO</h4></b></div>
-        <div class="col-sm-2"></div>
+        <div class="col-sm-3"><b><h4>PLANTÃO NOTURNO</h4></b></div>
+        <div class="col-sm-1"></div>
         <div class="col-sm-2"></div>
         <div class="col-sm-2"><b><h4>DATA:</h4></b></div>
         <div class="col-sm-2"></div>

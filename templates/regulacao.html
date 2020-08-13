@@ -957,13 +957,13 @@ function activeValorMascara__(){
 						<div class="col-sm-4" style="">
 							Frequência Respiratória:
 							<div class="form-check-inline">
-								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="frequencia_respiratoria" value="{{registro.frequencia_respiratoria}}" style="margin-left: ;width: 80px">
+								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="frequencia_respiratoria_admissao" value="{{registro.frequencia_respiratoria_admissao}}" style="margin-left: ;width: 80px">
 							</div><label for="" style="">irpm</label>    				
 						</div>
 						<div class="col-sm-3" style="">
 							Saturação:
 							<div class="form-check-inline">
-								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="saturacao_paciente" style="width: 55px" value="{{registro.saturacao_paciente}}">
+								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="saturacao_paciente_admissao" style="width: 55px" value="{{registro.saturacao_paciente_admissao}}">
 							</div><label for="" style="margin-left: -10px">%</label>
 						</div>
 						<div class="col-sm-3" style="">
@@ -978,7 +978,7 @@ function activeValorMascara__(){
 						<div class="col-sm-4">
 							Frequência Cardíaca:
 							<div class="form-check-inline">
-								<input type="number" class="form-control form-control-sm" id="" placeholder="" name="f_cardiaca_paciente" style="width: 70px" value="{{registro.frequencia_cardiaca}}" min="0" max="500">
+								<input type="number" class="form-control form-control-sm" id="" placeholder="" name="frequencia_cardiaca_admissao" style="width: 70px" value="{{registro.frequencia_cardiaca_admissao}}" min="0" max="500">
 							</div><label for="" style="margin-left: -10px">bpm</label>
 						</div>
 						<div class="col-sm-4">
@@ -1020,7 +1020,7 @@ function activeValorMascara__(){
 									<label for="" class="form-check-label">Temperatura:</label>
 								</div>
 								<div class="form-check-inline">
-									<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" name="temperatura_paciente" size="5" value="{{registro.temperatura}}">
+									<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" name="temperatura_admissao" size="5" value="{{registro.temperatura_admissao}}">
 									<div class="invalid-feedback"></div>
 
 									<label for="">°C</label>					
@@ -1031,6 +1031,24 @@ function activeValorMascara__(){
 
 					<hr>
 	<div class="container" style="">
+		<div class="row">
+
+			<div class="col-sm-12">
+				Município do Estabelecimento Solicitante:
+				{% if registro.municipio_estabelecimento_solicitante == '' or registro.municipio_estabelecimento_solicitante == None %}
+				<div class="form-check-inline" style="width: 70%">
+					<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_solicitante" value="">
+				</div>
+				{%else%}
+				<div class="form-check-inline" style="width: 70%">
+					<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_solicitante" value="{{registro.municipio_estabelecimento_solicitante}}">
+				</div>
+				{%endif%}
+			</div>
+
+
+
+		</div><br>
 		<div class="row">
 
 			<div class="col-sm-12">
@@ -4323,15 +4341,14 @@ function activeValorMascara__(){
 			<br>
 			
 			<hr>
-			
+			<!--
+		
 			<div class="row">
+				{% if registro.municipio_estabelecimento_referencia == '' or registro.municipio_estabelecimento_referencia == None %}
 				<div class="col-sm-5">
 					<b>Município do Estabelecimento de Referência:</b>
-					{% if registro.municipio_estabelecimento_referencia != '' or registro.municipio_estabelecimento_referencia != None %}
+					
 					<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{municipio_estabelecimento_referencia}}" />
-					{% else %}
-					<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{municipio_estabelecimento_referencia}}" />
-					{%endif%}
 
 				</div>
 				<div class="col-sm-2">
@@ -4347,8 +4364,30 @@ function activeValorMascara__(){
 						{%endfor%}						
 					</select>
 				</div>
+				{% elif registro.municipio_estabelecimento_referencia != '' or registro.municipio_estabelecimento_referencia != None %}
+				<div class="col-sm-5">
+					<b>Município do Estabelecimento de Referência:</b>
+					
+					<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{registro.municipio_estabelecimento_referencia}}" />
+
+				</div>
+				<div class="col-sm-2">
+					<button type="button" class="" style="align-items: center; border-radius: 5px; border: 2px solid #c2c2d6" id=""><a class="" href="/regulacao_search_estabelecimento/{{registro.id}}/">Escolher Cidade</a></button>					
+				</div>
+
+				<div class="col-sm-5" id="">
+					Escolha estabelecimento de Referência:
+					<select class="form-control form-control-sm" name="estabelecimento_referencia" id="estabelecimento_id">
+
+						<option value="{{registro.estabelecimento_referencia}}">{{registro.estabelecimento_referencia}}</option>
+			
+					</select>
+				</div>
+				{%endif%}
+
 
 			</div>
+		
 			<br>
 			<div class="row">
 				<div class="col-sm-6">
@@ -4360,6 +4399,8 @@ function activeValorMascara__(){
 				<div class="col-sm-6"></div>
 
 			</div>
+		-->
+		
 			<br>
 			<div class="container" style="border: 2px solid #cccccc; border-radius: 10px">
 
@@ -4444,27 +4485,28 @@ function activeValorMascara__(){
 				<div class="row">
 					<div class="col-sm-4"></div>
 					<div class="col-sm-4" style="background-color: ">
-						{% if senha_paciente == 0 %}
-						{% if 'Regulado' in status_list_descricao %}
+						<!--
 						<div class="form-check-inline" style="font-size: 83%" id="div_paciente_regulado">
 							<label class="form-check-label" for="">
 								<input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="status_paciente" value="Regulado" onclick="activeStatusAguardVaga()">PACIENTE REGULADO
 							</label>
 						</div>
-						{%else%}
+						-->
+						{% if registro.codigo_sescovid %}
 						<div class="form-check-inline" style="font-size: 83%">
 							<label class="form-check-label" for="">
-								<input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="status_paciente" value="Regulado" onclick="activeStatusAguardVaga()">PACIENTE REGULADO
+								<input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="status_paciente" value="Regulado" onclick="activeStatusAguardVaga()" disabled checked>PACIENTE REGULADO
 							</label>
 						</div>
-						{%endif%}
 						{%else%}
+						
 						<div class="form-check-inline" style="font-size: 83%">
 							<label class="form-check-label" for="">
 								<input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="status_paciente" value="Regulado" onclick="activeStatusAguardVaga()" disabled>PACIENTE REGULADO
 							</label>
 						</div>
 						{%endif%}
+						
 					</div>
 					<div class="col-sm-4"></div>
 				</div>

@@ -113,7 +113,7 @@ def change_password(request):
 
 @login_required
 def covid_list(request):
-	registros = RegistroCovid.objects.all().order_by('data_notificacao').reverse()
+	registros = RegistroCovid.objects.all().order_by('-data_notificacao', '-hora_notificacao')
 
 	if registros:
 		paginator = Paginator(registros, 10)
@@ -293,13 +293,25 @@ def registro_covid_set(request):
 		data_admissao = data_admissao_cap
 
 
-	frequencia_respiratoria_cap = request.POST.get('frequencia_respiratoria')
+	frequencia_respiratoria_admissao_cap = request.POST.get('frequencia_respiratoria_admissao')
+	if frequencia_respiratoria_admissao_cap == '' or frequencia_respiratoria_admissao_cap == None:
+		frequencia_respiratoria_admissao = None
+	else:
+		frequencia_respiratoria_admissao = int(frequencia_respiratoria_admissao_cap)
+
+	frequencia_respiratoria_cap = request.POST.get('fr_irpm')
 	if frequencia_respiratoria_cap != '':
 		frequencia_respiratoria = int(frequencia_respiratoria_cap)
 	else:
 		frequencia_respiratoria = None
 
-	saturacao_paciente_cap = request.POST.get('saturacao_paciente')
+	saturacao_paciente_admissao_cap = request.POST.get('saturacao_paciente_admissao')
+	if saturacao_paciente_admissao_cap == '' or saturacao_paciente_admissao_cap == None:
+		saturacao_paciente_admissao = None
+	else:
+		saturacao_paciente_admissao = int(saturacao_paciente_admissao_cap)
+
+	saturacao_paciente_cap = request.POST.get('spo2')
 	if saturacao_paciente_cap != '':
 		saturacao_paciente = int(saturacao_paciente_cap)
 	else:
@@ -307,6 +319,12 @@ def registro_covid_set(request):
 
 	ar_o2 = request.POST.get('ar_o2')
 	
+	frequencia_cardiaca_admissao_cap = request.POST.get('frequencia_cardiaca_admissao')
+	if frequencia_cardiaca_admissao_cap == '' or frequencia_cardiaca_admissao_cap == None:
+		frequencia_cardiaca_admissao = None
+	else:
+		frequencia_cardiaca_admissao = int(frequencia_cardiaca_admissao_cap)
+
 	frequencia_cardiaca_cap = request.POST.get('f_cardiaca_paciente')
 	if frequencia_cardiaca_cap != '':
 		frequencia_cardiaca = int(frequencia_cardiaca_cap)
@@ -325,7 +343,13 @@ def registro_covid_set(request):
 
 	conciencia = request.POST.get('consciencia_paciente')
 	
-	temperatura_cap = request.POST.get('temperatura_paciente')
+	temperatura_admissao_cap = request.POST.get('temperatura_admissao')
+	if temperatura_admissao_cap != '' or temperatura_admissao_cap == None:
+		temperatura_admissao = float(temperatura_admissao_cap)
+	else:
+		temperatura_admissao = None
+
+	temperatura_cap = request.POST.get('temp_auxiliar')
 	if temperatura_cap != '':
 		temperatura = float(temperatura_cap)
 	else:
@@ -724,6 +748,10 @@ def registro_covid_set(request):
 		cidade_origem = cidade_origem,
 		telefone_retorno = telefone_retorno,
 		data_admissao = data_admissao,
+		frequencia_respiratoria_admissao = frequencia_respiratoria_admissao,
+		saturacao_paciente_admissao = saturacao_paciente_admissao,
+		frequencia_cardiaca_admissao = frequencia_cardiaca_admissao,
+		temperatura_admissao = temperatura_admissao,
 		frequencia_respiratoria = frequencia_respiratoria,
 		saturacao_paciente = saturacao_paciente,
 		ar_o2 = ar_o2,
@@ -864,7 +892,7 @@ def regulacao_search_estabelecimento(request, id):
 def regulacao_search_estabelecimento_set(request, id):
 	municipio_estabelecimento_referencia = request.session['municipio_estabelecimento_referencia']
 
-	return redirect('paciente_atribuir_senha', id=id)
+	return redirect('regulacao', id=id)
 
 
 @login_required
@@ -1088,12 +1116,21 @@ def regulacao_set(request, id):
 	municipio_estabelecimento_solicitante = registro.municipio_estabelecimento_solicitante
 	estabelecimento_solicitante = registro.estabelecimento_solicitante
 	estabelecimento_solicitante_outro = registro.estabelecimento_solicitante_outro
-	
-	if estabelecimento_solicitante == '' or estabelecimento_solicitante == None:
-		estabelecimento_solicitante = request.POST.get('estabelecimento_solicitante')
-	
-	if estabelecimento_solicitante_outro == '' or estabelecimento_solicitante_outro == None:
-		estabelecimento_solicitante_outro = request.POST.get('estabelecimento_solicitante_outro')
+
+	municipio_estabelecimento_solicitante_cap = request.POST.get('municipio_estabelecimento_solicitante')
+	if municipio_estabelecimento_solicitante_cap == '' or municipio_estabelecimento_solicitante_cap == None:
+		municipio_estabelecimento_solicitante = registro.municipio_estabelecimento_solicitante
+	else:
+		municipio_estabelecimento_solicitante = municipio_estabelecimento_solicitante_cap
+
+	estabelecimento_solicitante_cap = request.POST.get('estabelecimento_solicitante')
+	estabelecimento_solicitante_outro_cap = request.POST.get('estabelecimento_solicitante_outro')
+	if estabelecimento_solicitante_cap == '' or estabelecimento_solicitante_cap == None:
+		estabelecimento_solicitante_outro = estabelecimento_solicitante_outro_cap
+	elif estabelecimento_solicitante_outro_cap == '' or estabelecimento_solicitante_outro_cap == None:
+		estabelecimento_solicitante = estabelecimento_solicitante_cap
+
+		
 
 	municipio_estabelecimento_referencia = request.POST.get('municipio_estabelecimento_referencia')
 	estabelecimento_referencia = request.POST.get('estabelecimento_referencia')
@@ -1119,21 +1156,39 @@ def regulacao_set(request, id):
 		#data_admissao = data_admissao_cap
 
 
-	frequencia_respiratoria_cap = request.POST.get('frequencia_respiratoria')
+	frequencia_respiratoria_admissao_cap = request.POST.get('frequencia_respiratoria_admissao')
+	if frequencia_respiratoria_admissao_cap == '' or frequencia_respiratoria_admissao_cap == None:
+		frequencia_respiratoria_admissao = None
+	else:
+		frequencia_respiratoria_admissao = int(frequencia_respiratoria_admissao_cap)
+
+	frequencia_respiratoria_cap = request.POST.get('fr_irpm')
 	if frequencia_respiratoria_cap == '' or frequencia_respiratoria_cap == None:
 		frequencia_respiratoria = registro.frequencia_respiratoria
 	else:
 		frequencia_respiratoria = int(frequencia_respiratoria_cap)
 		
 	
-	saturacao_paciente_cap = request.POST.get('saturacao_paciente')
+	saturacao_paciente_admissao_cap = request.POST.get('saturacao_paciente_admissao')
+	if saturacao_paciente_admissao_cap == '' or saturacao_paciente_admissao_cap == None:
+		saturacao_paciente_admissao = None
+	else:
+		saturacao_paciente_admissao = int(saturacao_paciente_admissao_cap)
+
+	saturacao_paciente_cap = request.POST.get('spo2')
 	if saturacao_paciente_cap != '':
 		saturacao_paciente = int(saturacao_paciente_cap)
 	else:
 		saturacao_paciente = registro.saturacao_paciente
 
 
-	frequencia_cardiaca_cap = request.POST.get('f_cardiaca_paciente')
+	frequencia_cardiaca_admissao_cap = request.POST.get('frequencia_cardiaca_admissao')
+	if frequencia_cardiaca_admissao_cap == '' or frequencia_cardiaca_admissao_cap == None:
+		frequencia_cardiaca_admissao = None
+	else:
+		frequencia_cardiaca_admissao = int(frequencia_cardiaca_admissao_cap)
+
+	frequencia_cardiaca_cap = request.POST.get('fc')
 	if frequencia_cardiaca_cap != '':
 		frequencia_cardiaca = int(frequencia_cardiaca_cap)
 	else:
@@ -1166,7 +1221,12 @@ def regulacao_set(request, id):
 		temperatura = registro.temperatura
 	else:
 		temperatura = float(temperatura_cap)
-		
+	
+	temperatura_admissao_cap = request.POST.get('temperatura_admissao')
+	if temperatura_admissao_cap != '' or temperatura_admissao_cap == None:
+		temperatura_admissao = float(temperatura_admissao_cap)
+	else:
+		temperatura_admissao = None
 
 	descricao_clinica = request.POST.get('descricao_clinica')
 
@@ -1526,6 +1586,9 @@ def regulacao_set(request, id):
 		registro_covid=registro_covid
 		)
 
+	codigo_sescovid = request.POST.get('num_protocolo')
+	last_status = descricao
+	'''
 	last_status = descricao
 
 	if estabelecimento_referencia == '' or estabelecimento_referencia == None:
@@ -1557,7 +1620,7 @@ def regulacao_set(request, id):
 			senha = senha,
 			registro_covid = registro_covid
 			)
-
+		'''
 
 	justificativa = request.POST.get('justificativa')
 	observacao = request.POST.get('observacoes_medicas')
@@ -1605,6 +1668,10 @@ def regulacao_set(request, id):
 	registro.cidade_origem = cidade_origem
 	registro.telefone_retorno = telefone_retorno
 	registro.data_admissao = data_admissao
+	registro.frequencia_respiratoria_admissao = frequencia_respiratoria_admissao
+	registro.saturacao_paciente_admissao = saturacao_paciente_admissao
+	registro.frequencia_cardiaca_admissao = frequencia_cardiaca_admissao
+	registro.temperatura_admissao = temperatura_admissao
 	registro.frequencia_respiratoria = frequencia_respiratoria
 	registro.saturacao_paciente = saturacao_paciente
 	registro.ar_o2 = ar_o2
@@ -2413,6 +2480,7 @@ def status_registro(request, id):
 	status_regulado_registro = status_registro.filter(descricao='Regulado').last()
 	status_nao_regulado_registro = status_registro.filter(descricao='Não Preenche Critérios').last()
 	status_aguard_inf_registro = status_registro.filter(descricao='Aguardando Informações').last()
+	status_parecer_registro = status_registro.filter(descricao='Parecer Médico').last()
 
 	data_cancelamento = datetime.now()
 	formateDate = data_cancelamento.strftime("%d-%m-%Y")
@@ -2447,7 +2515,8 @@ def status_registro(request, id):
 				status_aguard_conf_vaga_registro, 'status_aguard_inf_registro':
 				status_aguard_inf_registro, 'data_cancelamento_bd_template':
 				data_cancelamento_bd_template, 'hora_canc':hora_canc, 
-				'minuto_canc':minuto_canc, 'pref':pref})
+				'minuto_canc':minuto_canc, 'pref':pref, 'status_parecer_registro':
+				status_parecer_registro})
 		else:
 			return render(request, 'status_registro.html', {'registro':registro, 
 				'status_registro':status_registro, 
@@ -2462,7 +2531,8 @@ def status_registro(request, id):
 				status_aguard_conf_vaga_registro, 'status_aguard_inf_registro':
 				status_aguard_inf_registro, 'data_cancelamento_bd_template':
 				data_cancelamento_bd_template, 'hora_canc':hora_canc, 
-				'minuto_canc':minuto_canc})
+				'minuto_canc':minuto_canc, 'status_parecer_registro':
+				status_parecer_registro})
 	else:
 		if len(str(minuto_canc)) < 2:
 			pref = 0
@@ -2476,7 +2546,8 @@ def status_registro(request, id):
 			status_obito_registro, 'status_aguard_conf_vaga_registro':
 			status_aguard_conf_vaga_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'hora_canc':hora_canc, 'minuto_canc':
-			minuto_canc, 'pref':pref})
+			minuto_canc, 'pref':pref, 'status_parecer_registro':
+				status_parecer_registro})
 		else:
 			return render(request, 'status_registro.html', {'registro':registro,
 			'status_registro':status_registro, 'formateDate':formateDate, 
@@ -2488,7 +2559,8 @@ def status_registro(request, id):
 			status_obito_registro, 'status_aguard_conf_vaga_registro':
 			status_aguard_conf_vaga_registro, 'status_aguard_inf_registro':
 			status_aguard_inf_registro, 'hora_canc':hora_canc, 'minuto_canc':
-			minuto_canc})
+			minuto_canc, 'status_parecer_registro':
+				status_parecer_registro})
 
 
 @login_required
@@ -2683,6 +2755,11 @@ def paciente_atribuir_senha(request, id):
 	pa_1 = p[0]
 	pa_2 = p[1]
 
+	pa_admissao = registro.pa_admissao
+	p = pa_admissao.split("x")
+	pad_1 = p[0]
+	pad_2 = p[1]
+
 	status_registro = Status.objects.filter(registro_covid=registro.id)
 
 	status_list_descricao_ = []
@@ -2740,7 +2817,7 @@ def paciente_atribuir_senha(request, id):
 	if not registro.image_laudo_tc and not registro.image_laudo_rx:
 		return render(request, 'paciente_atribuir_senha.html', {'registro' : registro, 
 			'codigo_sescovid':codigo_sescovid, 'senha':senha, 'pa_1':pa_1, 
-			'pa_2':pa_2, 
+			'pa_2':pa_2, 'pad_1':pad_1, 'pad_2':pad_2,
 			'data_regulacao_template':data_regulacao_template, 
 			'status_list_descricao':status_list_descricao, 
 			'status_aguard_conf_vaga_registro':
@@ -2775,7 +2852,8 @@ def paciente_atribuir_senha(request, id):
 			estabelecimento_solicitante_outro, 'cidade':cidade,
 			'estabelecimentos':estabelecimentos,
 			'municipio_estabelecimento_referencia':
-			municipio_estabelecimento_referencia, 'pareceristas':pareceristas})
+			municipio_estabelecimento_referencia, 'pareceristas':pareceristas,
+			'pad_1':pad_1, 'pad_2':pad_2,})
 
 	elif not registro.image_laudo_rx:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
@@ -2793,7 +2871,7 @@ def paciente_atribuir_senha(request, id):
 		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
 		estabelecimentos, 'municipio_estabelecimento_referencia':
 		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_tc':
-		img_tc, 'pareceristas':pareceristas})
+		img_tc, 'pareceristas':pareceristas, 'pad_1':pad_1, 'pad_2':pad_2,})
 	elif not registro.image_laudo_tc:
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
 
@@ -2810,7 +2888,7 @@ def paciente_atribuir_senha(request, id):
 		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
 		estabelecimentos, 'municipio_estabelecimento_referencia':
 		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_rx':img_rx, 
-		'pareceristas':pareceristas})
+		'pareceristas':pareceristas, 'pad_1':pad_1, 'pad_2':pad_2,})
 	else:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
@@ -2828,7 +2906,8 @@ def paciente_atribuir_senha(request, id):
 		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
 		estabelecimentos, 'municipio_estabelecimento_referencia':
 		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_tc':
-		img_tc, 'img_rx':img_rx, 'pareceristas':pareceristas})
+		img_tc, 'img_rx':img_rx, 'pareceristas':pareceristas, 'pad_1':pad_1, 
+		'pad_2':pad_2,})
 
 
 @login_required
@@ -2865,17 +2944,42 @@ def paciente_atribuir_senha_set(request, id):
 	estado_origem = registro.estado_origem
 	cidade_origem = registro.cidade_origem
 	telefone_retorno = registro.telefone_retorno
-	frequencia_respiratoria = registro.frequencia_respiratoria
-	saturacao_paciente = registro.saturacao_paciente
-	ar_o2 = registro.ar_o2
-	frequencia_cardiaca = registro.frequencia_cardiaca
+
+	frequencia_respiratoria_admissao_cap = request.POST.get('frequencia_respiratoria_admissao')
+	if frequencia_respiratoria_admissao_cap == '' or frequencia_respiratoria_admissao_cap == None:
+		frequencia_respiratoria_admissao = None
+	else:
+		frequencia_respiratoria_admissao = int(frequencia_respiratoria_admissao_cap)
+	
+	saturacao_paciente_admissao_cap = request.POST.get('saturacao_paciente_admissao')
+	if saturacao_paciente_admissao_cap == '' or saturacao_paciente_admissao_cap == None:
+		saturacao_paciente_admissao = None
+	else:
+		saturacao_paciente_admissao = int(saturacao_paciente_admissao_cap)
+	
+	frequencia_cardiaca_admissao_cap = request.POST.get('frequencia_cardiaca_admissao')
+	if frequencia_cardiaca_admissao_cap == '' or frequencia_cardiaca_admissao_cap == None:
+		frequencia_cardiaca_admissao = None
+	else:
+		frequencia_cardiaca_admissao = int(frequencia_cardiaca_admissao_cap)
+	
+	temperatura_admissao_cap = request.POST.get('temperatura_admissao')
+	if temperatura_admissao_cap != '' or temperatura_admissao_cap == None:
+		temperatura_admissao = float(temperatura_admissao_cap)
+	else:
+		temperatura_admissao = None
+
+	frequencia_respiratoria = request.POST.get('fr_irpm')
+	saturacao_paciente = request.POST.get('spo2')
+	ar_o2 = request.POST.get('ar_o2')
+	frequencia_cardiaca = request.POST.get('fc')
 	
 	pa_part1 = request.POST.get('pa_part1')
 	pa_part2 = request.POST.get('pa_part2')
 	pa = pa_part1 + "x" + pa_part2
 	
-	conciencia = registro.conciencia
-	temperatura = registro.temperatura
+	conciencia = request.POST.get('consciencia_paciente')
+	temperatura = request.POST.get('temp_auxiliar')
 
 	descricao_clinica = request.POST.get('descricao_clinica')
 
@@ -3307,6 +3411,10 @@ def paciente_atribuir_senha_set(request, id):
 	registro.estado_origem = estado_origem
 	registro.cidade_origem = cidade_origem
 	registro.telefone_retorno = telefone_retorno
+	registro.frequencia_respiratoria_admissao = frequencia_respiratoria_admissao
+	registro.saturacao_paciente_admissao = saturacao_paciente_admissao
+	registro.frequencia_cardiaca_admissao = frequencia_cardiaca_admissao
+	registro.temperatura_admissao = temperatura_admissao
 	registro.frequencia_respiratoria = frequencia_respiratoria
 	registro.saturacao_paciente = saturacao_paciente
 	registro.ar_o2 = ar_o2

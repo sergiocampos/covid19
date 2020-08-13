@@ -959,13 +959,13 @@ function active_IgGIgM(){
 						<div class="col-sm-4" style="">
 							Frequência Respiratória:
 							<div class="form-check-inline">
-								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="frequencia_respiratoria" value="{{registro.frequencia_respiratoria}}" style="margin-left: ;width: 80px">
+								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="frequencia_respiratoria_admissao" value="{{registro.frequencia_respiratoria_admissao}}" style="margin-left: ;width: 80px">
 							</div><label for="" style="">irpm</label>    				
 						</div>
 						<div class="col-sm-3" style="">
 							Saturação:
 							<div class="form-check-inline">
-								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="saturacao_paciente" style="width: 55px" value="{{registro.saturacao_paciente}}">
+								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="saturacao_paciente_admissao" style="width: 55px" value="{{registro.saturacao_paciente_admissao}}">
 							</div><label for="" style="margin-left: -10px">%</label>
 						</div>
 						<div class="col-sm-4" style="">
@@ -980,7 +980,7 @@ function active_IgGIgM(){
 						<div class="col-sm-4">
 							Frequência Cardíaca:
 							<div class="form-check-inline">
-								<input type="number" class="form-control form-control-sm" id="" placeholder="" name="f_cardiaca_paciente" style="width: 70px" value="{registro.frequencia_cardiaca}}" min="0" max="500">
+								<input type="number" class="form-control form-control-sm" id="" placeholder="" name="frequencia_cardiaca_admissao" style="width: 70px" value="{{registro.frequencia_cardiaca_admissao}}" min="0" max="500">
 							</div><label for="" style="margin-left: -10px">bpm</label>
 						</div>
 						<div class="col-sm-4">
@@ -1022,7 +1022,7 @@ function active_IgGIgM(){
 									<label for="" class="form-check-label">Temperatura:</label>
 								</div>
 								<div class="form-check-inline">
-									<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" name="temperatura_paciente" size="5" value="{{registro.temperatura}}">
+									<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" name="temperatura_admissao" size="5" value="{{registro.temperatura_admissao}}">
 									<div class="invalid-feedback"></div>
 
 									<label for="">°C</label>					
@@ -1429,7 +1429,7 @@ function active_IgGIgM(){
 				{% if 'Uso de imunobiológicos' in registro.comorbidades %}
 				<div class="form-check-inline" style="width: 140%">
 					<label class="form-check-label">
-						<input type="checkbox" class="form-check-input" name="comorbidades" value="Uso de imunobiológicos" id="">Uso de imunobiológicos;
+						<input type="checkbox" class="form-check-input" name="comorbidades" value="Uso de imunobiológicos" id="" checked>Uso de imunobiológicos;
 					</label>
 				</div>
 				{%else%}
@@ -3693,22 +3693,28 @@ function active_IgGIgM(){
 				<div class="row">
 			<div class="col-sm-5">
 				<b>Município do Estabelecimento de Referência:</b>
+				<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{registro.municipio_estabelecimento_referencia}}" />
 				
-				<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{municipio_estabelecimento_referencia}}" / disabled>
+				<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{municipio_estabelecimento_referencia}}" />
 				
 
 			</div>
 			<div class="col-sm-2">
-					<button type="button" class="" style="align-items: center; border-radius: 5px; border: 2px solid #c2c2d6" id=""><a class="" href="/regulacao_search_estabelecimento/{{registro.id}}/">Escolher Cidade</a></button>					
+				
+					<button type="button" class="" style="align-items: center; border-radius: 5px; border: 2px solid #c2c2d6" id=""><a class="" href="/regulacao_search_estabelecimento/{{registro.id}}/">Alterar</a></button>			
 				</div>
 
 			<div class="col-sm-5" id="">
-				Escolha estabelecimento de Referência:
+
+				Estabelecimento de Referência:
+				<input type="text" class="form-control form-control-sm" name="estabelecimento_referencia" value="{{registro.estabelecimento_referencia}}" />
+
 				<select class="form-control form-control-sm" name="estabelecimento_referencia" id="estabelecimento_id">
-					<option value="">...nenhum</option>
-						{% for e in estabelecimentos %}
-						<option value="{{e.NO_FANTASIA}}">{{e.NO_FANTASIA}}</option>
-						{%endfor%}										
+					
+					{% for m in estabelecimentos %}
+						<option value="{{m.NO_FANTASIA}}">{{m.NO_FANTASIA}}</option>
+						{%endfor%}
+						
 				</select>
 			</div>
 
@@ -3718,7 +3724,11 @@ function active_IgGIgM(){
 			<div class="col-sm-6">
 				Outros:
 				<div class="form-check-inline" style="width: 100%">
-					<input type="text" class="form-control form-control-sm" name="estabelecimento_referencia_outro" value="" placeholder="Digite caso não encontrou estabelecimento">
+					{% if registro.estabelecimento_referencia_outro == '' or registro.estabelecimento_referencia_outro == None %}
+					<input type="text" class="form-control form-control-sm" name="estabelecimento_referencia_outro" value="">
+					{%else%}
+					<input type="text" class="form-control form-control-sm" name="estabelecimento_referencia_outro" value="{{registro.estabelecimento_referencia_outro}}">
+					{%endif%}
 				</div>
 			</div>
 			<div class="col-sm-6"></div>

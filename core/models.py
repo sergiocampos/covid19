@@ -43,13 +43,17 @@ class RegistroCovid(models.Model):
 	telefone_retorno = models.CharField(max_length=100, blank=True, default='', null=True)
 	data_admissao = models.DateField(blank=True, null=True, default=None)
 	frequencia_respiratoria = models.IntegerField(blank=True, null=True)
+	frequencia_respiratoria_admissao = models.IntegerField(blank=True, null=True)
 	saturacao_paciente = models.IntegerField(blank=True, null=True)
+	saturacao_paciente_admissao = models.IntegerField(blank=True, null=True)
 	ar_o2 = models.CharField(max_length=100, blank=True, default='', null=True)
 	frequencia_cardiaca = models.IntegerField(blank=True, null=True)
+	frequencia_cardiaca_admissao = models.IntegerField(blank=True, null=True)
 	pa = models.CharField(max_length=100, default='', null=True)
 	pa_admissao = models.CharField(max_length=100, default='', null=True)
 	conciencia = models.CharField(max_length=100, blank=True, default='', null=True)
 	temperatura = models.FloatField(blank=True, null=True)
+	temperatura_admissao = models.FloatField(blank=True, null=True)
 
 	descricao_clinica = models.TextField(blank=True, default='', null=True)
 

@@ -163,13 +163,13 @@
 						<div class="col-sm-4" style="">
 							Frequência Respiratória:
 							<div class="form-check-inline">
-								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="frequencia_respiratoria" value="{{registro.frequencia_respiratoria}}" style="margin-left: ;width: 80px">
+								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="frequencia_respiratoria" value="{{registro.frequencia_respiratoria_admissao}}" style="margin-left: ;width: 80px">
 							</div><label for="" style="">irpm</label>    				
 						</div>
 						<div class="col-sm-3" style="">
 							Saturação:
 							<div class="form-check-inline">
-								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="saturacao_paciente" style="width: 55px" value="{{registro.saturacao_paciente}}">
+								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="saturacao_paciente" style="width: 55px" value="{{registro.saturacao_paciente_admissao}}">
 							</div><label for="" style="margin-left: -10px">%</label>
 						</div>
 						<div class="col-sm-3" style="">
@@ -184,7 +184,7 @@
 						<div class="col-sm-4">
 							Frequência Cardíaca:
 							<div class="form-check-inline">
-								<input type="number" class="form-control form-control-sm" id="" placeholder="" name="f_cardiaca_paciente" style="width: 70px" value="{{registro.frequencia_cardiaca}}" min="0" max="500">
+								<input type="number" class="form-control form-control-sm" id="" placeholder="" name="f_cardiaca_paciente" style="width: 70px" value="{{registro.frequencia_cardiaca_admissao}}" min="0" max="500">
 							</div><label for="" style="margin-left: -10px">bpm</label>
 						</div>
 						<div class="col-sm-4">
@@ -226,7 +226,7 @@
 									<label for="" class="form-check-label">Temperatura:</label>
 								</div>
 								<div class="form-check-inline">
-									<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" max="100" name="temperatura_paciente" size="5" value="{{registro.temperatura}}">
+									<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" max="100" name="temperatura_paciente" size="5" value="{{registro.temperatura_admissao}}">
 									<div class="invalid-feedback"></div>
 
 									<label for="">°C</label>					
@@ -238,6 +238,24 @@
 		</div>
 		<hr>
 		<div class="container" style="">
+			<div class="row">
+
+			<div class="col-sm-12">
+				Município do Estabelecimento Solicitante:
+				{% if registro.municipio_estabelecimento_solicitante == '' or registro.municipio_estabelecimento_solicitante == None %}
+				<div class="form-check-inline" style="width: 70%">
+					<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_solicitante" value="">
+				</div>
+				{%else%}
+				<div class="form-check-inline" style="width: 70%">
+					<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_solicitante" value="{{registro.municipio_estabelecimento_solicitante}}">
+				</div>
+				{%endif%}
+			</div>
+
+
+
+		</div><br>
 			<div class="row">
 				
 				<div class="col-sm-12">

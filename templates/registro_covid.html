@@ -1380,13 +1380,13 @@ function activeDosePropofol_(){
 						<div class="col-sm-4" style="">
 							Frequência Respiratória:
 							<div class="form-check-inline">
-								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="frequencia_respiratoria" value="" style="margin-left: ;width: 80px">
+								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="frequencia_respiratoria_admissao" value="" style="margin-left: ;width: 80px">
 							</div><label for="" style="">irpm</label>    				
 						</div>
 						<div class="col-sm-3" style="">
 							Saturação:
 							<div class="form-check-inline">
-								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="saturacao_paciente" style="width: 55px" value="">
+								<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="saturacao_paciente_admissao" style="width: 55px" value="">
 							</div><label for="" style="margin-left: -10px">%</label>
 						</div>
 						<div class="col-sm-4" style="">
@@ -1401,7 +1401,7 @@ function activeDosePropofol_(){
 						<div class="col-sm-4">
 							Frequência Cardíaca:
 							<div class="form-check-inline">
-								<input type="number" class="form-control form-control-sm" id="" placeholder="" name="f_cardiaca_paciente" style="width: 70px" value="" min="0" max="500">
+								<input type="number" class="form-control form-control-sm" id="" placeholder="" name="frequencia_cardiaca_admissao" style="width: 70px" value="" min="0" max="500">
 							</div><label for="" style="margin-left: -10px">bpm</label>
 						</div>
 						<div class="col-sm-4">
@@ -1439,7 +1439,7 @@ function activeDosePropofol_(){
 									<label for="" class="form-check-label">Temperatura:</label>
 								</div>
 								<div class="form-check-inline">
-									<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" max="100" name="temperatura_paciente" size="5">
+									<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" max="100" name="temperatura_admissao" size="5">
 									<div class="invalid-feedback"></div>
 
 									<label for="">°C</label>					
@@ -2330,7 +2330,7 @@ function activeDosePropofol_(){
 				<div class="col-sm-3">
 					FC:
 					<div class="form-check-inline" style="width:">
-						<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="fc" style="width: 80px" value="{{registro.frequencia_cardiaca}}">
+						<input type="number" min="0" max="500" class="form-control form-control-sm" id="" placeholder="" name="f_cardiaca_paciente" style="width: 80px" value="{{registro.frequencia_cardiaca}}">
 					</div><label for="" style="">bpm</label>
 				</div>
 				<div class="col-sm-4">

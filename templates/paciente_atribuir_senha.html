@@ -1022,7 +1022,7 @@ function active_IgGIgM(){
 									<label for="" class="form-check-label">Temperatura:</label>
 								</div>
 								<div class="form-check-inline">
-									<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" name="temperatura_admissao" size="5" value="{{registro.temperatura_admissao}}">
+									<input type="number" class="form-control form-control-sm" id="" placeholder="" step="0.1" min="0" name="temperatura_admissao" value="{{registro.temperatura_admissao}}">
 									<div class="invalid-feedback"></div>
 
 									<label for="">°C</label>					
@@ -2628,6 +2628,7 @@ function active_IgGIgM(){
 
 		<div class="row">
 			<div class="col-sm-5" style="">
+				{% if registro.escala_pontos_glasgow == '' or registro.escala_pontos_glasgow == None %}
 				<div class="form-check-inline" style="width:">
 					<label class="form-check-label" for="">
 						<input type="checkbox" class="form-check-input" id="check_escala_glasgow" name="" value="" onclick="activeValorGlasgow()">Escala de Coma de Glasgow
@@ -2638,6 +2639,18 @@ function active_IgGIgM(){
 					<div class="invalid-feedback"></div>
 					<label for="">pontos</label>
 				</div>
+				{%else%}
+				<div class="form-check-inline" style="width:">
+					<label class="form-check-label" for="">
+						<input type="checkbox" class="form-check-input" id="check_escala_glasgow" name="" value="" onclick="activeValorGlasgow()" checked>Escala de Coma de Glasgow
+					</label>
+				</div>
+				<div class="form-check-inline" style="">
+					<input type="number" size="2" class="form-control form-control-sm" id="escala_glasgow_id" step="" min="0" max="100" name="escala_glasgow" style="width: 100px" value="{{registro.escala_pontos_glasgow}}">
+					<div class="invalid-feedback"></div>
+					<label for="">pontos</label>
+				</div>
+				{%endif%}
 			</div>
 			<div class="col-sm-3" style="">
 
@@ -2646,6 +2659,7 @@ function active_IgGIgM(){
 
 			</div>
 		</div>
+
 		
 
 		<div class="row">
@@ -3690,11 +3704,15 @@ function active_IgGIgM(){
 				</div>
 				<hr>
 
-				<div class="row">
+		<div class="row">
 			<div class="col-sm-5">
 				<b>Município do Estabelecimento de Referência:</b>
+				{% if registro.municipio_estabelecimento_referencia == '' or registro.municipio_estabelecimento_referencia == None %}
+				<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="" />
+				{%else%}
 				<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{registro.municipio_estabelecimento_referencia}}" />
-				
+				{%endif%}
+				<br>
 				<input type="text" class="form-control form-control-sm" name="municipio_estabelecimento_referencia" value="{{municipio_estabelecimento_referencia}}" />
 				
 
@@ -3705,9 +3723,13 @@ function active_IgGIgM(){
 				</div>
 
 			<div class="col-sm-5" id="">
-
-				Estabelecimento de Referência:
+				<b>Estabelecimento de Referência:</b>
+				{% if registro.estabelecimento_referencia == '' or registro.estabelecimento_referencia == None %}
+				<input type="text" class="form-control form-control-sm" name="estabelecimento_referencia" value="" /><br>
+				{%else%}
 				<input type="text" class="form-control form-control-sm" name="estabelecimento_referencia" value="{{registro.estabelecimento_referencia}}" />
+				{%endif%}
+				<br>
 
 				<select class="form-control form-control-sm" name="estabelecimento_referencia" id="estabelecimento_id">
 					
@@ -3748,8 +3770,12 @@ function active_IgGIgM(){
 						</div>
 						<div class="col-sm-1"></div>
 						<div class="col-sm-5" style="margin-top: 30px">
-							<div class="form-check-inline" style="font-size: 83%; width: 100%" id="senha_id">
-								<input type="text" min="0" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="{{codigo_sescovid}}">
+							<div class="form-check-inline" style="font-size: 83%; width: 100%" id="">
+								{% if regulacao_paciente_last %}
+								<input type="text" min="0" class="form-control form-control-sm" id="" placeholder="" name="num_protocolo" value="SESCOVID{{regulacao_paciente_last.senha}}">
+								{%else%}
+								
+								{%endif%}
 							</div>
 						</div>
 					</div>
@@ -3822,7 +3848,14 @@ function active_IgGIgM(){
 					<div class="row">
 						<div class="col-sm-4"></div>
 						<div class="col-sm-4" style="background-color: ">
-							{% if 'Regulado' in status_list_descricao %}
+							{% if regulacao_paciente_last %}
+							<div class="form-check-inline" style="font-size: 83%">
+								<label class="form-check-label" for="">
+									<input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="status_paciente" value="Regulado" onclick="activeStatusAguardVaga()" checked disabled>PACIENTE REGULADO
+								</label>
+							</div>
+
+							{% elif 'Regulado' in status_list_descricao %}
 							<div class="form-check-inline" style="font-size: 83%" id="div_paciente_regulado">
 								<label class="form-check-label" for="">
 									<input type="radio" class="form-check-input" id="check_paciente_regulado_id" name="status_paciente" value="Regulado" onclick="activeStatusAguardVaga()">PACIENTE REGULADO
@@ -3836,7 +3869,9 @@ function active_IgGIgM(){
 							</div>
 							{%endif%}
 						</div>
-						<div class="col-sm-4"></div>
+						<div class="col-sm-4">
+							<label for="" id="senha_id"style="font-size: 83%; border: 2px solid #cccccc; border-radius: 5px; background-color: #b3e6b3">{{codigo_sescovid}}</label>
+						</div>
 					</div>
 
 					<div class="row">

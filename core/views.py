@@ -2833,7 +2833,8 @@ def paciente_atribuir_senha(request, id):
 			estabelecimento_solicitante_outro, 'cidade':cidade,
 			'estabelecimentos':estabelecimentos,
 			'municipio_estabelecimento_referencia':
-			municipio_estabelecimento_referencia, 'encoded':encoded})
+			municipio_estabelecimento_referencia, 'encoded':encoded, 
+			'regulacao_paciente_last':regulacao_paciente_last})
 	elif not registro.image_laudo_tc and not registro.image_laudo_rx and not registro.image_descricao_clinica:
 		return render(request, 'paciente_atribuir_senha.html', {'registro' : registro, 
 			'codigo_sescovid':codigo_sescovid, 'senha':senha, 'pa_1':pa_1, 
@@ -2853,7 +2854,8 @@ def paciente_atribuir_senha(request, id):
 			'estabelecimentos':estabelecimentos,
 			'municipio_estabelecimento_referencia':
 			municipio_estabelecimento_referencia, 'pareceristas':pareceristas,
-			'pad_1':pad_1, 'pad_2':pad_2,})
+			'pad_1':pad_1, 'pad_2':pad_2, 
+			'regulacao_paciente_last':regulacao_paciente_last})
 
 	elif not registro.image_laudo_rx:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
@@ -2871,7 +2873,8 @@ def paciente_atribuir_senha(request, id):
 		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
 		estabelecimentos, 'municipio_estabelecimento_referencia':
 		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_tc':
-		img_tc, 'pareceristas':pareceristas, 'pad_1':pad_1, 'pad_2':pad_2,})
+		img_tc, 'pareceristas':pareceristas, 'pad_1':pad_1, 'pad_2':pad_2, 
+			'regulacao_paciente_last':regulacao_paciente_last})
 	elif not registro.image_laudo_tc:
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
 
@@ -2888,7 +2891,8 @@ def paciente_atribuir_senha(request, id):
 		estabelecimento_solicitante_outro, 'cidade':cidade, 'estabelecimentos':
 		estabelecimentos, 'municipio_estabelecimento_referencia':
 		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_rx':img_rx, 
-		'pareceristas':pareceristas, 'pad_1':pad_1, 'pad_2':pad_2,})
+		'pareceristas':pareceristas, 'pad_1':pad_1, 'pad_2':pad_2, 
+			'regulacao_paciente_last':regulacao_paciente_last})
 	else:
 		img_tc = base64.b64encode(registro.image_laudo_tc).decode('ascii')
 		img_rx = base64.b64encode(registro.image_laudo_rx).decode('ascii')
@@ -2907,7 +2911,7 @@ def paciente_atribuir_senha(request, id):
 		estabelecimentos, 'municipio_estabelecimento_referencia':
 		municipio_estabelecimento_referencia, 'encoded':encoded, 'img_tc':
 		img_tc, 'img_rx':img_rx, 'pareceristas':pareceristas, 'pad_1':pad_1, 
-		'pad_2':pad_2,})
+		'pad_2':pad_2, 'regulacao_paciente_last':regulacao_paciente_last})
 
 
 @login_required
@@ -2964,10 +2968,10 @@ def paciente_atribuir_senha_set(request, id):
 		frequencia_cardiaca_admissao = int(frequencia_cardiaca_admissao_cap)
 	
 	temperatura_admissao_cap = request.POST.get('temperatura_admissao')
-	if temperatura_admissao_cap != '' or temperatura_admissao_cap == None:
-		temperatura_admissao = float(temperatura_admissao_cap)
-	else:
+	if temperatura_admissao_cap == '' or temperatura_admissao_cap == None:
 		temperatura_admissao = None
+	else:
+		temperatura_admissao = float(temperatura_admissao_cap)
 
 	frequencia_respiratoria = request.POST.get('fr_irpm')
 	saturacao_paciente = request.POST.get('spo2')
@@ -2979,7 +2983,12 @@ def paciente_atribuir_senha_set(request, id):
 	pa = pa_part1 + "x" + pa_part2
 	
 	conciencia = request.POST.get('consciencia_paciente')
-	temperatura = request.POST.get('temp_auxiliar')
+
+	temperatura_cap = request.POST.get('temp_auxiliar')
+	if temperatura_cap == '' or temperatura_cap == None:
+		temperatura = None
+	else:
+		temperatura = float(temperatura_cap)
 
 	descricao_clinica = request.POST.get('descricao_clinica')
 

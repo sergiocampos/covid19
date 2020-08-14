@@ -2946,11 +2946,9 @@
 				<div class="col-sm-7" id="">
 					<b>Estabelecimento de Referência:</b>
 					<select class="form-control form-control-sm" name="estabelecimento_referencia" id="estabelecimento_id">
-						{% if regulacao_registro_last.estabelecimento_referencia_covid == '' or regulacao_registro_last.estabelecimento_referencia_covid == None %}
+						
 						<option value="{{registro.estabelecimento_referencia}}">{{registro.estabelecimento_referencia}}</option>
-						{% else %}
-						<option value="{{regulacao_registro_last.estabelecimento_referencia_covid}}">{{regulacao_registro_last.estabelecimento_referencia_covid}}</option>
-						{%endif%}						
+											
 					</select>
 				</div>
 

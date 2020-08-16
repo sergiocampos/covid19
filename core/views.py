@@ -279,6 +279,12 @@ def registro_covid_set(request):
 		idade_paciente = int(idade_paciente_cap)
 	else:
 		idade_paciente = None
+
+	idade_recem_nascido_cap = request.POST.get('idade_rn')
+	if idade_recem_nascido_cap == '' or idade_recem_nascido_cap == None:
+		idade_recem_nascido = None
+	else:
+		idade_recem_nascido = idade_recem_nascido_cap
 	
 	sexo_paciente = request.POST.get('sexo_paciente')
 	recurso_que_precisa = request.POST.get('recurso_que_precisa')
@@ -742,6 +748,7 @@ def registro_covid_set(request):
 		estabelecimento_solicitante_outro = estabelecimento_solicitante_outro,
 		nome_paciente = nome_paciente,
 		idade_paciente = idade_paciente,
+		idade_recem_nascido = idade_recem_nascido,
 		sexo_paciente = sexo_paciente,
 		recurso_que_precisa = recurso_que_precisa,
 		estado_origem = estado_origem,
@@ -1142,6 +1149,12 @@ def regulacao_set(request, id):
 		idade_paciente = None
 	else:
 		idade_paciente = int(float(idade_paciente_cap))
+
+	idade_recem_nascido_cap = request.POST.get('idade_rn')
+	if idade_recem_nascido_cap == '' or idade_recem_nascido_cap == None:
+		idade_recem_nascido = None
+	else:
+		idade_recem_nascido = idade_recem_nascido_cap
 
 	sexo_paciente = request.POST.get('sexo_paciente')
 	recurso_que_precisa = registro.recurso_que_precisa
@@ -1662,6 +1675,7 @@ def regulacao_set(request, id):
 	registro.estabelecimento_referencia_outro = estabelecimento_referencia_outro
 	registro.nome_paciente = nome_paciente
 	registro.idade_paciente = idade_paciente
+	registro.idade_recem_nascido = idade_recem_nascido
 	registro.sexo_paciente = sexo_paciente
 	registro.recurso_que_precisa = recurso_que_precisa
 	registro.estado_origem = estado_origem

@@ -35,6 +35,7 @@ class RegistroCovid(models.Model):
 	
 	nome_paciente = models.CharField(max_length=100, blank=True, default='', null=True)
 	idade_paciente = models.IntegerField(blank=True, null=True)
+	idade_recem_nascido = models.CharField(max_length=100, blank=True, null=True)
 	sexo_paciente = models.CharField(max_length=10, blank=True, null=True)
 	regulacao_status = ArrayField(models.CharField(max_length=100), blank=True, null=True)
 	recurso_que_precisa = models.TextField(blank=True, null=True)

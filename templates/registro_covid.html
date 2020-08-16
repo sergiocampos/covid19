@@ -1042,6 +1042,28 @@ function activeDosePropofol_(){
 </script>
 
 <script>
+	function activeIdadeRN(){
+		$("#idade_rn_desactive_id").show();
+		$("#idade_rn_active_id").hide();
+
+		$("#idade_rn_id").show();
+		$("#valor_idade_id").val("");
+		$("#idade_id").hide();
+	}
+</script>
+
+<script>
+	function desactiveIdadeRN(){
+		$("#idade_rn_desactive_id").hide();
+		$("#idade_rn_active_id").show();
+
+		$("#idade_rn_id").hide();
+		$("#valor_idade_rn_id").val("");
+		$("#idade_id").show();
+	}
+</script>
+
+<script>
 	(function($) {
 		$.fn.checkFileType = function(options) {
 			var defaults = {
@@ -1282,22 +1304,44 @@ function activeDosePropofol_(){
 
 
 			<div class="container" style="">
-				<div class="row">
-					<div class="col-sm-6" style="">
+				<div class="row" style="">
+					<div class="col-sm-5" style="">
 						Nome do Paciente
-						<div class="form-check-inline">
-							<input type="text" class="form-control form-control-sm" id="nome_paciente_id" placeholder="" name="nome_paciente" size="40" value="{{nome_paciente}}">
+						<div class="form-check-inline" style="margin-right: -10px">
+							<input type="text" class="form-control form-control-sm" id="nome_paciente_id" placeholder="" name="nome_paciente" size="30" value="{{nome_paciente}}">
 						</div>
 					</div>
-					<div class="col-sm-2" style="">
+					<div class="col-sm-2" style="" id="idade_id">
 						Idade:
 						<div class="form-check-inline">
-							<input type="number" class="form-control form-control-sm" id="" placeholder="" name="idade_paciente" value="{{idade_paciente}}" min="1" max="200" style="width: 60px">
+							<input type="number" class="form-control form-control-sm" id="valor_idade_id" placeholder="" name="idade_paciente" value="{{idade_paciente}}" min="1" max="200" style="width: 60px">
 						</div>
 					</div>
-					<div class="col-sm-4">
+
+					<div class="col-sm-2" style="margin-left: -40px" id="idade_rn_id">
+						Idade RN:
+						<div class="form-check-inline" style="margin-right: -10px">
+							<input type="text" class="form-control form-control-sm" id="valor_idade_rn_id" name="idade_rn" value="{{idade_recem_nascido}}" style="width: 80px">
+						</div>
+					</div>
+					
+					<div class="col-sm-2" style="margin-left: -50px" id="idade_rn_active_id">
+						<button type="button" class="btn btn-primary btn-sm" onclick="activeIdadeRN()">Recém Nascido?</button>
+					</div>
+					<div class="col-sm-2" style="margin-left: " id="idade_rn_desactive_id">
+						<button type="button" class="btn btn-primary btn-sm" onclick="desactiveIdadeRN()">Voltar?</button>
+					</div>
+
+					<style>
+						#idade_rn_desactive_id,
+						#idade_rn_id {
+							display: none;
+						}
+					</style>
+					
+					<div class="col-sm-3" style="margin-right: -10px">
 						Sexo:
-						<div class="form-check-inline">
+						<div class="form-check-inline" style="">
 							{% if registro.sexo_paciente == '' or registro.sexo_paciente == None %}
 							<select class="form-control form-control-sm" name="sexo_paciente" id="" style="width: 125px">
 								<option value="" selected>escolha...</option>

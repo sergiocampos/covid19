@@ -1071,7 +1071,11 @@ function activeValorMascara__(){
 			<div class="col-sm-6">
 				Idade:
 				<div class="form-check-inline">
+					{% if registro.idade_recem_nascido == '' or registro.idade_recem_nascido == None %}
 					<input type="number" class="form-control form-control-sm" id="" placeholder="" name="idade_paciente" value="{{registro.idade_paciente}}" min="1" max="200">
+					{%else%}
+					<input type="text" class="form-control form-control-sm" id="" placeholder="" name="idade_rn" value="{{registro.idade_recem_nascido}}" min="1" max="200">
+					{%endif%}
 				</div>
 			</div>
 			<div class="col-sm-6">
@@ -2714,7 +2718,11 @@ function activeValorMascara__(){
 			</div>
 			<div class="col-sm-2">
 				<div class="form-check-inline" style="">
+					{% if registro.idade_recem_nascido == '' or registro.idade_recem_nascido == None %}
 					<input type="number" size="2" class="form-control form-control-sm" id="nora" step="" min="0" max="100" name="" style="width: 100px" value="{{registro.idade_paciente}}">
+					{% else %}
+					<input type="text" size="2" class="form-control form-control-sm" id="nora" name="" style="width: 100px" value="{{registro.idade_recem_nascido}}">
+					{%endif%}
 				</div>
 			</div>
 		</div><hr>

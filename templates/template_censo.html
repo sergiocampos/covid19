@@ -175,6 +175,20 @@
 
   });
 
+  $(document).ready(function(){
+    var totalClementino_l_Implantadas = parseInt($('#totalClementinoLeitosImplantadas').val()) || 0;
+    var totalM_l_Implantadas = parseInt($('#totalMetropolitanoLeitosImplantadas').val()) || 0;
+    var totalS_l_Implantadas = parseInt($('#totalHospSolidarioLeitosImplantadas').val()) || 0;
+    var totalSP_l_Implantadas = parseInt($('#totalSantaPaulaLeitosImplantadas').val()) || 0;
+    var totalFD_l_Implantadas = parseInt($('#totalFreiDamiaoLeitosImplantadas').val()) || 0;
+
+    var totalEstadualLeitosImplantadasDX = totalClementino_l_Implantadas + totalM_l_Implantadas + totalS_l_Implantadas + totalSP_l_Implantadas + totalFD_l_Implantadas;
+
+    $('#totalEstadualLeitosImplantadas').val(totalEstadualLeitosImplantadasDX);
+
+
+  });
+
 
   $(document).ready(function() {
   $("#qtdHospValentLeitosImplantados,#qtdHospSantIsabelLeitosImplantadas,#qtdHospProntovidaLeitosImplantados").on('keyup', function() {
@@ -189,17 +203,18 @@
     $('#totalMunicipalLeitosImplantadas').val(totalMunicipalLeitosImplantadasDX);
   });
 
-  $("#totalClementinoImplantadas,#totalMetropolitanoImplantadas,#totalHospSolidarioImplantadas,#totalSantaPaulaImplantadas,#totalFreiDamiaoImplantadas").on('keyup', function() {
 
-    var clementino = parseInt($('#totalClementinoImplantadas').val()) || 0;
-    var metropolitano = parseInt($('#totalMetropolitanoImplantadas').val()) || 0;
-    var solidario = parseInt($('#totalHospSolidarioImplantadas').val()) || 0;
-    var santapaula = parseInt($('#totalSantaPaulaImplantadas').val()) || 0;
-    var freidamiao = parseInt($('#totalFreiDamiaoImplantadas').val()) || 0;
+  $("#totalClementinoLeitosImplantadas,#totalMetropolitanoLeitosImplantadas,#totalHospSolidarioLeitosImplantadas,#totalSantaPaulaLeitosImplantadas,#totalFreiDamiaoLeitosImplantadas").on('keyup', function() {
 
-    var totalEstadualImplantadasDX = clementino + metropolitano + solidario + santapaula + freidamiao;
+    var clementino = parseInt($('#totalClementinoLeitosImplantadas').val()) || 0;
+    var metropolitano = parseInt($('#totalMetropolitanoLeitosImplantadas').val()) || 0;
+    var solidario = parseInt($('#totalHospSolidarioLeitosImplantadas').val()) || 0;
+    var santapaula = parseInt($('#totalSantaPaulaLeitosImplantadas').val()) || 0;
+    var freidamiao = parseInt($('#totalFreiDamiaoLeitosImplantadas').val()) || 0;
 
-    $('#totalEstadualLeitosImplantadas').val(totalEstadualImplantadasDX);
+    var totalEstadualLeitosImplantadasDX = clementino + metropolitano + solidario + santapaula + freidamiao;
+
+    $('#totalEstadualLeitosImplantadas').val(totalEstadualLeitosImplantadasDX);
   });
 
   $("#totalLauroWanderley").on('keyup', function() {
@@ -477,7 +492,7 @@
           <input type="text" name="" style="width: 80%; text-align: center" id="totalEstadualImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="70" style="width: 80%; text-align: center">
+          <input type="text" name="" style="width: 80%; text-align: center" id="totalEstadualLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
           <input type="text" name="" value="" style="width: 80%; text-align: center">
@@ -498,7 +513,7 @@
           <input type="text" name="" value="15" style="width: 80%; text-align: center" id="totalClementinoImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="16" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="16" style="width: 80%; text-align: center;" id="totalClementinoLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
           <input type="text" name="" value="" style="width: 80%; text-align: center;">
@@ -519,7 +534,7 @@
           <input type="text" name="" value="20" style="width: 80%; text-align: center" id="totalMetropolitanoImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="31" style="width: 80%; text-align: center">
+          <input type="text" name="" value="31" style="width: 80%; text-align: center" id="totalMetropolitanoLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
           <input type="text" name="" value="" style="width: 80%; text-align: center">
@@ -540,7 +555,7 @@
           <input type="text" name="" value="-" style="width: 80%; text-align: center" id="totalHospSolidarioImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center" id="totalHospSolidarioLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
           <input type="text" name="" value="" style="width: 80%; text-align: center">
@@ -561,7 +576,7 @@
           <input type="text" name="" value="-" style="width: 80%; text-align: center" id="totalSantaPaulaImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center"id="totalSantaPaulaLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
           <input type="text" name="" value="" style="width: 80%; text-align: center">
@@ -582,7 +597,7 @@
           <input type="text" name="" value="6" style="width: 80%; text-align: center" id="totalFreiDamiaoImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="16/12" style="width: 80%; text-align: center">
+          <input type="text" name="" value="16/12" style="width: 80%; text-align: center" id="totalFreiDamiaoLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
           <input type="text" name="" value="" style="width: 80%; text-align: center">

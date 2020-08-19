@@ -189,6 +189,15 @@
 
   });
 
+  $(document).ready(function(){
+    var totalHU_l_Implantados = parseInt($('#totalLeitosLauroWanderley').val()) || 0;
+
+    var totalFederalLeitosImplantadosDX = totalHU_l_Implantados;
+
+    $('#totalFederalLeitosImplantados').val(totalFederalLeitosImplantadosDX);
+
+  });
+
 
   $(document).ready(function() {
   $("#qtdHospValentLeitosImplantados,#qtdHospSantIsabelLeitosImplantadas,#qtdHospProntovidaLeitosImplantados").on('keyup', function() {
@@ -217,6 +226,14 @@
     $('#totalEstadualLeitosImplantadas').val(totalEstadualLeitosImplantadasDX);
   });
 
+  $("#totalLeitosLauroWanderley").on('keyup', function() {
+
+    var hu = parseInt($('#totalLeitosLauroWanderley').val()) || 0;
+    var totalFederalLeitosImplantadosDX = hu;
+
+    $('#totalFederalLeitosImplantados').val(totalFederalLeitosImplantadosDX);
+  });
+
   $("#totalLauroWanderley").on('keyup', function() {
 
     var hu = parseInt($('#totalLauroWanderley').val()) || 0;
@@ -226,19 +243,19 @@
     $('#totalFederalLeitosImplantadas').val(totalFederalImplantadosDX);
   });
 
-  $("#totalLauroWanderley,#totalClementinoImplantadas,#totalMetropolitanoImplantadas,#totalHospSolidarioImplantadas,#totalSantaPaulaImplantadas,#totalFreiDamiaoImplantadas,#qtdHospValentImplantadas,#qtdHospSantIsabelImplantadas,#qtdHospProntovidaImplantadas").on('keyup', function() {
+  $("#totalLeitosLauroWanderley,#totalClementinoLeitosImplantadas,#totalMetropolitanoLeitosImplantadas,#totalHospSolidarioLeitosImplantadas,#totalSantaPaulaLeitosImplantadas,#totalFreiDamiaoLeitosImplantadas,#qtdHospValentLeitosImplantados,#qtdHospSantIsabelLeitosImplantadas,#qtdHospProntovidaLeitosImplantados").on('keyup', function() {
 
-    var hu = parseInt($('#totalLauroWanderley').val()) || 0;
+    var hu = parseInt($('#totalLeitosLauroWanderley').val()) || 0;
 
-    var clementino = parseInt($('#totalClementinoImplantadas').val()) || 0;
-    var metropolitano = parseInt($('#totalMetropolitanoImplantadas').val()) || 0;
-    var solidario = parseInt($('#totalHospSolidarioImplantadas').val()) || 0;
-    var santapaula = parseInt($('#totalSantaPaulaImplantadas').val()) || 0;
-    var freidamiao = parseInt($('#totalFreiDamiaoImplantadas').val()) || 0;
+    var clementino = parseInt($('#totalClementinoLeitosImplantadas').val()) || 0;
+    var metropolitano = parseInt($('#totalMetropolitanoLeitosImplantadas').val()) || 0;
+    var solidario = parseInt($('#totalHospSolidarioLeitosImplantadas').val()) || 0;
+    var santapaula = parseInt($('#totalSantaPaulaLeitosImplantadas').val()) || 0;
+    var freidamiao = parseInt($('#totalFreiDamiaoLeitosImplantadas').val()) || 0;
 
-    var valentina = parseInt($('#qtdHospValentImplantadas').val()) || 0;
-    var santaIsabel = parseInt($('#qtdHospSantIsabelImplantadas').val()) || 0;
-    var prontovida = parseInt($('#qtdHospProntovidaImplantadas').val()) || 0;
+    var valentina = parseInt($('#qtdHospValentLeitosImplantados').val()) || 0;
+    var santaIsabel = parseInt($('#qtdHospSantIsabelLeitosImplantadas').val()) || 0;
+    var prontovida = parseInt($('#qtdHospProntovidaLeitosImplantados').val()) || 0;
 
     var totalImplantadosDX = hu + clementino + metropolitano + solidario + santapaula + freidamiao + valentina + santaIsabel + prontovida;
 
@@ -252,15 +269,15 @@
   $(document).ready(function() {
     var hu = parseInt($('#totalLeitosLauroWanderley').val()) || 0;
 
-    var clementino = parseInt($('#totalLeitosClementinoImplantadas').val()) || 0;
-    var metropolitano = parseInt($('#totalLeitosMetropolitanoImplantadas').val()) || 0;
-    var solidario = parseInt($('#totalLeitosHospSolidarioImplantadas').val()) || 0;
-    var santapaula = parseInt($('#totalLeitosSantaPaulaImplantadas').val()) || 0;
-    var freidamiao = parseInt($('#totalFreiDamiaoImplantadas').val()) || 0;
+    var clementino = parseInt($('#totalClementinoLeitosImplantadas').val()) || 0;
+    var metropolitano = parseInt($('#totalMetropolitanoLeitosImplantadas').val()) || 0;
+    var solidario = parseInt($('#totalHospSolidarioLeitosImplantadas').val()) || 0;
+    var santapaula = parseInt($('#totalSantaPaulaLeitosImplantadas').val()) || 0;
+    var freidamiao = parseInt($('#totalFreiDamiaoLeitosImplantadas').val()) || 0;
 
-    var valentina = parseInt($('#qtdLeitosHospValentImplantadas').val()) || 0;
-    var santaIsabel = parseInt($('#qtdLeitosHospSantIsabelImplantadas').val()) || 0;
-    var prontovida = parseInt($('#qtdLeitosHospProntovidaImplantadas').val()) || 0;
+    var valentina = parseInt($('#qtdHospValentLeitosImplantados').val()) || 0;
+    var santaIsabel = parseInt($('#qtdHospSantIsabelLeitosImplantadas').val()) || 0;
+    var prontovida = parseInt($('#qtdHospProntovidaLeitosImplantados').val()) || 0;
 
     var totalImplantadosDX = hu + clementino + metropolitano + solidario + santapaula + freidamiao + valentina + santaIsabel + prontovida;
 
@@ -619,7 +636,7 @@
           <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalFederalImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="11" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalFederalLeitosImplantados">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
           <input type="text" name="" value="" style="width: 80%; text-align: center">

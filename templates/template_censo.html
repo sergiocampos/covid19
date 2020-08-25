@@ -87,6 +87,173 @@
 
 <script>
 
+$(document).ready(function(){
+    var pedro1 = parseInt($('#qtdHospPedro1Implantadas').val()) || 0;
+    var hospCrianca = parseInt($('#qtdHospDaCriancaImplantadas').val()) || 0;
+    var hospCampanha = parseInt($('#qtdHospCampanhaImplantadas').val()) || 0;
+    var isea = parseInt($('#qtdIseaImplantadas').val()) || 0;
+
+    var totalMunicipalImplantadasDX = pedro1 + hospCampanha + hospCrianca + isea;
+
+    $('#totalMunicipalImplantadas2Macro').val(totalMunicipalImplantadasDX);
+
+    var pedro1L = parseInt($('#qtdHospPedro1LeitosImplantadas').val()) || 0;
+    var hospCriancaL = parseInt($('#qtdHospDaCriancaLeitosImplantadas').val()) || 0;
+    var hospCampanhaL = parseInt($('#qtdHospCampanhaLeitosImplantadas').val()) || 0;
+    var iseaL = parseInt($('#qtdIseaLeitosImplantadas').val()) || 0;
+
+    var totalMunicipalLImplantadasDX = pedro1L + hospCampanhaL + hospCriancaL + iseaL;
+
+    $('#totalMunicipalLeitosImplantadas2Macro').val(totalMunicipalLImplantadasDX);
+
+    
+    var pedro1_uti_d = parseInt($('#qtdHospPedro1UtiDisponivel').val()) || 0;
+    var hospCrianca_uti_d = parseInt($('#qtdHospCriancaUtiDisponivel').val()) || 0;
+    var hospCampanha_uti_d = parseInt($('#qtdHospCampanhaUtiDisponivel').val()) || 0;
+    var isea_uti_d = parseInt($('#qtdIseaUtiDisponivel').val()) || 0;
+
+    var totalMunicipalUtiDisponivelDX = pedro1_uti_d + hospCampanha_uti_d + hospCrianca_uti_d + isea_uti_d;
+
+    $('#totalMunicipalUtiDisponivel').val(totalMunicipalUtiDisponivelDX);
+
+
+
+    var pedro1_enf_d = parseInt($('#qtdHospPedro1EnfermariaDisponivel').val()) || 0;
+    var hospCrianca_enf_d = parseInt($('#qtdHospCriancaEnfermariaDisponivel').val()) || 0;
+    var hospCampanha_enf_d = parseInt($('#qtdHospCampanhaEnfermariaDisponivel').val()) || 0;
+    var isea_enf_d = parseInt($('#qtdIseaEnfermariaDisponivel').val()) || 0;
+
+    var totalMunicipalEnfDisponivelDX = pedro1_enf_d + hospCampanha_enf_d + hospCrianca_enf_d + isea_enf_d;
+
+    $('#totalMunicipalEnfermariaDisponivel').val(totalMunicipalEnfDisponivelDX);
+
+
+    var pedro1_uti_e = parseInt($('#qtdHospPedro1UtiEnviadas').val()) || 0;
+    var hospCrianca_uti_e = parseInt($('#qtdHospCriancaUtiEnviadas').val()) || 0;
+    var hospCampanha_uti_e = parseInt($('#qtdHospCampanhaUtiEnviadas').val()) || 0;
+    var isea_uti_e = parseInt($('#qtdIseaUtiEnviadas').val()) || 0;
+
+    var totalMunicipalUtiEnviadasDX = pedro1_uti_e + hospCampanha_uti_e + hospCrianca_uti_e + isea_uti_e;
+
+    $('#totalMunicipalUtiEnviadas').val(totalMunicipalUtiEnviadasDX);
+
+
+    $("#qtdHospPedro1EnfermariaEnviadas,#qtdHospCriancaEnfermariaEnviadas,#qtdHospCampanhaEnfermariaEnviadas,#qtdIseaEnfermariaEnviadas").on('keyup', function() {
+
+    var pedro1_Enfermaria_e = parseInt($('#qtdHospPedro1EnfermariaEnviadas').val()) || 0;
+    var hospCrianca_Enfermaria_e = parseInt($('#qtdHospCriancaEnfermariaEnviadas').val()) || 0;
+    var hospCampanha_Enfermaria_e = parseInt($('#qtdHospCampanhaEnfermariaEnviadas').val()) || 0;
+    var isea_Enfermaria_e = parseInt($('#qtdIseaEnfermariaEnviadas').val()) || 0;
+
+    var totalMunicipalEnfermariaEnviadasDX = pedro1_Enfermaria_e + hospCampanha_Enfermaria_e + hospCrianca_Enfermaria_e + isea_Enfermaria_e;
+
+    $('#totalMunicipalEnfermariaEnviadas').val(totalMunicipalEnfermariaEnviadasDX);
+  });
+
+
+    
+
+
+
+
+    //var clementino = parseInt($('#totalClementinoImplantadas').val()) || 0;
+    //var metropolitano = parseInt($('#totalMetropolitanoImplantadas').val()) || 0;
+    //var solidario = parseInt($('#totalHospSolidarioImplantadas').val()) || 0;
+    //var santapaula = parseInt($('#totalSantaPaulaImplantadas').val()) || 0;
+    //var freidamiao = parseInt($('#totalFreiDamiaoImplantadas').val()) || 0;
+
+    //var totalEstadualImplantadasDX = clementino + metropolitano + solidario + //santapaula + freidamiao;
+
+    //$('#totalEstadualImplantadas').val(totalEstadualImplantadasDX);
+
+    //var hu = parseInt($('#totalLauroWanderley').val()) || 0;
+
+    //var totalFederalImplantadosDX = hu;
+
+    //$('#totalFederalImplantadas').val(totalFederalImplantadosDX);
+
+  });
+</script>
+
+<script>
+  
+$(document).ready(function() {
+  $("#qtdHospPedro1Implantadas,#qtdHospDaCriancaImplantadas,#qtdHospCampanhaImplantadas,#qtdIseaImplantadas").on('keyup', function() {
+
+    var pedro1 = parseInt($('#qtdHospPedro1Implantadas').val()) || 0;
+    var hospCrianca = parseInt($('#qtdHospDaCriancaImplantadas').val()) || 0;
+    var hospCampanha = parseInt($('#qtdHospCampanhaImplantadas').val()) || 0;
+    var isea = parseInt($('#qtdIseaImplantadas').val()) || 0;
+
+    var totalMunicipalImplantadasDX = pedro1 + hospCampanha + hospCrianca + isea;
+
+    $('#totalMunicipalImplantadas2Macro').val(totalMunicipalImplantadasDX);
+  });
+  $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCampanhaLeitosImplantadas,#qtdIseaLeitosImplantadas").on('keyup', function() {
+
+    var pedro1L = parseInt($('#qtdHospPedro1LeitosImplantadas').val()) || 0;
+    var hospCriancaL = parseInt($('#qtdHospDaCriancaLeitosImplantadas').val()) || 0;
+    var hospCampanhaL = parseInt($('#qtdHospCampanhaLeitosImplantadas').val()) || 0;
+    var iseaL = parseInt($('#qtdIseaLeitosImplantadas').val()) || 0;
+
+    var totalMunicipalLImplantadasDX = pedro1L + hospCampanhaL + hospCriancaL + iseaL;
+
+    $('#totalMunicipalLeitosImplantadas2Macro').val(totalMunicipalLImplantadasDX);
+  });
+
+  $("#qtdHospPedro1UtiDisponivel,#qtdHospCriancaUtiDisponivel,#qtdHospCampanhaUtiDisponivel,#qtdIseaUtiDisponivel").on('keyup', function() {
+
+    var pedro1_uti_d = parseInt($('#qtdHospPedro1UtiDisponivel').val()) || 0;
+    var hospCrianca_uti_d = parseInt($('#qtdHospCriancaUtiDisponivel').val()) || 0;
+    var hospCampanha_uti_d = parseInt($('#qtdHospCampanhaUtiDisponivel').val()) || 0;
+    var isea_uti_d = parseInt($('#qtdIseaUtiDisponivel').val()) || 0;
+
+    var totalMunicipalUtiDisponivelDX = pedro1_uti_d + hospCampanha_uti_d + hospCrianca_uti_d + isea_uti_d;
+
+    $('#totalMunicipalUtiDisponivel').val(totalMunicipalUtiDisponivelDX);
+  });
+
+  $("#qtdHospPedro1EnfermariaDisponivel,#qtdHospCriancaEnfermariaDisponivel,#qtdHospCampanhaEnfermariaDisponivel,#qtdIseaEnfermariaDisponivel").on('keyup', function() {
+
+    var pedro1_enf_d = parseInt($('#qtdHospPedro1EnfermariaDisponivel').val()) || 0;
+    var hospCrianca_enf_d = parseInt($('#qtdHospCriancaEnfermariaDisponivel').val()) || 0;
+    var hospCampanha_enf_d = parseInt($('#qtdHospCampanhaEnfermariaDisponivel').val()) || 0;
+    var isea_enf_d = parseInt($('#qtdIseaEnfermariaDisponivel').val()) || 0;
+
+    var totalMunicipalEnfDisponivelDX = pedro1_enf_d + hospCampanha_enf_d + hospCrianca_enf_d + isea_enf_d;
+
+    $('#totalMunicipalEnfermariaDisponivel').val(totalMunicipalEnfDisponivelDX);
+  });
+
+  $("#qtdHospPedro1UtiEnviadas,#qtdHospCriancaUtiEnviadas,#qtdHospCampanhaUtiEnviadas,#qtdIseaUtiEnviadas").on('keyup', function() {
+
+    var pedro1_uti_e = parseInt($('#qtdHospPedro1UtiEnviadas').val()) || 0;
+    var hospCrianca_uti_e = parseInt($('#qtdHospCriancaUtiEnviadas').val()) || 0;
+    var hospCampanha_uti_e = parseInt($('#qtdHospCampanhaUtiEnviadas').val()) || 0;
+    var isea_uti_e = parseInt($('#qtdIseaUtiEnviadas').val()) || 0;
+
+    var totalMunicipalUtiEnviadasDX = pedro1_uti_e + hospCampanha_uti_e + hospCrianca_uti_e + isea_uti_e;
+
+    $('#totalMunicipalUtiEnviadas').val(totalMunicipalUtiEnviadasDX);
+  });
+
+  $("#qtdHospPedro1EnfermariaEnviadas,#qtdHospCriancaEnfermariaEnviadas,#qtdHospCampanhaEnfermariaEnviadas,#qtdIseaEnfermariaEnviadas").on('keyup', function() {
+
+    var pedro1_Enfermaria_e = parseInt($('#qtdHospPedro1EnfermariaEnviadas').val()) || 0;
+    var hospCrianca_Enfermaria_e = parseInt($('#qtdHospCriancaEnfermariaEnviadas').val()) || 0;
+    var hospCampanha_Enfermaria_e = parseInt($('#qtdHospCampanhaEnfermariaEnviadas').val()) || 0;
+    var isea_Enfermaria_e = parseInt($('#qtdIseaEnfermariaEnviadas').val()) || 0;
+
+    var totalMunicipalEnfermariaEnviadasDX = pedro1_Enfermaria_e + hospCampanha_Enfermaria_e + hospCrianca_Enfermaria_e + isea_Enfermaria_e;
+
+    $('#totalMunicipalEnfermariaEnviadas').val(totalMunicipalEnfermariaEnviadasDX);
+  });
+});
+
+</script>
+
+<script>
+
   $(document).ready(function() {
   $("#qtdHospValentImplantadas,#qtdHospSantIsabelImplantadas,#qtdHospProntovidaImplantadas").on('keyup', function() {
 
@@ -140,6 +307,204 @@
     $('#totalImplantadas').val(totalImplantadosDX);
   });
 
+
+  
+
+
+
+
+
+
+
+$("#qtdHospPedro1Implantadas,#qtdHospDaCriancaImplantadas,#qtdHospCampanhaImplantadas,#qtdIseaImplantadas,#qtdHospTraumaCGUtiImplantadas,#qtdHospClinicasUtiImplantadas").on('keyup', function() {
+
+    var pedro1_uti_i = parseInt($('#qtdHospPedro1Implantadas').val()) || 0;
+
+    var hosp_crianca_uti_i = parseInt($('#qtdHospDaCriancaImplantadas').val()) || 0;
+    var hosp_campanha_uti_i = parseInt($('#qtdHospCampanhaImplantadas').val()) || 0;
+    var isea_uti_i = parseInt($('#qtdIseaImplantadas').val()) || 0;
+    var santaPaula_uti_i = parseInt($('#qtdHospTraumaCGUtiImplantadas').val()) || 0;
+    var hosp_clinicas_uti_i = parseInt($('#qtdHospClinicasUtiImplantadas').val()) || 0;
+
+    var totalutiImplantadosMacro2DX = pedro1_uti_i + hosp_crianca_uti_i + hosp_campanha_uti_i + isea_uti_i + santaPaula_uti_i + hosp_clinicas_uti_i;
+
+    $('#totalImplantadasMacro2').val(totalutiImplantadosMacro2DX);
+  });
+
+
+$("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCampanhaLeitosImplantadas,#qtdIseaLeitosImplantadas,#qtdHospTraumaCGLeitosImplantadas,#qtdHospClinicasLeitosImplantadas").on('keyup', function() {
+
+    var pedro1_uti_i = parseInt($('#qtdHospPedro1LeitosImplantadas').val()) || 0;
+
+    var hosp_crianca_uti_i = parseInt($('#qtdHospDaCriancaLeitosImplantadas').val()) || 0;
+    var hosp_campanha_uti_i = parseInt($('#qtdHospCampanhaLeitosImplantadas').val()) || 0;
+    var isea_uti_i = parseInt($('#qtdIseaLeitosImplantadas').val()) || 0;
+    var santaPaula_uti_i = parseInt($('#qtdHospTraumaCGLeitosImplantadas').val()) || 0;
+    var hosp_clinicas_uti_i = parseInt($('#qtdHospClinicasLeitosImplantadas').val()) || 0;
+
+    var totalLeitosImplantadosMacro2DX = pedro1_uti_i + hosp_crianca_uti_i + hosp_campanha_uti_i + isea_uti_i + santaPaula_uti_i + hosp_clinicas_uti_i;
+
+    $('#totalLeitosImplantadosMacro2').val(totalLeitosImplantadosMacro2DX);
+  });
+
+  $("#qtdHospPedro1UtiDisponivel,#qtdHospCriancaUtiDisponivel,#qtdHospCampanhaUtiDisponivel,#qtdIseaUtiDisponivel,#qtdHospTraumaCGUtiDisponivel,#qtdHospClinicasUtiDisponivel").on('keyup', function() {
+    var pedro1_uti_d = parseInt($('#qtdHospPedro1UtiDisponivel').val()) || 0;
+
+    var hosp_crianca_uti_d = parseInt($('#qtdHospCriancaUtiDisponivel').val()) || 0;
+    var hosp_campanha_uti_d = parseInt($('#qtdHospCampanhaUtiDisponivel').val()) || 0;
+    var isea_uti_d = parseInt($('#qtdIseaUtiDisponivel').val()) || 0;
+    var htdlgf_uti_d = parseInt($('#qtdHospTraumaCGUtiDisponivel').val()) || 0;
+    var hosp_clinicas_uti_d = parseInt($('#qtdHospClinicasUtiDisponivel').val()) || 0;
+
+    var totalUtiDisponicelMacro2DX = pedro1_uti_d + hosp_crianca_uti_d + hosp_campanha_uti_d + isea_uti_d + htdlgf_uti_d + hosp_clinicas_uti_d;
+
+    $('#totalUtiDisponivelMacro2').val(totalUtiDisponicelMacro2DX);
+
+  });
+
+  $("#qtdHospPedro1EnfermariaEnviadas,#qtdHospCriancaEnfermariaEnviadas,#qtdHospCampanhaEnfermariaEnviadas,#qtdIseaEnfermariaEnviadas,#qtdHospTraumaCGEnfEnviadas,#qtdHospClinicasEnfEnviadas").on('keyup', function() {
+    var pedro1_enf_e = parseInt($('#qtdHospPedro1EnfermariaEnviadas').val()) || 0;
+
+    var hosp_crianca_enf_e = parseInt($('#qtdHospCriancaEnfermariaEnviadas').val()) || 0;
+    var hosp_campanha_enf_e = parseInt($('#qtdHospCampanhaEnfermariaEnviadas').val()) || 0;
+    var isea_enf_e = parseInt($('#qtdIseaEnfermariaEnviadas').val()) || 0;
+    var htdlgf_enf_e = parseInt($('#qtdHospTraumaCGEnfEnviadas').val()) || 0;
+    var hosp_clinicas_enf_e = parseInt($('#qtdHospClinicasEnfEnviadas').val()) || 0;
+
+    var totalEnfEnviadasMacro2DX = pedro1_enf_e + hosp_crianca_enf_e + hosp_campanha_enf_e + isea_enf_e + htdlgf_enf_e + hosp_clinicas_enf_e;
+
+    $('#totalEnfEnviadasMacro2').val(totalEnfEnviadasMacro2DX);
+
+  });
+
+  
+
+  $("#qtdHospPedro1UtiEnviadas,#qtdHospCriancaUtiEnviadas,#qtdHospCampanhaUtiEnviadas,#qtdIseaUtiEnviadas,#qtdHospTraumaCGUtiEnviadas,#qtdHospClinicasUtiEnviadas").on('keyup', function() {
+    var pedro1_uti_e = parseInt($('#qtdHospPedro1UtiEnviadas').val()) || 0;
+
+    var hosp_crianca_uti_e = parseInt($('#qtdHospCriancaUtiEnviadas').val()) || 0;
+    var hosp_campanha_uti_e = parseInt($('#qtdHospCampanhaUtiEnviadas').val()) || 0;
+    var isea_uti_e = parseInt($('#qtdIseaUtiEnviadas').val()) || 0;
+    var htdlgf_uti_e = parseInt($('#qtdHospTraumaCGUtiEnviadas').val()) || 0;
+    var hosp_clinicas_uti_e = parseInt($('#qtdHospClinicasUtiEnviadas').val()) || 0;
+
+    var totalUtiEnviadasMacro2DX = pedro1_uti_e + hosp_crianca_uti_e + hosp_campanha_uti_e + isea_uti_e + htdlgf_uti_e + hosp_clinicas_uti_e;
+
+    $('#totalUtiEnviadasMacro2').val(totalUtiEnviadasMacro2DX);
+
+  });
+
+
+  $("#qtdHospPedro1EnfermariaDisponivel,#qtdHospCriancaEnfermariaDisponivel,#qtdHospCampanhaEnfermariaDisponivel,#qtdIseaEnfermariaDisponivel,#qtdHospTraumaCGenfDisponivel,#qtdHospClinicasenfDisponivel").on('keyup', function() {
+    var pedro1_enf_d = parseInt($('#qtdHospPedro1EnfermariaDisponivel').val()) || 0;
+
+    var hosp_crianca_enf_d = parseInt($('#qtdHospCriancaEnfermariaDisponivel').val()) || 0;
+    var hosp_campanha_enf_d = parseInt($('#qtdHospCampanhaEnfermariaDisponivel').val()) || 0;
+    var isea_enf_d = parseInt($('#qtdIseaEnfermariaDisponivel').val()) || 0;
+    var htdlgf_enf_d = parseInt($('#qtdHospTraumaCGenfDisponivel').val()) || 0;
+    var hosp_clinicas_enf_d = parseInt($('#qtdHospClinicasenfDisponivel').val()) || 0;
+
+    var totalEnfDisponicelMacro2DX = pedro1_enf_d + hosp_crianca_enf_d + hosp_campanha_enf_d + isea_enf_d + htdlgf_enf_d + hosp_clinicas_enf_d;
+
+    $('#totalEnfDisponivelMacro2').val(totalEnfDisponicelMacro2DX);
+
+  });
+
+
+
+  $("#qtdHospTraumaCGUtiImplantadas,#qtdHospClinicasUtiImplantadas").on('keyup', function() {
+
+    var htdlgf = parseInt($('#qtdHospTraumaCGUtiImplantadas').val()) || 0;
+
+    var hospClinicas = parseInt($('#qtdHospClinicasUtiImplantadas').val()) || 0;
+
+    var totalUtiImplantadosM2DX = htdlgf + hospClinicas;
+
+    $('#totalEstadualUtiImplantadasMacro2').val(totalUtiImplantadosM2DX);
+  });
+
+
+  $("#qtdHospTraumaCGLeitosImplantadas,#qtdHospClinicasLeitosImplantadas").on('keyup', function() {
+    var htdlgfL = parseInt($('#qtdHospTraumaCGLeitosImplantadas').val()) || 0;
+
+    var hospClinicasL = parseInt($('#qtdHospClinicasLeitosImplantadas').val()) || 0;
+
+    var totalUtiImplantadosLM2DX = htdlgfL + hospClinicasL;
+
+    $('#totalEstadualLeitosImplantadasMacro2').val(totalUtiImplantadosLM2DX);
+  });
+
+
+  $("#qtdHospTraumaCGUtiDisponivel,#qtdHospClinicasUtiDisponivel").on('keyup', function() {
+
+    var htdlgf_uti = parseInt($('#qtdHospTraumaCGUtiDisponivel').val()) || 0;
+
+    var hospClinicas_uti = parseInt($('#qtdHospClinicasUtiDisponivel').val()) || 0;
+
+    var totalEstadualUtiDisponivelMacro2DX = htdlgf_uti + hospClinicas_uti;
+
+    $('#totalEstadualUtiDisponivelMacro2').val(totalEstadualUtiDisponivelMacro2DX);
+  });
+
+
+  $("#qtdHospTraumaCGenfDisponivel,#qtdHospClinicasenfDisponivel").on('keyup', function() {
+    var htdlgf_enf = parseInt($('#qtdHospTraumaCGenfDisponivel').val()) || 0;
+
+    var hospClinicas_enf = parseInt($('#qtdHospClinicasenfDisponivel').val()) || 0;
+
+    var totalEstadualEnfDisponivelMacro2DX = htdlgf_enf + hospClinicas_enf;
+
+    $('#totalEstadualEnfermariaDisponivelMacro2').val(totalEstadualEnfDisponivelMacro2DX);
+  });
+
+
+  $("#qtdHospTraumaCGUtiEnviadas,#qtdHospClinicasUtiEnviadas").on('keyup', function() {
+    var htdlgf_uti_e = parseInt($('#qtdHospTraumaCGUtiEnviadas').val()) || 0;
+
+    var hospClinicas_uti_e = parseInt($('#qtdHospClinicasUtiEnviadas').val()) || 0;
+
+    var totalEstadualutiEnvMacro2DX = htdlgf_uti_e + hospClinicas_uti_e;
+
+    $('#totalEstadualUtiEnviadasMacro2').val(totalEstadualutiEnvMacro2DX);
+  });
+
+  $("#qtdHospTraumaCGEnfEnviadas,#qtdHospClinicasEnfEnviadas").on('keyup', function() {
+    var htdlgf_enf_e = parseInt($('#qtdHospTraumaCGEnfEnviadas').val()) || 0;
+
+    var hospClinicas_enf_e = parseInt($('#qtdHospClinicasEnfEnviadas').val()) || 0;
+
+    var totalEstadualEnfEnvMacro2DX = htdlgf_enf_e + hospClinicas_enf_e;
+
+    $('#totalEstadualEnfEnviadasMacro2').val(totalEstadualEnfEnvMacro2DX);
+  });
+
+  $("#totalMunicipalImplantadas2Macro,#totalMunicipalLeitosImplantadas2Macro,#totalMunicipalUtiDisponivel,#totalMunicipalEnfermariaDisponivel,#totalMunicipalUtiEnviadas,#totalMunicipalEnfermariaEnviadas,#totalEstadualUtiImplantadasMacro2,#totalEstadualLeitosImplantadasMacro2,#totalEstadualUtiDisponivelMacro2,#totalEstadualEnfermariaDisponivelMacro2,#totalEstadualUtiEnviadasMacro2,#totalEstadualEnfEnviadasMacro2").on('keyup', function() {
+    var total_m_uti_i = parseInt($('#totalMunicipalImplantadas2Macro').val()) || 0;
+    var total_m_l_i = parseInt($('#totalMunicipalLeitosImplantadas2Macro').val()) || 0;
+    var total_m_u_d = parseInt($('#totalMunicipalUtiDisponivel'))
+    var total_m_e_d = parseInt($('#totalMunicipalEnfermariaDisponivel'))
+    var total_m_uti_e = parseInt($('#totalMunicipalUtiEnviadas'))
+    var total_m_e_e = parseInt($('#totalMunicipalEnfermariaEnviadas'))
+    var total_e_uti_i = parseInt($('#totalEstadualUtiImplantadasMacro2').val()) || 0;
+    var total_e_l_i = parseInt($('#totalEstadualLeitosImplantadasMacro2').val()) || 0;
+    var total_e_u_d = parseInt($('#totalEstadualUtiDisponivelMacro2'))
+    var total_e_e_d = parseInt($('#totalEstadualEnfermariaDisponivelMacro2'))
+    var total_e_uti_e = parseInt($('#totalEstadualUtiEnviadasMacro2'))
+    var total_e_e_e = parseInt($('#totalEstadualEnfEnviadasMacro2'))
+
+    var totalEstadualEnfEnvMacro2DX = htdlgf_ + hospClinicas_;
+
+    $('#').val(totalEstadualEnfEnvMacro2DX);
+  });
+
+  
+
+
+
+  
+
+
+
 });
 </script>
 <script>
@@ -161,6 +526,173 @@
     $('#totalImplantadas').val(totalImplantadosDX);
 
   });
+
+
+  $(document).ready(function() {
+    var pedro1_uti_i = parseInt($('#qtdHospPedro1Implantadas').val()) || 0;
+
+    var hosp_crianca_uti_i = parseInt($('#qtdHospDaCriancaImplantadas').val()) || 0;
+    var hosp_campanha_uti_i = parseInt($('#qtdHospCampanhaImplantadas').val()) || 0;
+    var isea_uti_i = parseInt($('#qtdIseaImplantadas').val()) || 0;
+    var santaPaula_uti_i = parseInt($('#qtdHospTraumaCGUtiImplantadas').val()) || 0;
+    var hosp_clinicas_uti_i = parseInt($('#qtdHospClinicasUtiImplantadas').val()) || 0;
+
+    var totalutiImplantadosMacro2DX = pedro1_uti_i + hosp_crianca_uti_i + hosp_campanha_uti_i + isea_uti_i + santaPaula_uti_i + hosp_clinicas_uti_i;
+
+    $('#totalImplantadasMacro2').val(totalutiImplantadosMacro2DX);
+
+  });
+
+  $(document).ready(function() {
+    
+    var pedro1_uti_i = parseInt($('#qtdHospPedro1LeitosImplantadas').val()) || 0;
+
+    var hosp_crianca_uti_i = parseInt($('#qtdHospDaCriancaLeitosImplantadas').val()) || 0;
+    var hosp_campanha_uti_i = parseInt($('#qtdHospCampanhaLeitosImplantadas').val()) || 0;
+    var isea_uti_i = parseInt($('#qtdIseaLeitosImplantadas').val()) || 0;
+    var santaPaula_uti_i = parseInt($('#qtdHospTraumaCGLeitosImplantadas').val()) || 0;
+    var hosp_clinicas_uti_i = parseInt($('#qtdHospClinicasLeitosImplantadas').val()) || 0;
+
+    var totalLeitosImplantadosMacro2DX = pedro1_uti_i + hosp_crianca_uti_i + hosp_campanha_uti_i + isea_uti_i + santaPaula_uti_i + hosp_clinicas_uti_i;
+
+    $('#totalLeitosImplantadosMacro2').val(totalLeitosImplantadosMacro2DX);
+
+  });
+
+  $(document).ready(function() {
+    
+    var pedro1_uti_d = parseInt($('#qtdHospPedro1UtiDisponivel').val()) || 0;
+
+    var hosp_crianca_uti_d = parseInt($('#qtdHospCriancaUtiDisponivel').val()) || 0;
+    var hosp_campanha_uti_d = parseInt($('#qtdHospCampanhaUtiDisponivel').val()) || 0;
+    var isea_uti_d = parseInt($('#qtdIseaUtiDisponivel').val()) || 0;
+    var htdlgf_uti_d = parseInt($('#qtdHospTraumaCGUtiDisponivel').val()) || 0;
+    var hosp_clinicas_uti_d = parseInt($('#qtdHospClinicasUtiDisponivel').val()) || 0;
+
+    var totalUtiDisponicelMacro2DX = pedro1_uti_d + hosp_crianca_uti_d + hosp_campanha_uti_d + isea_uti_d + htdlgf_uti_d + hosp_clinicas_uti_d;
+
+    $('#totalUtiDisponivelMacro2').val(totalUtiDisponicelMacro2DX);
+
+  });
+
+  $(document).ready(function() {
+    var pedro1_enf_d = parseInt($('#qtdHospPedro1EnfermariaDisponivel').val()) || 0;
+
+    var hosp_crianca_enf_d = parseInt($('#qtdHospCriancaEnfermariaDisponivel').val()) || 0;
+    var hosp_campanha_enf_d = parseInt($('#qtdHospCampanhaEnfermariaDisponivel').val()) || 0;
+    var isea_enf_d = parseInt($('#qtdIseaEnfermariaDisponivel').val()) || 0;
+    var htdlgf_enf_d = parseInt($('#qtdHospTraumaCGenfDisponivel').val()) || 0;
+    var hosp_clinicas_enf_d = parseInt($('#qtdHospClinicasenfDisponivel').val()) || 0;
+
+    var totalEnfDisponicelMacro2DX = pedro1_enf_d + hosp_crianca_enf_d + hosp_campanha_enf_d + isea_enf_d + htdlgf_enf_d + hosp_clinicas_enf_d;
+
+    $('#totalEnfDisponivelMacro2').val(totalEnfDisponicelMacro2DX);
+  });
+
+  $(document).ready(function() {
+    
+    var pedro1_enf_e = parseInt($('#qtdHospPedro1EnfermariaEnviadas').val()) || 0;
+
+    var hosp_crianca_enf_e = parseInt($('#qtdHospCriancaEnfermariaEnviadas').val()) || 0;
+    var hosp_campanha_enf_e = parseInt($('#qtdHospCampanhaEnfermariaEnviadas').val()) || 0;
+    var isea_enf_e = parseInt($('#qtdIseaEnfermariaEnviadas').val()) || 0;
+    var htdlgf_enf_e = parseInt($('#qtdHospTraumaCGEnfEnviadas').val()) || 0;
+    var hosp_clinicas_enf_e = parseInt($('#qtdHospClinicasEnfEnviadas').val()) || 0;
+
+    var totalEnfEnviadasMacro2DX = pedro1_enf_e + hosp_crianca_enf_e + hosp_campanha_enf_e + isea_enf_e + htdlgf_enf_e + hosp_clinicas_enf_e;
+
+    $('#totalEnfEnviadasMacro2').val(totalEnfEnviadasMacro2DX);
+
+  });
+
+  $(document).ready(function() {
+    var pedro1_uti_e = parseInt($('#qtdHospPedro1UtiEnviadas').val()) || 0;
+
+    var hosp_crianca_uti_e = parseInt($('#qtdHospCriancaUtiEnviadas').val()) || 0;
+    var hosp_campanha_uti_e = parseInt($('#qtdHospCampanhaUtiEnviadas').val()) || 0;
+    var isea_uti_e = parseInt($('#qtdIseaUtiEnviadas').val()) || 0;
+    var htdlgf_uti_e = parseInt($('#qtdHospTraumaCGUtiEnviadas').val()) || 0;
+    var hosp_clinicas_uti_e = parseInt($('#qtdHospClinicasUtiEnviadas').val()) || 0;
+
+    var totalUtiEnviadasMacro2DX = pedro1_uti_e + hosp_crianca_uti_e + hosp_campanha_uti_e + isea_uti_e + htdlgf_uti_e + hosp_clinicas_uti_e;
+
+    $('#totalUtiEnviadasMacro2').val(totalUtiEnviadasMacro2DX);
+
+  });
+
+
+
+  $(document).ready(function() {
+    var htdlgf = parseInt($('#qtdHospTraumaCGUtiImplantadas').val()) || 0;
+
+    var hospClinicas = parseInt($('#qtdHospClinicasUtiImplantadas').val()) || 0;
+
+    var totalUtiImplantadosM2DX = htdlgf + hospClinicas;
+
+    $('#totalEstadualUtiImplantadasMacro2').val(totalUtiImplantadosM2DX);
+  });
+
+  $(document).ready(function() {
+    var htdlgfL = parseInt($('#qtdHospTraumaCGLeitosImplantadas').val()) || 0;
+
+    var hospClinicasL = parseInt($('#qtdHospClinicasLeitosImplantadas').val()) || 0;
+
+    var totalUtiImplantadosLM2DX = htdlgfL + hospClinicasL;
+
+    $('#totalEstadualLeitosImplantadasMacro2').val(totalUtiImplantadosLM2DX);
+  });
+
+  $(document).ready(function() {
+    var htdlgf_uti = parseInt($('#qtdHospTraumaCGUtiDisponivel').val()) || 0;
+
+    var hospClinicas_uti = parseInt($('#qtdHospClinicasUtiDisponivel').val()) || 0;
+
+    var totalEstadualUtiDisponivelMacro2DX = htdlgf_uti + hospClinicas_uti;
+
+    $('#totalEstadualUtiDisponivelMacro2').val(totalEstadualUtiDisponivelMacro2DX);
+  });
+
+  $(document).ready(function() {
+    var htdlgf_enf = parseInt($('#qtdHospTraumaCGenfDisponivel').val()) || 0;
+
+    var hospClinicas_enf = parseInt($('#qtdHospClinicasenfDisponivel').val()) || 0;
+
+    var totalEstadualEnfDisponivelMacro2DX = htdlgf_enf + hospClinicas_enf;
+
+    $('#totalEstadualEnfermariaDisponivelMacro2').val(totalEstadualEnfDisponivelMacro2DX);
+  });
+
+
+  $(document).ready(function() {
+    var htdlgf_uti_e = parseInt($('#qtdHospTraumaCGUtiEnviadas').val()) || 0;
+
+    var hospClinicas_uti_e = parseInt($('#qtdHospClinicasUtiEnviadas').val()) || 0;
+
+    var totalEstadualutiEnvMacro2DX = htdlgf_uti_e + hospClinicas_uti_e;
+
+    $('#totalEstadualUtiEnviadasMacro2').val(totalEstadualutiEnvMacro2DX);    
+  });
+
+  $(document).ready(function() {
+    var htdlgf_enf_e = parseInt($('#qtdHospTraumaCGEnfEnviadas').val()) || 0;
+
+    var hospClinicas_enf_e = parseInt($('#qtdHospClinicasEnfEnviadas').val()) || 0;
+
+    var totalEstadualEnfEnvMacro2DX = htdlgf_enf_e + hospClinicas_enf_e;
+
+    $('#totalEstadualEnfEnviadasMacro2').val(totalEstadualEnfEnvMacro2DX);       
+  });
+
+  $(document).ready(function() {
+    var htdlgf_ = parseInt($('#').val()) || 0;
+
+    var hospClinicas_ = parseInt($('#').val()) || 0;
+
+    var totalEstadualEnfEnvMacro2DX = htdlgf_ + hospClinicas_;
+
+    $('#').val(totalEstadualEnfEnvMacro2DX);       
+  });
+
 </script>
 
 <script>
@@ -703,192 +1235,192 @@
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
         <div class="col-sm-4"><b>Municipais</b></div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="26" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="26" style="width: 80%; text-align: center;" id="totalMunicipalImplantadas2Macro">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="130" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="130" style="width: 80%; text-align: center;" id="totalMunicipalLeitosImplantadas2Macro">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="totalMunicipalUtiDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="totalMunicipalEnfermariaDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="totalMunicipalUtiEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="totalMunicipalEnfermariaEnviadas">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Hospital Pedro I (SMS - CG)</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="30" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="30" style="width: 80%; text-align: center;" id="qtdHospPedro1Implantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="66" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="66" style="width: 80%; text-align: center;" id="qtdHospPedro1LeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospPedro1UtiDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospPedro1EnfermariaDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospPedro1UtiEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospPedro1EnfermariaEnviadas">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Hospital da Criança e do Adolescente (SMS -CG)</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="10" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="10" style="width: 80%; text-align: center;" id="qtdHospDaCriancaImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="64" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="64" style="width: 80%; text-align: center;" id="qtdHospDaCriancaLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospCriancaUtiDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospCriancaEnfermariaDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospCriancaUtiEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospCriancaEnfermariaEnviadas">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4" style="font-size: 90%">Hospital de Campanha (SMS - CG) - Anexo do Pedro I</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center" id="qtdHospCampanhaImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="-" style="width: 80%; text-align: center">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center" id="qtdHospCampanhaLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospCampanhaUtiDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospCampanhaEnfermariaDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospCampanhaUtiEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospCampanhaEnfermariaEnviadas">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Isea</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="6" style="width: 80%; text-align: center">
+          <input type="text" name="" value="6" style="width: 80%; text-align: center" id="qtdIseaImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="6" style="width: 80%; text-align: center">
+          <input type="text" name="" value="6" style="width: 80%; text-align: center" id="qtdIseaLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdIseaUtiDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdIseaEnfermariaDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdIseaUtiEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdIseaEnfermariaEnviadas">
         </div>
       </div>
       <br>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
         <div class="col-sm-4"><b>Estaduais</b></div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEstadualUtiImplantadasMacro2">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEstadualLeitosImplantadasMacro2">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEstadualUtiDisponivelMacro2">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEstadualEnfermariaDisponivelMacro2">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEstadualUtiEnviadasMacro2">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEstadualEnfEnviadasMacro2">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Hospital de Trauma D. Luiz Gonzaga</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospTraumaCGUtiImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospTraumaCGLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospTraumaCGUtiDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospTraumaCGenfDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospTraumaCGUtiEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospTraumaCGEnfEnviadas">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Hospital das Clínicas </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospClinicasUtiImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospClinicasLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospClinicasUtiDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospClinicasenfDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospClinicasUtiEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospClinicasEnfEnviadas">
         </div>
       </div>
       <br>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
         <div class="col-sm-4"><b>TOTAL DA 2ª MACRO</b></div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalImplantadasMacro2">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalLeitosImplantadosMacro2">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalUtiDisponivelMacro2">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEnfDisponivelMacro2">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalUtiEnviadasMacro2">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEnfEnviadasMacro2">
         </div>
       </div>
       <br>

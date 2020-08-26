@@ -423,6 +423,111 @@ $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCa
     $('#totalEstadualUtiImplantadasMacro2').val(totalUtiImplantadosM2DX);
   });
 
+  $("#qtdHospNaldoLeiteUtiImplantadas,#qtdHospJCUtiImplantadas,#qtdHospRegionalCzUtiImplantadas,#qtdHospRegionalPombalUtiImplantadas,#qtdHospRegionalPiancoUtiImplantadas").on('keyup', function() {
+
+    var naldo_leite = parseInt($('#qtdHospNaldoLeiteUtiImplantadas').val()) || 0;
+
+    var janduhy_carneiro = parseInt($('#qtdHospJCUtiImplantadas').val()) || 0;
+
+    var regional_cz = parseInt($('#qtdHospRegionalCzUtiImplantadas').val()) || 0;
+
+    var regional_pombal = parseInt($('#qtdHospRegionalPombalUtiImplantadas').val()) || 0;
+
+    var regional_pianco = parseInt($('#qtdHospRegionalPiancoUtiImplantadas').val()) || 0;
+
+    var totalUtiImplantadosM3DX = naldo_leite + janduhy_carneiro + regional_cz + regional_pombal + regional_pianco;
+
+    $('#totalEstadualUtiImplantadasMacro3').val(totalUtiImplantadosM3DX);
+  });
+
+  $("#qtdHospNaldoLeiteLeitosImplantados,#qtdHospJCLeitosImplantados,#qtdHospRegionalCzLeitosImplantados,#qtdHospRegionalPombalLeitosImplantados,#qtdHospRegionalPiancoLeitosImplantados").on('keyup', function() {
+
+    var naldo_leite_l = parseInt($('#qtdHospNaldoLeiteLeitosImplantados').val()) || 0;
+
+    var janduhy_carneiro_l = parseInt($('#qtdHospJCLeitosImplantados').val()) || 0;
+
+    var regional_cz_l = parseInt($('#qtdHospRegionalCzLeitosImplantados').val()) || 0;
+
+    var regional_pombal_l = parseInt($('#qtdHospRegionalPombalLeitosImplantados').val()) || 0;
+
+    var regional_pianco_l = parseInt($('#qtdHospRegionalPiancoLeitosImplantados').val()) || 0;
+
+    var totalLImplantadosM3DX = naldo_leite_l + janduhy_carneiro_l + regional_cz_l + regional_pombal_l + regional_pianco_l;
+
+    $('#totalEstadualLeitosImplantadosMacro3').val(totalLImplantadosM3DX);
+  });
+
+  $("#qtdHospNaldoLeiteUtisDisponivel,#qtdHospJCUtisDisponivel,#qtdHospRegionalCzUtisDisponivel,#qtdHospRegionalPombalUtisDisponivel,#qtdHospRegionalPiancoUtisDisponivel").on('keyup', function() {
+
+    var naldo_leite_l = parseInt($('#qtdHospNaldoLeiteUtisDisponivel').val()) || 0;
+
+    var janduhy_carneiro_l = parseInt($('#qtdHospJCUtisDisponivel').val()) || 0;
+
+    var regional_cz_l = parseInt($('#qtdHospRegionalCzUtisDisponivel').val()) || 0;
+
+    var regional_pombal_l = parseInt($('#qtdHospRegionalPombalUtisDisponivel').val()) || 0;
+
+    var regional_pianco_l = parseInt($('#qtdHospRegionalPiancoUtisDisponivel').val()) || 0;
+
+    var totalUtiDisponivelM3DX = naldo_leite_l + janduhy_carneiro_l + regional_cz_l + regional_pombal_l + regional_pianco_l;
+
+    $('#totalEstadualUtisDisponivelMacro3').val(totalUtiDisponivelM3DX);
+  });
+
+
+  $("#qtdHospNaldoLeiteEnfDisponivel,#qtdHospJCEnfDisponivel,#qtdHospRegionalCzEnfDisponivel,#qtdHospRegionalPombalEnfDisponivel,#qtdHospRegionalPiancoEnfDisponivel").on('keyup', function() {
+
+    var naldo_leite_l = parseInt($('#qtdHospNaldoLeiteEnfDisponivel').val()) || 0;
+
+    var janduhy_carneiro_l = parseInt($('#qtdHospJCEnfDisponivel').val()) || 0;
+
+    var regional_cz_l = parseInt($('#qtdHospRegionalCzEnfDisponivel').val()) || 0;
+
+    var regional_pombal_l = parseInt($('#qtdHospRegionalPombalEnfDisponivel').val()) || 0;
+
+    var regional_pianco_l = parseInt($('#qtdHospRegionalPiancoEnfDisponivel').val()) || 0;
+
+    var totalUtiDisponivelM3DX = naldo_leite_l + janduhy_carneiro_l + regional_cz_l + regional_pombal_l + regional_pianco_l;
+
+    $('#totalEstadualEnfDisponivelMacro3').val(totalUtiDisponivelM3DX);
+  });
+
+
+  $("#qtdHospNaldoLeiteUtiEnviadas,#qtdHospJCUtiEnviadas,#qtdHospRegionalCzUtiEnviadas,#qtdHospRegionalPombalUtiEnviadas,#qtdHospRegionalPiancoUtiEnviadas").on('keyup', function() {
+
+    var naldo_leite_l = parseInt($('#qtdHospNaldoLeiteUtiEnviadas').val()) || 0;
+
+    var janduhy_carneiro_l = parseInt($('#qtdHospJCUtiEnviadas').val()) || 0;
+
+    var regional_cz_l = parseInt($('#qtdHospRegionalCzUtiEnviadas').val()) || 0;
+
+    var regional_pombal_l = parseInt($('#qtdHospRegionalPombalUtiEnviadas').val()) || 0;
+
+    var regional_pianco_l = parseInt($('#qtdHospRegionalPiancoUtiEnviadas').val()) || 0;
+
+    var totalUtiDisponivelM3DX = naldo_leite_l + janduhy_carneiro_l + regional_cz_l + regional_pombal_l + regional_pianco_l;
+
+    $('#totalEstadualUtiEnviadasMacro3').val(totalUtiDisponivelM3DX);
+  });
+
+
+  $("#qtdHospNaldoLeiteEnfEnviadas,#qtdHospJCEnfEnviadas,#qtdHospRegionalCzEnfEnviadas,#qtdHospRegionalPombalEnfEnviadas,#qtdHospRegionalPiancoEnfEnviadas").on('keyup', function() {
+
+    var naldo_leite_l = parseInt($('#qtdHospNaldoLeiteEnfEnviadas').val()) || 0;
+
+    var janduhy_carneiro_l = parseInt($('#qtdHospJCEnfEnviadas').val()) || 0;
+
+    var regional_cz_l = parseInt($('#qtdHospRegionalCzEnfEnviadas').val()) || 0;
+
+    var regional_pombal_l = parseInt($('#qtdHospRegionalPombalEnfEnviadas').val()) || 0;
+
+    var regional_pianco_l = parseInt($('#qtdHospRegionalPiancoEnfEnviadas').val()) || 0;
+
+    var totalUtiDisponivelM3DX = naldo_leite_l + janduhy_carneiro_l + regional_cz_l + regional_pombal_l + regional_pianco_l;
+
+    $('#totalEstadualEnfEnviadasMacro3').val(totalUtiDisponivelM3DX);
+  });
+
 
   $("#qtdHospTraumaCGLeitosImplantadas,#qtdHospClinicasLeitosImplantadas").on('keyup', function() {
     var htdlgfL = parseInt($('#qtdHospTraumaCGLeitosImplantadas').val()) || 0;
@@ -633,6 +738,108 @@ $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCa
   });
 
   $(document).ready(function() {
+    var naldo_leite = parseInt($('#qtdHospNaldoLeiteUtiImplantadas').val()) || 0;
+
+    var janduhy_carneiro = parseInt($('#qtdHospJCUtiImplantadas').val()) || 0;
+
+    var regional_cz = parseInt($('#qtdHospRegionalCzUtiImplantadas').val()) || 0;
+
+    var regional_pombal = parseInt($('#qtdHospRegionalPombalUtiImplantadas').val()) || 0;
+
+    var regional_pianco = parseInt($('#qtdHospRegionalPiancoUtiImplantadas').val()) || 0;
+
+    var totalUtiImplantadosM3DX = naldo_leite + janduhy_carneiro + regional_cz + regional_pombal + regional_pianco;
+
+    $('#totalEstadualUtiImplantadasMacro3').val(totalUtiImplantadosM3DX);
+  });
+
+$(document).ready(function() {  
+  var naldo_leite_l = parseInt($('#qtdHospNaldoLeiteLeitosImplantados').val()) || 0;
+
+    var janduhy_carneiro_l = parseInt($('#qtdHospJCLeitosImplantados').val()) || 0;
+
+    var regional_cz_l = parseInt($('#qtdHospRegionalCzLeitosImplantados').val()) || 0;
+
+    var regional_pombal_l = parseInt($('#qtdHospRegionalPombalLeitosImplantados').val()) || 0;
+
+    var regional_pianco_l = parseInt($('#qtdHospRegionalPiancoLeitosImplantados').val()) || 0;
+
+    var totalLImplantadosM3DX = naldo_leite_l + janduhy_carneiro_l + regional_cz_l + regional_pombal_l + regional_pianco_l;
+
+    $('#totalEstadualLeitosImplantadosMacro3').val(totalLImplantadosM3DX);
+  });
+
+$(document).ready(function() {  
+  var naldo_leite_l = parseInt($('#qtdHospNaldoLeiteUtisDisponivel').val()) || 0;
+
+    var janduhy_carneiro_l = parseInt($('#qtdHospJCUtisDisponivel').val()) || 0;
+
+    var regional_cz_l = parseInt($('#qtdHospRegionalCzUtisDisponivel').val()) || 0;
+
+    var regional_pombal_l = parseInt($('#qtdHospRegionalPombalUtisDisponivel').val()) || 0;
+
+    var regional_pianco_l = parseInt($('#qtdHospRegionalPiancoUtisDisponivel').val()) || 0;
+
+    var totalUtiDisponivelM3DX = naldo_leite_l + janduhy_carneiro_l + regional_cz_l + regional_pombal_l + regional_pianco_l;
+
+    $('#totalEstadualUtisDisponivelMacro3').val(totalUtiDisponivelM3DX);
+  });
+
+$(document).ready(function() {
+  var naldo_leite_l = parseInt($('#qtdHospNaldoLeiteEnfDisponivel').val()) || 0;
+
+    var janduhy_carneiro_l = parseInt($('#qtdHospJCEnfDisponivel').val()) || 0;
+
+    var regional_cz_l = parseInt($('#qtdHospRegionalCzEnfDisponivel').val()) || 0;
+
+    var regional_pombal_l = parseInt($('#qtdHospRegionalPombalEnfDisponivel').val()) || 0;
+
+    var regional_pianco_l = parseInt($('#qtdHospRegionalPiancoEnfDisponivel').val()) || 0;
+
+    var totalUtiDisponivelM3DX = naldo_leite_l + janduhy_carneiro_l + regional_cz_l + regional_pombal_l + regional_pianco_l;
+
+    $('#totalEstadualEnfDisponivelMacro3').val(totalUtiDisponivelM3DX);
+
+});
+
+
+$(document).ready(function() {
+  var naldo_leite_l = parseInt($('#qtdHospNaldoLeiteUtiEnviadas').val()) || 0;
+
+    var janduhy_carneiro_l = parseInt($('#qtdHospJCUtiEnviadas').val()) || 0;
+
+    var regional_cz_l = parseInt($('#qtdHospRegionalCzUtiEnviadas').val()) || 0;
+
+    var regional_pombal_l = parseInt($('#qtdHospRegionalPombalUtiEnviadas').val()) || 0;
+
+    var regional_pianco_l = parseInt($('#qtdHospRegionalPiancoUtiEnviadas').val()) || 0;
+
+    var totalUtiDisponivelM3DX = naldo_leite_l + janduhy_carneiro_l + regional_cz_l + regional_pombal_l + regional_pianco_l;
+
+    $('#totalEstadualUtiEnviadasMacro3').val(totalUtiDisponivelM3DX);
+
+});
+
+$(document).ready(function() {
+    var naldo_leite_l = parseInt($('#qtdHospNaldoLeiteEnfEnviadas').val()) || 0;
+
+    var janduhy_carneiro_l = parseInt($('#qtdHospJCEnfEnviadas').val()) || 0;
+
+    var regional_cz_l = parseInt($('#qtdHospRegionalCzEnfEnviadas').val()) || 0;
+
+    var regional_pombal_l = parseInt($('#qtdHospRegionalPombalEnfEnviadas').val()) || 0;
+
+    var regional_pianco_l = parseInt($('#qtdHospRegionalPiancoEnfEnviadas').val()) || 0;
+
+    var totalUtiDisponivelM3DX = naldo_leite_l + janduhy_carneiro_l + regional_cz_l + regional_pombal_l + regional_pianco_l;
+
+    $('#totalEstadualEnfEnviadasMacro3').val(totalUtiDisponivelM3DX);
+
+});
+
+
+
+  $(document).ready(function() {
     var htdlgfL = parseInt($('#qtdHospTraumaCGLeitosImplantadas').val()) || 0;
 
     var hospClinicasL = parseInt($('#qtdHospClinicasLeitosImplantadas').val()) || 0;
@@ -707,6 +914,53 @@ $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCa
 
   });
 
+  $(document).ready(function() {
+    var valentina_l = parseInt($('#qtdHospValentinaUtiDisponivel').val()) || 0;
+    var santaIsabel_l = parseInt($('#qtdHospSantaIsabelUtisDisponivel').val()) || 0;
+    var prontovida_l = parseInt($('#qtdHospProntovidaUtiDisponivel').val()) || 0;
+
+    var totalMunicipalUtisDisponivelDX = valentina_l + santaIsabel_l + prontovida_l;
+
+    $('#totalMunicipalUtisDisponivel').val(totalMunicipalUtisDisponivelDX);
+
+  });
+
+
+  $(document).ready(function() {
+    var valentina_l = parseInt($('#qtdHospValentinaEnfDisponivel').val()) || 0;
+    var santaIsabel_l = parseInt($('#qtdHospSantaIsabelEnfDisponivel').val()) || 0;
+    var prontovida_l = parseInt($('#qtdHospProntovidaEnfDisponivel').val()) || 0;
+
+    var totalMunicipalUtisDisponivelDX = valentina_l + santaIsabel_l + prontovida_l;
+
+    $('#totalMunicipalEnfDisponivel').val(totalMunicipalUtisDisponivelDX);
+
+  });
+
+
+  $(document).ready(function() {
+    var valentina_l = parseInt($('#qtdHospValentinaUtisEnviadas').val()) || 0;
+    var santaIsabel_l = parseInt($('#qtdHospSantaIsabelUtisEnviadas').val()) || 0;
+    var prontovida_l = parseInt($('#qtdHospProntovidaUtiEnviadas').val()) || 0;
+
+    var totalMunicipalUtisenvDX = valentina_l + santaIsabel_l + prontovida_l;
+
+    $('#totalMunicipalUtisEnviadas').val(totalMunicipalUtisenvDX);
+
+  });
+
+  $(document).ready(function() {
+    var valentina_l = parseInt($('#qtdHospValentinaEnfEnviadas').val()) || 0;
+    var santaIsabel_l = parseInt($('#qtdHospSantaIsabelEnfEnviadas').val()) || 0;
+    var prontovida_l = parseInt($('#qtdHospProntovidaEnfEnviadas').val()) || 0;
+
+    var totalMunicipalUtisenvDX = valentina_l + santaIsabel_l + prontovida_l;
+
+    $('#totalMunicipalEnfEnviadas').val(totalMunicipalUtisenvDX);
+
+  });
+
+
   $(document).ready(function(){
     var totalClementino_l_Implantadas = parseInt($('#totalClementinoLeitosImplantadas').val()) || 0;
     var totalM_l_Implantadas = parseInt($('#totalMetropolitanoLeitosImplantadas').val()) || 0;
@@ -720,6 +974,21 @@ $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCa
 
 
   });
+
+  $(document).ready(function(){
+    var totalClementino_l_Implantadas = parseInt($('#totalClementinoUtiDisponivel').val()) || 0;
+    var totalM_l_Implantadas = parseInt($('#totalMetropolitanoUtiDisponivel').val()) || 0;
+    var totalS_l_Implantadas = parseInt($('#totalHospSolidarioUtiDisponivel').val()) || 0;
+    var totalSP_l_Implantadas = parseInt($('#totalSantaPaulaUtiDisponivel').val()) || 0;
+    var totalFD_l_Implantadas = parseInt($('#totalFreiDamiaoUtiDisponivel').val()) || 0;
+
+    var totalEstadualUtiDisponivelDX = totalClementino_l_Implantadas + totalM_l_Implantadas + totalS_l_Implantadas + totalSP_l_Implantadas + totalFD_l_Implantadas;
+
+    $('#totalEstadualUtiDisponivel').val(totalEstadualUtiDisponivelDX);
+
+
+  });
+
 
   $(document).ready(function(){
     var totalHU_l_Implantados = parseInt($('#totalLeitosLauroWanderley').val()) || 0;
@@ -744,6 +1013,57 @@ $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCa
     $('#totalMunicipalLeitosImplantadas').val(totalMunicipalLeitosImplantadasDX);
   });
 
+  $("#qtdHospValentinaUtiDisponivel,#qtdHospSantaIsabelUtisDisponivel,#qtdHospProntovidaUtiDisponivel").on('keyup', function() {
+
+
+    var valentina_l = parseInt($('#qtdHospValentinaUtiDisponivel').val()) || 0;
+    var santaIsabel_l = parseInt($('#qtdHospSantaIsabelUtisDisponivel').val()) || 0;
+    var prontovida_l = parseInt($('#qtdHospProntovidaUtiDisponivel').val()) || 0;
+
+    var totalMunicipalUtisDisponivelDX = valentina_l + santaIsabel_l + prontovida_l;
+
+    $('#totalMunicipalUtisDisponivel').val(totalMunicipalUtisDisponivelDX);
+  });
+
+  $("#qtdHospValentinaEnfDisponivel,#qtdHospSantaIsabelEnfDisponivel,#qtdHospProntovidaEnfDisponivel").on('keyup', function() {
+
+
+    var valentina_l = parseInt($('#qtdHospValentinaEnfDisponivel').val()) || 0;
+    var santaIsabel_l = parseInt($('#qtdHospSantaIsabelEnfDisponivel').val()) || 0;
+    var prontovida_l = parseInt($('#qtdHospProntovidaEnfDisponivel').val()) || 0;
+
+    var totalMunicipalEnfDisponivelDX = valentina_l + santaIsabel_l + prontovida_l;
+
+    $('#totalMunicipalEnfDisponivel').val(totalMunicipalEnfDisponivelDX);
+  });
+
+
+  $("#qtdHospValentinaUtisEnviadas,#qtdHospSantaIsabelUtisEnviadas,#qtdHospProntovidaUtiEnviadas").on('keyup', function() {
+
+
+    var valentina_l = parseInt($('#qtdHospValentinaUtisEnviadas').val()) || 0;
+    var santaIsabel_l = parseInt($('#qtdHospSantaIsabelUtisEnviadas').val()) || 0;
+    var prontovida_l = parseInt($('#qtdHospProntovidaUtiEnviadas').val()) || 0;
+
+    var totalMunicipalEnfDisponivelDX = valentina_l + santaIsabel_l + prontovida_l;
+
+    $('#totalMunicipalUtisEnviadas').val(totalMunicipalEnfDisponivelDX);
+  });
+
+
+  $("#qtdHospValentinaEnfEnviadas,#qtdHospSantaIsabelEnfEnviadas,#qtdHospProntovidaEnfEnviadas").on('keyup', function() {
+
+
+    var valentina_l = parseInt($('#qtdHospValentinaEnfEnviadas').val()) || 0;
+    var santaIsabel_l = parseInt($('#qtdHospSantaIsabelEnfEnviadas').val()) || 0;
+    var prontovida_l = parseInt($('#qtdHospProntovidaEnfEnviadas').val()) || 0;
+
+    var totalMunicipalEnfDisponivelDX = valentina_l + santaIsabel_l + prontovida_l;
+
+    $('#totalMunicipalEnfEnviadas').val(totalMunicipalEnfDisponivelDX);
+  });
+
+
 
   $("#totalClementinoLeitosImplantadas,#totalMetropolitanoLeitosImplantadas,#totalHospSolidarioLeitosImplantadas,#totalSantaPaulaLeitosImplantadas,#totalFreiDamiaoLeitosImplantadas").on('keyup', function() {
 
@@ -757,6 +1077,20 @@ $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCa
 
     $('#totalEstadualLeitosImplantadas').val(totalEstadualLeitosImplantadasDX);
   });
+
+  $("#totalClementinoUtiDisponivel,#totalMetropolitanoUtiDisponivel,#totalHospSolidarioUtiDisponivel,#totalSantaPaulaUtiDisponivel,#totalFreiDamiaoUtiDisponivel").on('keyup', function() {
+
+    var clementino = parseInt($('#totalClementinoUtiDisponivel').val()) || 0;
+    var metropolitano = parseInt($('#totalMetropolitanoUtiDisponivel').val()) || 0;
+    var solidario = parseInt($('#totalHospSolidarioUtiDisponivel').val()) || 0;
+    var santapaula = parseInt($('#totalSantaPaulaUtiDisponivel').val()) || 0;
+    var freidamiao = parseInt($('#totalFreiDamiaoUtiDisponivel').val()) || 0;
+
+    var totalEstadualLeitosImplantadasDX = clementino + metropolitano + solidario + santapaula + freidamiao;
+
+    $('#totalEstadualUtiDisponivel').val(totalEstadualLeitosImplantadasDX);
+  });
+
 
   $("#totalLeitosLauroWanderley").on('keyup', function() {
 
@@ -959,16 +1293,16 @@ $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCa
           <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalMunicipalLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="totalMunicipalUtisDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="totalMunicipalEnfDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="totalMunicipalUtisEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="totalMunicipalEnfEnviadas">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
@@ -980,16 +1314,16 @@ $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCa
           <input type="text" name="" value="30" style="width: 80%; text-align: center" id="qtdHospValentLeitosImplantados">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospValentinaUtiDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospValentinaEnfDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospValentinaUtisEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospValentinaEnfEnviadas">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
@@ -1001,16 +1335,16 @@ $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCa
           <input type="text" name="" value="10" style="width: 80%; text-align: center;" id="qtdHospSantIsabelLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospSantaIsabelUtisDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospSantaIsabelEnfDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospSantaIsabelUtisEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospSantaIsabelEnfEnviadas">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
@@ -1022,16 +1356,16 @@ $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCa
           <input type="text" name="" value="20" style="width: 80%; text-align: center" id="qtdHospProntovidaLeitosImplantados">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospProntovidaUtiDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospProntovidaEnfDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospProntovidaUtiEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospProntovidaEnfEnviadas">
         </div>
       </div>
       <br>
@@ -1044,16 +1378,16 @@ $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCa
           <input type="text" name="" style="width: 80%; text-align: center" id="totalEstadualLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEstadualUtiDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEstadualEnfDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEstadualUtiEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEstadualEnfEnviadas">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
@@ -1065,16 +1399,16 @@ $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCa
           <input type="text" name="" value="16" style="width: 80%; text-align: center;" id="totalClementinoLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="totalClementinoUtiDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="totalClementinoEnfDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="totalClementinoUtiEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="totalClementinoEnfEnviadas">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
@@ -1086,16 +1420,16 @@ $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCa
           <input type="text" name="" value="31" style="width: 80%; text-align: center" id="totalMetropolitanoLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalMetropolitanoUtiDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalMetropolitanoEnfDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalMetropolitanoUtiEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalMetropolitanoEnfEnviadas">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
@@ -1107,16 +1441,16 @@ $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCa
           <input type="text" name="" value="-" style="width: 80%; text-align: center" id="totalHospSolidarioLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalHospSolidarioUtiDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalHospSolidarioEnfDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalHospSolidarioUtiEnviada">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalHospSolidarioEnfEnviada">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
@@ -1125,19 +1459,19 @@ $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCa
           <input type="text" name="" value="-" style="width: 80%; text-align: center" id="totalSantaPaulaImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="-" style="width: 80%; text-align: center"id="totalSantaPaulaLeitosImplantadas">
+          <input type="text" name="" value="-" style="width: 80%; text-align: center" id="totalSantaPaulaLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalSantaPaulaUtiDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalSantaPaulaEnfDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalSantaPaulaUtiEnviada">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalSantaPaulaEnfEnviada">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
@@ -1149,16 +1483,16 @@ $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCa
           <input type="text" name="" value="16/12" style="width: 80%; text-align: center" id="totalFreiDamiaoLeitosImplantadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalFreiDamiaoUtiDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalFreiDamiaoEnfDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalFreiDamiaoUtiEnviada">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalFreiDamiaoEnfEnviada">
         </div>
       </div>
       <br>
@@ -1432,149 +1766,149 @@ $("#qtdHospPedro1LeitosImplantadas,#qtdHospDaCriancaLeitosImplantadas,#qtdHospCa
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
         <div class="col-sm-4"><b>Estaduais</b></div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="29" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="29" style="width: 80%; text-align: center;" id="">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="51" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="51" style="width: 80%; text-align: center;" id="">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Hospital Infantil Noaldo Leite - Patos</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="6" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="6" style="width: 80%; text-align: center;" id="qtdHospNaldoLeiteUtiImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="7" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="7" style="width: 80%; text-align: center;" id="qtdHospNaldoLeiteLeitosImplantados">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospNaldoLeiteUtisDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospNaldoLeiteEnfDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospNaldoLeiteUtiEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospNaldoLeiteEnfEnviadas">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Hospital Regional Jandhuy Carneiro - Patos</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="10" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="10" style="width: 80%; text-align: center;" id="qtdHospJCUtiImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="12" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="12" style="width: 80%; text-align: center;" id="qtdHospJCLeitosImplantados">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospJCUtisDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospJCEnfDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospJCUtiEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospJCEnfEnviadas">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Hospital Regional de Cajazeiras</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="6" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="6" style="width: 80%; text-align: center;" id="qtdHospRegionalCzUtiImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="8" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="8" style="width: 80%; text-align: center;" id="qtdHospRegionalCzLeitosImplantados">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospRegionalCzUtisDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospRegionalCzEnfDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospRegionalCzUtiEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospRegionalCzEnfEnviadas">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Hospital Regional Dep. Rui Carneiro - Pombal</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="4" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="4" style="width: 80%; text-align: center;" id="qtdHospRegionalPombalUtiImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="12" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="12" style="width: 80%; text-align: center;" id="qtdHospRegionalPombalLeitosImplantados">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospRegionalPombalUtisDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospRegionalPombalEnfDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospRegionalPombalUtiEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospRegionalPombalEnfEnviadas">
         </div>
       </div>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px">
         <div class="col-sm-4">Hospital Regional de Wenceslau Lopes - Piancó</div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="8" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="8" style="width: 80%; text-align: center;" id="qtdHospRegionalPiancoUtiImplantadas">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="15" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="15" style="width: 80%; text-align: center;" id="qtdHospRegionalPiancoLeitosImplantados">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospRegionalPiancoUtisDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center;">
+          <input type="text" name="" value="" style="width: 80%; text-align: center;" id="qtdHospRegionalPiancoEnfDisponivel">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospRegionalPiancoUtiEnviadas">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdHospRegionalPiancoEnfEnviadas">
         </div>
       </div>
       <br>
       <div class="row" style="border: 1px solid #a6a6a6; border-radius: 5px; background-color: #d9d9d9">
         <div class="col-sm-4"><b>TOTAL DA 3ª MACRO</b></div>
         <div class="col-sm-2" style="font-size: 80%; margin-left: -50px">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEstadualUtiImplantadasMacro3">
         </div>
         <div class="col-sm-2" style="font-size: 80%; margin-left:">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEstadualLeitosImplantadosMacro3">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEstadualUtisDisponivelMacro3">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEstadualEnfDisponivelMacro3">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEstadualUtiEnviadasMacro3">
         </div>
         <div class="col-sm-1" style="font-size: 80%">
-          <input type="text" name="" value="" style="width: 80%; text-align: center">
+          <input type="text" name="" value="" style="width: 80%; text-align: center" id="totalEstadualEnfEnviadasMacro3">
         </div>
       </div>
 

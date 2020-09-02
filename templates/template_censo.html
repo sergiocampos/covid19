@@ -1471,6 +1471,61 @@
 
     $('#totalUtiImplantadasMunicipalN').val(totalMunicipalImplantadasDX);
 
+    
+      var pedro1n = parseInt($('#qtdUtiImplanthospPedroIN').val()) || 0;
+      var hospital_c_a_n = parseInt($('#qtdUtiimplantHospCAN').val()) || 0;
+      var hospital_campanha_n = parseInt($('#qtdUtiImplantHospCampanhaN').val()) || 0;
+      var isea_n = parseInt($('#qtdUTIIseaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = pedro1n + hospital_c_a_n + hospital_campanha_n + isea_n;
+
+      $('#totalMunicipalutiImplantadasMacro2N').val(totalMunicipalImplantadasDX);
+
+      var pedro1n = parseInt($('#qtdEnfImplanthospPedroIN').val()) || 0;
+      var hospital_c_a_n = parseInt($('#qtdEnfimplantHospCAN').val()) || 0;
+      var hospital_campanha_n = parseInt($('#qtdEnfImplantHospCampanhaN').val()) || 0;
+      var isea_n = parseInt($('#qtdEnfIseaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = pedro1n + hospital_c_a_n + hospital_campanha_n + isea_n;
+
+      $('#totalMunicipalEnfImplantadaMacro2N').val(totalMunicipalImplantadasDX);
+
+      var pedro1n = parseInt($('#qtdUtiDisphospPedroIN').val()) || 0;
+      var hospital_c_a_n = parseInt($('#qtdUtiDisponHospCAN').val()) || 0;
+      var hospital_campanha_n = parseInt($('#qtdUtiDisponHospCampanhaN').val()) || 0;
+      var isea_n = parseInt($('#qtdUTIdseaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = pedro1n + hospital_c_a_n + hospital_campanha_n + isea_n;
+
+      $('#totalMunicipalUtiDisponivelMacro2N').val(totalMunicipalImplantadasDX);
+
+      var pedro1n = parseInt($('#qtdEnfDisphospPedroIN').val()) || 0;
+      var hospital_c_a_n = parseInt($('#qtdEnfDisponHospCAN').val()) || 0;
+      var hospital_campanha_n = parseInt($('#qtdEnfDisponHospCampanhaN').val()) || 0;
+      var isea_n = parseInt($('#qtdEnfdseaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = pedro1n + hospital_c_a_n + hospital_campanha_n + isea_n;
+
+      $('#totalMunicipalEnfDisponivelMacro2N').val(totalMunicipalImplantadasDX);
+
+      var pedro1n = parseInt($('#qtdUtiEnvhospPedroIN').val()) || 0;
+      var hospital_c_a_n = parseInt($('#qtdUtiEnvHospCAN').val()) || 0;
+      var hospital_campanha_n = parseInt($('#qtdUtiEnviadaHospCampanhaN').val()) || 0;
+      var isea_n = parseInt($('#qtdUTIeseaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = pedro1n + hospital_c_a_n + hospital_campanha_n + isea_n;
+
+      $('#totalMunicipalUtiEnviadaMacro2N').val(totalMunicipalImplantadasDX);
+
+      var pedro1n = parseInt($('#qtdEnfEnvhospPedroIN').val()) || 0;
+      var hospital_c_a_n = parseInt($('#qtdEnfEnvHospCAN').val()) || 0;
+      var hospital_campanha_n = parseInt($('#qtdEnfEnviadaHospCampanhaN').val()) || 0;
+      var isea_n = parseInt($('#qtdEnfeseaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = pedro1n + hospital_c_a_n + hospital_campanha_n + isea_n;
+
+      $('#totalMunicipalEnfEnviadaMacro2N').val(totalMunicipalImplantadasDX);
+
 
     var valentina = parseInt($('#qtdValentinaEnfImplantadasN').val()) || 0;
     var santaIsabel = parseInt($('#qtdSantaIsabelEnfImplantadasN').val()) || 0;
@@ -1711,6 +1766,78 @@
       var totalMunicipalImplantadasDX = valentina + santaIsabel + prontovida;
 
       $('#totalUtiImplantadasMunicipalN').val(totalMunicipalImplantadasDX);
+    });
+
+    $("#qtdUtiImplanthospPedroIN,#qtdUtiimplantHospCAN,#qtdUtiImplantHospCampanhaN,#qtdUTIIseaN").on('keyup', function() {
+
+      var pedro1n = parseInt($('#qtdUtiImplanthospPedroIN').val()) || 0;
+      var hospital_c_a_n = parseInt($('#qtdUtiimplantHospCAN').val()) || 0;
+      var hospital_campanha_n = parseInt($('#qtdUtiImplantHospCampanhaN').val()) || 0;
+      var isea_n = parseInt($('#qtdUTIIseaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = pedro1n + hospital_c_a_n + hospital_campanha_n + isea_n;
+
+      $('#totalMunicipalutiImplantadasMacro2N').val(totalMunicipalImplantadasDX);
+    });
+
+    $("#qtdEnfImplanthospPedroIN,#qtdEnfimplantHospCAN,#qtdEnfImplantHospCampanhaN,#qtdEnfIseaN").on('keyup', function() {
+
+      var pedro1n = parseInt($('#qtdEnfImplanthospPedroIN').val()) || 0;
+      var hospital_c_a_n = parseInt($('#qtdEnfimplantHospCAN').val()) || 0;
+      var hospital_campanha_n = parseInt($('#qtdEnfImplantHospCampanhaN').val()) || 0;
+      var isea_n = parseInt($('#qtdEnfIseaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = pedro1n + hospital_c_a_n + hospital_campanha_n + isea_n;
+
+      $('#totalMunicipalEnfImplantadaMacro2N').val(totalMunicipalImplantadasDX);
+    });
+
+    $("#qtdUtiDisphospPedroIN,#qtdUtiDisponHospCAN,#qtdUtiDisponHospCampanhaN,#qtdUTIdseaN").on('keyup', function() {
+
+      var pedro1n = parseInt($('#qtdUtiDisphospPedroIN').val()) || 0;
+      var hospital_c_a_n = parseInt($('#qtdUtiDisponHospCAN').val()) || 0;
+      var hospital_campanha_n = parseInt($('#qtdUtiDisponHospCampanhaN').val()) || 0;
+      var isea_n = parseInt($('#qtdUTIdseaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = pedro1n + hospital_c_a_n + hospital_campanha_n + isea_n;
+
+      $('#totalMunicipalUtiDisponivelMacro2N').val(totalMunicipalImplantadasDX);
+    });
+
+    $("#qtdEnfDisphospPedroIN,#qtdEnfDisponHospCAN,#qtdEnfDisponHospCampanhaN,#qtdEnfdseaN").on('keyup', function() {
+
+      var pedro1n = parseInt($('#qtdEnfDisphospPedroIN').val()) || 0;
+      var hospital_c_a_n = parseInt($('#qtdEnfDisponHospCAN').val()) || 0;
+      var hospital_campanha_n = parseInt($('#qtdEnfDisponHospCampanhaN').val()) || 0;
+      var isea_n = parseInt($('#qtdEnfdseaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = pedro1n + hospital_c_a_n + hospital_campanha_n + isea_n;
+
+      $('#totalMunicipalEnfDisponivelMacro2N').val(totalMunicipalImplantadasDX);
+    });
+
+    $("#qtdUtiEnvhospPedroIN,#qtdUtiEnvHospCAN,#qtdUtiEnviadaHospCampanhaN,#qtdUTIeseaN").on('keyup', function() {
+
+      var pedro1n = parseInt($('#qtdUtiEnvhospPedroIN').val()) || 0;
+      var hospital_c_a_n = parseInt($('#qtdUtiEnvHospCAN').val()) || 0;
+      var hospital_campanha_n = parseInt($('#qtdUtiEnviadaHospCampanhaN').val()) || 0;
+      var isea_n = parseInt($('#qtdUTIeseaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = pedro1n + hospital_c_a_n + hospital_campanha_n + isea_n;
+
+      $('#totalMunicipalUtiEnviadaMacro2N').val(totalMunicipalImplantadasDX);
+    });
+
+    $("#qtdEnfEnvhospPedroIN,#qtdEnfEnvHospCAN,#qtdEnfEnviadaHospCampanhaN,#qtdEnfeseaN").on('keyup', function() {
+
+      var pedro1n = parseInt($('#qtdEnfEnvhospPedroIN').val()) || 0;
+      var hospital_c_a_n = parseInt($('#qtdEnfEnvHospCAN').val()) || 0;
+      var hospital_campanha_n = parseInt($('#qtdEnfEnviadaHospCampanhaN').val()) || 0;
+      var isea_n = parseInt($('#qtdEnfeseaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = pedro1n + hospital_c_a_n + hospital_campanha_n + isea_n;
+
+      $('#totalMunicipalEnfEnviadaMacro2N').val(totalMunicipalImplantadasDX);
     });
 
     $("#qtdValentinaEnfImplantadasN,#qtdSantaIsabelEnfImplantadasN,#qtdProntovidaEnfImplantadasN").on('keyup', function() {
@@ -3168,16 +3295,16 @@
         <input type="text" name="" value="6" style="width: 80%; text-align: center" id="qtdEnfIseaN">
       </div>
       <div class="col-sm-1" style="font-size: 80%">
-        <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdUTIIseaN">
+        <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdUTIdseaN">
       </div>
       <div class="col-sm-1" style="font-size: 80%">
-        <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdEnfIseaN">
+        <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdEnfdseaN">
       </div>
       <div class="col-sm-1" style="font-size: 80%">
-        <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdUTIIseaN">
+        <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdUTIeseaN">
       </div>
       <div class="col-sm-1" style="font-size: 80%">
-        <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdEnfIseaN">
+        <input type="text" name="" value="" style="width: 80%; text-align: center" id="qtdEnfeseaN">
       </div>
     </div>
     <br>

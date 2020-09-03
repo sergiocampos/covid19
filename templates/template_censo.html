@@ -1481,6 +1481,202 @@
 
       $('#totalMunicipalutiImplantadasMacro2N').val(totalMunicipalImplantadasDX);
 
+      var hetdlgf = parseInt($('#qtdUtiImplantHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiImplanthospClinicaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = hetdlgf + hospital_clinicas;
+
+      $('#totalEstadualUtiImplantMacro2N').val(totalMunicipalImplantadasDX);
+
+      var hetdlgf = parseInt($('#qtdEnfImplantHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfImplanthospClinicaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = hetdlgf + hospital_clinicas;
+
+      $('#totalEstadualEnfImplantMacro2N').val(totalMunicipalImplantadasDX);
+
+      var hetdlgf = parseInt($('#qtdUtiDisponHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiDispohospClinicaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = hetdlgf + hospital_clinicas;
+
+      $('#totalEstadualUtiDispMacro2N').val(totalMunicipalImplantadasDX);
+
+      var hetdlgf = parseInt($('#qtdEnfDisponHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfDispohospClinicaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = hetdlgf + hospital_clinicas;
+
+      $('#totalEstadualEnfDispMacro2N').val(totalMunicipalImplantadasDX);
+
+      var hetdlgf = parseInt($('#qtdUtiEnvHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiEnvhospClinicaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = hetdlgf + hospital_clinicas;
+
+      $('#totalEstadualUtiEnvMacro2N').val(totalMunicipalImplantadasDX);
+
+      var hetdlgf = parseInt($('#qtdEnfEnvHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfEnvhospClinicaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = hetdlgf + hospital_clinicas;
+
+      $('#totalEstadualEnfEnvMacro2N').val(totalMunicipalImplantadasDX);
+
+      var pedro1 = parseInt($('#qtdUtiImplanthospPedroIN').val()) || 0;
+      var hospital_ca = parseInt($('#qtdUtiimplantHospCAN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdUtiImplantHospCampanhaN').val()) || 0;
+      var isea = parseInt($('#qtdUTIIseaN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdUtiImplantHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiImplanthospClinicaN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca + pedro1; 
+
+      $('#totalGeralUtiImplantMacro2N').val(totalEImplantadasDX);
+
+      var hospital_ca = parseInt($('#qtdUtiImplantHospNoaldoLeiteN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdUtiImplantHospJandCarneiroN').val()) || 0;
+      var isea = parseInt($('#qtdUtiImplantHospRegionalCZN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdUtiImplantHospRegionalPombalN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiImplantHospRegionalPiancoN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca; 
+
+      $('#totalGeralMacro3UtiImplantN').val(totalEImplantadasDX);
+
+      var hospital_ca = parseInt($('#qtdEnfImplantHospNoaldoLeiteN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdEnfImplantHospJandCarneiroN').val()) || 0;
+      var isea = parseInt($('#qtdEnfImplantHospRegionalCZN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdEnfImplantHospRegionalPombalN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfImplantHospRegionalPiancoN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca; 
+
+      $('#totalGeralMacro3EnfImplantN').val(totalEImplantadasDX);
+
+      var hospital_ca = parseInt($('#qtdUtiDispHospNoaldoLeiteN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdUtiDispHospJandCarneiroN').val()) || 0;
+      var isea = parseInt($('#qtdUtiDispHospRegionalCZN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdUtiDispHospRegionalPombalN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiDispHospRegionalPiancoN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca; 
+
+      $('#totalGeralMacro3UtiDispN').val(totalEImplantadasDX);
+
+      var hospital_ca = parseInt($('#qtdEnfDispHospNoaldoLeiteN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdEnfDispHospJandCarneiroN').val()) || 0;
+      var isea = parseInt($('#qtdEnfDispHospRegionalCZN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdEnfDispHospRegionalPombalN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfDispHospRegionalPiancoN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca; 
+
+      $('#totalGeralMacro3EnfDispN').val(totalEImplantadasDX);
+
+      var hospital_ca = parseInt($('#qtdUtiEnvHospNoaldoLeiteN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdUtiEnvHospJandCarneiroN').val()) || 0;
+      var isea = parseInt($('#qtdUtiEnvHospRegionalCZN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdUtiEnvHospRegionalPombalN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiEnvHospRegionalPiancoN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca; 
+
+      $('#totalGeralMacro3UtiEnvN').val(totalEImplantadasDX);
+
+      var hospital_ca = parseInt($('#qtdEnfEnvHospNoaldoLeiteN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdEnfEnvHospJandCarneiroN').val()) || 0;
+      var isea = parseInt($('#qtdEnfEnvHospRegionalCZN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdEnfEnvHospRegionalPombalN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfEnvHospRegionalPiancoN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca; 
+
+      $('#totalGeralMacro3EnfEnvN').val(totalEImplantadasDX);
+
+  
+
+      var pedro1 = parseInt($('#qtdEnfImplanthospPedroIN').val()) || 0;
+      var hospital_ca = parseInt($('#qtdEnfimplantHospCAN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdEnfImplantHospCampanhaN').val()) || 0;
+      var isea = parseInt($('#qtdEnfIseaN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdEnfImplantHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfImplanthospClinicaN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca + pedro1; 
+
+      $('#totalGeralEnfImplantMacro2N').val(totalEImplantadasDX);
+
+      var pedro1 = parseInt($('#qtdUtiDisphospPedroIN').val()) || 0;
+      var hospital_ca = parseInt($('#qtdUtiDisponHospCAN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdUtiDisponHospCampanhaN').val()) || 0;
+      var isea = parseInt($('#qtdUTIdseaN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdUtiDisponHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiDispohospClinicaN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca + pedro1; 
+
+      $('#totalGeralUtiDispoMacro2N').val(totalEImplantadasDX);
+
+      var pedro1 = parseInt($('#qtdEnfDisphospPedroIN').val()) || 0;
+      var hospital_ca = parseInt($('#qtdEnfDisponHospCAN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdEnfDisponHospCampanhaN').val()) || 0;
+      var isea = parseInt($('#qtdEnfdseaN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdEnfDisponHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfDispohospClinicaN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca + pedro1; 
+
+      $('#totalGeralEnfDisponMacro2N').val(totalEImplantadasDX);
+
+      var pedro1 = parseInt($('#qtdUtiEnvhospPedroIN').val()) || 0;
+      var hospital_ca = parseInt($('#qtdUtiEnvHospCAN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdUtiEnviadaHospCampanhaN').val()) || 0;
+      var isea = parseInt($('#qtdUTIeseaN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdUtiEnvHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiEnvhospClinicaN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca + pedro1; 
+
+      $('#totalGeralUtiEnvMacro2N').val(totalEImplantadasDX);
+
+      var pedro1 = parseInt($('#qtdEnfEnvhospPedroIN').val()) || 0;
+      var hospital_ca = parseInt($('#qtdEnfEnvHospCAN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdEnfEnviadaHospCampanhaN').val()) || 0;
+      var isea = parseInt($('#qtdEnfeseaN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdEnfEnvHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfEnvhospClinicaN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca + pedro1; 
+
+      $('#totalGeralEnfEnvMacro2N').val(totalEImplantadasDX);
+
+
+      
       var pedro1n = parseInt($('#qtdEnfImplanthospPedroIN').val()) || 0;
       var hospital_c_a_n = parseInt($('#qtdEnfimplantHospCAN').val()) || 0;
       var hospital_campanha_n = parseInt($('#qtdEnfImplantHospCampanhaN').val()) || 0;
@@ -1779,6 +1975,256 @@
 
       $('#totalMunicipalutiImplantadasMacro2N').val(totalMunicipalImplantadasDX);
     });
+
+    $("#qtdUtiImplantHospTraumaN,#qtdUtiImplanthospClinicaN").on('keyup', function() {
+
+      var hetdlgf = parseInt($('#qtdUtiImplantHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiImplanthospClinicaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = hetdlgf + hospital_clinicas;
+
+      $('#totalEstadualUtiImplantMacro2N').val(totalMunicipalImplantadasDX);
+    });
+
+    $("#qtdEnfImplantHospTraumaN,#qtdEnfImplanthospClinicaN").on('keyup', function() {
+
+      var hetdlgf = parseInt($('#qtdEnfImplantHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfImplanthospClinicaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = hetdlgf + hospital_clinicas;
+
+      $('#totalEstadualEnfImplantMacro2N').val(totalMunicipalImplantadasDX);
+    });
+
+    $("#qtdUtiDisponHospTraumaN,#qtdUtiDispohospClinicaN").on('keyup', function() {
+
+      var hetdlgf = parseInt($('#qtdUtiDisponHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiDispohospClinicaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = hetdlgf + hospital_clinicas;
+
+      $('#totalEstadualUtiDispMacro2N').val(totalMunicipalImplantadasDX);
+    });
+
+    $("#qtdEnfDisponHospTraumaN,#qtdEnfDispohospClinicaN").on('keyup', function() {
+
+      var hetdlgf = parseInt($('#qtdEnfDisponHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfDispohospClinicaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = hetdlgf + hospital_clinicas;
+
+      $('#totalEstadualEnfDispMacro2N').val(totalMunicipalImplantadasDX);
+    });
+
+    $("#qtdUtiEnvHospTraumaN,#qtdUtiEnvhospClinicaN").on('keyup', function() {
+
+      var hetdlgf = parseInt($('#qtdUtiEnvHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiEnvhospClinicaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = hetdlgf + hospital_clinicas;
+
+      $('#totalEstadualUtiEnvMacro2N').val(totalMunicipalImplantadasDX);
+    });
+
+    $("#qtdEnfEnvHospTraumaN,#qtdEnfEnvhospClinicaN").on('keyup', function() {
+
+      var hetdlgf = parseInt($('#qtdEnfEnvHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfEnvhospClinicaN').val()) || 0;
+
+      var totalMunicipalImplantadasDX = hetdlgf + hospital_clinicas;
+
+      $('#totalEstadualEnfEnvMacro2N').val(totalMunicipalImplantadasDX);
+    });
+
+    $("#qtdUtiImplanthospPedroIN,#qtdUtiimplantHospCAN,#qtdUtiImplantHospCampanhaN,#qtdUTIIseaN,#qtdUtiImplantHospTraumaN,#qtdUtiImplanthospClinicaN").on('keyup', function() {
+
+      var pedro1 = parseInt($('#qtdUtiImplanthospPedroIN').val()) || 0;
+      var hospital_ca = parseInt($('#qtdUtiimplantHospCAN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdUtiImplantHospCampanhaN').val()) || 0;
+      var isea = parseInt($('#qtdUTIIseaN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdUtiImplantHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiImplanthospClinicaN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca + pedro1; 
+
+      $('#totalGeralUtiImplantMacro2N').val(totalEImplantadasDX);
+    });
+
+    $("#qtdUtiImplantHospNoaldoLeiteN,#qtdUtiImplantHospJandCarneiroN,#qtdUtiImplantHospRegionalCZN,#qtdUtiImplantHospRegionalPombalN,#qtdUtiImplantHospRegionalPiancoN").on('keyup', function() {
+
+      var hospital_ca = parseInt($('#qtdUtiImplantHospNoaldoLeiteN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdUtiImplantHospJandCarneiroN').val()) || 0;
+      var isea = parseInt($('#qtdUtiImplantHospRegionalCZN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdUtiImplantHospRegionalPombalN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiImplantHospRegionalPiancoN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca; 
+
+      $('#totalGeralMacro3UtiImplantN').val(totalEImplantadasDX);
+    });
+
+    $("#qtdEnfImplantHospNoaldoLeiteN,#qtdEnfImplantHospJandCarneiroN,#qtdEnfImplantHospRegionalCZN,#qtdEnfImplantHospRegionalPombalN,#qtdEnfImplantHospRegionalPiancoN").on('keyup', function() {
+
+      var hospital_ca = parseInt($('#qtdEnfImplantHospNoaldoLeiteN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdEnfImplantHospJandCarneiroN').val()) || 0;
+      var isea = parseInt($('#qtdEnfImplantHospRegionalCZN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdEnfImplantHospRegionalPombalN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfImplantHospRegionalPiancoN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca; 
+
+      $('#totalGeralMacro3EnfImplantN').val(totalEImplantadasDX);
+    });
+
+    $("#qtdUtiDispHospNoaldoLeiteN,#qtdUtiDispHospJandCarneiroN,#qtdUtiDispHospRegionalCZN,#qtdUtiDispHospRegionalPombalN,#qtdUtiDispHospRegionalPiancoN").on('keyup', function() {
+
+      var hospital_ca = parseInt($('#qtdUtiDispHospNoaldoLeiteN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdUtiDispHospJandCarneiroN').val()) || 0;
+      var isea = parseInt($('#qtdUtiDispHospRegionalCZN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdUtiDispHospRegionalPombalN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiDispHospRegionalPiancoN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca; 
+
+      $('#totalGeralMacro3UtiDispN').val(totalEImplantadasDX);
+    });
+
+    $("#qtdEnfDispHospNoaldoLeiteN,#qtdEnfDispHospJandCarneiroN,#qtdEnfDispHospRegionalCZN,#qtdEnfDispHospRegionalPombalN,#qtdEnfDispHospRegionalPiancoN").on('keyup', function() {
+
+      var hospital_ca = parseInt($('#qtdEnfDispHospNoaldoLeiteN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdEnfDispHospJandCarneiroN').val()) || 0;
+      var isea = parseInt($('#qtdEnfDispHospRegionalCZN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdEnfDispHospRegionalPombalN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfDispHospRegionalPiancoN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca; 
+
+      $('#totalGeralMacro3EnfDispN').val(totalEImplantadasDX);
+    });
+
+    $("#qtdUtiEnvHospNoaldoLeiteN,#qtdUtiEnvHospJandCarneiroN,#qtdUtiEnvHospRegionalCZN,#qtdUtiEnvHospRegionalPombalN,#qtdUtiEnvHospRegionalPiancoN").on('keyup', function() {
+
+      var hospital_ca = parseInt($('#qtdUtiEnvHospNoaldoLeiteN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdUtiEnvHospJandCarneiroN').val()) || 0;
+      var isea = parseInt($('#qtdUtiEnvHospRegionalCZN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdUtiEnvHospRegionalPombalN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiEnvHospRegionalPiancoN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca; 
+
+      $('#totalGeralMacro3UtiEnvN').val(totalEImplantadasDX);
+    });
+
+    $("#qtdEnfEnvHospNoaldoLeiteN,#qtdEnfEnvHospJandCarneiroN,#qtdEnfEnvHospRegionalCZN,#qtdEnfEnvHospRegionalPombalN,#qtdEnfEnvHospRegionalPiancoN").on('keyup', function() {
+
+      var hospital_ca = parseInt($('#qtdEnfEnvHospNoaldoLeiteN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdEnfEnvHospJandCarneiroN').val()) || 0;
+      var isea = parseInt($('#qtdEnfEnvHospRegionalCZN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdEnfEnvHospRegionalPombalN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfEnvHospRegionalPiancoN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca; 
+
+      $('#totalGeralMacro3EnfEnvN').val(totalEImplantadasDX);
+    });
+
+    $("#qtdEnfImplanthospPedroIN,#qtdEnfimplantHospCAN,#qtdEnfImplantHospCampanhaN,#qtdEnfIseaN,#qtdEnfImplantHospTraumaN,#qtdEnfImplanthospClinicaN").on('keyup', function() {
+
+      var pedro1 = parseInt($('#qtdEnfImplanthospPedroIN').val()) || 0;
+      var hospital_ca = parseInt($('#qtdEnfimplantHospCAN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdEnfImplantHospCampanhaN').val()) || 0;
+      var isea = parseInt($('#qtdEnfIseaN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdEnfImplantHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfImplanthospClinicaN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca + pedro1; 
+
+      $('#totalGeralEnfImplantMacro2N').val(totalEImplantadasDX);
+    });
+
+    $("#qtdUtiDisphospPedroIN,#qtdUtiDisponHospCAN,#qtdUtiDisponHospCampanhaN,#qtdUTIdseaN,#qtdUtiDisponHospTraumaN,#qtdUtiDispohospClinicaN").on('keyup', function() {
+
+      var pedro1 = parseInt($('#qtdUtiDisphospPedroIN').val()) || 0;
+      var hospital_ca = parseInt($('#qtdUtiDisponHospCAN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdUtiDisponHospCampanhaN').val()) || 0;
+      var isea = parseInt($('#qtdUTIdseaN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdUtiDisponHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiDispohospClinicaN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca + pedro1; 
+
+      $('#totalGeralUtiDispoMacro2N').val(totalEImplantadasDX);
+    });
+
+    $("#qtdEnfDisphospPedroIN,#qtdEnfDisponHospCAN,#qtdEnfDisponHospCampanhaN,#qtdEnfdseaN,#qtdEnfDisponHospTraumaN,#qtdEnfDispohospClinicaN").on('keyup', function() {
+
+      var pedro1 = parseInt($('#qtdEnfDisphospPedroIN').val()) || 0;
+      var hospital_ca = parseInt($('#qtdEnfDisponHospCAN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdEnfDisponHospCampanhaN').val()) || 0;
+      var isea = parseInt($('#qtdEnfdseaN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdEnfDisponHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfDispohospClinicaN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca + pedro1; 
+
+      $('#totalGeralEnfDisponMacro2N').val(totalEImplantadasDX);
+    });
+
+    $("#qtdUtiEnvhospPedroIN,#qtdUtiEnvHospCAN,#qtdUtiEnviadaHospCampanhaN,#qtdUTIeseaN,#qtdUtiEnvHospTraumaN,#qtdUtiEnvhospClinicaN").on('keyup', function() {
+
+      var pedro1 = parseInt($('#qtdUtiEnvhospPedroIN').val()) || 0;
+      var hospital_ca = parseInt($('#qtdUtiEnvHospCAN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdUtiEnviadaHospCampanhaN').val()) || 0;
+      var isea = parseInt($('#qtdUTIeseaN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdUtiEnvHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdUtiEnvhospClinicaN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca + pedro1; 
+
+      $('#totalGeralUtiEnvMacro2N').val(totalEImplantadasDX);
+    });
+
+    $("#qtdEnfEnvhospPedroIN,#qtdEnfEnvHospCAN,#qtdEnfEnviadaHospCampanhaN,#qtdEnfeseaN,#qtdEnfEnvHospTraumaN,#qtdEnfEnvhospClinicaN").on('keyup', function() {
+
+      var pedro1 = parseInt($('#qtdEnfEnvhospPedroIN').val()) || 0;
+      var hospital_ca = parseInt($('#qtdEnfEnvHospCAN').val()) || 0;
+
+      var hosp_campanha = parseInt($('#qtdEnfEnviadaHospCampanhaN').val()) || 0;
+      var isea = parseInt($('#qtdEnfeseaN').val()) || 0;
+
+      var hetdlgf = parseInt($('#qtdEnfEnvHospTraumaN').val()) || 0;
+      var hospital_clinicas = parseInt($('#qtdEnfEnvhospClinicaN').val()) || 0;
+
+      var totalEImplantadasDX = hetdlgf + hospital_clinicas + isea + hosp_campanha + hospital_ca + pedro1; 
+
+      $('#totalGeralEnfEnvMacro2N').val(totalEImplantadasDX);
+    });
+
+
+
+    
 
     $("#qtdEnfImplanthospPedroIN,#qtdEnfimplantHospCAN,#qtdEnfImplantHospCampanhaN,#qtdEnfIseaN").on('keyup', function() {
 

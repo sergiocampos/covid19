@@ -242,3 +242,67 @@ class Regulacao(models.Model):
 
 	def __str__(self):
 		return str(self.estabelecimento_referencia_covid)
+
+class CensoHospitalar(models.Model):
+	uti_implant_macro1_hospValent_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_implant_macro1_hospValent_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_dispon_macro1_hospValent_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_dispon_macro1_hospValent_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_enviada_macro1_hospValent_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_enviada_macro1_hospValent_diurno = models.Charfield(max_length=200, blank=True, null=True)
+
+	uti_implant_macro1_hospStaIsabel_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_implant_macro1_hospStaIsabel_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_dispon_macro1_hospStaIsabel_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_dispon_macro1_hospStaIsabel_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_enviada_macro1_hospStaIsabel_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_enviada_macro1_hospStaIsabel_diurno = models.Charfield(max_length=200, blank=True, null=True)
+
+	uti_implant_macro1_prontovida_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_implant_macro1_prontovida_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_dispon_macro1_prontovida_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_dispon_macro1_prontovida_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_enviada_macro1_prontovida_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_enviada_macro1_prontovida_diurno = models.Charfield(max_length=200, blank=True, null=True)
+
+	uti_implant_macro1_clementino_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_implant_macro1_clementino_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_dispon_macro1_clementino_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_dispon_macro1_clementino_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_enviada_macro1_clementino_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_enviada_macro1_clementino_diurno = models.Charfield(max_length=200, blank=True, null=True)
+
+	uti_implant_macro1_metropolitano_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_implant_macro1_metropolitano_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_dispon_macro1_metropolitano_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_dispon_macro1_metropolitano_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_enviada_macro1_metropolitano_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_enviada_macro1_metropolitano_diurno = models.Charfield(max_length=200, blank=True, null=True)
+
+	uti_implant_macro1_solidario_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_implant_macro1_solidario_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_dispon_macro1_solidario_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_dispon_macro1_solidario_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_enviada_macro1_solidario_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_enviada_macro1_solidario_diurno = models.Charfield(max_length=200, blank=True, null=True)
+
+	uti_implant_macro1_staPaula_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_implant_macro1_staPaula_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_dispon_macro1_staPaula_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_dispon_macro1_staPaula_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_enviada_macro1_staPaula_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_enviada_macro1_staPaula_diurno = models.Charfield(max_length=200, blank=True, null=True)
+
+	uti_implant_macro1_freiDamiao_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_implant_macro1_freiDamiao_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_dispon_macro1_freiDamiao_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_dispon_macro1_freiDamiao_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_enviada_macro1_freiDamiao_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_enviada_macro1_freiDamiao_diurno = models.Charfield(max_length=200, blank=True, null=True)
+
+	uti_implant_macro1_hu_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_implant_macro1_hu_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_dispon_macro1_hu_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_dispon_macro1_hu_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	uti_enviada_macro1_hu_diurno = models.Charfield(max_length=200, blank=True, null=True)
+	enf_enviada_macro1_hu_diurno = models.Charfield(max_length=200, blank=True, null=True)

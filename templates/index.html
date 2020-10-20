@@ -2,11 +2,11 @@
 {% block body_block %}
 <div class="container">
   <div class="jumbotron">
-    <h2>Obrigado por acessar o sistema de regulação!</h2>
+    <h1>Bem vindo à CERH!</h1>
     {% if user.is_authenticated %}
-        <h2>Hello {{ user.username }}</h2>
+        <h3><a href="/covid_list/">Acessar Sistema</a></h3>
     {% else %}
-        <h3><b>Registre-se</b> ou Login para utilizar!</h3>
+        <h2></h2>
     {% endif %}
   </div>
 </div>

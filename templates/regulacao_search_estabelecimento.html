@@ -636,7 +636,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 		      <a class="nav-link" href="/registro_covid/">Registrar Caso</a>
 		    </li>
 		    <li class="nav-item">
-		      <a class="nav-link" href="/regulacao_edit/{{registro.id}}/">Registro/Edição</a>
+		      <a class="nav-link" href="/regulacao/{{registro.id}}/">Registro/Edição</a>
 		    </li>
 		    <li class="nav-item">
 		      <a class="nav-link active" href="#">Regulação</a>
@@ -653,7 +653,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 		  </ul>
 		</nav><hr>
 
-		<form enctype="multipart/form-data" action="submit" method="POST">{% csrf_token %}
+		<form enctype="multipart/form-data" method="POST" action="{% url 'paciente_atribuir_senha' registro.id %}?municipio_estabelecimento_referencia={{municipio_estabelecimento_referencia}}">{% csrf_token %}
 
 		<div class="container">
 
@@ -674,14 +674,14 @@ máxima de 12h de validação para recepção na unidade solicitante.
 					Nome do Solicitante
 					<input type="number" name="registro_id" value="{{registro.id}}" id="" hidden>
 					<div class="form-check-inline">
-						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="nome_solicitante" size="40" value="{{registro.nome_solicitante}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="nome_solicitante" size="40" value="{{registro.nome_solicitante}}" disabled>
 				    </div>
 				</div>
 
 				<div class="col-sm-6">
 					Paciente
 					<div class="form-check-inline">
-						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="nome_paciente" size="40" value="{{registro.nome_paciente}}">
+						<input type="text" class="form-control form-control-sm" id="" placeholder="" name="nome_paciente" size="40" value="{{registro.nome_paciente}}" disabled>
 				    </div>
 				</div>
     			
@@ -694,7 +694,7 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-12">
 					Estabelecimento Solicitante:
 					<div class="form-check-inline" style="width: 70%">
-						<input type="text" class="form-control form-control-sm" value="{{registro.estabelecimento_solicitante}}">
+						<input type="text" class="form-control form-control-sm" value="{{registro.estabelecimento_solicitante}}" disabled>
 				    </div>
 				</div>
 				
@@ -705,20 +705,20 @@ máxima de 12h de validação para recepção na unidade solicitante.
 				<div class="col-sm-6">
     				Idade:
 				    <div class="form-check-inline">
-				        <input type="number" class="form-control form-control-sm" id="" placeholder="" name="idade_paciente" value="{{registro.idade_paciente}}" min="1" max="200">
+				        <input type="number" class="form-control form-control-sm" id="" placeholder="" name="idade_paciente" value="{{registro.idade_paciente}}" min="1" max="200" disabled>
 				    </div>
     			</div>
 				<div class="col-sm-6">
 					Sexo:
 					<div class="form-check-inline">
 						{% if registro.sexo_paciente == '' or registro.sexo_paciente == None %}
-						<select class="form-control form-control-sm" name="sexo_paciente" id="" style="width: 125px">
+						<select class="form-control form-control-sm" name="sexo_paciente" id="" style="width: 125px" disabled>
 							<option value=""></option>
 							<option value="MASCULINO">MASCULINO</option>
 							<option value="FEMININO">FEMININO</option>
 						</select>
 					    {%else%}
-					    <select class="form-control form-control-sm" name="sexo_paciente" id="" style="width: 125px">
+					    <select class="form-control form-control-sm" name="sexo_paciente" id="" style="width: 125px" disabled>
 							<option value="{{registro.sexo_paciente}}" selected>{{registro.sexo_paciente}}</option>
 							<option value="MASCULINO">MASCULINO</option>
 							<option value="FEMININO">FEMININO</option>
@@ -729,18 +729,26 @@ máxima de 12h de validação para recepção na unidade solicitante.
 			</div>
 			<br>
 			<div class="row">
+				<div class="col-sm-4" id=""></div>
 				<div class="col-sm-4">
 					Município do Estabelecimento de Referência:
-					<select class="form-control form-control-sm" autofocus="autofocus" name="municipio_solicitante" id="" required>
+					<select class="form-control form-control-sm" autofocus="autofocus" name="municipio_estabelecimento_referencia" id="" required>
 						{% for m in municipios %}
 						<option value="{{m.MUNICIPIO}}">{{m.MUNICIPIO}}</option>
 						{%endfor%}
 					</select>
 				</div>
+				<div class="col-sm-4" id=""></div>
+				
+			</div><br>
+			<div class="row">
 				<div class="col-sm-4"></div>
 				<div class="col-sm-4">
-					<button type="submit" class="" style="align-items: center; border-radius: 5px; border: 2px solid #c2c2d6" id="btn_inicio">Pesquisar Estabelecimento Referência:</button>
+					<div class="container-fluid" style="text-align: center;">
+						<button type="submit" class="btn btn-primary" style="align-items: center;" id="btn_inserir_paciente">Pesquisar Estabelecimento</button>  
+				    </div>
 				</div>
+				<div class="col-sm-4" id=""></div>
 			</div>
 			<hr>
 

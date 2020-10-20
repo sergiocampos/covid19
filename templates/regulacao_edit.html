@@ -4440,7 +4440,10 @@
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		  <ul class="navbar-nav">
 		    <li class="nav-item">
-		      <a class="nav-link" href="/">Principal</a>
+		      <a class="nav-link" href="/">Home</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="/covid_list/">Principal</a>
 		    </li>
 		    <li class="nav-item">
 		      <a class="nav-link" href="#"></a>
@@ -4485,7 +4488,7 @@
 	    <br>
 		</div>
 
-		<form enctype="multipart/form-data" action="submit" method="POST">{% csrf_token %}
+		<form enctype="multipart/form-data" method="POST" action="{% url 'regulacao' registro.id %}?municipio_estabelecimento_solicitante={{municipio_estabelecimento_solicitante}}?estabelecimento_solicitante={{estabelecimento_solicitante}}?estabelecimento_solicitante_outro={{estabelecimento_solicitante_outro}}?municipio_referencia={{municipio_referencia}}">{% csrf_token %}
 
 		<div class="container">
 

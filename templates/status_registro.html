@@ -16,6 +16,8 @@
 
 	<script language="JavaScript" type="text/javascript" src="/static/js/cidades-estados-1.4-utf8.js"></script>
 
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 	<style>
 		#status_regulacao_id,
 		#paciente_regulado_id,
@@ -27,10 +29,17 @@
 		#paciente_obito_regulacao_id,
 		#paciente_lista_regulacao_id,
 		#paciente_internado_regulacao_id,
-		#ag_conf_vaga_regulacao_id {
+		#ag_conf_vaga_regulacao_id,
+		#justif_cancelar_regulacao_id {
 		display: none;
 	}
 	</style>
+
+	<script>
+		function exibirJustCanc(){
+			$("#justif_cancelar_regulacao_id").show();
+		}
+	</script>
 
 </head>
 <body>
@@ -44,14 +53,17 @@
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		  <ul class="navbar-nav">
 		    <li class="nav-item">
-		      <a class="nav-link" href="/">Principal</a>
+		      <a class="nav-link" href="/">Home</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="/covid_list/">Principal</a>
 		    </li>
 		    <li class="nav-item">
 		      <a class="nav-link" href="/search_estabelecimento/">Registrar Caso</a>
 		    </li>
-		    <li class="nav-item">
+		    <!--<li class="nav-item">
 		      <a class="nav-link" href="/regulacao_edit/{{registro.id}}/">Registro/Edição</a>
-		    </li>
+		    </li>-->
 		    <li class="nav-item">
 		      <a class="nav-link" href="#"></a>
 		    </li>
@@ -59,7 +71,10 @@
 		      <a class="nav-link" href="/search_register/">Localizar</a>
 		    </li>
 		    <li class="nav-item">
+		      {% if user.first_name == 'videofonista' or user.first_name == 'medico' or user.first_name == 'enfermeiro' %}
+		      {%else%}
 		      <a class="nav-link" href="/gerar_relatorios/">Relatórios</a>
+		      {%endif%}
 		    </li>
 		    <li>
 		    	<a class="nav-link" href="/accounts/logout">Sair</a>
@@ -96,9 +111,7 @@
 		<div class="row">
 			<div class="col-sm-5"></div>
 			<div class="col-sm-5"></div>
-			<div class="col-sm-2">
-				<button type="button" class="btn btn-outline-danger btn-sm" style="align-items: center;" id="btn_inicio"><a class="" href="/remove_registro_covid/{{registro.id}}/">Escluir Registro</a></button> 
-			</div>
+			<div class="col-sm-2"></div>
 		</div>
 		<hr />
 		<br />
@@ -107,8 +120,14 @@
 			<div class="col-sm-4"></div>
 			<div class="col-sm-4"><b class="">Status do paciente {{registro.nome_paciente}}:</b></div>
 			<div class="col-sm-4">
+				{% if user.first_name != 'enfermeiro' %}
 				<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Parecer Médico
 				</button>
+				{%endif%}
+				{% if registro.andamento_processo != '' %}
+				{%else%}
+				<button type="button" class="btn btn-warning btn-sm" onclick="exibirJustCanc()">Cancelar processo!</button>
+				{%endif%}
 			</div>
 		</div><br />
 
@@ -125,7 +144,12 @@
 		        
 		        <!-- Modal body -->
 		        <div class="modal-body">
-		          <textarea name="" id="" cols="50" rows="10">{{registro.parecer_medico}}</textarea>
+		          <textarea name="" id="" cols="50" rows="10">
+		          {% if registro.parecer_medico == '' or registro.parecer_medico == None %}
+		          {%else%}
+		          {{registro.parecer_medico}}
+		          {%endif%}
+		      	</textarea>
 		        </div>
 		        
 		        <!-- Modal footer -->
@@ -137,11 +161,22 @@
 		    </div>
 		  </div>
 
-
-
 			<div class="row">
 				<div class="col-sm-4"></div>
-				{% if 'Aguardando confirmação de Vaga' in status_list_descricao %}
+				{% if 'Parecer Médico' in status_parecer_registro.descricao %}
+				<div id="" class="col-sm-4" style="background-color: #ffcc00; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b><i>Parecer Médico! - {{status_parecer_registro.data_notificacao}} - {{status_parecer_registro.hora_notificacao|time:"H:i"}}</i></b>
+				</div>
+				{%else%}
+				<div id="paciente_regulado_id" class="col-sm-4" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b><i>Parecer Médico!</i></b>
+				</div>
+				{%endif%}
+				<div class="col-sm-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4"></div>
+				{% if 'Aguardando confirmação de Vaga' in status_aguard_conf_vaga_registro.descricao %}
 				<div id="" class="col-sm-4" style="background-color: #ffd6cc; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
 					<b><i>Aguardando Confirmação de Vaga! - {{status_aguard_conf_vaga_registro.data_notificacao}} - {{status_aguard_conf_vaga_registro.hora_notificacao|time:"H:i"}}</i></b>
 				</div>
@@ -155,7 +190,7 @@
 
 			<div class="row">
 				<div class="col-sm-4"></div>
-				{% if 'Aguardando em Lista de Espera' in status_list_descricao %}
+				{% if 'Aguardando em Lista de Espera' in status_aguard_lista_espera_registro.descricao %}
 				<div id="" class="col-sm-4" style="background-color: #ffcc99; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
 					<b><i>Paciente em Lista de espera! - {{status_aguard_lista_espera_registro.data_notificacao}} - {{status_aguard_lista_espera_registro.hora_notificacao|time:"H:i"}}</i></b>
 				</div>
@@ -169,7 +204,7 @@
 
 			<div class="row">
 				<div class="col-sm-4"></div>
-				{% if 'Regulado' in status_list_descricao %}
+				{% if 'Regulado' in status_regulado_registro.descricao %}
 				<div id="" class="col-sm-4" style="background-color: #b3e6b3; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
 					<b><i>Paciente Regulado! - {{status_regulado_registro.data_notificacao}} - {{status_regulado_registro.hora_notificacao|time:"H:i"}}</i></b>
 				</div>
@@ -183,13 +218,107 @@
 
 			<div class="row">
 				<div class="col-sm-4"></div>
-				{% if 'Não Regulado' in status_list_descricao %}
+				{% if 'Não Preenche Critérios' in status_nao_regulado_registro.descricao %}
 				<div id="" class="col-sm-4" style="background-color: #c6c6c6; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b><i>Paciente Não Regulado! - {{status_nao_regulado_registro.data_notificacao}} - {{status_nao_regulado_registro.hora_notificacao|time:"H:i"}}</i></b>
+					<b><i>Não Preenche Critérios! - {{status_nao_regulado_registro.data_notificacao}} - {{status_nao_regulado_registro.hora_notificacao|time:"H:i"}}</i></b>
 				</div>
 				{%else%}
 				<div id="paciente_internado_regulacao_id" class="col-sm-4" style="background-color: #b3e6b3; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
-					<b><i>Paciente Não Regulado!</i></b>
+					<b><i>Não Preenche Critérios!</i></b>
+				</div>
+				{%endif%}
+				<div class="col-sm-4"></div>
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-4"></div>
+				{% if 'Aguardando Informações' in status_aguard_inf_registro.descricao %}
+				<div id="" class="col-sm-4" style="background-color: #ffb366; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b><i>Aguardando Informações! - {{status_aguard_inf_registro.data_notificacao}} - {{status_aguard_inf_registro.hora_notificacao|time:"H:i"}}</i></b>
+				</div>
+				{%else%}
+				<div id="paciente_internado_regulacao_id" class="col-sm-4" style="background-color: #8cb3d9; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b><i>Aguardando Informações!</i></b>
+				</div>
+				{%endif%}
+				<div class="col-sm-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4"></div>
+				{% if 'Obito' in status_obito_registro.descricao %}
+				<div id="" class="col-sm-4" style="background-color: #ff8080; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b><i>Óbito! - {{status_obito_registro.data_notificacao}} - {{status_obito_registro.hora_notificacao|time:"H:i"}}</i></b>
+				</div>
+				{%else%}
+				<div id="paciente_internado_regulacao_id" class="col-sm-4" style="background-color: #ff8080; font-size: 70%; border: 2px solid #cccccc; border-radius: 10px">
+					<b><i>Óbito!</i></b>
+				</div>
+				{%endif%}
+				<div class="col-sm-4"></div>
+			</div>
+			<br />
+			<div class="row">
+				<div class="col-sm-4"></div>
+					{% if registro.andamento_processo == 'Cancelado' %}
+					<div id="" class="col-sm-4" style="background-color: red; font-size: 80%; border: 2px solid #cccccc; border-radius: 10px">
+					<b><i>Processo cancelado!</i></b>
+					</div>
+					{%else%}
+					<div class="col-sm-4"></div>
+					{%endif%}
+				
+				<div class="col-sm-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4"></div>
+				
+				{% if registro.andamento_processo != '' %}
+				<div class="col-sm-4" id="">
+					<form action="submit" method="POST">{% csrf_token %}
+						
+							<label for="comment"style="">Justificativa:</label>
+							
+							<textarea class="form-control" rows="8" id="just_cancelar_id" name="justif_cancelar_regulacao" value="" style="width: 100%" disabled>{{registro.justificativa_cancelamento}}</textarea>
+							<br />
+
+							<div class="form-check-inline" style=""><b>Data:</b>
+					    	<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="" value="{{data_cancelamento_bd_template}} {{hora_canc}}:{{pref}}{{minuto_canc}}" style="width: 140px" disabled>						
+					   		</div><br />
+							
+							<div class="invalid-feedback"></div>
+		      			
+		      			<br />
+
+		      			<!--
+		      			<div class="container-fluid" style="text-align: center;">
+							<button type="submit" class="btn btn-primary btn-sm" style="align-items: center;" id="">Salvar</button>  
+					    </div>
+					-->
+					</form>
+					
+				</div>
+				{%else%}
+				<div class="col-sm-4" id="justif_cancelar_regulacao_id">
+					<form action="submit" method="POST">{% csrf_token %}
+						
+							<label for="comment"style="">Justificativa:</label>
+							
+							<textarea class="form-control" rows="8" id="just_cancelar_id" name="justif_cancelar_regulacao" value="" style="width: 100%"></textarea>
+							<br />
+
+							<div class="form-check-inline" style=""><b>Data:</b>
+					    	<input type="text" class="form-control form-control-sm" id="data_exames_lab_id" placeholder="" name="" value="{{formateDate}} - {{hora}}" style="width: 140px" disabled>						
+					   		</div><br />
+							
+							<div class="invalid-feedback"></div>
+		      			
+		      			<br />
+
+		      			<div class="container-fluid" style="text-align: center;">
+							<button type="submit" class="btn btn-primary btn-sm" style="align-items: center;" id="">Salvar</button>  
+					    </div>
+					</form>
+					
 				</div>
 				{%endif%}
 				<div class="col-sm-4"></div>
@@ -199,13 +328,34 @@
 
 	<div class="container mt-3">
 		<div class="container-fluid" style="text-align: center;">
-			<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/">Principal</a></button>
-			<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/regulacao/{{registro.id}}/">Regular</a></button>
+			<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/covid_list/">Principal</a></button>
+			
+			<button type="button" class="" style="align-items: center;" id="btn_inicio"><a class="" href="/regular_registro/{{registro.id}}/">Histórico de Regulações</a></button>
+			
+			{% if registro.andamento_processo != '' %}
+			{%else%}
+			<button type="button" class="" style="align-items: center;" id=""><a class="" href="/paciente_atribuir_senha/{{registro.id}}/">Regular Paciente</a></button>
+			{%endif%}
 			
 		</div>
 		<br />
 		
 	</div>
+
+	<div class="container mt-3">
+		<div class="container-fluid" style="text-align: center;">
+			{% if user.first_name == 'videofonista' or user.first_name == 'enfermeiro' or user.first_name == 'medico' %}
+				{%else%}
+				
+				<button type="button" class="btn btn-outline-danger btn-sm" style="align-items: center;" id="btn_inicio"><a class="" href="/remove_registro_covid/{{registro.id}}/">Excluir Registro</a></button>
+			
+				{%endif%}
+			
+		</div>
+		<br />
+		
+	</div>
+	
 
 
 <!--
